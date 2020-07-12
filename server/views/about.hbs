@@ -1,0 +1,52 @@
+<!--====== ABOUT START ======-->
+<section id="about" class="style-2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center">
+                    <h2 class="title">About Us</h2>
+                    <p>CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies.</p>
+                    <br />
+                    <p>We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond.</p>
+                </div> <!-- Section Title -->
+            </div>
+        </div> <!-- Row End -->
+    </div> <!-- Container End -->
+</section>
+<!--====== ABOUT ENDS ======-->
+
+<!--====== TEAM START ======-->
+<section id="team">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Section Title -->
+                <div class="section-title text-center">
+                    <h2 class="title">Meet the Team</h2>
+                </div>
+            </div>
+        </div> <!-- Row End -->
+        {{#each members as |member|}}
+            {{#if (ifOdd member.id)}}
+            <div class="row justify-content-center">
+            {{/if}}
+                <div class="col-lg-6 col-md-8 col-sm-9">
+                    <div class="box">
+                        <div class="content">
+                            <img src="assets/img/profiles/{{member.image}}" width="300" height="388" alt="{{member.name}}">
+                            <h4 class="sub-title profile">{{member.name}}</h4>
+                            <h6 class="label">{{member.title}}</h6>
+                            <p>{{member.bio}}</p>
+                            <br />
+                            <p>{{member.about}}</p>
+                        </div>
+                    </div>
+                </div>
+            {{#if (ifEven member.id)}}
+            </div>
+            {{/if}}
+        {{/each}}
+    </div> <!-- Container End -->
+</section>
+<!--====== TEAM ENDS ======-->
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CapTracks</title>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!--====== Icons CSS ======-->
+    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome/css/all.min.css">
+
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <!--====== HEADER START ======-->
+    <header id="home" class="style-2 header-area">
+        <!--====== NAV START ======-->
+        <div class="navigation fixed-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <!-- Logo -->
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/img/logo.png" alt="Logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active"><a href="/">Home</a></li>
+                                    <li class="nav-item"><a href="/about">About Us</a></li>
+                                    <li class="nav-item"><a href="/map">Map</a></li>
+                                    <li class="store-form"><button class="form-toggler" type="button">Add Your Store</button></li>
+                                </ul>
+                            </div> <!-- Navbar Collapse End -->
+                        </nav> <!-- Navbar End -->
+                    </div>
+                </div> <!-- Row End -->
+            </div> <!-- Container End -->
+        </div> 
+        <!--====== NAV END ======-->
+        {{#if intro}}
+        <div class="intro container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="header-content-left">
+                        <h2 class="slogan">Be at the right place, at the right time.</h2>
+                        <p>Track the capacity and other essential information at local grocery and convenient stores. Manage your time better with CapTracks.</p>
+                        <br/>
+                        <p>For questions and inquiries about CapTracks and how it works, feel free to reach out to us at  <a href="mailto:info@captracks.com?subject=Question About CapTracks">info@captracks.com</a></p>
+                        <!-- <button type="button">Try It Out!</button -->
+                    </div> <!-- Header Content End -->
+                </div>
+                <div class="col-lg-6 offset-xl-1">
+                    <!-- Image -->
+                    <div class="header-image d-none d-lg-block">
+                        <!-- <img src="assets/img/banner/hero.png" alt="hero"> -->
+                    </div> 
+                </div>
+            </div> <!-- Row End -->
+        </div> <!-- Container End -->
+        {{else}}
+        {{/if}}
+    </header>
+    <!--====== HEADER ENDS ======-->
+
+    <!--====== FORM POPUP START ======-->
+    <div class="form-popup" id="storeForm">
+        <div action="/action_page.php" class="form-container">
+            <span class="close-btn">&times;</span>
+            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+            <div class="elfsight-app-3a1cb1f9-0f80-417e-8eca-47fb5cabe02a"></div>
+        </div>
+      </div>
+    <!--====== FORM POPUP END ======-->
+
+    {{{body}}}
+
+    <!--====== FOOTER START ======-->
+    <footer id="footer" class="style-2">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 footer-links">
+                        <ul>
+                            <li><a href="mailto:info@captracks.com">info@captracks.com</a></li>
+                            <li><a href="assets/CapTracks_Privacy_Policy.pdf" target="_blank">Privacy Policy</a></li>
+                         </ul>
+                        <!-- <ul>
+                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                        </ul> -->
+                    </div>
+                </div> <!-- Row End -->
+            </div> <!-- Container End -->
+        </div> <!-- Footer End -->
+    </footer> 
+    <!-- ====== FOOTER ENDS ====== -->
+
+    <!--====== jQuery js ======-->
+    <script src="assets/js/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!--====== Main js ======-->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "captracks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Server side of CapTracks app",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.0.0",
+    "handlebars": "^4.7.6",
+    "hbs": "^4.1.1",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.26.0",
+    "moment-timezone": "^0.5.31",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.22",
+    "node-uuid": "^1.4.8",
+    "realm": "^6.0.2",
+    "swagger-ui-express": "^4.1.4",
+    "sync-request": "^6.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renaauerbach/captracks.git"
+  },
+  "keywords": [
+    "covid-19",
+    "mobile app",
+    "swift app",
+    "mongodb"
+  ],
+  "author": "Rena Auerbach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renaauerbach/captracks/issues"
+  },
+  "homepage": "https://github.com/renaauerbach/captracks#readme"
+}
