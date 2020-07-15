@@ -270,13 +270,11 @@ p, label {
     top: 25px;
     background-color: #e708ae;
     visibility: hidden;
-
     -webkit-transform: scaleX(0);
     -moz-transition:scaleX(0);
     -ms-transition:scaleX(0);
     -o-transition:scaleX(0);
     transform: scaleX(0);
-
     -webkit-transition: all 0.3s ease-in-out 0s;
     -moz-transition: all 0.3s ease-in-out 0s;
     -ms-transition: all 0.3s ease-in-out 0s;
@@ -552,16 +550,24 @@ p, label {
 }
 
 /*====== FUNCTIONALITY / ABOUT / TEAM ======*/
+.intro, #about {
+    padding-top: 20%;
+    padding-bottom: 10%;
+}
+
 #func,
-#about,
 #team {
     padding-top: 70px;
     padding-bottom: 130px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .intro, #about {
+        padding: 10%;
+        padding-top: 25%;
+    }
+
     #func,
-    #about,
     #team {
         padding-top: 50px;
         padding-bottom: 100px;
@@ -569,8 +575,12 @@ p, label {
 }
 
 @media (max-width: 767px) {
+    .intro, #about {
+        padding: 10%;
+        padding-top: 40%;
+    }
+
     #func,
-    #about,
     #team {
         padding-top: 45px;
         padding-bottom: 80px;
@@ -665,4 +675,63 @@ p, label {
 
 .footer-copyright .copyright-text p {
     color: #fff;
+}
+
+/* ====== MAP ====== */
+#map-section {
+    overflow-x: hidden !important;
+}
+
+#map {
+    height: 85%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: unset !important;
+}
+
+.popup-bubble {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -100%);
+    /* Style the bubble. */
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    overflow-y: auto;
+    max-height: 60px;
+    box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+.popup-bubble-anchor {
+    /* Position the div a fixed distance above the tip */
+    position: absolute;
+    width: 100%;
+    bottom: 8px;
+    left: 0;
+}
+
+/* Popup tip */
+.popup-bubble-anchor::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Center popup tip */
+    transform: translate(-50%, 0);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid white;
+}
+
+/* JavaScript will position this div at the bottom of the popup tip. */
+.popup-container {
+    cursor: auto;
+    height: 0;
+    position: absolute;
+    width: 200px;
 }
