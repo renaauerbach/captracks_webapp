@@ -5,7 +5,7 @@ const router = express.Router();
 const Message = require('../db.js').Message;
 
 // Get all messages (forum posts)
-router.get('/store/:id/forum', (req, res) => {
+router.get('/:id/forum', (req, res) => {
    Message.find((err, messages) => {
       if (err) {
          res.status(400).json({ success: false, error: err });
@@ -24,7 +24,7 @@ router.get('/store/:id/forum', (req, res) => {
 });
 
 // Create new message
-router.post('/store/:id/forum/post', (req, res) => {
+router.post('/:id/forum/post', (req, res) => {
    const newMessage = new Message({
       title: req.body.title,
       text: req.body.text,
@@ -41,7 +41,7 @@ router.post('/store/:id/forum/post', (req, res) => {
 });
 
 // Delete a message
-router.delete('/store/:id/forum/:id', (req, res) => {
+router.delete('/:id/forum/:id', (req, res) => {
    Message.findByIdAndRemove({ _id: req.params.id, useFindAndModify: false }),
       err => {
          if (err) {

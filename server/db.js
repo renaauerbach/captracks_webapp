@@ -43,15 +43,21 @@ const storeSchema = new mongoose.Schema({
     details: { type: [{ detailsSchema }] },
 });
 
+mongoose.model('messages', messageSchema, 'messages');
+mongoose.model('details', detailsSchema, 'details');
+mongoose.model('managers', managerSchema, 'managers');
+mongoose.model('stores', storeSchema, 'stores');
+
 // Connect to MongoDB
 let uri;
+process.env.NODE_ENV = 'PRODUCTION';
 if (process.env.NODE_ENV === 'PRODUCTION') {
-    const data = fs.readFileSync(path.join(__dirname, '../../config.json'));
+    const data = fs.readFileSync(path.join(__dirname, './config.json'));
     const conf = JSON.parse(data);
     uri = conf.uri;
 } else {
     // If NOT in PRODUCTION mode
-    uri = 'mongodb://localhost/captracks';
+    // uri = '"mongodb://captracks-rirqa.mongodb.net/cap_tracks';
 }
 
 mongoose.Promise = global.Promise;
@@ -59,10 +65,3 @@ mongoose
     .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log(`Database connected successfully`))
     .catch(err => console.log('Connection error: ', err));
-
-module.exports = {
-    Message: mongoose.model('Message', messageSchema),
-    Details: mongoose.model('Details', detailsSchema),
-    Manager: mongoose.model('Manager', managerSchema),
-    Store: mongoose.model('Store', storeSchema),
-};

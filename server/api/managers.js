@@ -6,17 +6,18 @@ const Manager = require('../db.js').Manager;
 // Handle login
 // Get manager by ID
 router.get('/:id', (req, res) => {
-    Message.find((err, messages) => {
+    Message.find((err, manager) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
         res.json(
-            messages.map(msg => {
+            manager.map(info => {
                 return {
-                    id: msg._id,
-                    title: msg.title,
-                    text: msg.text,
-                    createdAt: msg.createdAt,
+                    id: info._id,
+                    firstName: info.firstName,
+                    lastName: info.lastName,
+                    phone: info.phone,
+                    email: info.email,
                 };
             })
         );
@@ -26,9 +27,11 @@ router.get('/:id', (req, res) => {
 // Create new manager
 router.post('/', (req, res) => {
     const newManger = new Manager({
-        title: req.body.title,
-        text: req.body.text,
-        createdAt: req.body.createdAt,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        password: req.body.password, //TODO: Password hashing
+        phone: req.body.phone,
+        email: req.body.email,
     });
 
     newManger.save((err, msg) => {
@@ -36,19 +39,19 @@ router.post('/', (req, res) => {
             res.status(400).json({ success: false, error: err });
         }
         res.status(200).json({ success: true, id: msg.id });
-        console.log('Forum post added successfully!');
+        console.log('Manager created successfully!');
     });
 });
 
 // Delete manager account
-router.delete('/account/:id', (req, res) => {
+router.delete('/:id/account', (req, res) => {
     Manager.findByIdAndRemove({ _id: req.params.id, useFindAndModify: false }),
         err => {
             if (err) {
                 res.status(400).json({ success: false, error: err });
             }
             res.status(200).json({ success: true });
-            console.log('Forum post deleted successfully!');
+            console.log('Manager account deleted successfully!');
         };
 });
 

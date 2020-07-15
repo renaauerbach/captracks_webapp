@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 class Member {
     constructor(data) {
         this.id = data.id;
@@ -24,8 +22,7 @@ function parseData(data, name) {
     const parsed = JSON.parse(data)[name];
 
     const arr = [];
-    let Obj = (name == 'functionality') ? Box : Member;
-    console.log("parsed", parsed)
+    const Obj = (name == 'functionality') ? Box : Member;
 
     parsed.map((info, i) => {
         arr[i] = new Obj(info);

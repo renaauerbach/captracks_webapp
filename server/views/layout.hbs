@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>CapTracks</title>
+    <title>{{title}} | Captracks</title>
 
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -20,7 +20,6 @@
 
     <!--====== Bootstrap CSS ======-->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
 </head>
 
 <body>
@@ -44,7 +43,7 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item active"><a href="/">Home</a></li>
+                                    <li class="nav-item"><a href="/">Home</a></li>
                                     <li class="nav-item"><a href="/about">About Us</a></li>
                                     <li class="nav-item"><a href="/map">Map</a></li>
                                     <li class="store-form"><button class="form-toggler" type="button">Add Your Store</button></li>
@@ -124,6 +123,14 @@
 
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
+
+    <!--====== Map Script ======-->
+    <script src="assets/js/map.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
 
 </body>
 

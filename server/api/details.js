@@ -3,26 +3,7 @@ const router = express.Router();
 
 const Details = require('../db.js').Details;
 
-// Get all details
-router.get('/details', (req, res) => {
-    Details.find((err, details) => {
-        if (err) {
-            res.status(400).json({ success: false, error: err });
-        }
-        res.json(
-            stores.map(store => {
-                // Don't need all data for listing all stores
-                return {
-                    id: store._id,
-                    name: store.name,
-                    address: store.address,
-                };
-            })
-        );
-    });
-});
-
-// Get store by ID
+// Get details by store ID
 router.get('/:id', (req, res) => {
     Details.findById({ id: req.params._id }, (err, store) => {
         if (err) {
@@ -38,37 +19,23 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// Get forum and all messages
+// Edit store details
+// router.post('/register/store', (req, res) => {
+//     // const address; - DEFINE ADDRESS
+//     const newStore = new Store({
+//         name: req.body.name,
+//         address: address,
+//         forum: [],
+//         manager: req.body.manager,
+//     });
 
-// Create new store & save new store
-router.post('/register/store', (req, res) => {
-    // const address; - DEFINE ADDRESS
-    const newStore = new Store({
-        name: req.body.name,
-        address: address,
-        forum: [],
-        manager: req.body.manager,
-    });
-
-    newStore.save((err, msg) => {
-        if (err) {
-            res.status(400).json({ success: false, error: err });
-        }
-        res.status(200).json({ success: true, id: msg.id });
-        console.log('Store added successfully!');
-    });
-});
-
-// Remove a store
-router.delete('/:id/account', (req, res) => {
-    Details.findByIdAndRemove({ _id: req.params.id, useFindAndModify: false }),
-        err => {
-            if (err) {
-                res.status(400).json({ success: false, error: err });
-            }
-            res.status(200).json({ success: true });
-            console.log('Store deleted successfully!');
-        };
-});
+//     newStore.save((err, msg) => {
+//         if (err) {
+//             res.status(400).json({ success: false, error: err });
+//         }
+//         res.status(200).json({ success: true, id: msg.id });
+//         console.log('Store added successfully!');
+//     });
+// });
 
 module.exports = router;

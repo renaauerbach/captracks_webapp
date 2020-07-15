@@ -1,42 +1,41 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const db = require('../db.js');
 const router = express.Router();
 
-const Store = require('../db.js').Store;
+const Store = mongoose.model('stores');
 
 // Get all stores
-router.get('/stores', (req, res) => {
+
+router.get('/', (req, res) => {
     Store.find((err, stores) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.json(
-            stores.map(store => {
-                // Don't need all data for listing all stores
-                return {
-                    id: store._id,
-                    name: store.name,
-                    address: store.address,
-                    details: store.details,
-                };
-            })
-        );
+        // res.json(
+        stores.map(store => {
+            var id = store._id;
+            delete store._id;
+            return {
+                id: id,
+                name: store.name,
+                address: store.address,
+                details: store.details,
+            };
+        });
+        // );
+
+        res.render('map', { layout: 'layout', title: 'Map', stores: stores });
     });
 });
 
 // Get store by ID
-router.get('/stores/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Store.findById({ id: req.params._id }, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.json({
-            id: store._id,
-            name: store.name,
-            address: store.address,
-            manager: store.manager,
-            details: store.details,
-            forum: store.forum,
-        });
+        res.render('map', { layout: 'layout', title: 'Map', stores: stores });
     });
 });
 
