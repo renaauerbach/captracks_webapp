@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const db = require('../db.js');
+
 const router = express.Router();
 
 const Store = mongoose.model('stores');
@@ -12,7 +13,6 @@ router.get('/', (req, res) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        // res.json(
         stores.map(store => {
             var id = store._id;
             delete store._id;
@@ -23,41 +23,30 @@ router.get('/', (req, res) => {
                 details: store.details,
             };
         });
-        // );
 
-        res.render('map', { layout: 'layout', title: 'Map', stores: stores });
+        res.render('map', { layout: 'layout', title: 'Map', displayMap: true, stores: stores });
     });
 });
 
 // Get store by ID
 router.get('/:id', (req, res) => {
-    Store.findById({ id: req.params._id }, (err, store) => {
+    Store.find({ id: req.params.id }, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.render('map', { layout: 'layout', title: 'Map', stores: stores });
+        res.render('map', { layout: 'layout', title: 'Map', displayMap: true, store: store });
     });
 });
 
-// Get forum and all messages
 
-// Create new store & save new store
-// router.post('/register/store', (req, res) => {
-//     const address; - DEFINE ADDRESS
-//     const newStore = new Store({
-//         name: req.body.name,
-//         address: address,
-//         forum: [],
-//         manager: req.body.manager,
-//     });
-//
-//     newStore.save((err, msg) => {
-//         if (err) {
-//             res.status(400).json({ success: false, error: err });
-//         }
-//         res.status(200).json({ success: true, id: msg.id });
-//         console.log('Store added successfully!');
-//     });
-// });
+// Get store's forum
+router.get('/:id/forum', (req, res) => {
+    Store.find({ id: req.params._id }, (err, store) => {
+        if (err) {
+            res.status(400).json({ success: false, error: err });
+        }
+        res.render('forum', { layout: 'layout', title: store.name, forum: store.forum });
+    });
+ });
 
 module.exports = router;

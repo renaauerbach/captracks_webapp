@@ -15,7 +15,7 @@ const storeRouter = require('./api/stores');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
 hbs.registerHelper('ifOdd', (val) => {
     return val % 2 == 0 ? false : true;
@@ -39,8 +39,8 @@ app.use(cors());
 
 // Routers
 app.use('/map', storeRouter);
-app.use('/map/store', detailsRouter);
-app.use('/map/store/forum', messageRouter);
+// app.use('/map/store', detailsRouter);
+// app.use('/map/:id/forum', messageRouter);
 app.use('/account', managerRouter);
 
 app.use((req, res, next) => {
@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     // Load functionality box data
     const boxes = parser.parseData(
-        fs.readFileSync(path.join(__dirname, 'content/functionality.json')),
+        fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
         'functionality'
     );
 
@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     // Load team member data
     const members = parser.parseData(
-        fs.readFileSync(path.join(__dirname, 'content/team.json')),
+        fs.readFileSync(path.join(__dirname, '/content/team.json')),
         'team'
     );
 

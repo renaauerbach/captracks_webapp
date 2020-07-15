@@ -83,7 +83,7 @@
                             '<div class="popup-details">Current Capacity: ' + info.details + '</div>' +
                             '<div class="popup-details">Current Wait Time: ' + info.details + '</div>' +
                         '</div>' + 
-                        '<a href="/' + info.id + '/forum">See Forum</a>' +
+                        '<a href="/map/' + info.id + '/forum">See Forum</a>' +
                     '</div>';
         return contentString;
     }

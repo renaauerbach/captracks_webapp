@@ -8,18 +8,18 @@
     <title>{{title}} | Captracks</title>
 
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
 
     <!--====== Icons CSS ======-->
-    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome/css/all.min.css">
 
     <!--====== Style CSS ======-->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
     <!--====== Bootstrap CSS ======-->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -32,8 +32,8 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <!-- Logo -->
-                            <a class="navbar-brand" href="index.html">
-                                <img src="assets/img/logo.png" alt="Logo">
+                            <a class="navbar-brand" href="/">
+                                <img src="/assets/img/logo.png" alt="Logo">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
@@ -100,7 +100,7 @@
                     <div class="col-lg-8 footer-links">
                         <ul>
                             <li><a href="mailto:info@captracks.com">info@captracks.com</a></li>
-                            <li><a href="assets/CapTracks_Privacy_Policy.pdf" target="_blank">Privacy Policy</a></li>
+                            <li><a href="/assets/CapTracks_Privacy_Policy.pdf" target="_blank">Privacy Policy</a></li>
                          </ul>
                         <!-- <ul>
                             <li><a href="#"><i class="fab fa-facebook"></i></a></li>
@@ -115,22 +115,25 @@
     <!-- ====== FOOTER ENDS ====== -->
 
     <!--====== jQuery js ======-->
-    <script src="assets/js/modernizr-3.6.0.min.js"></script>
-    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <script src="/assets/js/modernizr-3.6.0.min.js"></script>
+    <script src="/assets/js/jquery-1.12.4.min.js"></script>
 
     <!--====== Bootstrap js ======-->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 
     <!--====== Main js ======-->
-    <script src="assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 
-    <!--====== Map Script ======-->
-    <script src="assets/js/map.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=places&v=weekly"
-      defer
-    ></script>
+    {{#if displayMap}}
+        <!--====== Map Script ======-->
+        <script src="/assets/js/map.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=places&v=weekly"
+        defer
+        ></script>
+    {{else}}
+    {{/if}}
 
 </body>
 
