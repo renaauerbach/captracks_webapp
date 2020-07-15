@@ -45,7 +45,8 @@
 
     // Add Marker
     function addMarker(location, map, store) {
-        var marker = new google.maps.Marker({
+        var colors = ['#fff500', '#4aad4e'];
+        exports.marker = new google.maps.Marker({
             position: location,
             label: labels[exports.labelIndex++ % labels.length],
             map: map,
@@ -53,9 +54,7 @@
         });
 
         var content = contentFormatter(store);
-        makeInfoWindowEvent(map, infoWindow, content, marker);
-
-        marker.addListener('click', toggleBounce);
+        makeInfoWindowEvent(map, infoWindow, content, exports.marker);
     }
 
     // Animate Marker
@@ -77,14 +76,14 @@
 
     // Detail Content Formatter
     function contentFormatter(info) {
-        var contentString = '<div id="popup-container">' +
+        var contentString = '<div id="popup">' +
                         '<div class="popup-title">' + info.name + '</div>' +
                         '<div class="popup-content">' +
-                            '<div class="popup-subTitle">Address: ' + info.address + '</div>' +
-                            '<div class="popup-subTitle">Current Capacity: ' + info.details + '</div>' +
-                            '<div class="popup-subTitle">Current Wait Time: ' + info.details + '</div>' +
-                            '<a href="/' + info.id + '/forum">See Forum</a>' +
+                            '<div class="popup-address">' + info.address + '</div>' + '<br/>' +
+                            '<div class="popup-details">Current Capacity: ' + info.details + '</div>' +
+                            '<div class="popup-details">Current Wait Time: ' + info.details + '</div>' +
                         '</div>' + 
+                        '<a href="/' + info.id + '/forum">See Forum</a>' +
                     '</div>';
         return contentString;
     }
