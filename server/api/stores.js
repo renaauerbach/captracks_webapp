@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 
 // Get store by ID
 router.get('/:id', (req, res) => {
-    Store.find({ id: req.params.id }, (err, store) => {
+    Store.findById(req.params.id, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
@@ -41,8 +41,7 @@ router.get('/:id', (req, res) => {
 
 // Get store's forum
 router.get('/:id/forum', (req, res) => {
-    Store.find({ id: req.params._id }, (err, store) => {
-        console.log(store);
+    Store.findById(req.params.id, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
