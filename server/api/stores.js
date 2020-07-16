@@ -42,10 +42,11 @@ router.get('/:id', (req, res) => {
 // Get store's forum
 router.get('/:id/forum', (req, res) => {
     Store.find({ id: req.params._id }, (err, store) => {
+        console.log(store);
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.render('forum', { layout: 'layout', title: store.name, forum: store.forum });
+        res.render('forum', { layout: 'layout', title: store.name, forum: store.forum, store: store });
     });
  });
 

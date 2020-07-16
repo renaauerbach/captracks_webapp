@@ -46,13 +46,18 @@ h4 {
     font-size: 22px;
 }
 
+h5 {
+    font-size: 19px;
+}
+
 ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
 
-p, label {
+p, 
+label {
     font: normal normal 300 17px 'Arial', sans-serif;
     line-height: 28px;
     color: #555;
@@ -75,10 +80,7 @@ p, label {
     );
 }
 
-.style-2 .section-title .title {
-    color: #fff;
-}
-
+.style-2 .section-title .title,
 .style-2 p {
     color: #fff;
 }
@@ -550,38 +552,41 @@ p, label {
 }
 
 /*====== FUNCTIONALITY / ABOUT / TEAM ======*/
-.intro, #about {
-    padding-top: 20%;
+.intro, #about, #forum {
+    padding-top: 18%;
     padding-bottom: 10%;
 }
 
 #func,
-#team {
+#team,
+#posts {
     padding-top: 70px;
     padding-bottom: 130px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .intro, #about {
+    .intro, #about, #forum {
         padding: 10%;
         padding-top: 25%;
     }
 
     #func,
-    #team {
+    #team,
+    #posts  {
         padding-top: 50px;
         padding-bottom: 100px;
     }
 }
 
 @media (max-width: 767px) {
-    .intro, #about {
+    .intro, #about, #forum {
         padding: 10%;
         padding-top: 40%;
     }
 
     #func,
-    #team {
+    #team,
+    #posts {
         padding-top: 45px;
         padding-bottom: 80px;
     }
@@ -710,3 +715,46 @@ p, label {
     color: #e708ae;
     text-decoration: none;
 }
+
+/* ====== STORE FORUM ====== */
+.store-links ul, 
+.store-links ul a {
+    text-decoration: none;
+}
+
+.store-links li {
+    line-height: 2em;
+}
+
+.store-links li i {
+    color: #e708ae;
+}
+
+.store-links li i:hover {
+    color: #0000cd;
+}
+
+.divider {
+    position: absolute;
+    left: 26.5%;
+    top: 55%;
+    bottom: -3%;
+    border: 2px solid;
+    border-image-slice: 1;
+    z-index: -1000;
+}
+
+.border-gradient {
+    border-image-source: linear-gradient(
+        to top,
+        #0000cd,
+        #b116e0,
+        #e708ae
+    );
+}
+
+.forum-content p {
+    font-size: 16px;
+}
+
+

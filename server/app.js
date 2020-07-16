@@ -27,6 +27,8 @@ hbs.registerHelper('convert', (data) => {
     var stringify = JSON.stringify(data).split('"_id":').join('"id":');
     return stringify;
 });
+hbs.registerPartials(__dirname + '/views/partials', (err) => {});
+
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

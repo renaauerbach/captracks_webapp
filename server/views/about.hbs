@@ -1,31 +1,13 @@
 <!--====== ABOUT START ======-->
 <section id="about" class="style-2">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="section-title text-center">
-                    <h2 class="title">About Us</h2>
-                    <p>CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies.</p>
-                    <br />
-                    <p>We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond.</p>
-                </div> <!-- Section Title -->
-            </div>
-        </div> <!-- Row End -->
-    </div> <!-- Container End -->
+    {{> header title="About Us" text1="CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies." text2="We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond."}}
 </section>
 <!--====== ABOUT ENDS ======-->
 
 <!--====== TEAM START ======-->
 <section id="team">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <!-- Section Title -->
-                <div class="section-title text-center">
-                    <h2 class="title">Meet the Team</h2>
-                </div>
-            </div>
-        </div> <!-- Row End -->
+        {{> section_title title="Meet the Team"}}
         {{#each members as |member|}}
             {{#if (ifOdd member.id)}}
             <div class="row justify-content-center">
