@@ -1,11 +1,14 @@
 <!--====== FORUM START ======-->
 <section id="forum" class="style-2">
-    {{> header title=store.name text1="View recent updates directly from store.name."}}
-    <span id="data" style="display: none;">{{{ forum }}}</span> 
+    <div class="back">
+        <i class="fas fa-chevron-left"></i>
+        <a href="/map">Back to map</a>
+    </div>
+    {{> header title=store.name text1="View recent updates directly from STORE."}}
+    <span id="data" style="display: none">{{{ store }}}</span> 
 </section>
 <section id="posts">
     <div class="container">
-        {{!-- {{#each forum as |msg|}} --}}
             <div class="row justify-content-between">
                 <div class="col-sm-3">
                     <div class="store-info">
@@ -13,9 +16,22 @@
                         <hr>
                         <div class="store-links">
                             <ul>
-                                <li><a href=""><i class="fas fa-map-marker-alt"></i>{{store.address}}</a></li>
-                                <li><a href=""><i class="fas fa-phone"></i>{{store.phone}}</a></li>
-                                <li><a href="{{store.website}}"><i class="fas fa-globe"></i>{{store.website}}</a></li>
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <a href="">{{store.address}}</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <a href="tel:{{store.phone}}">{{store.phone}}</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-globe"></i>
+                                    <a href="{{store.url}}">{{store.url}}</a>
+                                </li>
+                                <li>
+                                    <i class="far fa-hourglass"></i>
+                                    <p>Sunday: {{store.hours}}</p>
+                                </li>
                            </ul>
                            {{#if links}}
                                 <hr>
@@ -27,20 +43,20 @@
                     </div>
                 </div>
                 <div class="divider border-gradient"></div>
-                <div class="col-sm-9">
-                    <div class="forum-box">
-                        <div class="forum-content">
-                            <h5 class="post-title float-left">TITLE{{msg.title}}</h5>
-                            <h6 class="label float-right">DATE{{msg.createdOn}}</h6>
-                            <br/>
-                            <hr>
-                            <p class="post-text">INFO{{msg.text}}</p>
+                {{#each forum as |msg|}}
+                    <div class="col-sm-9">
+                        <div class="forum-box">
+                            <div class="forum-content">
+                                <h5 class="post-title float-left">{{msg.title}}</h5>
+                                <h6 class="label float-right">{{msg.createdOn}}</h6>
+                                <br/>
+                                <hr>
+                                <p class="post-text">{{msg.text}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>  
+                {{/each}}
             </div>
-        {{!-- {{/each}} --}}
     </div> <!-- Container End -->
-    <span id="data" style="display: none;">{{{ forum }}}</span> 
 </section>
 <!--====== FORUM ENDS ======-->

@@ -50,20 +50,9 @@
             position: location,
             label: labels[exports.labelIndex++ % labels.length],
             map: map,
-            animation: google.maps.Animation.DROP,
         });
 
-        var content = contentFormatter(store);
-        makeInfoWindowEvent(map, infoWindow, content, exports.marker);
-    }
-
-    // Animate Marker
-    function toggleBounce() {
-        if (exports.marker.getAnimation() !== null) {
-            exports.marker.setAnimation(null);
-        } else {
-            exports.marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
+        makeInfoWindowEvent(map, infoWindow, contentFormatter(store), exports.marker);
     }
 
     // Maker Detail Popup
@@ -83,7 +72,7 @@
                             '<div class="popup-details">Current Capacity: ' + info.details + '</div>' +
                             '<div class="popup-details">Current Wait Time: ' + info.details + '</div>' +
                         '</div>' + 
-                        '<a href="/map/' + info.id + '/forum">See Forum</a>' +
+                        '<a href="/map/' + info.id + '">Store Details</a>' +
                     '</div>';
         return contentString;
     }

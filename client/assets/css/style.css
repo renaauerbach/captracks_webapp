@@ -717,8 +717,23 @@ label {
 }
 
 /* ====== STORE FORUM ====== */
-.store-links ul, 
-.store-links ul a {
+#forum .back {
+    color: #ffffff;
+    font-size: 14px;
+    margin-left: 5%;
+    top: 40px;
+}
+
+#forum .back a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#forum .back i {
+	margin-right: 10px;
+}
+
+.store-links ul {
     text-decoration: none;
 }
 
@@ -728,18 +743,35 @@ label {
 
 .store-links li i {
     color: #e708ae;
+    text-align: center;
+    font-size: 25px;
+    padding: 15px 0;
+	border-radius: 0;
+	margin-right: 15px;
 }
 
-.store-links li i:hover {
+.store-links li a {
+    display: inline;
     color: #0000cd;
+    font-size: 16px;
+}
+
+.store-links li a:hover {
+    color: #e708ae;
+}
+
+@media (max-width: 767px) {
+    .store-links li i {
+        padding: 15px 0;
+    }
 }
 
 .divider {
     position: absolute;
     left: 26.5%;
-    top: 55%;
-    bottom: -3%;
-    border: 2px solid;
+    /* top: 55%; */
+    bottom: 0;
+    border-left: 2px dotted;
     border-image-slice: 1;
     z-index: -1000;
 }

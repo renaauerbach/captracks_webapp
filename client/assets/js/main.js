@@ -17,7 +17,7 @@
 
     /* ===== Stick Navbar ===== */
     $(window).on('scroll', function(event) {
-        var scroll = $(window).scrollTop();
+        const scroll = $(window).scrollTop();
         if (scroll < 10) {
             $('.navigation').removeClass('sticky');
         } else {

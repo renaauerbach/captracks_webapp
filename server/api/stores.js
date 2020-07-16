@@ -7,7 +7,6 @@ const router = express.Router();
 const Store = mongoose.model('stores');
 
 // Get all stores
-
 router.get('/', (req, res) => {
     Store.find((err, stores) => {
         if (err) {
@@ -21,6 +20,9 @@ router.get('/', (req, res) => {
                 name: store.name,
                 address: store.address,
                 details: store.details,
+                phone: store.phone,
+                url: store.url,
+                hours: store.hours,
             };
         });
 
@@ -28,24 +30,13 @@ router.get('/', (req, res) => {
     });
 });
 
-// Get store by ID
+// Get store by ID (for forum/store page)
 router.get('/:id', (req, res) => {
     Store.findById(req.params.id, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.render('map', { layout: 'layout', title: 'Map', displayMap: true, store: store });
-    });
-});
-
-
-// Get store's forum
-router.get('/:id/forum', (req, res) => {
-    Store.findById(req.params.id, (err, store) => {
-        if (err) {
-            res.status(400).json({ success: false, error: err });
-        }
-        res.render('forum', { layout: 'layout', title: store.name, forum: store.forum, store: store });
+        res.render('forum', { layout: 'layout', title: store.name, store: store });
     });
  });
 
