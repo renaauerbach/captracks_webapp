@@ -229,7 +229,7 @@ label {
     }
 }
 
-.navigation .navbar .navbar-nav .nav-item, .navigation .navbar .navbar-nav .store-form {
+.navigation .navbar .navbar-nav .nav-item, .navigation .navbar .navbar-nav .login {
     margin-left: 30px;
 }
 
@@ -313,7 +313,7 @@ label {
 }
 
 /* For Store Application Link */
-.navigation .navbar .navbar-nav .store-form button {
+.navigation .navbar .navbar-nav .login button {
     text-transform: uppercase;
     font-size: 16px;
     color: #fff;
@@ -327,25 +327,28 @@ label {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .navigation .navbar .navbar-nav .store-form {
+    .navigation .navbar .navbar-nav .login {
         margin: 4px -2px;
     }
 }
 
 @media (max-width: 767px) {
-    .navigation .navbar .navbar-nav .store-form {
+    .navigation .navbar .navbar-nav .login {
         margin: 4px -2px;
     }
 }
 
-.navigation .navbar .navbar-nav .store-form button:hover {
+.navigation .navbar .navbar-nav .login button:hover {
     background-color: #0000cd;
     text-decoration: none;
 }
-.navigation .navbar .navbar-nav .store-form button:active {
+.navigation .navbar .navbar-nav .login button:active {
     background-color: #b116e0;
     text-decoration: none;
 }
+
+/*====== POPUP FORM ======*/
+
 
 /*====== HEADER ======*/
 .intro {
@@ -552,41 +555,41 @@ label {
 }
 
 /*====== FUNCTIONALITY / ABOUT / TEAM ======*/
-.intro, #about, #forum {
+.intro, #about, #store {
     padding-top: 18%;
     padding-bottom: 10%;
 }
 
 #func,
 #team,
-#posts {
+#forum {
     padding-top: 70px;
     padding-bottom: 130px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .intro, #about, #forum {
+    .intro, #about, #store {
         padding: 10%;
         padding-top: 25%;
     }
 
     #func,
     #team,
-    #posts  {
+    #forum  {
         padding-top: 50px;
         padding-bottom: 100px;
     }
 }
 
 @media (max-width: 767px) {
-    .intro, #about, #forum {
+    .intro, #about, #store {
         padding: 10%;
         padding-top: 40%;
     }
 
     #func,
     #team,
-    #posts {
+    #forum {
         padding-top: 45px;
         padding-bottom: 80px;
     }
@@ -683,16 +686,19 @@ label {
 }
 
 /* ====== MAP ====== */
-#map-section {
-    overflow-x: hidden !important;
+.map-container {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
 }
 
 #map {
-    height: 85%;
+    left: 0;
+    top: 0;
+    height: 100%;
     width: 100%;
-    margin: 0; 
-    padding: 0;
-    position: unset !important;
+    position: absolute;
 }
 
 .popup-title, 
@@ -716,20 +722,20 @@ label {
     text-decoration: none;
 }
 
-/* ====== STORE FORUM ====== */
-#forum .back {
+/* ====== STORE PAGE ====== */
+#store .back {
     color: #ffffff;
     font-size: 14px;
     margin-left: 5%;
     top: 40px;
 }
 
-#forum .back a {
+#store .back a {
     text-decoration: none;
     color: #ffffff;
 }
 
-#forum .back i {
+#store .back i {
 	margin-right: 10px;
 }
 

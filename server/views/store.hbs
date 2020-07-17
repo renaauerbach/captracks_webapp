@@ -1,5 +1,5 @@
-<!--====== FORUM START ======-->
-<section id="forum" class="style-2">
+<!--====== STORE PAGE START ======-->
+<section id="store" class="style-2">
     <div class="back">
         <i class="fas fa-chevron-left"></i>
         <a href="/map">Back to map</a>
@@ -7,7 +7,7 @@
     {{> header title=store.name text1="View recent updates directly from STORE."}}
     <span id="data" style="display: none">{{{ store }}}</span> 
 </section>
-<section id="posts">
+<section id="forum">
     <div class="container">
             <div class="row justify-content-between">
                 <div class="col-sm-3">
@@ -47,11 +47,11 @@
                     <div class="col-sm-9">
                         <div class="forum-box">
                             <div class="forum-content">
-                                <h5 class="post-title float-left">{{msg.title}}</h5>
-                                <h6 class="label float-right">{{msg.createdOn}}</h6>
+                                <h5 class="post-title float-left">TITLE{{msg.title}}</h5>
+                                <h6 class="label float-right">DATE{{msg.createdOn}}</h6>
                                 <br/>
                                 <hr>
-                                <p class="post-text">{{msg.text}}</p>
+                                <p class="post-text">TEXT{{msg.text}}</p>
                             </div>
                         </div>
                     </div>
@@ -59,4 +59,4 @@
             </div>
     </div> <!-- Container End -->
 </section>
-<!--====== FORUM ENDS ======-->
+<!--====== STORE PAGE ENDS ======-->

@@ -6,23 +6,14 @@ const Manager = require('../db.js').Manager;
 // Handle login
 // Get manager by ID
 router.get('/:id', (req, res) => {
-    Message.find((err, manager) => {
+    Manager.findById(req.params.id, (err, manager) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.json(
-            manager.map(info => {
-                return {
-                    id: info._id,
-                    firstName: info.firstName,
-                    lastName: info.lastName,
-                    phone: info.phone,
-                    email: info.email,
-                };
-            })
-        );
+        res.render('account', { layout: 'layout', title: "Account", store: store });
     });
-});
+ });
+
 
 // Create new manager
 router.post('/', (req, res) => {
@@ -45,14 +36,13 @@ router.post('/', (req, res) => {
 
 // Delete manager account
 router.delete('/:id/account', (req, res) => {
-    Manager.findByIdAndRemove({ _id: req.params.id, useFindAndModify: false }),
-        err => {
-            if (err) {
-                res.status(400).json({ success: false, error: err });
-            }
-            res.status(200).json({ success: true });
-            console.log('Manager account deleted successfully!');
-        };
+    Manager.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            res.status(400).json({ success: false, error: err });
+        }
+        res.status(200).json({ success: true });
+        console.log('Manager account deleted successfully!');
+    });
 });
 
 module.exports = router;

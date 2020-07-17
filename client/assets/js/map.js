@@ -72,7 +72,7 @@
                             '<div class="popup-details">Current Capacity: ' + info.details + '</div>' +
                             '<div class="popup-details">Current Wait Time: ' + info.details + '</div>' +
                         '</div>' + 
-                        '<a href="/map/' + info.id + '">Store Details</a>' +
+                        '<a href="/store/' + info.id + '">Store Details</a>' +
                     '</div>';
         return contentString;
     }

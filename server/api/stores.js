@@ -26,18 +26,43 @@ router.get('/', (req, res) => {
             };
         });
 
-        res.render('map', { layout: 'layout', title: 'Map', displayMap: true, stores: stores });
+        res.render('map', { layout: 'layout', title: 'Home', intro: true, displayMap: true, stores: stores });
+    });
+});
+
+router.get('/store/add', (req, res) => {
+	res.render('add', {
+		layout: 'layout',
+		title: 'Add Store',
+	});
+});
+
+router.post('/store/add', (req, res) => {
+    const newStore = new Store({
+        name: req.body.name,
+        address: req.body.address,
+        phone: req.body.phone,
+        url: req.body.url,
+        // ADD HOURS
+    });
+
+    newStore.save((err, store) => {
+        if (err) {
+            res.status(400).json({ success: false, error: err });
+        }
+        res.status(200).json({ success: true, id: store.id });
+        console.log('Store added successfully!');
     });
 });
 
 // Get store by ID (for forum/store page)
-router.get('/:id', (req, res) => {
+router.get('/store/:id', (req, res) => {
     Store.findById(req.params.id, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.render('forum', { layout: 'layout', title: store.name, store: store });
+        res.render('store', { layout: 'layout', title: store.name, store: store });
     });
- });
+});
 
 module.exports = router;

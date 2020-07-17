@@ -3,9 +3,28 @@
     {{> header title="About Us" text1="CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies." text2="We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond."}}
 </section>
 <!--====== ABOUT ENDS ======-->
-
+<!--====== FUNCTIONALITY START ======-->
+<section id="func">
+    <div class="container">
+        {{> section_title title="How It Works"}}
+        <div class="row justify-content-center">
+            {{#each functionality as |box|}}
+            <div class="col-lg-4 col-md-8 col-sm-9">
+                <div class="box">
+                    <div class="content">
+                        <i class="{{box.icon}}"></i>
+                        <h4 class="sub-title">{{box.subtitle}}</h4>
+                        <p>{{box.text}}</p>
+                    </div>
+                </div> 
+            </div>
+            {{/each}}
+        </div> <!-- Row End -->
+    </div> <!-- Container End -->
+</section>
+<!--====== FUNCTIONALITY ENDS ======-->
 <!--====== TEAM START ======-->
-<section id="team">
+<section id="team" class="style-2">
     <div class="container">
         {{> section_title title="Meet the Team"}}
         {{#each members as |member|}}

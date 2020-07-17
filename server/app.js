@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 // Routers
-app.use('/map', storeRouter);
+app.use('/', storeRouter);
 // app.use('/map/store', detailsRouter);
 // app.use('/map/:id/forum', messageRouter);
 app.use('/account', managerRouter);
@@ -50,17 +50,13 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res) => {
+app.get('/about', (req, res) => {
     // Load functionality box data
     const boxes = parser.parseData(
         fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
         'functionality'
     );
 
-    res.render('home', { layout: 'layout', title: 'Home', intro: true, functionality: boxes });
-});
-
-app.get('/about', (req, res) => {
     // Load team member data
     const members = parser.parseData(
         fs.readFileSync(path.join(__dirname, '/content/team.json')),
@@ -71,7 +67,8 @@ app.get('/about', (req, res) => {
         layout: 'layout',
         title: 'About',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
-        members: members,
+        functionality: boxes, 
+        members: members
     });
 });
 
