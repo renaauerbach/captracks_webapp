@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const querystring = require('querystring');    
+
 const db = require('../db.js');
 
 const router = express.Router();
@@ -30,6 +32,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// Add Store (for add store page)
 router.get('/store/add', (req, res) => {
 	res.render('add', {
 		layout: 'layout',
@@ -38,21 +41,28 @@ router.get('/store/add', (req, res) => {
 });
 
 router.post('/store/add', (req, res) => {
+    var address = req.body.street + req.body.city + ", " + req.body.state + req.body.zip;
+    var survey = [req.body.survey1, req.body.survey1];
+
     const newStore = new Store({
         name: req.body.name,
-        address: req.body.address,
+        address: address,
         phone: req.body.phone,
         url: req.body.url,
         // ADD HOURS
     });
 
-    newStore.save((err, store) => {
-        if (err) {
-            res.status(400).json({ success: false, error: err });
-        }
-        res.status(200).json({ success: true, id: store.id });
-        console.log('Store added successfully!');
-    });
+    res.locals.store = newStore;
+    res.locals.survey = survey;
+
+    // newStore.save((err, store) => {
+    //     if (err) {
+    //         res.status(400).json({ success: false, error: err });
+    //     }
+    //     res.status(200).json({ success: true, id: store.id });
+    //     console.log('Store added successfully!');
+    // });
+    res.redirect('/account/register');
 });
 
 // Get store by ID (for forum/store page)

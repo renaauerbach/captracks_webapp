@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const hbs = require('hbs');
 const path = require('path');
 const cors = require('cors');
@@ -27,9 +28,7 @@ hbs.registerHelper('convert', (data) => {
     var stringify = JSON.stringify(data).split('"_id":').join('"id":');
     return stringify;
 });
-
 hbs.registerPartials(__dirname + '/views/partials', (err) => {});
-
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,8 +45,30 @@ app.use('/', storeRouter);
 // app.use('/map/:id/forum', messageRouter);
 app.use('/account', managerRouter);
 
+// Sessions
+app.use(
+	session({
+		secret: 'secret reviewer',
+		saveUninitialized: false,
+		resave: true,
+		cookie: {},
+	})
+);
+
 app.use((req, res, next) => {
-    next();
+	res.locals.user = req.sessionID;
+	res.locals.authenticated = !req.sessionID.anonymous;
+
+	const cookieHeader = req.get('Cookie').split('; ');
+	const cookieObj = cookieHeader.reduce((cookies, nameValue) => {
+		const [name, value] = nameValue.split('=');
+		cookies[name] = value;
+		return cookies;
+	}, {});
+	req.cookies = cookieObj;
+	console.log(req.cookies);
+
+	next();
 });
 
 app.get('/about', (req, res) => {
