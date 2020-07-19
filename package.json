@@ -18,6 +18,7 @@
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.22",
     "node-uuid": "^1.4.8",
+    "nodemailer": "^6.4.10",
     "querystring": "^0.2.0",
     "realm": "^6.0.2",
     "swagger-ui-express": "^4.1.4",

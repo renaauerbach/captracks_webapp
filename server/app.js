@@ -56,17 +56,17 @@ app.use(
 );
 
 app.use((req, res, next) => {
-	res.locals.user = req.sessionID;
-	res.locals.authenticated = !req.sessionID.anonymous;
+	// res.locals.user = req.sessionID;
+	// res.locals.authenticated = !req.sessionID.anonymous;
 
-	const cookieHeader = req.get('Cookie').split('; ');
-	const cookieObj = cookieHeader.reduce((cookies, nameValue) => {
-		const [name, value] = nameValue.split('=');
-		cookies[name] = value;
-		return cookies;
-	}, {});
-	req.cookies = cookieObj;
-	console.log(req.cookies);
+	// const cookieHeader = req.get('Cookie').split('; ');
+	// const cookieObj = cookieHeader.reduce((cookies, nameValue) => {
+	// 	const [name, value] = nameValue.split('=');
+	// 	cookies[name] = value;
+	// 	return cookies;
+	// }, {});
+	// req.cookies = cookieObj;
+	// console.log(req.cookies);
 
 	next();
 });

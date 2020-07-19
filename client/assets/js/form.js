@@ -5,7 +5,6 @@
         function() {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener(
                     'submit',
@@ -25,10 +24,36 @@
 })();
 
 // Handle 24 Hour Checkbox
-var cb = document.getElementById('24hours');
-cb.addEventListener('change', () => {
-    document.querySelectorAll('.hours').disabled = !cb.checked;
+var checkbox = document.getElementById('24hours');
+checkbox.addEventListener('change', e => {
+    var inputs = document.querySelectorAll('.hours');
+    if (e.target.checked) {
+        for (var i = 0; i < inputs.length; ++i) {
+            inputs[i].disabled = true;
+        }
+    }
+    else {
+        for (var i = 0; i < inputs.length; ++i) {
+            inputs[i].disabled = false;
+        }
+    }
 });
+
+// Handle Closed Checkbox
+document.querySelector('#days').onclick = (e) => {
+    var name = e.srcElement.attributes.name.nodeValue;
+    var fields = document.getElementsByName(name);
+    if (e.target.checked) {
+        for (var i = 0; i < fields.length; ++i) {
+            fields[i].disabled = true;
+        }
+    }
+    else {
+        for (var i = 0; i < fields.length; ++i) {
+            fields[i].disabled = false;
+        }
+    }
+}
 
 // Handle Phone Number Formatting
 function phoneFormat(e, restore) {

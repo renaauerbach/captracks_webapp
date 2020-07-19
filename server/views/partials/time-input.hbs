@@ -2,7 +2,7 @@
     <legend class="col-form-label col-sm-2 pt-0">
         {{name}}
         <div class="form-check form-check-inline">
-            <input class="form-check-input hours" type="checkbox" id="closed">
+            <input class="form-check-input hours" name={{name}} type="checkbox">
             <label class="form-check-label" for="closed">Closed</label>
         </div>
     </legend>
@@ -10,7 +10,7 @@
         <input type="text" class="form-control hours" name={{name}} placeholder="Open">
     </div>
     <div class="col-md-2 mb-1" style="padding: 2px">
-        <select type="select" class="form-control hours" name="daytime">
+        <select type="select" class="form-control hours" name={{name}}>
             <option>AM</option>
             <option>PM</option>
         </select>
@@ -19,7 +19,7 @@
         <input type="text" class="form-control hours" name={{name}} placeholder="Close">
     </div>
     <div class="col-md-2 mb-1" style="padding: 2px">
-        <select type="select" class="form-control hours" name="daytime">
+        <select type="select" class="form-control hours" name={{name}}>
             <option>AM</option>
             <option>PM</option>
         </select>
