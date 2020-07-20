@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const validator = require('validator');
+
 const hbs = require('hbs');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
-const { check, validationResult } = require('express-validator');
 
 const parser = require('./parser.js');
 
@@ -52,26 +53,11 @@ app.use((req, res, next) => {
 });
 
 // Login
-app.post(
-    '/login',
-    [
-        check('email', 'Please enter a valid email').isEmail(),
-        check('password', 'Please enter a valid password').isLength({
-            min: 6,
-        }),
-    ],
-    async (req, res) => {
-        const errors = validationResult(req);
-
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ success: false, error: errors.array() });
-        }
+app.post('/login', async (req, res) => {
 
         const { email, password } = req.body;
         try {
-            let manager = await Manager.findOne({
-                email,
-            });
+            let manager = await Manager.findOne({ email });
             if (!manager) {
                 return res.status(400).json({
                     message: 'Manager does not exist',
@@ -79,21 +65,18 @@ app.post(
             }
 
             const isMatch = await bcrypt.compare(password, manager.password);
-            if (!isMatch)
+            if (!isMatch) {
                 return res.status(400).json({
                     message: 'Incorrect Password !',
                 });
+            }
 
-            const payload = {
-                manager: {
-                    id: manager.id,
+            const payload = { manager: {
+                    id: manager.id, 
                 },
             };
 
-            jwt.sign(
-                payload,
-                jwtKey,
-                {
+            jwt.sign( payload, jwtKey, {
                     algorithm: "HS256",
                     expiresIn: jwtExpirySeconds,
                 },

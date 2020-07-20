@@ -25,7 +25,8 @@
     "querystring": "^0.2.0",
     "realm": "^6.0.2",
     "swagger-ui-express": "^4.1.4",
-    "sync-request": "^6.1.0"
+    "sync-request": "^6.1.0",
+    "validator": "^13.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
