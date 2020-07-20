@@ -32,23 +32,23 @@ a {
     display: inline-block;
 }
 
-h2,
-h4 {
+/* #bootstrapOverride h2,
+#bootstrapOverride h4 {
     font-weight: 500;
     margin: 0px;
 }
 
-h2 {
+#bootstrapOverride h2 {
     font-size: 36px;
 }
 
-h4 {
+#bootstrapOverride h4 {
     font-size: 22px;
 }
 
-h5 {
+#bootstrapOverride h5 {
     font-size: 19px;
-}
+} */
 
 ul {
     margin: 0;
@@ -87,8 +87,8 @@ label {
 
 /*===== Title Style =====*/
 .section-title .title,
-.rounded-title {
-    font: normal normal 600 50px "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+.rounded-title .title {
+    font: normal normal 600 45px "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
 }
 
 .section-title .title {
@@ -98,14 +98,23 @@ label {
 
 .rounded-title {
     color: #ffffff;
-    padding: 30px;
+    padding: 5%;
     border-radius: 15px;
 }
 
-@media (max-width: 767px) {
-    .section-title .title,
-    .rounded-title {
-        font-size: 40px;
+@media (max-width: 769px) {
+    .section-title .title {
+        font-size: 36px;
+    }
+
+    div#rounded-continer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .rounded-title .title {
+        font-size: 25px;
+        margin: 5px 0;
     }
 }
 
@@ -828,9 +837,73 @@ label {
     margin-top: 5%;
 }
 
-.form-group .form-check input#24hours {
-    margin-left: 15px !important;
+#add .form-control,
+#register .form-control {
+    font-size: 18px;
 }
+
+.form-group .form-check .col-form-label {
+    margin-right: 15px !important;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    #add form, 
+    #register form {
+        max-width: 75%;
+    }
+
+    #add .form-control,
+    #register .form-control {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 991px) {
+    #add form, 
+    #register form {
+        max-width: 100%;
+    }
+
+    #add .form-control,
+    #register .form-control {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+   div.form-group legend {
+       display: flex;
+       justify-content: space-between;
+       font-size: 16px;
+   }
+
+   #hr-title {
+       margin-bottom: 0;
+   }
+
+   #hr-title div.form-check-inline {
+        display: block;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+   }
+
+   #hr-title div.form-check-inline .col-form-label {
+       padding-bottom: 0;
+   }
+
+    #state,
+    #web,
+    #open,
+    #close {
+        padding-left: 0;
+    }
+
+    #daytime {
+        padding-right: 0;
+    }
+}
+
 
 /* Remove arrows for input[type=number] */
 input::-webkit-outer-spin-button,

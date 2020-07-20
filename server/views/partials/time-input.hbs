@@ -1,24 +1,24 @@
 <div class="form-group row">
-    <legend class="col-form-label col-sm-2 pt-0">
+    <legend class="col-form-label pt-0" style='padding: 0'>
         {{name}}
         <div class="form-check form-check-inline">
             <input class="form-check-input hours" name={{name}} type="checkbox">
             <label class="form-check-label" for="closed">Closed</label>
         </div>
     </legend>
-    <div class="col-md-3 mb-3" style="padding: 2px">
+    <div id='open' class="col-md-3 col-8" style="padding-right: 2px">
         <input type="text" class="form-control hours" name={{name}} placeholder="Open">
     </div>
-    <div class="col-md-2 mb-1" style="padding: 2px">
+    <div class="col-md-2 col-4 mb-1" style="padding-right: 2px">
         <select type="select" class="form-control hours" name={{name}}>
             <option>AM</option>
             <option>PM</option>
         </select>
     </div>
-    <div class="col-md-3 mb-3" style="padding: 2px">
+    <div id='close' class="col-md-3 col-8" style="padding-right: 2px">
         <input type="text" class="form-control hours" name={{name}} placeholder="Close">
     </div>
-    <div class="col-md-2 mb-1" style="padding: 2px">
+    <div class="col-md-2 col-4 mb-1" id='daytime'>
         <select type="select" class="form-control hours" name={{name}}>
             <option>AM</option>
             <option>PM</option>
