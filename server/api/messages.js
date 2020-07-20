@@ -4,8 +4,7 @@ const db = require('../db.js');
 
 const router = express.Router();
 
-const Store = mongoose.model('stores');
-const Message = mongoose.model('messages');
+const Message = require('../models/message.model');
 
 // Create new message
 router.post('/post', (req, res) => {

@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
+const { check, validationResult } = require('express-validator');
 
 const parser = require('./parser.js');
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
+app.use(cookieParser())
 
 // Routers
 app.use('/', storeRouter);
@@ -45,31 +47,73 @@ app.use('/', storeRouter);
 // app.use('/map/:id/forum', messageRouter);
 app.use('/account', managerRouter);
 
-// Sessions
-app.use(
-	session({
-		secret: 'secret reviewer',
-		saveUninitialized: false,
-		resave: true,
-		cookie: {},
-	})
-);
-
 app.use((req, res, next) => {
-	// res.locals.user = req.sessionID;
-	// res.locals.authenticated = !req.sessionID.anonymous;
-
-	// const cookieHeader = req.get('Cookie').split('; ');
-	// const cookieObj = cookieHeader.reduce((cookies, nameValue) => {
-	// 	const [name, value] = nameValue.split('=');
-	// 	cookies[name] = value;
-	// 	return cookies;
-	// }, {});
-	// req.cookies = cookieObj;
-	// console.log(req.cookies);
-
 	next();
 });
+
+// Login
+app.post(
+    '/login',
+    [
+        check('email', 'Please enter a valid email').isEmail(),
+        check('password', 'Please enter a valid password').isLength({
+            min: 6,
+        }),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ success: false, error: errors.array() });
+        }
+
+        const { email, password } = req.body;
+        try {
+            let manager = await Manager.findOne({
+                email,
+            });
+            if (!manager) {
+                return res.status(400).json({
+                    message: 'Manager does not exist',
+                });
+            }
+
+            const isMatch = await bcrypt.compare(password, manager.password);
+            if (!isMatch)
+                return res.status(400).json({
+                    message: 'Incorrect Password !',
+                });
+
+            const payload = {
+                manager: {
+                    id: manager.id,
+                },
+            };
+
+            jwt.sign(
+                payload,
+                jwtKey,
+                {
+                    algorithm: "HS256",
+                    expiresIn: jwtExpirySeconds,
+                },
+                (err, token) => {
+                    if (err) {
+                        throw err;
+                    }
+                    res.status(200).json({
+                        token,
+                    });
+                    res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
+                }
+            );
+            res.redirect('/account');
+        } catch (err) {
+            res.status(500).json({ success: false, error: err });
+            console.log("Error logging in manager", err.message);
+        }
+    }
+);
 
 app.get('/about', (req, res) => {
     // Load functionality box data

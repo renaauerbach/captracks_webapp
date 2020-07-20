@@ -2,11 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const querystring = require('querystring');    
 
-const db = require('../db.js');
-
 const router = express.Router();
 
-const Store = mongoose.model('stores');
+const Store = require('../models/store.model');
 
 // Get all stores
 router.get('/', (req, res) => {

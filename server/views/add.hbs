@@ -2,62 +2,62 @@
 <section id="add">
     <div class="container">
         {{> title_bar title="Add Your Store to CapTracks!"}}
-            <div class="d-flex justify-content-center">
-                <form class="needs-validation" method="POST">
-                    <div class="form-group row">
-                        <input type="text" id="name" class="form-control" name="name" placeholder="Store Name" required>
+        <div class="d-flex justify-content-center">
+            <form class="needs-validation" method="POST">
+                <div class="form-group row">
+                    <input type="text" id="name" class="form-control" name="name" placeholder="Store Name" required>
+                </div>
+                <div class="form-group row">
+                    <input type="text" class="form-control" name="street" placeholder="Street Address" required>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6" style='padding: 0'>
+                        <input type="text" class="form-control" name="city" placeholder="City" required>
                     </div>
-                    <div class="form-group row">
-                        <input type="text" class="form-control" name="street" placeholder="Street Address" required>
+                    <div class="col-md-2 col-4" id="state">
+                        <input type="text" class="form-control" name="state" placeholder="State" minlength="2" maxlength="2" 
+                        oninput="this.value = this.value.toUpperCase()" required>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-6" style='padding: 0'>
-                            <input type="text" class="form-control" name="city" placeholder="City" required>
-                        </div>
-                        <div class="col-md-2 col-4" id="state">
-                            <input type="text" class="form-control" name="state" placeholder="State" minlength="2" maxlength="2" 
-                            oninput="this.value = this.value.toUpperCase()" required>
-                        </div>
-                        <div class="col-md-4 col-8" style='padding: 0'>
-                            <input type="number" class="form-control" name="zip" placeholder="Zip Code" minlength='5' maxlength="5" oninput="this.value = this.value.slice(0, this.maxLength)" required>
-                        </div>
+                    <div class="col-md-4 col-8" style='padding: 0'>
+                        <input type="number" class="form-control" name="zip" placeholder="Zip Code" minlength='5' maxlength="5" oninput="this.value = this.value.slice(0, this.maxLength)" required>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-6 col-sm-6" style='padding: 0'>
-                            <input id="phone" type="text" class="form-control" name="phone" placeholder="Phone Number" minlength="12" maxlength="12" required>
-                        </div>
-                        <div id="web" class="col-md-6 col-sm-6" style='padding-right: 0'>
-                            <input type="text" class="form-control" name="url" placeholder="Website URL" required>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 col-sm-6" style='padding: 0'>
+                        <input id="phone" type="text" class="form-control" name="phone" placeholder="Phone Number" minlength="12" maxlength="12" required>
                     </div>
-                    <div id="hr-title" class="form-group align-items-center">
-                        <div class="form-check form-check-inline">
-                            <label class="col-form-label" for="hours">Hours of Operation: </label>
-                            <input class="form-check-input" type="checkbox" id="24hours">
-                            <label class="form-check-label" for="24hours">Open 24/7</label>
-                        </div>
+                    <div id="web" class="col-md-6 col-sm-6" style='padding-right: 0'>
+                        <input type="text" class="form-control" name="url" placeholder="Website URL" required>
                     </div>
-                    <fieldset id='days' class="form-group">
-                        {{> time_input name='Sunday'}}
-                        {{> time_input name='Monday'}}
-                        {{> time_input name='Tuesday'}}
-                        {{> time_input name='Wednesday'}}
-                        {{> time_input name='Thursdsay'}} 
-                        {{> time_input name='Friday'}}
-                        {{> time_input name='Saturday'}}
-                        {{> time_input name='Sunday'}}
-                    </fieldset>
-                    <div class="form-group row">
-                        <textarea class="form-control" id="survey1" name="survey1" rows="3" placeholder="What is your business / what type of retailer are you?" required></textarea>
+                </div>
+                <div id="hr-title" class="form-group align-items-center">
+                    <div class="form-check form-check-inline">
+                        <label class="col-form-label" for="hours">Hours of Operation: </label>
+                        <input class="form-check-input" type="checkbox" id="24hours">
+                        <label class="form-check-label" for="24hours">Open 24/7</label>
                     </div>
-                    <div class="form-group row">
-                        <textarea class="form-control" id="survey2"  name="survey2" rows="5" placeholder="What digital advertisement services do you currently use? Please be specific." required></textarea>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <input class="main-btn" type="submit" name="next" value="Next">
-                    </div>
-                </form>
-            </div>
+                </div>
+                <fieldset id='days' class="form-group">
+                    {{> time_input name='Sunday'}}
+                    {{> time_input name='Monday'}}
+                    {{> time_input name='Tuesday'}}
+                    {{> time_input name='Wednesday'}}
+                    {{> time_input name='Thursdsay'}} 
+                    {{> time_input name='Friday'}}
+                    {{> time_input name='Saturday'}}
+                    {{> time_input name='Sunday'}}
+                </fieldset>
+                <div class="form-group row">
+                    <textarea class="form-control" id="survey1" name="survey1" rows="3" placeholder="What is your business / what type of retailer are you?" required></textarea>
+                </div>
+                <div class="form-group row">
+                    <textarea class="form-control" id="survey2"  name="survey2" rows="5" placeholder="What digital advertisement services do you currently use? Please be specific." required></textarea>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input class="main-btn" type="submit" name="next" value="Next">
+                </div>
+            </form>
+        </div>
     </div> <!-- Container End -->
 </section>
 <!--====== ADD STORE ENDS ======-->
