@@ -20,17 +20,22 @@ const PORT = process.env.PORT || 3000;
 
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
-hbs.registerHelper('ifOdd', (val) => {
+hbs.registerHelper('ifOdd', val => {
     return val % 2 == 0 ? false : true;
 });
-hbs.registerHelper('ifEven', (val) => {
+hbs.registerHelper('ifEven', val => {
     return val % 2 == 0 ? true : false;
 });
-hbs.registerHelper('convert', (data) => {
-    var stringify = JSON.stringify(data).split('"_id":').join('"id":');
+hbs.registerHelper('convert', data => {
+    var stringify = JSON.stringify(data)
+        .split('"_id":')
+        .join('"id":');
     return stringify;
 });
-hbs.registerPartials(__dirname + '/views/partials', (err) => {});
+hbs.registerHelper('eq', (val1, val2) => {
+    return val1 === val2;
+});
+hbs.registerPartials(__dirname + '/views/partials', err => {});
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,7 +45,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
-app.use(cookieParser())
+app.use(cookieParser());
 
 // Routers
 app.use('/', storeRouter);
@@ -49,54 +54,56 @@ app.use('/', storeRouter);
 app.use('/account', managerRouter);
 
 app.use((req, res, next) => {
-	next();
+    next();
 });
 
 // Login
 app.post('/login', async (req, res) => {
-
-        const { email, password } = req.body;
-        try {
-            let manager = await Manager.findOne({ email });
-            if (!manager) {
-                return res.status(400).json({
-                    message: 'Manager does not exist',
-                });
-            }
-
-            const isMatch = await bcrypt.compare(password, manager.password);
-            if (!isMatch) {
-                return res.status(400).json({
-                    message: 'Incorrect Password !',
-                });
-            }
-
-            const payload = { manager: {
-                    id: manager.id, 
-                },
-            };
-
-            jwt.sign( payload, jwtKey, {
-                    algorithm: "HS256",
-                    expiresIn: jwtExpirySeconds,
-                },
-                (err, token) => {
-                    if (err) {
-                        throw err;
-                    }
-                    res.status(200).json({
-                        token,
-                    });
-                    res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
-                }
-            );
-            res.redirect('/account');
-        } catch (err) {
-            res.status(500).json({ success: false, error: err });
-            console.log("Error logging in manager", err.message);
+    const { email, password } = req.body;
+    try {
+        let manager = await Manager.findOne({ email });
+        if (!manager) {
+            return res.status(400).json({
+                message: 'Manager does not exist',
+            });
         }
+
+        const isMatch = await bcrypt.compare(password, manager.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                message: 'Incorrect Password !',
+            });
+        }
+
+        const payload = {
+            manager: {
+                id: manager.id,
+            },
+        };
+
+        jwt.sign(
+            payload,
+            jwtKey,
+            {
+                algorithm: 'HS256',
+                expiresIn: jwtExpirySeconds,
+            },
+            (err, token) => {
+                if (err) {
+                    throw err;
+                }
+                res.status(200).json({
+                    token,
+                });
+                res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
+            }
+        );
+        res.redirect('/account');
+    } catch (err) {
+        res.status(500).json({ success: false, error: err });
+        console.log('Error logging in manager', err.message);
     }
-);
+});
 
 app.get('/about', (req, res) => {
     // Load functionality box data
@@ -115,8 +122,8 @@ app.get('/about', (req, res) => {
         layout: 'layout',
         title: 'About',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
-        functionality: boxes, 
-        members: members
+        functionality: boxes,
+        members: members,
     });
 });
 

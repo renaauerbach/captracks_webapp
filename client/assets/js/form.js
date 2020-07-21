@@ -131,6 +131,6 @@ function checkNumber(field, e) {
     }
 }
 
-document.getElementById('phone').onkeyup = function(e) {
+document.getElementById('phone').onkeyup = (e) => {
     checkNumber(this, e);
 };

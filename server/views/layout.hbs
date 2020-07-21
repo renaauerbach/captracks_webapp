@@ -43,9 +43,9 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item"><a href="/">Home</a></li>
-                                    <li class="nav-item"><a href="/about">About Us</a></li>
-                                    <li class="nav-item"><a href="/register/store">Add Your Store</a></li>
+                                    <li {{#if (eq title 'Home')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/">Home</a></li>
+                                    <li {{#if (eq title 'About')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/about">About Us</a></li>
+                                    <li {{#if (eq title 'Add Store')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/register/store">Add Your Store</a></li>
                                     <li class="login"><button class="form-toggler" type="button">Manager Login</button></li>
                                 </ul>
                             </div> <!-- Navbar Collapse End -->
