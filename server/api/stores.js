@@ -14,7 +14,7 @@ const jwtKey = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/auth.c
 const jwtExpirySeconds = 360;
 
 const Store = require('../models/store.model');
-const Manager = require('../models/manager.model');
+const Vendor = require('../models/vendor.model');
 
 // Get all stores --> MAP (Home)
 router.get('/', (req, res) => {
@@ -90,7 +90,7 @@ router.post('/register/store', (req, res) => {
     res.redirect('/register/account');
 });
 
-// Create new manager
+// Create new vendor account
 router.get('/register/account', (req, res) => {
     res.render('register', {
         layout: 'layout',
@@ -102,15 +102,15 @@ router.post('/register/account', async (req, res) => {
     const { firstName, lastName, password, phone, email } = req.body;
     // Check if an account already exists with that email
     try {
-        let manager = await Manager.findOne({
+        let vendor = await Vendor.findOne({
             email,
         });
-        if (manager) {
+        if (vendor) {
             return res.status(400).json({
                 msg: 'Account already exists with that email',
             });
         }
-        manager = new Manager({
+        vendor = new Vendor({
             partition: 'trackable_caps',
             firstName: firstName,
             lastName: lastName,
@@ -121,14 +121,14 @@ router.post('/register/account', async (req, res) => {
 
         console.log(">> Salting");
         const salt = await bcrypt.genSalt(10);
-        manager.password = await bcrypt.hash(password, salt);
+        vendor.password = await bcrypt.hash(password, salt);
 
-        await manager.save();
+        await vendor.save();
         console.log(">> Saved");
 
         const payload = {
-            manager: {
-                id: manager.id,
+            vendor: {
+                id: vendor.id,
             },
         };
 
@@ -155,7 +155,7 @@ router.post('/register/account', async (req, res) => {
 
     } catch (err) {
         res.status(500).json({ success: false, error: err });
-        console.log("Error registering manager", err);
+        console.log("Error registering vendor", err);
     }
 
     // var recipients = ['gabriel@captracks.com', 'ben@captracks.com'];

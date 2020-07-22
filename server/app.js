@@ -12,7 +12,7 @@ const parser = require('./parser.js');
 
 const messageRouter = require('./api/messages');
 const detailsRouter = require('./api/details');
-const managerRouter = require('./api/managers');
+const vendorRouter = require('./api/managers');
 const storeRouter = require('./api/stores');
 
 const app = express();
@@ -64,14 +64,14 @@ app.use((req, res, next) => {
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
-        let manager = await Manager.findOne({ email });
-        if (!manager) {
+        let vendor = await Vendor.findOne({ email });
+        if (!vendor) {
             return res.status(400).json({
-                message: 'Manager does not exist',
+                message: 'Vendor does not exist',
             });
         }
 
-        const isMatch = await bcrypt.compare(password, manager.password);
+        const isMatch = await bcrypt.compare(password, vendor.password);
         if (!isMatch) {
             return res.status(400).json({
                 message: 'Incorrect Password !',
@@ -79,8 +79,8 @@ app.post('/login', async (req, res) => {
         }
 
         const payload = {
-            manager: {
-                id: manager.id,
+            vendor: {
+                id: vendor.id,
             },
         };
 
@@ -104,7 +104,7 @@ app.post('/login', async (req, res) => {
         res.redirect('/account');
     } catch (err) {
         res.status(500).json({ success: false, error: err });
-        console.log('Error logging in manager', err.message);
+        console.log('Error logging in vendor', err.message);
     }
 });
 

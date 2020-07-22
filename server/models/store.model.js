@@ -11,7 +11,7 @@ const storeSchema = new mongoose.Schema({
     url: { type: String, required: true},
     hours: { type: Array },
     forum: { type: Array },
-    manager: { type: ObjectID },
+    vendor: { type: ObjectID },
     details: { type: Array },
 });
 

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const Manager = require('../models/manager.model');
+const Vendor = require('../models/vendor.model');
 
-// Manager Account --> ACCOUNT
+// Vendor Account --> ACCOUNT
 router.get('/', (req, res) => {
     res.render('account', {
         layout: 'layout',
@@ -11,14 +11,14 @@ router.get('/', (req, res) => {
     });
 });
 
-// Delete Manager Account
+// Delete Vendor Account
 router.delete('/:id', (req, res) => {
-    Manager.findByIdAndRemove(req.params.id, err => {
+    Vendor.findByIdAndRemove(req.params.id, err => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
         res.status(200).json({ success: true });
-        console.log('Manager account deleted successfully!');
+        console.log('Vendor account deleted successfully!');
     });
 });
 

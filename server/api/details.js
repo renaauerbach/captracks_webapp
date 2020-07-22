@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
             id: store._id,
             name: store.name,
             address: store.address,
-            manager: store.manager,
+            vendor: store.vendor,
             forum: store.forum,
         });
     });
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 //         name: req.body.name,
 //         address: address,
 //         forum: [],
-//         manager: req.body.manager,
+//         vendor: req.body.vendor,
 //     });
 
 //     newStore.save((err, msg) => {
