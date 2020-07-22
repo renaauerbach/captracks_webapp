@@ -1,62 +1,62 @@
 {{!-- <!--====== ACCOUNT START ======--> --}}
-<section id="store" class="style-2">
-    <div class="back">
-        <i class="fas fa-chevron-left"></i>
-        <a href="/map">Back to map</a>
-    </div>
-    {{> header title=store.name text1="View recent updates directly from STORE."}}
+<section id="account" class="style-2">
+    {{> header title=(concat 'Welcome back, ' manager.firstName)}}
     <span id="data" style="display: none">{{{ store }}}</span> 
 </section>
 <section id="forum">
     <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-sm-3">
-                    <div class="store-info">
-                        <h5>Store Info</h5>
-                        <hr>
-                        <div class="store-links">
-                            <ul>
-                                <li>
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <a href="">{{store.address}}</a>
-                                </li>
-                                <li>
-                                    <i class="fas fa-phone"></i>
-                                    <a href="tel:{{store.phone}}">{{store.phone}}</a>
-                                </li>
-                                <li>
-                                    <i class="fas fa-globe"></i>
-                                    <a href="{{store.url}}">{{store.url}}</a>
-                                </li>
-                                <li>
-                                    <i class="far fa-hourglass"></i>
-                                    <p>Sunday: {{store.hours}}</p>
-                                </li>
-                           </ul>
-                           {{#if links}}
-                                <hr>
-                                {{#each links as |link|}}
-                                <a href={{link}}>{{link.title}}</a>
-                                {{/each}}
+        <div class="row justify-content-between">
+            <div class="col-sm-3">
+                <div class="store-info">
+                    <h5>Store Info</h5>
+                    <hr>
+                    <div class="store-links">
+                        <ul>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <a href="">{{store.address}}</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:{{store.phone}}">{{store.phone}}</a>
+                            </li>
+                            {{#if store.url}}
+                            <li>
+                                <i class="fas fa-globe"></i>
+                                <a href="{{store.url}}">{{store.url}}</a>
+                            </li>
+                            {{else}}
                             {{/if}}
+                            <li>
+                                <i class="far fa-hourglass"></i>
+                                {{}}
+                                <p>Sunday: {{store.hours}}</p>
+                            </li>
+                        </ul>
+                        {{#if links}}
+                            <hr>
+                            {{#each links as |link|}}
+                            <a href={{link}}>{{link.title}}</a>
+                            {{/each}}
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <div class="divider border-gradient"></div>
+            {{#each forum as |msg|}}
+                <div class="col-sm-9">
+                    <div class="forum-box">
+                        <div class="forum-content">
+                            <h5 class="post-title float-left">TITLE{{msg.title}}</h5>
+                            <h6 class="label float-right">DATE{{msg.createdOn}}</h6>
+                            <br/>
+                            <hr>
+                            <p class="post-text">TEXT{{msg.text}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="divider border-gradient"></div>
-                {{#each forum as |msg|}}
-                    <div class="col-sm-9">
-                        <div class="forum-box">
-                            <div class="forum-content">
-                                <h5 class="post-title float-left">TITLE{{msg.title}}</h5>
-                                <h6 class="label float-right">DATE{{msg.createdOn}}</h6>
-                                <br/>
-                                <hr>
-                                <p class="post-text">TEXT{{msg.text}}</p>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
+            {{/each}}
+        </div>
     </div> <!-- Container End -->
 </section>
 {{!-- <!--====== ACCOUNT ENDS ======--> --}}

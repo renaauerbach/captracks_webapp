@@ -631,7 +631,8 @@ label {
 #about, 
 #store, 
 #add,
-#register {
+#register,
+#account {
     padding-top: 18%;
     padding-bottom: 10%;
 }
@@ -648,7 +649,8 @@ label {
     #about, 
     #store, 
     #add,
-    #register { 
+    #register,
+    #account {
         padding: 10%;
         padding-top: 25%;
     }
@@ -666,7 +668,8 @@ label {
     #about, 
     #store, 
     #add,
-    #register {
+    #register,
+    #account {
         padding: 10%;
         padding-top: 40%;
     }
@@ -834,6 +837,7 @@ label {
 #add form, 
 #register form {
     max-width: 70%;
+    width: 70%;
     margin-top: 5%;
 }
 
@@ -850,6 +854,7 @@ label {
     #add form, 
     #register form {
         max-width: 75%;
+        width: 75%;
     }
 
     #add .form-control,
@@ -862,6 +867,7 @@ label {
     #add form, 
     #register form {
         max-width: 100%;
+        width: 100%;
     }
 
     #add .form-control,
@@ -871,6 +877,14 @@ label {
 }
 
 @media (max-width: 767px) {
+    #register div.col-md-6 {
+        padding: 0;
+    }
+
+    #register div:nth-child(odd).col-md-6 {
+        margin-bottom: 5px;
+    }
+
    div.form-group legend {
        display: flex;
        justify-content: space-between;
@@ -904,7 +918,6 @@ label {
     }
 }
 
-
 /* Remove arrows for input[type=number] */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -915,6 +928,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* ====== ACCOUNT PAGE ====== */
+
 
 /* ====== FOOTER ====== */
 .footer-links ul {

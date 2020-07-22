@@ -50,8 +50,26 @@ router.get('/register/store', (req, res) => {
 
 router.post('/register/store', (req, res) => {
     console.log("STORE BODY: ", req.body);
-    var address = req.body.street + " " + req.body.city + ", " + req.body.state + " " + req.body.zip;
+    var address = req.body.street + ", " + req.body.city + ", " + req.body.state + " " + req.body.zip;
     var survey = [req.body.survey1, req.body.survey1];
+
+    var hours = [];
+    if (!req.body['24hours']) {
+        var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+        for (let i = 0; i < days.length; i++) {
+            let curr = req.body[days[i]];
+            if (curr) {
+                hours.push({'day': days[i], 'open': [curr[0], curr[1]], 'close': [curr[2], curr[3]]});
+            }
+            else {
+                hours.push({'day': days[i]});
+            }
+        }
+    }
+    else {
+        hours.push('Open 24/7');
+    }
 
     const newStore = new Store({
         name: req.body.name,
@@ -59,7 +77,7 @@ router.post('/register/store', (req, res) => {
         address: address,
         phone: req.body.phone,
         url: req.body.url,
-        // ADD HOURS
+        hours: hours,
     });
 
     // newStore.save((err, store) => {

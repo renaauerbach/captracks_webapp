@@ -2,26 +2,28 @@
     <legend class="col-form-label pt-0" style='padding: 0'>
         {{name}}
         <div class="form-check form-check-inline">
-            <input class="form-check-input hours" name={{name}} type="checkbox">
+            <input class="form-check-input hours closed" for="closed" name={{name}} type="checkbox">
             <label class="form-check-label" for="closed">Closed</label>
         </div>
     </legend>
-    <div id='open' class="col-md-3 col-8" style="padding-right: 2px">
-        <input type="text" class="form-control hours" name={{name}} placeholder="Open">
+    <div id='open' class="col-md-4 col-8" style="padding-right: 2px">
+        <input type="text" class="form-control hours" name={{name}} placeholder="Open" minlength="4" maxlength="5">
     </div>
     <div class="col-md-2 col-4 mb-1" style="padding-right: 2px">
         <select type="select" class="form-control hours" name={{name}}>
-            <option>AM</option>
-            <option>PM</option>
+            <option name="am">AM</option>
+            <option name="pm">PM</option>
         </select>
     </div>
-    <div id='close' class="col-md-3 col-8" style="padding-right: 2px">
-        <input type="text" class="form-control hours" name={{name}} placeholder="Close">
+    <div id='close' class="col-md-4 col-8" style="padding-right: 2px">
+        <input type="text" class="form-control hours" name={{name}} placeholder="Close" minlength="4" maxlength="5">
     </div>
     <div class="col-md-2 col-4 mb-1" id='daytime'>
         <select type="select" class="form-control hours" name={{name}}>
-            <option>AM</option>
-            <option>PM</option>
+            <option name="am">AM</option>
+            <option name="pm">PM</option>
         </select>
     </div>
 </div>
+
+<script src="/assets/js/form.js"></script>

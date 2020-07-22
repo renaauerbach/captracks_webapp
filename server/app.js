@@ -35,6 +35,9 @@ hbs.registerHelper('convert', data => {
 hbs.registerHelper('eq', (val1, val2) => {
     return val1 === val2;
 });
+hbs.registerHelper('concat', (val1, val2) => {
+    return val1 + val2;
+});
 hbs.registerPartials(__dirname + '/views/partials', err => {});
 
 // Bodyparser middleware

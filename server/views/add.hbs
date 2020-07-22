@@ -33,19 +33,18 @@
                 <div id="hr-title" class="form-group align-items-center">
                     <div class="form-check form-check-inline">
                         <label class="col-form-label" for="hours">Hours of Operation: </label>
-                        <input class="form-check-input" type="checkbox" id="24hours">
-                        <label class="form-check-label" for="24hours">Open 24/7</label>
+                        <input class="form-check-input" type="checkbox" for="24hours" name="24hours" id="24hours">
+                        <label class="form-check-label" for="24hours" name="24hours">Open 24/7</label>
                     </div>
                 </div>
-                <fieldset id='days' class="form-group">
-                    {{> time_input name='Sunday'}}
-                    {{> time_input name='Monday'}}
-                    {{> time_input name='Tuesday'}}
-                    {{> time_input name='Wednesday'}}
-                    {{> time_input name='Thursdsay'}} 
-                    {{> time_input name='Friday'}}
-                    {{> time_input name='Saturday'}}
-                    {{> time_input name='Sunday'}}
+                <fieldset class="form-group">
+                    {{> time_input name='Sun'}}
+                    {{> time_input name='Mon'}}
+                    {{> time_input name='Tues'}}
+                    {{> time_input name='Wed'}}
+                    {{> time_input name='Thurs'}} 
+                    {{> time_input name='Fri'}}
+                    {{> time_input name='Sat'}}
                 </fieldset>
                 <div class="form-group row">
                     <textarea class="form-control" id="survey1" name="survey1" rows="3" placeholder="What is your business / what type of retailer are you?" required></textarea>
@@ -54,7 +53,7 @@
                     <textarea class="form-control" id="survey2"  name="survey2" rows="5" placeholder="What digital advertisement services do you currently use? Please be specific." required></textarea>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <input class="main-btn" type="submit" name="next" value="Next">
+                    <input class="main-btn" type="submit" value="Next">
                 </div>
             </form>
         </div>
@@ -62,3 +61,5 @@
 </section>
 <!--====== ADD STORE ENDS ======-->
 <script src="/assets/js/form.js"></script>
+<script src="/assets/js/validator.js"></script>
+
