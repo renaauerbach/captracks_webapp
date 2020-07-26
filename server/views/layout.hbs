@@ -80,37 +80,13 @@
     </header>
     <!--====== HEADER ENDS ======-->
 
-    <!--====== FORM POPUP START ======-->
-    <div class="form-popup" id="storeForm">
-        <div action="/action_page.php" class="form-container">
-            <span class="close-btn">&times;</span>
-        </div>
-      </div>
-    <!--====== FORM POPUP END ======-->
+    <!--====== Popup ======-->
+    {{> login}}
 
     {{{body}}}
 
-    <!--====== FOOTER START ======-->
-    <footer id="footer" class="style-2">
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 footer-links">
-                        <ul>
-                            <li><a href="mailto:info@captracks.com">info@captracks.com</a></li>
-                            <li><a href="/assets/CapTracks_Privacy_Policy.pdf" target="_blank">Privacy Policy</a></li>
-                         </ul>
-                        <!-- <ul>
-                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        </ul> -->
-                    </div>
-                </div> <!-- Row End -->
-            </div> <!-- Container End -->
-        </div> <!-- Footer End -->
-    </footer> 
-    <!-- ====== FOOTER ENDS ====== -->
+    <!--====== Footer ======-->
+    {{> footer}}
 
     <!--====== jQuery JS ======-->
     <script src="/assets/js/modernizr-3.6.0.min.js"></script>

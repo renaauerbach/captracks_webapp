@@ -1,0 +1,25 @@
+<!--====== LOGIN FORM POPUP START ======-->
+<div class="form-popup" id="storeForm">
+    <div class="form-container">
+        <span class="close-btn"><i class="fas fa-times"></i></span>
+        <div class="overlay"></div>
+        <form id="login" action="/login" method="POST">
+            {{> header title="Vendor Login"}}
+            <div class="inputs">
+                <div class="form-group row">
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group row">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                <div class="error">
+                    <p></p>
+                </div>
+            </div>
+            <div class="submit-btn d-flex justify-content-center">
+                <input class="main-btn" type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+</div>
+<!--====== LOGIN FORM POPUP END ======-->

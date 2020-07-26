@@ -12,7 +12,7 @@ const parser = require('./parser.js');
 
 const messageRouter = require('./api/messages');
 const detailsRouter = require('./api/details');
-const vendorRouter = require('./api/managers');
+const vendorRouter = require('./api/vendors');
 const storeRouter = require('./api/stores');
 
 const app = express();
@@ -38,6 +38,9 @@ hbs.registerHelper('eq', (val1, val2) => {
 hbs.registerHelper('concat', (val1, val2) => {
     return val1 + val2;
 });
+hbs.registerHelper('len', (obj) => {
+    return Object.keys(obj).length;
+});
 hbs.registerPartials(__dirname + '/views/partials', err => {});
 
 // Bodyparser middleware
@@ -54,7 +57,7 @@ app.use(cookieParser());
 app.use('/', storeRouter);
 // app.use('/map/store', detailsRouter);
 // app.use('/map/:id/forum', messageRouter);
-app.use('/account', managerRouter);
+app.use('/account', vendorRouter);
 
 app.use((req, res, next) => {
     next();
@@ -65,6 +68,7 @@ app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
         let vendor = await Vendor.findOne({ email });
+        console.log("VENDOR: ", vendor);
         if (!vendor) {
             return res.status(400).json({
                 message: 'Vendor does not exist',
@@ -72,9 +76,11 @@ app.post('/login', async (req, res) => {
         }
 
         const isMatch = await bcrypt.compare(password, vendor.password);
+        console.log("MATCHED: ", isMatch);
+
         if (!isMatch) {
             return res.status(400).json({
-                message: 'Incorrect Password !',
+                message: 'Incorrect Password!',
             });
         }
 

@@ -1,0 +1,67 @@
+<!--====== FOOTER START ======-->
+<footer id="footer" class="style-2">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="footer-widget">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list">
+                        <li {{#if (eq title 'Home')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/">Home</a></li>
+                        <li {{#if (eq title 'About')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/about">About Us</a></li>
+                        <li {{#if (eq title 'Add Store')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/register/store">Add Your Store</a></li>
+                        <li><a href="/assets/CapTracks_Privacy_Policy.pdf" target="_blank">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="footer-widget">
+                    <h5 class="footer-title">Contact Us</h5>
+                    <div class="icon">
+                        <span><i class="fa fa-phone"></i></span>
+                        <a href="tel:847-708-5253">+1 (847) 708-5253</a>
+                    </div>
+                    <div class="icon">
+                        <span><i class="fa fa-envelope"></i></span>
+                        <a href="mailto:info@captracks.com">info@captracks.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="footer-widget">
+                    <form class="contact-form" method="POST" name="contactForm" enctype="multipart/form-data" action="client/assets/submit.php">
+                        <!-- Inputs Row -->
+                        <div class="row">
+                            <!-- Name Input -->
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-item">
+                                    <input type="text" class="form-control" placeholder="Name*" name="name" required data-validation-required-message="Please enter your name">
+                                </div>
+                            </div>
+                            <!-- Email Input -->
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-item">
+                                    <input type="email" class="form-control" placeholder="Email*" name="email" required data-validation-required-message="Please enter your email address">
+                                </div>
+                            </div>
+                            <!-- Phone Number Input -->
+                            <div class="col-12">
+                                <div class="form-item">
+                                    <input type="text" class="form-control" placeholder="Subject" name="subject" required data-validation-required-message="Please enter a subject for your message">
+                                </div>
+                            </div>
+                        </div> <!-- End Input Row -->
+                        <!-- Message Textarea -->
+                        <div class="form-item">
+                            <textarea class="form-control" rows="4" placeholder="Message" name="message" required data-validation-required-message="Please enter a message"></textarea>
+                            <div id="success"></div>
+                        </div>
+                        <div class="d-flex justify-content-right">
+                            <button class="main-btn" type="submit" name="submit">Send</button> 
+                        </div>
+                    </form> <!-- End Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer> 
+<!-- ====== FOOTER ENDS ====== -->

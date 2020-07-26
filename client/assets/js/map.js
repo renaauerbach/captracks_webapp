@@ -72,6 +72,8 @@
                             '<div class="popup-details">Current Capacity: ' + info.details + '</div>' +
                             '<div class="popup-details">Current Wait Time: ' + info.details + '</div>' +
                         '</div>' + 
+                    '</div>' +
+                    '<div class="popup-link">' +
                         '<a href="/store/' + info.id + '">Store Details</a>' +
                     '</div>';
         return contentString;

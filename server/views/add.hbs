@@ -27,7 +27,7 @@
                         <input id="phone" type="text" class="form-control" name="phone" placeholder="Phone Number" minlength="12" maxlength="12" required>
                     </div>
                     <div id="web" class="col-md-6 col-sm-6" style='padding-right: 0'>
-                        <input type="text" class="form-control" name="url" placeholder="Website URL" required>
+                        <input type="text" class="form-control" name="url" placeholder="Website URL" pattern="^\s*(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\s*$" required>
                     </div>
                 </div>
                 <div id="hr-title" class="form-group align-items-center">

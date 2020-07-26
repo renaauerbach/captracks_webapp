@@ -60,7 +60,7 @@ router.post('/register/store', (req, res) => {
         for (let i = 0; i < days.length; i++) {
             let curr = req.body[days[i]];
             if (curr) {
-                hours.push({'day': days[i], 'open': [curr[0], curr[1]], 'close': [curr[2], curr[3]]});
+                hours.push({'day': days[i], 'open': curr[0] + " " + curr[1], 'close': curr[2] + " " + curr[3]});
             }
             else {
                 hours.push({'day': days[i]});
@@ -189,11 +189,12 @@ router.post('/register/account', async (req, res) => {
 });
 
 // Get store by ID (for forum/store page)
-router.get('/stores/:id', (req, res) => {
+router.get('/store/:id', (req, res) => {
     Store.findById(req.params.id, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
+        console.log(store.hours);
         res.render('store', { layout: 'layout', title: store.name, store: store });
     });
 });

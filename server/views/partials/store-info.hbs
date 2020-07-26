@@ -1,0 +1,42 @@
+<div class="store-info">
+    <h5>Store Info</h5>
+    <hr>
+    <div class="store-links">
+        <ul>
+            <li class="d-flex justify-content-start align-items-start">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>{{store.address}}</p>
+            </li>
+            <li class="d-flex justify-content-start align-items-center">
+                <i class="fas fa-phone"></i>
+                <a href="tel:{{store.phone}}">{{store.phone}}</a>
+            </li>
+            {{#if store.url}}
+            <li class="d-flex justify-content-start align-items-center">
+                <i class="fas fa-globe"></i>
+                <a href="{{store.url}}">{{store.url}}</a>
+            </li>
+            {{else}}
+            {{/if}}
+            <li class="d-flex justify-content-start align-items-baseline">
+                <i class="far fa-hourglass"></i>
+                <div>
+                    <p>Store Hours:</p>
+                    {{#each store.hours as |day|}}
+                        {{#if (eq (len day) 1)}}
+                            <p class="hours">{{day.day}}: Closed</p>
+                        {{else}}
+                            <p class="hours">{{day.day}}: {{day.open}} - {{day.close}}</p>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </li>
+        </ul>
+        {{#if links}}
+            <hr>
+            {{#each links as |link|}}
+                <a href={{link}}>{{link.title}}</a>
+            {{/each}}
+        {{/if}}
+    </div>
+</div>
