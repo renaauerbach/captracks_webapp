@@ -3,11 +3,11 @@
     <div class="form-container">
         <span class="close-btn"><i class="fas fa-times"></i></span>
         <div class="overlay"></div>
-        <form id="login" action="/login" method="POST">
+        <form id="login" action="/account" method="POST">
             {{> header title="Vendor Login"}}
             <div class="inputs">
                 <div class="form-group row">
-                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                    <input type="text" class="form-control" name="email" placeholder="Email" required>
                 </div>
                 <div class="form-group row">
                     <input type="password" class="form-control" name="password" placeholder="Password" required>
@@ -20,6 +20,7 @@
                 <input class="main-btn" type="submit" value="Login">
             </div>
         </form>
+        <p class="reg-link">Don't have an account? <a href="/register/store">Add your store</a> to CapTracks today!</p>
     </div>
 </div>
 <!--====== LOGIN FORM POPUP END ======-->

@@ -1,26 +1,39 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
+const fs = require('fs');
+
 const db = require('../db.js');
+const partition = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/db.config.json'))).partition;
 
 const router = express.Router();
 
 const Message = require('../models/message.model');
+const Store = require('../models/store.model');
 
-// Create new message
-router.post('/post', (req, res) => {
+// Add new message to store's forum
+router.post('/:id', (req, res) => {
 	const newMessage = new Message({
+		partition: partition,
 		title: req.body.title,
 		text: req.body.text,
-		createdOn: req.body.createdOn,
+		createdOn: new Date(year, month, day, hours, minutes)
 	});
 
-	newMessage.save((err, msg) => {
-		if (err) {
-			res.status(400).json({ success: false, error: err });
-		}
-		res.status(200).json({ success: true, id: msg.id });
-		console.log('Forum post added successfully!');
-	});
+	Store.findById(req.body.storeId, (err, store) => {
+        if (err) {
+            res.status(400).json({ success: false, error: err });
+        }
+        newMessage.save((err, msg) => {
+			if (err) {
+				res.status(400).json({ success: false, error: err });
+			}
+			store.forum.push(msg);
+			res.status(200).json({ success: true, id: msg.id });
+			console.log('Forum post added successfully!');
+		});
+    });
+	
 });
 
 // Delete a message

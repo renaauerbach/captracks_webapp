@@ -56,62 +56,11 @@ app.use(cookieParser());
 // Routers
 app.use('/', storeRouter);
 // app.use('/map/store', detailsRouter);
-// app.use('/map/:id/forum', messageRouter);
+app.use('/post', messageRouter);
 app.use('/account', vendorRouter);
 
 app.use((req, res, next) => {
     next();
-});
-
-// Login
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        let vendor = await Vendor.findOne({ email });
-        console.log("VENDOR: ", vendor);
-        if (!vendor) {
-            return res.status(400).json({
-                message: 'Vendor does not exist',
-            });
-        }
-
-        const isMatch = await bcrypt.compare(password, vendor.password);
-        console.log("MATCHED: ", isMatch);
-
-        if (!isMatch) {
-            return res.status(400).json({
-                message: 'Incorrect Password!',
-            });
-        }
-
-        const payload = {
-            vendor: {
-                id: vendor.id,
-            },
-        };
-
-        jwt.sign(
-            payload,
-            jwtKey,
-            {
-                algorithm: 'HS256',
-                expiresIn: jwtExpirySeconds,
-            },
-            (err, token) => {
-                if (err) {
-                    throw err;
-                }
-                res.status(200).json({
-                    token,
-                });
-                res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
-            }
-        );
-        res.redirect('/account');
-    } catch (err) {
-        res.status(500).json({ success: false, error: err });
-        console.log('Error logging in vendor', err.message);
-    }
 });
 
 app.get('/about', (req, res) => {

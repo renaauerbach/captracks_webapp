@@ -55,6 +55,7 @@ label {
 input {
     border: 1px solid #b116e0;
 }
+
 /*===== Colored Background Style =====*/
 .style-2 {
     background-image: linear-gradient(
@@ -192,6 +193,29 @@ input {
     color: #ffffff;
 	border-color: #0000cd;
 	text-decoration: none;
+}
+
+button.thin-btn {
+    font-weight: 500;
+	text-align: center;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+    user-select: none;
+    border: 2px solid #ffffff;
+    padding: 0 10px;
+    font-size: 12px;
+    line-height: 30px;
+    border-radius: 15px;
+    width: 30%;
+    color: #e708ae;
+    background-color: #ffffff;
+}
+
+button.thin-btn:hover {
+    background-color: transparent;
+    color: #ffffff;
 }
 
 /*====== NAV ======*/
@@ -407,82 +431,6 @@ input {
     text-decoration: none;
 }
 
-/*====== POPUP FORM ======*/
-.form-popup.open {
-    display: inline-block;
-}
-
-.form-popup {
-    display: none;
-    position: fixed;
-    z-index: 5000;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0, 0.5);
-}
-
-.form-container {
-    padding: 30px;
-    position: relative;
-    font-size: 17px;
-    background-color: white;
-    width: 50%;
-    margin: 0 25%;
-    border: 2px solid #b116e0;
-    border-radius: 15px;
-    z-index: 9999;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .form-container {
-        font-size: 15px;
-        margin: 0 5%;
-        width: 90%;
-    }
-}
-
-@media (max-width: 767px) {
-    .form-container {
-        font-size: 15px;
-        margin: 0;
-        width: 100%;
-    }
-}
-
-.form-container #login {
-    margin: 0 auto;
-    width: 70%;
-}
-
-.form-container #login .inputs {
-    margin: 8% 0 20%;
-}
-
-.form-container #login .error p {
-    line-height: 30px;
-    font-size: 14px;
-}
-
-/* Close Button */
-.close-btn {
-    color: #0000cd;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: #e708ae;
-    text-decoration: none;
-}
-
 /*====== HEADER ======*/
 .intro {
     padding-top: 20%;
@@ -593,6 +541,96 @@ input {
 .header-image img {
     position: relative;
     z-index: 5;
+}
+
+/*====== LOGIN FORM ======*/
+.form-popup.open {
+    display: inline-block;
+}
+
+.form-popup {
+    display: none;
+    position: fixed;
+    z-index: 5000;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.form-container {
+    padding: 30px;
+    position: relative;
+    font-size: 17px;
+    background-color: white;
+    width: 50%;
+    margin: 0 25%;
+    border: 2px solid #b116e0;
+    border-radius: 15px;
+    z-index: 9999;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .form-container {
+        font-size: 15px;
+        margin: 0 5%;
+        width: 90%;
+    }
+}
+
+@media (max-width: 767px) {
+    .form-container {
+        font-size: 15px;
+        margin: 0;
+        width: 100%;
+    }
+}
+
+.form-container #login {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.form-container #login .inputs {
+    margin: 8% 0 20%;
+}
+
+.form-container #login .error p {
+    line-height: 30px;
+    font-size: 14px;
+}
+
+/* Close Button */
+.close-btn {
+    color: #0000cd;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #e708ae;
+    text-decoration: none;
+}
+
+.reg-link {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.reg-link a {
+    color: #0000cd;
+}
+
+.reg-link a:hover {
+    text-decoration: none;
+    color: #e708ae;
 }
 
 /*====== ALL PAGES/SECTIONS ======*/
@@ -809,6 +847,7 @@ input {
 }
 
 .border-gradient {
+    border-image-slice: 1;
     border-image-source: linear-gradient(
         to top,
         #0000cd,
@@ -918,7 +957,30 @@ input[type=number] {
 }
 
 /* ====== ACCOUNT PAGE ====== */
+textarea.forum.form-control, 
+input.forum.form-control {
+    border-width: 3px;
+    border-style: solid;
+    padding: 1rem;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(
+        to bottom right,
+        #0000cd,
+        #b116e0,
+        #e708ae
+    );
+}
 
+button.forum.thin-btn {
+    color: #ffffff;
+    border-color: #0000cd;
+    background-color: #0000cd;
+}
+
+button.forum.thin-btn:hover {
+    border-color: #e708ae;
+    background-color: #e708ae;
+}
 
 /* ====== FOOTER ====== */
 footer {
@@ -996,18 +1058,4 @@ footer {
     padding-left: 0;
 }
 
-.footer-widget .contact-form button.main-btn {
-    padding: 0 10px;
-    line-height: 30px;
-    width: 30%;
-    font-size: 12px;
-    color: #e708ae;
-    background-color: #ffffff;
-    border-color: #ffffff;
-}
-
-.footer-widget .contact-form button.main-btn:hover {
-    background-color: transparent;
-    color: #ffffff;
-}
 

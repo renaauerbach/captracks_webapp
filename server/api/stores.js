@@ -10,6 +10,7 @@ const fs = require('fs');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 
+const partition = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/db.config.json'))).partition;
 const jwtKey = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/auth.config.json'))).secret;
 const jwtExpirySeconds = 360;
 
@@ -73,20 +74,20 @@ router.post('/register/store', (req, res) => {
 
     const newStore = new Store({
         name: req.body.name,
-        partition: 'trackable_caps',
+        partition: partition,
         address: address,
         phone: req.body.phone,
         url: req.body.url,
         hours: hours,
     });
 
-    // newStore.save((err, store) => {
-    //     if (err) {
-    //         res.status(400).json({ success: false, error: err });
-    //     }
-    //     res.status(200).json({ success: true, id: store.id });
-    //     console.log('Store added successfully!');
-    // });
+    newStore.save((err, store) => {
+        if (err) {
+            res.status(400).json({ success: false, error: err });
+        }
+        res.status(200).json({ success: true, id: store.id });
+        console.log('Store added successfully!');
+    });
     res.redirect('/register/account');
 });
 
@@ -151,7 +152,7 @@ router.post('/register/account', async (req, res) => {
         );
         console.log(">> JWT DONE");
 
-        res.redirect('/account');
+        res.redirect('/account/' + vendor._id);
 
     } catch (err) {
         res.status(500).json({ success: false, error: err });
@@ -194,7 +195,6 @@ router.get('/store/:id', (req, res) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        console.log(store.hours);
         res.render('store', { layout: 'layout', title: store.name, store: store });
     });
 });

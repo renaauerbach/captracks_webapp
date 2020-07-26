@@ -10,18 +10,27 @@
                 {{> store_info store=store}}
             </div>
             <div class="divider border-gradient"></div>
-            {{#each forum as |msg|}}
-                <div class="col-sm-9">
-                    <div class="forum-box">
-                        <div class="forum-content">
-                            <h5 class="post-title float-left">TITLE{{msg.title}}</h5>
-                            <h6 class="label float-right">DATE{{msg.createdOn}}</h6>
-                            <br/>
-                            <hr>
-                            <p class="post-text">TEXT{{msg.text}}</p>
-                        </div>
+            <div class="col">
+                <h5>Forum</h5>
+                <hr>
+                <form class="forum" action="/post/{{store.id}}" method="POST">
+                <p>Add a post to your forum to keep your customers up to date.</p>
+                    <div class="form-group row">
+                        <input class="forum form-control" id="title"  name="title" rows="5" placeholder="Title your post">
                     </div>
-                </div>
+                    <div class="form-group row">
+                        <textarea class="forum form-control" id="text"  name="text" rows="5" placeholder=""></textarea>
+                    </div>
+                    <div style="display: none;">
+                        <input name="storeId" value={{store.id}}>
+                    </div>
+                    <div class="d-flex justify-content-right">
+                        <button class="forum thin-btn" type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
+            {{#each forum as |msg|}}
+                {{> forum_post msg=msg}}
             {{/each}}
         </div>
     </div> <!-- Container End -->

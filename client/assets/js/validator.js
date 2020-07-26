@@ -28,3 +28,11 @@ var password = document.getElementById('password');
 // document.getElementById('confirmed').onChange = (e) => {
 //     validate(this, e);
 // };
+
+// Check password and confirmed password match
+
+// Check why phone formatting not working on register user
+
+// Reguire difficult password
+
+
