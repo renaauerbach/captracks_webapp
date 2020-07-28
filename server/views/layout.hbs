@@ -20,9 +20,10 @@
 
     <!--====== Bootstrap CSS ======-->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
 </head>
 
-<body id="bootstrapOverride">
+<body>
     <!--====== HEADER START ======-->
     <header id="home" class="style-2 header-area">
         <!--====== NAV START ======-->
@@ -45,7 +46,7 @@
                                 <ul class="navbar-nav ml-auto">
                                     <li {{#if (eq title 'Home')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/">Home</a></li>
                                     <li {{#if (eq title 'About')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/about">About Us</a></li>
-                                    <li {{#if (eq title 'Add Store')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/register/store">Add Your Store</a></li>
+                                    <li {{#if (eq title 'Signup')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/signup">Add Your Store</a></li>
                                     <li class="login"><button class="form-toggler" type="button">Vendor Login</button></li>
                                 </ul>
                             </div> <!-- Navbar Collapse End -->
@@ -94,7 +95,7 @@
 
     <!--====== Bootstrap JS ======-->
     <script src="/assets/js/bootstrap.min.js"></script>
-
+    
     <!--====== Main JS ======-->
     <script src="/assets/js/main.js"></script>
 

@@ -41,65 +41,27 @@ router.get('/', (req, res) => {
     });
 });
 
-// Add Store
-router.get('/register/store', (req, res) => {
-	res.render('add', {
-		layout: 'layout',
-		title: 'Add Store',
-	});
-});
 
-router.post('/register/store', (req, res) => {
-    console.log("STORE BODY: ", req.body);
-    var address = req.body.street + ", " + req.body.city + ", " + req.body.state + " " + req.body.zip;
-    var survey = [req.body.survey1, req.body.survey1];
-
-    var hours = [];
-    if (!req.body['24hours']) {
-        var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-
-        for (let i = 0; i < days.length; i++) {
-            let curr = req.body[days[i]];
-            if (curr) {
-                hours.push({'day': days[i], 'open': curr[0] + " " + curr[1], 'close': curr[2] + " " + curr[3]});
-            }
-            else {
-                hours.push({'day': days[i]});
-            }
-        }
-    }
-    else {
-        hours.push('Open 24/7');
-    }
-
-    const newStore = new Store({
-        name: req.body.name,
-        partition: partition,
-        address: address,
-        phone: req.body.phone,
-        url: req.body.url,
-        hours: hours,
-    });
-
-    newStore.save((err, store) => {
+// Get store by ID (for forum/store page)
+router.get('/store/:id', (req, res) => {
+    Store.findById(req.params.id, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.status(200).json({ success: true, id: store.id });
-        console.log('Store added successfully!');
+        res.render('store', { layout: 'layout', title: store.name, store: store });
     });
-    res.redirect('/register/account');
 });
+
 
 // Create new vendor account
-router.get('/register/account', (req, res) => {
-    res.render('register', {
+router.get('/signup', (req, res) => {
+    res.render('signup', {
         layout: 'layout',
-        title: 'Create Account',
+        title: 'Sign Up',
     });
 });
 
-router.post('/register/account', async (req, res) => {
+router.post('/signup', async (req, res) => {
     const { firstName, lastName, password, phone, email } = req.body;
     // Check if an account already exists with that email
     try {
@@ -112,7 +74,7 @@ router.post('/register/account', async (req, res) => {
             });
         }
         vendor = new Vendor({
-            partition: 'trackable_caps',
+            partition: partition,
             firstName: firstName,
             lastName: lastName,
             password: password,
@@ -152,7 +114,7 @@ router.post('/register/account', async (req, res) => {
         );
         console.log(">> JWT DONE");
 
-        res.redirect('/account/' + vendor._id);
+        res.redirect('/signup/' + vendor._id + '/new_store');
 
     } catch (err) {
         res.status(500).json({ success: false, error: err });
@@ -189,14 +151,60 @@ router.post('/register/account', async (req, res) => {
     // });
 });
 
-// Get store by ID (for forum/store page)
-router.get('/store/:id', (req, res) => {
-    Store.findById(req.params.id, (err, store) => {
+
+// Add Store
+router.get('/signup/:id/new_store', (req, res) => {
+	res.render('new-store', {
+		layout: 'layout',
+		title: 'New Store',
+	});
+});
+
+router.post('/signup/:id/new_store', (req, res) => {
+    console.log("STORE BODY: ", req.body);
+    var address = req.body.street + ", " + req.body.city + ", " + req.body.state + " " + req.body.zip;
+    var survey = [req.body.survey1, req.body.survey1];
+
+    var hours = [];
+    if (!req.body['24hours']) {
+        var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+        for (let i = 0; i < days.length; i++) {
+            let curr = req.body[days[i]];
+            if (curr) {
+                hours.push({'day': days[i], 'open': curr[0] + " " + curr[1], 'close': curr[2] + " " + curr[3]});
+            }
+            else {
+                hours.push({'day': days[i]});
+            }
+        }
+    }
+    else {
+        hours.push('Open 24/7');
+    }
+
+    const newStore = new Store({
+        partition: partition,
+        name: req.body.name,
+        address: address,
+        phone: req.body.phone,
+        url: req.body.url,
+        hours: hours,
+        forum: [],
+        vendor: req.body.id,
+        details: [],
+    });
+
+    newStore.save((err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.render('store', { layout: 'layout', title: store.name, store: store });
+        res.status(200).json({ success: true, id: store.id });
+        console.log('Store added successfully!');
     });
+    res.redirect('/account');
 });
+
+
 
 module.exports = router;
