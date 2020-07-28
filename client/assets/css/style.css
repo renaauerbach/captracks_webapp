@@ -874,10 +874,23 @@ button.thin-btn:hover {
     display: block;
 }
 
+#add .form-group,
+.signup .form-group {
+    height: 75px;
+    width: 100%;
+    padding: 0;
+}
+
 #add .form-control,
 .signup .form-control {
     font-size: 18px;
     border: 1px solid #b116e0;
+    width: 100% !important;
+}
+
+/* Spacing b/w first row inputs */
+.signup .form-inline:nth-child(1) .form-control:nth-child(1),
+.signup .form-inline:nth-child(1) .form-control:nth-child(2) {
     width: 95% !important;
 }
 
@@ -892,15 +905,10 @@ button.thin-btn:hover {
     margin-right: 15px !important;
 }
 
-#add .form-group,
-.signup .form-group {
-    height: 75px;
-    width: 100%;
-    padding: 0;
-}
-
 #add .form-group span.help,
-.signup .form-group span.help {
+.signup .form-group span.help,
+.signup .form-group span.unmet,
+.signup .form-group span.unmatched {
     display: none;
     font-size: 10px;
     line-height: 14px;
@@ -917,10 +925,34 @@ button.thin-btn:hover {
     transform-origin: top left;
     transition: 240ms;
 }
-  
+
+.signup ul li.reqs {
+    font-size: 15px;
+    padding-left: 5%;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.signup ul li.reqs.valid {
+    color: #24b954;
+}
+
+.signup ul li.reqs.valid:before {
+    content: '✓';
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.signup ul li.reqs.invalid {
+    color: #f72942;
+}
+
+.signup ul li.reqs.invalid:before {
+    color: #f72942;
+    content: 'x';
+}
+
 .signup .form-group.focused .control-label {
     opacity: 1;
-    transform: translate3d(0px, -10px, 0) scale(0.75);
+    transform: translate3d(0px, -10px, 0) scale(0.85);
     line-height: 1px;
     color: #e708ae;
 }
@@ -944,7 +976,7 @@ button.thin-btn:hover {
 
 .signup .form-group.filled .control-label {
     opacity: 1;
-    transform: translate3d(0px, -10px, 0) scale(0.75);
+    transform: translate3d(0px, -10px, 0) scale(0.85);
     line-height: 1px;
     color: #e708ae;
 }
@@ -952,7 +984,7 @@ button.thin-btn:hover {
 .signup .form-control.filled {
     border-color: #e708ae;
     opacity: 1;
-    transform: translate3d(0px, -10px, 0) scale(0.75);
+    transform: translate3d(0px, -10px, 0) scale(0.85);
     line-height: 1px;
 }
 
@@ -980,9 +1012,28 @@ button.thin-btn:hover {
     .signup .form-control {
         font-size: 14px;
     }
+
+    #add .control-label,
+    .signup .control-label {
+        font-size: 16px;
+    }
+
+    #add .form-group span.help,
+    .signup .form-group span.help,
+    .signup .form-group span.unmet,
+    .signup .form-group span.unmatched {
+        font-size: 8px;
+    }
 }
 
 @media (max-width: 767px) {
+    #add .form-group,
+    .signup .form-group {
+        height: 55px;
+        width: 100%;
+        padding: 0;
+    }
+
     .signup div.col-md-6 {
         padding: 0;
     }

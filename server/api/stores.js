@@ -62,9 +62,9 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-    const { firstName, lastName, password, phone, email } = req.body;
-    // Check if an account already exists with that email
+    const { firstName, lastName, phone, email, password } = req.body;
     try {
+        // Check if an account already exists with that email
         let vendor = await Vendor.findOne({
             email,
         });
@@ -73,6 +73,7 @@ router.post('/signup', async (req, res) => {
                 msg: 'Account already exists with that email',
             });
         }
+        
         vendor = new Vendor({
             partition: partition,
             firstName: firstName,

@@ -15,9 +15,9 @@ if(isset($_POST['submit'])) {
 
    mail($to[0], $subject, $body, $headers);
    mail($to[1], $subject, $body, $headers);
-   print '<h4>Your message was sent successfully!</h4>';
+   echo '<h4>Your message was sent successfully!</h4>';
 } else {
-   print '<h4>An error has occurred</h4>';
+   echo '<h4>An error has occurred</h4>';
 }
 
 ?>
