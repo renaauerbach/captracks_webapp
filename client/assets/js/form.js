@@ -1,4 +1,4 @@
-// Handle floating labels
+// Handle Floating Labels
 document.querySelectorAll('.form-control').forEach(input => {
     input.addEventListener('blur', function() {
         var parent = this.parentElement;
@@ -38,11 +38,11 @@ document.querySelectorAll('.closed').forEach(cb => {
         var name = e.srcElement.attributes.name.nodeValue;
         var fields = document.getElementsByName(name);
         if (e.target.checked) {
-            for (var i = 0; i < fields.length; ++i) {
+            for (var i = 1; i < fields.length; ++i) {
                 fields[i].disabled = true;
             }
         } else {
-            for (var i = 0; i < fields.length; ++i) {
+            for (var i = 1; i < fields.length; ++i) {
                 fields[i].disabled = false;
             }
         }
@@ -67,13 +67,13 @@ document.querySelectorAll('.hours').forEach(input => {
 });
 
 // Handle Phone Number Formatting
-const enforceFormat = e => {
+function enforceFormat(e) {
     if (!isNumeric(e) && !isModifier(e)) {
         e.preventDefault();
     }
 };
 
-const phoneFormat = e => {
+function phoneFormat(e) {
     if (isModifier(e)) {
         return;
     }
@@ -92,12 +92,12 @@ const phoneFormat = e => {
     }
 };
 
-const isNumeric = e => {
+function isNumeric(e) {
     var key = e.keyCode;
     return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
 };
 
-const isModifier = e => {
+function isModifier(e) {
     const key = e.keyCode;
     return (
         e.shiftKey === true ||
@@ -116,6 +116,10 @@ const isModifier = e => {
 
 var phone = document.getElementById('phone');
 if (phone) {
-    phone.addEventListener('keydown', enforceFormat);
-    phone.addEventListener('keyup', phoneFormat);
+    phone.addEventListener('keydown', e => {
+        enforceFormat(e)
+    });
+    phone.addEventListener('keyup', e => {
+        phoneFormat(e)
+    });
 }

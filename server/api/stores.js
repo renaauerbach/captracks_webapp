@@ -55,9 +55,11 @@ router.get('/store/:id', (req, res) => {
 
 // Create new vendor account
 router.get('/signup', (req, res) => {
+    console.log(err)
     res.render('signup', {
         layout: 'layout',
         title: 'Sign Up',
+        error: err,
     });
 });
 
@@ -69,9 +71,7 @@ router.post('/signup', async (req, res) => {
             email,
         });
         if (vendor) {
-            return res.status(400).json({
-                msg: 'Account already exists with that email',
-            });
+            return res.status(400).send(JSON.stringify(req.flash('An account already exists with that email.')));
         }
         
         vendor = new Vendor({
@@ -161,51 +161,63 @@ router.get('/signup/:id/new_store', (req, res) => {
 	});
 });
 
-router.post('/signup/:id/new_store', (req, res) => {
-    console.log("STORE BODY: ", req.body);
+router.post('/signup/:id/new_store', async (req, res) => {
     var address = req.body.street + ", " + req.body.city + ", " + req.body.state + " " + req.body.zip;
-    var survey = [req.body.survey1, req.body.survey1];
 
-    var hours = [];
-    if (!req.body['24hours']) {
-        var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+    try {
+        // Check if an store already exists with that address
+        let store = await Store.findOne({
+            address,
+        });
+        if (store) {
+            return res.status(400).send(JSON.stringify(req.flash('This store is already registered in our system. Please try again or contact us for assistance.')));
+        }
 
-        for (let i = 0; i < days.length; i++) {
-            let curr = req.body[days[i]];
-            if (curr) {
-                hours.push({'day': days[i], 'open': curr[0] + " " + curr[1], 'close': curr[2] + " " + curr[3]});
-            }
-            else {
-                hours.push({'day': days[i]});
+        var survey = [req.body.survey1, req.body.survey1];
+
+        var hours = [];
+        if (!req.body['24hours']) {
+            var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+            for (let i = 0; i < days.length; i++) {
+                let curr = req.body[days[i]];
+                if (curr) {
+                    hours.push({'day': days[i], 'open': curr[0] + " " + curr[1], 'close': curr[2] + " " + curr[3]});
+                }
+                else {
+                    hours.push({'day': days[i]});
+                }
             }
         }
-    }
-    else {
-        hours.push('Open 24/7');
-    }
-
-    const newStore = new Store({
-        partition: partition,
-        name: req.body.name,
-        address: address,
-        phone: req.body.phone,
-        url: req.body.url,
-        hours: hours,
-        forum: [],
-        vendor: req.body.id,
-        details: [],
-    });
-
-    newStore.save((err, store) => {
-        if (err) {
-            res.status(400).json({ success: false, error: err });
+        else {
+            hours.push('Open 24/7');
         }
-        res.status(200).json({ success: true, id: store.id });
-        console.log('Store added successfully!');
-    });
-    res.redirect('/account');
+        
+        store = new Store({
+            partition: partition,
+            name: req.body.name,
+            address: address,
+            phone: req.body.phone,
+            url: req.body.url,
+            hours: hours,
+            forum: [],
+            vendor: req.body.id,
+            details: [],
+        });
+    
+        store.save((err, store) => {
+            if (err) {
+                res.status(400).json({ success: false, error: err });
+            }
+            res.status(200).json({ success: true, id: store.id });
+            console.log('Store added successfully!');
+        });
+        res.redirect('/account');
+
+    } catch (err) {
+        res.status(500).send(JSON.stringify(req.flash('Error registering store')));
+        console.log("Error registering vendor", err);
+    }    
 });
-
-
 
 module.exports = router;

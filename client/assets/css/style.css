@@ -637,7 +637,7 @@ button.thin-btn:hover {
 .intro, 
 #about, 
 #store, 
-#add,
+#new-store,
 #signup,
 #account {
     padding-top: 18%;
@@ -655,7 +655,7 @@ button.thin-btn:hover {
     .intro, 
     #about, 
     #store, 
-    #add,
+    #new-store,
     #signup,
     #account {
         padding: 10%;
@@ -674,7 +674,7 @@ button.thin-btn:hover {
     .intro, 
     #about, 
     #store, 
-    #add,
+    #new-store,
     #signup,
     #account {
         padding: 10%;
@@ -862,60 +862,31 @@ button.thin-btn:hover {
     font-size: 16px;
 }
 
-/* ====== ADD STORE/ SIGNUP PAGE ====== */
-#add form, 
-#signup form {
+/* ====== SIGNUP / NEW STORE PAGE ====== */ 
+#signup form,
+#new-store form {
     max-width: 70%;
     width: 70%;
     margin-top: 5%;
 }
 
-.signup .form-inline .form-group {
+/* Input styles */
+.register .form-inline .form-group {
     display: block;
-}
-
-#add .form-group,
-.signup .form-group {
     height: 75px;
     width: 100%;
     padding: 0;
 }
-
-#add .form-control,
-.signup .form-control {
+.register .form-control {
     font-size: 18px;
     border: 1px solid #b116e0;
     width: 100% !important;
 }
 
-/* Spacing b/w first row inputs */
-.signup .form-inline:nth-child(1) .form-control:nth-child(1),
-.signup .form-inline:nth-child(1) .form-control:nth-child(2) {
-    width: 95% !important;
-}
 
-#add .form-control:focus,
-.signup .form-control:focus {
-    outline: none;
-    box-shadow: none;
-    border-color: #e708ae;
-}
-
-.form-group .form-check .col-form-label {
-    margin-right: 15px !important;
-}
-
-#add .form-group span.help,
-.signup .form-group span.help,
-.signup .form-group span.unmet,
-.signup .form-group span.unmatched {
-    display: none;
-    font-size: 10px;
-    line-height: 14px;
-}
-
-#add .control-label,
-.signup .control-label {
+/* Floating labels - Regular */
+.register .form-group .control-label {
+    max-width: 70%;
     font-size: 1rem;
     font-weight: 400;
     opacity: 0.4;
@@ -925,101 +896,143 @@ button.thin-btn:hover {
     transform-origin: top left;
     transition: 240ms;
 }
-
-.signup ul li.reqs {
-    font-size: 15px;
-    padding-left: 5%;
+.register .form-group .form-control::-webkit-input-placeholder {
+    color: transparent;
+    transition: 240ms;
+}  
+/* Help box - Regular */
+.register .form-group span.help,
+.signup .form-group span.unmet,
+.signup .form-group span.unmatched {
+    display: none;
+    font-size: 10px;
+    line-height: 14px;
 }
 
-/* Add a green text color and a checkmark when the requirements are right */
-.signup ul li.reqs.valid {
-    color: #24b954;
+/* Floating labels - Focused */
+.register .form-group .form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #e708ae;
 }
-
-.signup ul li.reqs.valid:before {
-    content: '✓';
-}
-
-/* Add a red text color and an "x" icon when the requirements are wrong */
-.signup ul li.reqs.invalid {
-    color: #f72942;
-}
-
-.signup ul li.reqs.invalid:before {
-    color: #f72942;
-    content: 'x';
-}
-
-.signup .form-group.focused .control-label {
+.register .form-group.focused .control-label {
     opacity: 1;
-    transform: translate3d(0px, -10px, 0) scale(0.85);
+    transform: translate3d(0px, -10px, 0) scale(0.7);
     line-height: 1px;
     color: #e708ae;
 }
-
-.signup .form-group.focused .help {
+.register .form-control:focus::-webkit-input-placeholder {
+    transition: none;
+}
+.register .form-group.focused .form-control::-webkit-input-placeholder {
+    color: #bbb;
+}
+/* Help box - Focused */
+.register .form-group.focused .help {
     display: block;
 }
 
-.signup .form-control::-webkit-input-placeholder {
-  color: transparent;
-  transition: 240ms;
-}
-
-.signup .form-control:focus::-webkit-input-placeholder {
-  transition: none;
-}
-
-.signup .form-group.focused .form-control::-webkit-input-placeholder {
-  color: #bbb;
-}
-
-.signup .form-group.filled .control-label {
-    opacity: 1;
-    transform: translate3d(0px, -10px, 0) scale(0.85);
-    line-height: 1px;
-    color: #e708ae;
-}
-
-.signup .form-control.filled {
+/* Floating labels - Filled */
+.register .form-control.filled,
+.register .form-group.filled .control-label {
     border-color: #e708ae;
     opacity: 1;
     transform: translate3d(0px, -10px, 0) scale(0.85);
     line-height: 1px;
 }
 
+/* Error Message */
+.register .errorMsg {
+    color: #f72942;
+    text-align: center;
+    display: block;
+}
+
+/* ====== SIGNUP PAGE ====== */ 
+/* Spacing b/w first row inputs */
+.signup .form-inline:nth-child(1) .form-control:nth-child(1),
+.signup .form-inline:nth-child(1) .form-control:nth-child(2) {
+    width: 95% !important;
+}
+
+/* Password requirements */
+.signup ul li.reqs {
+    font-size: 15px;
+    padding-left: 5%;
+}
+/* Add a green text color and a checkmark when the requirements are right */
+.signup ul li.reqs.valid {
+    color: #24b954;
+}
+.signup ul li.reqs.valid:before {
+    content: '✓';
+}
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.signup ul li.reqs.invalid {
+    color: #f72942;
+}
+.signup ul li.reqs.invalid:before {
+    color: #f72942;
+    content: 'x';
+}
+
+/* ====== NEW STORE PAGE ====== */ 
+/* Space b/w label and checkbox */
+.new-store .form-group .form-check .col-form-label {
+    margin-right: 15px !important;
+}
+
+/* Hours - section title */
+.new-store #hr {
+    margin-bottom: 0;
+}
+/* Hours - whole group */
+.new-store fieldset.form-group {
+    margin-bottom: 7%;
+}
+/* Hours - indiv groups */
+.new-store fieldset .form-group {
+    margin-bottom: 2px;
+}
+
+/* Hours inputs */
+.new-store fieldset .form-inline.days .form-group {
+    height: auto !important;
+}
+
+/* Textarea style */
+.new-store .form-group .control-label.survey {
+    max-width: 60%;
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-    #add form, 
+    #new-store form, 
     #signup form {
         max-width: 75%;
         width: 75%;
     }
 
-    #add .form-control,
-    .signup .form-control {
+    .register .form-control {
         font-size: 16px;
     }
 }
 
 @media (max-width: 991px) {
-    #add form, 
+    #new-store form, 
     #signup form {
         max-width: 100%;
         width: 100%;
     }
 
-    #add .form-control,
-    .signup .form-control {
+    .register .form-control {
         font-size: 14px;
     }
 
-    #add .control-label,
-    .signup .control-label {
+    .register .control-label {
         font-size: 16px;
     }
 
-    #add .form-group span.help,
-    .signup .form-group span.help,
+    .register .form-group span.help,
     .signup .form-group span.unmet,
     .signup .form-group span.unmatched {
         font-size: 8px;
@@ -1027,13 +1040,16 @@ button.thin-btn:hover {
 }
 
 @media (max-width: 767px) {
-    #add .form-group,
-    .signup .form-group {
+    .register .form-group {
         height: 55px;
         width: 100%;
         padding: 0;
     }
 
+    .register .form-group.focused .control-label {
+        transform: translate3d(0px, -10px, 0) scale(0.9);
+    }    
+    
     .signup div.col-md-6 {
         padding: 0;
     }
@@ -1042,26 +1058,26 @@ button.thin-btn:hover {
         margin-bottom: 5px;
     }
 
-   div.form-group legend {
-       display: flex;
-       justify-content: space-between;
-       font-size: 16px;
-   }
+    .form-group legend {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+    }
 
-   #hr-title {
-       margin-bottom: 0;
-   }
+    #hr-title {
+        margin-bottom: 0;
+    }
 
-   #hr-title div.form-check-inline {
-        display: block;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-   }
+    #hr-title div.form-check-inline {
+            display: block;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+    }
 
-   #hr-title div.form-check-inline .col-form-label {
-       padding-bottom: 0;
-   }
+    #hr-title div.form-check-inline .col-form-label {
+        padding-bottom: 0;
+    }
 
     #state,
     #web,

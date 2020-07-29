@@ -1,4 +1,4 @@
-const form = document.querySelector('.signup');
+var signupForm = document.querySelector('.signup');
 var password = document.getElementById('password');
 var confirmed = document.getElementById('confirmed');
 
@@ -10,7 +10,7 @@ var reqs = document.querySelectorAll('.reqs');
 // 4: At least 8 characters in length
 
 // Check strong password
-const passwordReqs = e => {
+function passwordReqs(e) {
     console.log(e);
     var upper = /[A-Z]/g;
     var lower = /[a-z]/g;
@@ -59,29 +59,41 @@ const passwordReqs = e => {
     }
 } 
 
-password.addEventListener('keyup', passwordReqs);
+if (password) {
+    password.addEventListener('keyup', e => {
+        passwordReqs(e)});
+}
 
 // Check passwords on submit
-form.addEventListener('submit', e => {
-    // Check is password and confirm match 
-    if (password.value !== confirmed.value) {
-        e.preventDefault();
-        e.stopPropagation();
-        var feedback = document.querySelector('.unmatched');
-        feedback.style.display = 'block';
-    }
-    reqs.forEach(req => {
-        // Check if any password requirements are still unmet
-        if (req.classList.contains('invalid')) {
+if (signupForm) {
+    signupForm.addEventListener('submit', e => {
+        // Check is password and confirm match 
+        if (password.value !== confirmed.value) {
             e.preventDefault();
             e.stopPropagation();
-            var feedback = document.querySelector('.unmet');
+            var feedback = document.querySelector('.unmatched');
             feedback.style.display = 'block';
         }
-    });
-});
+        reqs.forEach(req => {
+            // Check if any password requirements are still unmet
+            if (req.classList.contains('invalid')) {
+                e.preventDefault();
+                e.stopPropagation();
+                var feedback = document.querySelector('.unmet');
+                feedback.style.display = 'block';
+            }
+        });
+    });    
+}
 
-
+// // Activate login button on "Enter"
+// const loginForm = document.getElementById('login');
+// loginForm.addEventListener("keyup", (e) => {
+//     if (e.keyCode === 13) {
+//         e.preventDefault();
+//         document.getElementById("loginBtn").click();
+//     }
+// });
 
         
 

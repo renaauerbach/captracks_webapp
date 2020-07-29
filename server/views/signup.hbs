@@ -3,7 +3,7 @@
     <div class="container">
         {{> title_bar title="Create a Vendor Profile"}}
         <div class="d-flex justify-content-center">
-            <form class="signup" method="POST">
+            <form class="signup register" method="POST">
                 <div class="form-inline">
                     <div class="form-group col-lg-4 col-md-4 col-sm-6">
                         <label for="firstName" class="control-label">First name</label>
@@ -51,7 +51,7 @@
                         <span class="unmatched" style="color: red;">Passwords do not match. Please try again.</span>
                     </div>
                 </div>
-                <div class="errorMsg"></div>
+                <div class="errorMsg">{{errMessage}}</div>
                 <div class="d-flex justify-content-center">
                     <input class="main-btn" type="submit" name="submit" value="Submit">
                 </div>

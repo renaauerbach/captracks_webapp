@@ -1,4 +1,4 @@
-<!--====== LOGIN FORM POPUP START ======-->
+<!--====== LOGIN FORM START ======-->
 <div class="form-popup" id="storeForm">
     <div class="form-container">
         <span class="close-btn"><i class="fas fa-times"></i></span>
@@ -12,15 +12,14 @@
                 <div class="form-group row">
                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                 </div>
-                <div class="error">
-                    <p></p>
-                </div>
+                <div class="error"></div>
             </div>
             <div class="submit-btn d-flex justify-content-center">
-                <input class="main-btn" type="submit" value="Login">
+                <input id="loginBtn" class="main-btn" type="submit" value="Login">
             </div>
         </form>
         <p class="reg-link">Don't have an account? <a href="/signup">Add your store</a> to CapTracks today!</p>
     </div>
 </div>
-<!--====== LOGIN FORM POPUP END ======-->
+<!--====== LOGIN FORM END ======-->
+<script src="/assets/js/validator.js"></script>

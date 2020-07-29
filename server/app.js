@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 const validator = require('validator');
 
 const hbs = require('hbs');
@@ -50,8 +52,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cors());
-app.use(cookieParser());
+app.use(cookieParser('secret'));
+app.use(session({cookie: {maxAge: 60000 }}));
 
 // Routers
 app.use('/', storeRouter);
