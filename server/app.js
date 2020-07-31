@@ -46,11 +46,12 @@ hbs.registerHelper('len', (obj) => {
 hbs.registerPartials(__dirname + '/views/partials', err => {});
 
 // Bodyparser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, '../client')));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser('secret'));
 app.use(session({cookie: {maxAge: 60000 }}));

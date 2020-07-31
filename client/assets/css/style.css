@@ -543,7 +543,7 @@ button.thin-btn:hover {
     z-index: 5;
 }
 
-/*====== LOGIN FORM ======*/
+/*====== POPUP =====*/
 .form-popup.open {
     display: inline-block;
 }
@@ -589,20 +589,6 @@ button.thin-btn:hover {
     }
 }
 
-.form-container #login {
-    margin: 0 auto;
-    width: 70%;
-}
-
-.form-container #login .inputs {
-    margin: 8% 0 20%;
-}
-
-.form-container #login .error p {
-    line-height: 30px;
-    font-size: 14px;
-}
-
 /* Close Button */
 .close-btn {
     color: #0000cd;
@@ -617,20 +603,6 @@ button.thin-btn:hover {
 .close-btn:focus {
     color: #e708ae;
     text-decoration: none;
-}
-
-.reg-link {
-    text-align: center;
-    padding-top: 10px;
-}
-
-.reg-link a {
-    color: #0000cd;
-}
-
-.reg-link a:hover {
-    text-decoration: none;
-    color: #e708ae;
 }
 
 /*====== ALL PAGES/SECTIONS ======*/
@@ -877,12 +849,12 @@ button.thin-btn:hover {
     width: 100%;
     padding: 0;
 }
-.register .form-control {
+.register .form-group .form-control {
     font-size: 18px;
     border: 1px solid #b116e0;
-    width: 100% !important;
+    max-width: 100%;
+    width: 100%;
 }
-
 
 /* Floating labels - Regular */
 .register .form-group .control-label {
@@ -906,7 +878,11 @@ button.thin-btn:hover {
 .signup .form-group span.unmatched {
     display: none;
     font-size: 10px;
-    line-height: 14px;
+}
+.register .form-group span.temp {
+    display: block;
+    color: #ffffff;
+    font-size: 10px;
 }
 
 /* Floating labels - Focused */
@@ -928,17 +904,24 @@ button.thin-btn:hover {
     color: #bbb;
 }
 /* Help box - Focused */
-.register .form-group.focused .help {
+.register .form-group.focused span.help {
     display: block;
+}
+.register .form-group.focused span.temp {
+    display: none;
 }
 
 /* Floating labels - Filled */
-.register .form-control.filled,
+.register .form-group .form-control.filled,
 .register .form-group.filled .control-label {
     border-color: #e708ae;
     opacity: 1;
     transform: translate3d(0px, -10px, 0) scale(0.85);
     line-height: 1px;
+}
+.register .form-group.filled .control-label {
+    font-size: 16px;
+    color: #e708ae;
 }
 
 /* Error Message */
@@ -977,6 +960,12 @@ button.thin-btn:hover {
 }
 
 /* ====== NEW STORE PAGE ====== */ 
+.new-store span.heading {
+    display: block;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
 /* Space b/w label and checkbox */
 .new-store .form-group .form-check .col-form-label {
     margin-right: 15px !important;
@@ -994,10 +983,9 @@ button.thin-btn:hover {
 .new-store fieldset .form-group {
     margin-bottom: 2px;
 }
-
 /* Hours inputs */
 .new-store fieldset .form-inline.days .form-group {
-    height: auto !important;
+    height: auto;
 }
 
 /* Textarea style */
@@ -1005,27 +993,46 @@ button.thin-btn:hover {
     max-width: 60%;
 }
 
+/* Input sizes */
+.new-store #name-div {
+    margin-top: 10px;
+}
+.new-store #city,
+.new-store #phone {
+    width: 98.5%;
+}
+.new-store #state {
+    width: 95%;
+}
+.new-store .days .hours {
+    width: 98%;
+}
+
+/* .new-store .days .form-group input["type='select'"] {
+    width: 95% !important;
+} */
+
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-    #new-store form, 
-    #signup form {
+    #signup form, 
+    #new-store form {
         max-width: 75%;
         width: 75%;
     }
 
-    .register .form-control {
+    .register .form-group .form-control  {
         font-size: 16px;
     }
 }
 
-@media (max-width: 991px) {
-    #new-store form, 
-    #signup form {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #signup form, 
+    #new-store form {
         max-width: 100%;
         width: 100%;
     }
 
-    .register .form-control {
-        font-size: 14px;
+    .register .form-group .control-label {
+        font-size: 16px;
     }
 
     .register .control-label {
@@ -1037,19 +1044,42 @@ button.thin-btn:hover {
     .signup .form-group span.unmatched {
         font-size: 8px;
     }
+    
+    /* Textarea style */
+    .new-store .form-group .control-label.survey {
+        max-width: 70%;
+    }
 }
 
 @media (max-width: 767px) {
-    .register .form-group {
-        height: 55px;
+    #signup form, 
+    #new-store form {
+        max-width: 100%;
         width: 100%;
-        padding: 0;
     }
 
+    .register .form-inline .form-group {
+        height: 60px;
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    /* Inputs text size */
+    .register .form-group .control-label,
+    .register .form-group .form-control {
+        font-size: 16px;
+    }
+
+    /* Floating labels - regular */
+    .register .form-group .control-label {
+        transform: translate3d(8px, 9px, 0) scale(0.9);
+    } 
+    /* Floating labels - focused */
     .register .form-group.focused .control-label {
-        transform: translate3d(0px, -10px, 0) scale(0.9);
+        transform: translate3d(0px, -9px, 0) scale(0.9);
     }    
-    
+
+    /****** SIGNUP ******/
     .signup div.col-md-6 {
         padding: 0;
     }
@@ -1058,36 +1088,51 @@ button.thin-btn:hover {
         margin-bottom: 5px;
     }
 
-    .form-group legend {
-        display: flex;
-        justify-content: space-between;
-        font-size: 16px;
+    /****** NEW STORE ******/
+    /* Input sizes */
+    .new-store #city,
+    .new-store #phone {
+        width: 100%;
     }
-
-    #hr-title {
-        margin-bottom: 0;
-    }
-
-    #hr-title div.form-check-inline {
-            display: block;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-    }
-
-    #hr-title div.form-check-inline .col-form-label {
+    
+    /* Section titles */
+    .new-store span.heading,
+    .new-store .col-form-label {        
+        font-size: 19px;
         padding-bottom: 0;
     }
-
-    #state,
-    #web,
-    #open,
-    #close {
-        padding-left: 0;
+    /* Hours section title */
+    .new-store #hr {
+        margin-top: 1.4em;
+    }
+    .new-store #hr .col-form-label {
+        width: 100%;
+        padding-bottom: 0;
+    }
+    .new-store .form-check-inline {
+        display: block;
     }
 
-    #daytime {
-        padding-right: 0;
+    /* Hours day labels */
+    .new-store .form-group .form-check .col-form-label {
+        font-size: 17px;
+    }
+    /* Hours inputs */
+    .new-store fieldset .form-inline.days .form-group {
+        height: auto;
+        width: auto;
+    }
+    .new-store fieldset .form-inline.days .form-group:nth-child(3),
+    .new-store fieldset .form-inline.days .form-group:nth-child(4) {
+        margin-top: 6%;
+    }
+
+    /* Survey textarea style */
+    .new-store .form-group .control-label.survey {
+        max-width: 70%;
+    }
+    .new-store .form-group textarea.form-control {
+        margin-top: 10%;
     }
 }
 
@@ -1166,6 +1211,21 @@ footer {
 	margin-bottom: 28px;
 }
 
+/* Contact Form */
+.footer-widget .contact-form .form-item input.form-control {
+    line-height: 1.2;
+}
+
+.footer-widget .contact-form .form-item input.form-control,
+.footer-widget .contact-form .form-item textarea.form-control {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer-widget .contact-form .email {
+    padding-left: 0;
+}
+
 @media (max-width: 1199px) {
 	.footer-title {
 		font-size: 18px;
@@ -1177,31 +1237,26 @@ footer {
 		margin-bottom: 10px;
     }
     
-    .footer .col-sm-6 {
-		margin-bottom: 30px;
+    #footer .contact-form {
+		margin: 20px 0;
 	}
 }
 
 @media (max-width: 767px) {
-    .footer-bottom {
-        text-align: center;
+    #footer .links, 
+    #footer .contact-info {
+        margin-bottom: 2%;
+    }
+
+    .footer-widget .icon span {
+        margin: 0 10px 15px 0;
+    }
+
+    .footer-widget .contact-form .email {
+        padding-left: 15px;
     }
 }
 
-/* Contact Form */
-.footer-widget .contact-form .form-item input.form-control {
-    line-height: 1.2;
-}
 
-.footer-widget .contact-form .form-item input.form-control,
-.footer-widget .contact-form .form-item textarea.form-control {
-    font-size: 14px;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-.footer-widget .contact-form .row div.col-lg-6.col-md-6.col-sm-6:nth-child(2) {
-    padding-left: 0;
-}
 
 

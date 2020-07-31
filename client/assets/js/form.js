@@ -1,21 +1,23 @@
-// Handle Floating Labels
-document.querySelectorAll('.form-control').forEach(input => {
-    input.addEventListener('blur', function() {
-        var parent = this.parentElement;
-        parent.classList.remove('focused');
-        if (this.value.length > 0) {
-            parent.classList.add('filled');
+/*************** DISABLING ***************/
+var selection = document.getElementsByTagName('select')[0];
+if (selection) {
+    selection.addEventListener('change', (e) => {
+        let form = document.getElementsByClassName('new-store')[0];
+        console.log(form)
+        if (e.target.value !== "") {
+            for (var i = 1; i < form.length-1; ++i) {
+                form[i].disabled = true;
+            }
+        } else {
+            for (var i = 1; i < form.length-1; ++i) {
+                form[i].disabled = false;
+            }
         }
     });
+} 
 
-    input.addEventListener('focus', function() {
-        var parent = this.parentElement;
-        parent.classList.remove('filled');
-        parent.classList.add('focused');
-    });
-});
 
-// Handle 24 Hour Checkbox
+// Handle 24 Hour Checkbox --> Disable content
 var checkbox = document.getElementById('24hours');
 if (checkbox) {
     checkbox.addEventListener('change', e => {
@@ -32,7 +34,7 @@ if (checkbox) {
     });
 }
 
-// Handle Closed Checkbox
+// Handle Closed Checkbox --> Disable content
 document.querySelectorAll('.closed').forEach(cb => {
     cb.addEventListener('change', e => {
         var name = e.srcElement.attributes.name.nodeValue;
@@ -49,9 +51,26 @@ document.querySelectorAll('.closed').forEach(cb => {
     });
 });
 
-// Auto Format Time
+/*************** FORMATTING ***************/
+// Format Floating Labels
+document.querySelectorAll('.form-control').forEach(input => {
+    input.addEventListener('blur', function() {
+        var parent = this.parentElement;
+        parent.classList.remove('focused');
+        if (this.value.length > 0) {
+            parent.classList.add('filled');
+        }
+    });
+
+    input.addEventListener('focus', function() {
+        var parent = this.parentElement;
+        parent.classList.remove('filled');
+        parent.classList.add('focused');
+    });
+});
+
+// Format Time
 function timeFormat(str) {
-    console.log(/:/.test(str));
     if (!/:/.test(str)) {
         str += ':00';
     }
@@ -66,7 +85,7 @@ document.querySelectorAll('.hours').forEach(input => {
     }
 });
 
-// Handle Phone Number Formatting
+// Format Phone Number
 function enforceFormat(e) {
     if (!isNumeric(e) && !isModifier(e)) {
         e.preventDefault();
