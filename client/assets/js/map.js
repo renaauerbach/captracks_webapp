@@ -74,7 +74,7 @@
                         '</div>' + 
                     '</div>' +
                     '<div class="popup-link">' +
-                        '<a href="/store/' + info.id + '">Store Details</a>' +
+                        '<a href="/map/store/' + info.id + '">Store Details</a>' +
                     '</div>';
         return contentString;
     }

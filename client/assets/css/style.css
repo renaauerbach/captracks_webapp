@@ -396,8 +396,8 @@ button.thin-btn:hover {
     transform: scaleX(1);
 }
 
-/* For Store Application Link */
-.navigation .navbar .navbar-nav .login button {
+/* For Login Button */
+.navigation .navbar .navbar-nav .login a {
     text-transform: uppercase;
     font-size: 16px;
     color: #fff;
@@ -422,11 +422,11 @@ button.thin-btn:hover {
     }
 }
 
-.navigation .navbar .navbar-nav .login button:hover {
+.navigation .navbar .navbar-nav .login a:hover {
     background-color: #0000cd;
     text-decoration: none;
 }
-.navigation .navbar .navbar-nav .login button:active {
+.navigation .navbar .navbar-nav .login a:active {
     background-color: #b116e0;
     text-decoration: none;
 }
@@ -544,11 +544,11 @@ button.thin-btn:hover {
 }
 
 /*====== POPUP =====*/
-.form-popup.open {
+.popup.open {
     display: inline-block;
 }
 
-.form-popup {
+.popup {
     display: none;
     position: fixed;
     z-index: 5000;
@@ -561,7 +561,7 @@ button.thin-btn:hover {
     background-color: rgba(0,0,0, 0.5);
 }
 
-.form-container {
+.popup-container {
     padding: 30px;
     position: relative;
     font-size: 17px;
@@ -574,7 +574,7 @@ button.thin-btn:hover {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .form-container {
+    .popup-container {
         font-size: 15px;
         margin: 0 5%;
         width: 90%;
@@ -582,7 +582,7 @@ button.thin-btn:hover {
 }
 
 @media (max-width: 767px) {
-    .form-container {
+    .popup-container {
         font-size: 15px;
         margin: 0;
         width: 100%;
@@ -609,8 +609,8 @@ button.thin-btn:hover {
 .intro, 
 #about, 
 #store, 
-#new-store,
-#signup,
+#register,
+#login,
 #account {
     padding-top: 18%;
     padding-bottom: 10%;
@@ -627,8 +627,8 @@ button.thin-btn:hover {
     .intro, 
     #about, 
     #store, 
-    #new-store,
-    #signup,
+    #register,
+    #login,
     #account {
         padding: 10%;
         padding-top: 25%;
@@ -646,8 +646,8 @@ button.thin-btn:hover {
     .intro, 
     #about, 
     #store, 
-    #new-store,
-    #signup,
+    #register,
+    #login,
     #account {
         padding: 10%;
         padding-top: 40%;
@@ -835,8 +835,8 @@ button.thin-btn:hover {
 }
 
 /* ====== SIGNUP / NEW STORE PAGE ====== */ 
-#signup form,
-#new-store form {
+#login form,
+#register form {
     max-width: 70%;
     width: 70%;
     margin-top: 5%;
@@ -960,61 +960,61 @@ button.thin-btn:hover {
 }
 
 /* ====== NEW STORE PAGE ====== */ 
-.new-store span.heading {
+.register span.heading {
     display: block;
     text-align: center;
     margin-bottom: 2%;
 }
 
 /* Space b/w label and checkbox */
-.new-store .form-group .form-check .col-form-label {
+.register .form-group .form-check .col-form-label {
     margin-right: 15px !important;
 }
 
 /* Hours - section title */
-.new-store #hr {
+.register #hr {
     margin-bottom: 0;
 }
 /* Hours - whole group */
-.new-store fieldset.form-group {
+.register fieldset.form-group {
     margin-bottom: 7%;
 }
 /* Hours - indiv groups */
-.new-store fieldset .form-group {
+.register fieldset .form-group {
     margin-bottom: 2px;
 }
 /* Hours inputs */
-.new-store fieldset .form-inline.days .form-group {
+.register fieldset .form-inline.days .form-group {
     height: auto;
 }
 
 /* Textarea style */
-.new-store .form-group .control-label.survey {
+.register .form-group .control-label.survey {
     max-width: 60%;
 }
 
 /* Input sizes */
-.new-store #name-div {
+.register #name-div {
     margin-top: 10px;
 }
-.new-store #city,
-.new-store #phone {
+.register #city,
+.register #phone {
     width: 98.5%;
 }
-.new-store #state {
+.register #state {
     width: 95%;
 }
-.new-store .days .hours {
+.register .days .hours {
     width: 98%;
 }
 
-/* .new-store .days .form-group input["type='select'"] {
+/* .register .days .form-group input["type='select'"] {
     width: 95% !important;
 } */
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-    #signup form, 
-    #new-store form {
+    #login form, 
+    #register form {
         max-width: 75%;
         width: 75%;
     }
@@ -1025,8 +1025,8 @@ button.thin-btn:hover {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    #signup form, 
-    #new-store form {
+    #login form, 
+    #register form {
         max-width: 100%;
         width: 100%;
     }
@@ -1046,14 +1046,14 @@ button.thin-btn:hover {
     }
     
     /* Textarea style */
-    .new-store .form-group .control-label.survey {
+    .register .form-group .control-label.survey {
         max-width: 70%;
     }
 }
 
 @media (max-width: 767px) {
-    #signup form, 
-    #new-store form {
+    #login form, 
+    #register form {
         max-width: 100%;
         width: 100%;
     }
@@ -1090,48 +1090,48 @@ button.thin-btn:hover {
 
     /****** NEW STORE ******/
     /* Input sizes */
-    .new-store #city,
-    .new-store #phone {
+    .register #city,
+    .register #phone {
         width: 100%;
     }
     
     /* Section titles */
-    .new-store span.heading,
-    .new-store .col-form-label {        
+    .register span.heading,
+    .register .col-form-label {        
         font-size: 19px;
         padding-bottom: 0;
     }
     /* Hours section title */
-    .new-store #hr {
+    .register #hr {
         margin-top: 1.4em;
     }
-    .new-store #hr .col-form-label {
+    .register #hr .col-form-label {
         width: 100%;
         padding-bottom: 0;
     }
-    .new-store .form-check-inline {
+    .register .form-check-inline {
         display: block;
     }
 
     /* Hours day labels */
-    .new-store .form-group .form-check .col-form-label {
+    .register .form-group .form-check .col-form-label {
         font-size: 17px;
     }
     /* Hours inputs */
-    .new-store fieldset .form-inline.days .form-group {
+    .register fieldset .form-inline.days .form-group {
         height: auto;
         width: auto;
     }
-    .new-store fieldset .form-inline.days .form-group:nth-child(3),
-    .new-store fieldset .form-inline.days .form-group:nth-child(4) {
+    .register fieldset .form-inline.days .form-group:nth-child(3),
+    .register fieldset .form-inline.days .form-group:nth-child(4) {
         margin-top: 6%;
     }
 
     /* Survey textarea style */
-    .new-store .form-group .control-label.survey {
+    .register .form-group .control-label.survey {
         max-width: 70%;
     }
-    .new-store .form-group textarea.form-control {
+    .register .form-group textarea.form-control {
         margin-top: 10%;
     }
 }

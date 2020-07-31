@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const flash = require('connect-flash');
-const validator = require('validator');
 
 const hbs = require('hbs');
 const path = require('path');
@@ -12,8 +10,8 @@ const fs = require('fs');
 
 const parser = require('./parser.js');
 
+const authRouter = require('./api/auth');
 const messageRouter = require('./api/messages');
-const detailsRouter = require('./api/details');
 const vendorRouter = require('./api/vendors');
 const storeRouter = require('./api/stores');
 
@@ -57,10 +55,10 @@ app.use(cookieParser('secret'));
 app.use(session({cookie: {maxAge: 60000 }}));
 
 // Routers
-app.use('/', storeRouter);
-// app.use('/map/store', detailsRouter);
-app.use('/post', messageRouter);
+app.use('/', authRouter);
+app.use('/map', storeRouter);
 app.use('/account', vendorRouter);
+app.use('/post', messageRouter);
 
 app.use((req, res, next) => {
     next();
@@ -85,6 +83,14 @@ app.get('/about', (req, res) => {
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
         functionality: boxes,
         members: members,
+    });
+});
+
+app.get('/join', (req, res) => {
+
+    res.render('join', {
+        layout: 'layout',
+        title: 'Join CapTracks',
     });
 });
 

@@ -44,10 +44,10 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto">
-                                    <li {{#if (eq title 'Home')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/">Home</a></li>
+                                    <li {{#if (eq title 'Home')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/map">Home</a></li>
                                     <li {{#if (eq title 'About')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/about">About Us</a></li>
-                                    <li {{#if (eq title 'Signup')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/signup">Add Your Store</a></li>
-                                    <li class="login"><button class="form-toggler" type="button">Vendor Login</button></li>
+                                    <li {{#if (eq title 'Join')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/join">Join CapTracks</a></li>
+                                    <li class="login"><a href="/login">Vendor Login</a></li>
                                 </ul>
                             </div> <!-- Navbar Collapse End -->
                         </nav> <!-- Navbar End -->
@@ -80,9 +80,6 @@
         {{/if}}
     </header>
     <!--====== HEADER ENDS ======-->
-
-    <!--====== Popup ======-->
-    {{> login}}
 
     {{{body}}}
 

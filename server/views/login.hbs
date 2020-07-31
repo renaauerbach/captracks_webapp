@@ -1,6 +1,23 @@
-<!--====== CREATE ACCOUNT START ======-->
-<section id="signup">
+<!--====== LOGIN START ======-->
+<section id="login">
     <div class="container">
+
+        <form id="login" action="/account" method="POST">
+            <div class="inputs">
+                <div class="form-group row">
+                    <input type="text" class="form-control" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group row">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+                <div class="error"></div>
+            </div>
+            <div class="submit-btn d-flex justify-content-center">
+                <input id="loginBtn" class="main-btn" type="submit" value="Ok">
+            </div>
+        </form>
+
+        <!--====== CREATE ACCOUNT START ======-->
         {{> title_bar title="Create a Vendor Profile"}}
         <div class="d-flex justify-content-center">
             <form class="signup register" method="POST">
@@ -57,9 +74,10 @@
                 </div>
             </form>
         </div>
+        <!--====== CREATE ACCOUNT ENDS ======-->
     </div> <!-- Container End -->
 </section>
-<!--====== CREATE ACCOUNT ENDS ======-->
+<!--====== LOGIN ENDS ======-->
 <script src="/assets/js/form.js"></script>
 <script src="/assets/js/validator.js"></script>
 
