@@ -2,7 +2,7 @@
 var selection = document.getElementsByTagName('select')[0];
 if (selection) {
     selection.addEventListener('change', (e) => {
-        let form = document.getElementsByClassName('new-store')[0];
+        let form = document.getElementsByClassName('register')[0];
         console.log(form)
         if (e.target.value !== "") {
             for (var i = 1; i < form.length-1; ++i) {
@@ -15,7 +15,6 @@ if (selection) {
         }
     });
 } 
-
 
 // Handle 24 Hour Checkbox --> Disable content
 var checkbox = document.getElementById('24hours');

@@ -313,7 +313,7 @@ button.thin-btn:hover {
     }
 }
 
-.navigation .navbar .navbar-nav .nav-item, .navigation .navbar .navbar-nav .login {
+.navigation .navbar .navbar-nav .nav-item, .navigation .navbar .navbar-nav .nav-btn {
     margin-left: 30px;
 }
 
@@ -396,8 +396,8 @@ button.thin-btn:hover {
     transform: scaleX(1);
 }
 
-/* For Login Button */
-.navigation .navbar .navbar-nav .login a {
+/* For Nav Button */
+.navigation .navbar .navbar-nav .nav-btn a {
     text-transform: uppercase;
     font-size: 16px;
     color: #fff;
@@ -411,22 +411,22 @@ button.thin-btn:hover {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .navigation .navbar .navbar-nav .login {
+    .navigation .navbar .navbar-nav .nav-btn {
         margin: 4px -2px;
     }
 }
 
 @media (max-width: 767px) {
-    .navigation .navbar .navbar-nav .login {
+    .navigation .navbar .navbar-nav .nav-btn {
         margin: 4px -2px;
     }
 }
 
-.navigation .navbar .navbar-nav .login a:hover {
+.navigation .navbar .navbar-nav .nav-btn a:hover {
     background-color: #0000cd;
     text-decoration: none;
 }
-.navigation .navbar .navbar-nav .login a:active {
+.navigation .navbar .navbar-nav .nav-btn a:active {
     background-color: #b116e0;
     text-decoration: none;
 }
@@ -611,6 +611,7 @@ button.thin-btn:hover {
 #store, 
 #register,
 #login,
+#signup,
 #account {
     padding-top: 18%;
     padding-bottom: 10%;
@@ -629,6 +630,7 @@ button.thin-btn:hover {
     #store, 
     #register,
     #login,
+    #signup,
     #account {
         padding: 10%;
         padding-top: 25%;
@@ -648,6 +650,7 @@ button.thin-btn:hover {
     #store, 
     #register,
     #login,
+    #signup,
     #account {
         padding: 10%;
         padding-top: 40%;
@@ -834,22 +837,46 @@ button.thin-btn:hover {
     font-size: 16px;
 }
 
-/* ====== SIGNUP / NEW STORE PAGE ====== */ 
-#login form,
+/* ====== LOGIN / SIGNUP / REGISTER STORE PAGE ====== */ 
+#login form, 
+#signup form,
 #register form {
-    max-width: 70%;
-    width: 70%;
     margin-top: 5%;
 }
 
+#login form {
+    max-width: 50%;
+    width: 50%;
+}
+#signup form,
+#register form {
+    max-width: 70%;
+    width: 70%;
+}
+
+/* General links */
+.form span.details {
+    margin: 3% 0;
+}
+
+.form span.details a,
+.form .form-group span a {
+    color: #0000cd;
+}
+
+.form span.details a:hover,
+.form .form-group span a:hover {
+    color: #e708ae
+}
+
 /* Input styles */
-.register .form-inline .form-group {
+.form .form-inline .form-group {
     display: block;
     height: 75px;
     width: 100%;
     padding: 0;
 }
-.register .form-group .form-control {
+.form .form-group .form-control {
     font-size: 18px;
     border: 1px solid #b116e0;
     max-width: 100%;
@@ -857,7 +884,7 @@ button.thin-btn:hover {
 }
 
 /* Floating labels - Regular */
-.register .form-group .control-label {
+.form .form-group .control-label {
     max-width: 70%;
     font-size: 1rem;
     font-weight: 400;
@@ -868,68 +895,71 @@ button.thin-btn:hover {
     transform-origin: top left;
     transition: 240ms;
 }
-.register .form-group .form-control::-webkit-input-placeholder {
+.form .form-group .form-control::-webkit-input-placeholder {
     color: transparent;
     transition: 240ms;
 }  
 /* Help box - Regular */
-.register .form-group span.help,
+.form .form-group span.help,
 .signup .form-group span.unmet,
 .signup .form-group span.unmatched {
     display: none;
     font-size: 10px;
 }
-.register .form-group span.temp {
+.form .form-group span.temp {
     display: block;
     color: #ffffff;
     font-size: 10px;
 }
 
 /* Floating labels - Focused */
-.register .form-group .form-control:focus {
+.form .form-group .form-control:focus {
     outline: none;
     box-shadow: none;
     border-color: #e708ae;
 }
-.register .form-group.focused .control-label {
+.form .form-group.focused .control-label {
     opacity: 1;
     transform: translate3d(0px, -10px, 0) scale(0.7);
     line-height: 1px;
     color: #e708ae;
 }
-.register .form-control:focus::-webkit-input-placeholder {
+.form .form-control:focus::-webkit-input-placeholder {
     transition: none;
 }
-.register .form-group.focused .form-control::-webkit-input-placeholder {
+.form .form-group.focused .form-control::-webkit-input-placeholder {
     color: #bbb;
 }
 /* Help box - Focused */
-.register .form-group.focused span.help {
+.form .form-group.focused span.help {
     display: block;
 }
-.register .form-group.focused span.temp {
+.form .form-group.focused span.temp {
     display: none;
 }
 
 /* Floating labels - Filled */
-.register .form-group .form-control.filled,
-.register .form-group.filled .control-label {
+.form .form-group .form-control.filled,
+.form .form-group.filled .control-label {
     border-color: #e708ae;
     opacity: 1;
     transform: translate3d(0px, -10px, 0) scale(0.85);
     line-height: 1px;
 }
-.register .form-group.filled .control-label {
+.form .form-group.filled .control-label {
     font-size: 16px;
     color: #e708ae;
 }
 
 /* Error Message */
-.register .errorMsg {
+.form .errorMsg {
     color: #f72942;
     text-align: center;
     display: block;
 }
+
+/* ====== LOGIN PAGE ====== */ 
+
 
 /* ====== SIGNUP PAGE ====== */ 
 /* Spacing b/w first row inputs */
@@ -959,7 +989,7 @@ button.thin-btn:hover {
     content: 'x';
 }
 
-/* ====== NEW STORE PAGE ====== */ 
+/* ====== REGISTER STORE PAGE ====== */ 
 .register span.heading {
     display: block;
     text-align: center;
@@ -1008,38 +1038,33 @@ button.thin-btn:hover {
     width: 98%;
 }
 
-/* .register .days .form-group input["type='select'"] {
-    width: 95% !important;
-} */
-
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-    #login form, 
     #register form {
         max-width: 75%;
         width: 75%;
     }
 
-    .register .form-group .form-control  {
+    .form .form-group .form-control  {
         font-size: 16px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    #login form, 
+    /* #login form,  */
     #register form {
         max-width: 100%;
         width: 100%;
     }
 
-    .register .form-group .control-label {
+    .form .form-group .control-label {
         font-size: 16px;
     }
 
-    .register .control-label {
+    .form .control-label {
         font-size: 16px;
     }
 
-    .register .form-group span.help,
+    .form .form-group span.help,
     .signup .form-group span.unmet,
     .signup .form-group span.unmatched {
         font-size: 8px;
@@ -1052,30 +1077,30 @@ button.thin-btn:hover {
 }
 
 @media (max-width: 767px) {
-    #login form, 
+    /* #login form,  */
     #register form {
         max-width: 100%;
         width: 100%;
     }
 
-    .register .form-inline .form-group {
+    .form .form-inline .form-group {
         height: 60px;
         padding: 0;
         margin-bottom: 0;
     }
 
     /* Inputs text size */
-    .register .form-group .control-label,
-    .register .form-group .form-control {
+    .form .form-group .control-label,
+    .form .form-group .form-control {
         font-size: 16px;
     }
 
     /* Floating labels - regular */
-    .register .form-group .control-label {
+    .form .form-group .control-label {
         transform: translate3d(8px, 9px, 0) scale(0.9);
     } 
     /* Floating labels - focused */
-    .register .form-group.focused .control-label {
+    .form .form-group.focused .control-label {
         transform: translate3d(0px, -9px, 0) scale(0.9);
     }    
 
@@ -1088,7 +1113,7 @@ button.thin-btn:hover {
         margin-bottom: 5px;
     }
 
-    /****** NEW STORE ******/
+    /****** REGISTER STORE ******/
     /* Input sizes */
     .register #city,
     .register #phone {

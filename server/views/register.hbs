@@ -3,14 +3,14 @@
     <div class="container">
         {{> title_bar title="Add Your Store"}}
         <div class="d-flex justify-content-center">
-            <form class="register register" name="form2" method="POST">
+            <form class="register form" name="form2" method="POST">
                 {{#if stores}}
                 <div class="form-group">
                     <span class="heading" for="existed">Link to a store already on our map</span>
                     <select type="select" class="form-control" name="existed">
                         <option value="">Select your store</option>
                         {{#each stores as |store|}}
-                            <option value="{{store}}">{{store.name}} - {{store.address}}</option>
+                            <option value="{{store._id}}">{{store.name}} - {{store.address}}</option>
                         {{/each}}
                     </select>
                 </div>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group col-md-6 col-sm-6">
                         <label for="url" class="control-label">Website URL</label>
-                        <input id="web" type="text" class="form-control" name="url" pattern="^\s*(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\s*$" required>
+                        <input id="web" type="text" class="form-control" name="url" pattern="^\s*(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\s*$">
                     </div>
                 </div>
                 <div id="hr" class="form-group">

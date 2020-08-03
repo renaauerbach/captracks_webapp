@@ -1,21 +1,14 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const querystring = require('querystring');    
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const validator = require('validator');
-
 const path = require('path');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 
-const partition = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/db.config.json'))).partition;
-const jwtKey = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/auth.config.json'))).secret;
-const jwtExpirySeconds = 360;
+const AuthController = require('./auth.controller');
+const partition = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/db.config.json'))).partition;
 
-const Store = require('../models/store.model');
-const Vendor = require('../models/vendor.model');
+const Store = require('../../models/store.model');
+const Vendor = require('../../models/vendor.model');
 
 // Login
 router.get('/login', (req, res) => {
@@ -27,111 +20,118 @@ router.get('/login', (req, res) => {
 
 // Login form POST
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        let vendor = await Vendor.findOne({ email });
-        if (!vendor) {
-            return res.status(400).json({
-                message: 'Vendor does not exist',
-            });
-        }
+    AuthController.login(req, res);
+    // const { email, password } = req.body;
+    // try {
+    //     let vendor = await Vendor.findOne({ email });
+    //     if (!vendor) {
+    //         return res.status(400).send(JSON.stringify(req.flash('There is no account with that email')));
+    //     }
 
-        const isMatch = await bcrypt.compare(password, vendor.password);
-        console.log("MATCHED: ", isMatch);
+    //     const isMatch = await bcrypt.compare(password, vendor.password);
+    //     console.log("MATCHED: ", isMatch);
 
-        if (!isMatch) {
-            return res.status(400).json({
-                message: 'Incorrect Password!',
-            });
-        }
+    //     if (!isMatch) {
+    //         return res.status(400).send(JSON.stringify(req.flash('Incorrect password')));
+    //     }
 
-        const payload = {
-            vendor: {
-                id: vendor.id,
-            },
-        };
+    //     const payload = {
+    //         vendor: {
+    //             id: vendor.id,
+    //         },
+    //     };
 
-        jwt.sign(
-            payload,
-            jwtKey,
-            {
-                algorithm: 'HS256',
-                expiresIn: jwtExpirySeconds,
-            },
-            (err, token) => {
-                if (err) {
-                    throw err;
-                }
-                res.status(200).json({
-                    token,
-                });
-                res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
-            }
-        );
-        res.redirect('account/' + vendor._id);
-    } catch (err) {
-        res.status(500).json({ success: false, error: err });
-        console.log('Error logging in vendor', err.message);
-    }
+    //     jwt.sign(
+    //         payload,
+    //         jwtKey,
+    //         {
+    //             algorithm: 'HS256',
+    //             expiresIn: jwtExpirySeconds,
+    //         },
+    //         (err, token) => {
+    //             if (err) {
+    //                 throw err;
+    //             }
+    //             res.status(200).json({
+    //                 token,
+    //             });
+    //             res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
+    //         }
+    //     );
+    //     res.redirect('account/' + vendor._id);
+    // } catch (err) {
+    //     res.status(500).json({ success: false, error: err });
+    //     console.log('Error logging in vendor', err.message);
+    // }
+});
+
+// Sign up
+router.get('/signup', (req, res) => {
+    res.render('signup', {
+        layout: 'layout',
+        title: 'Sign Up',
+    });
 });
 
 // New account form POST
 router.post('/signup', async (req, res) => {
-    const { firstName, lastName, phone, email, password } = req.body;
-    try {
-        // Check if an account already exists with that email
-        let vendor = await Vendor.findOne({
-            email,
-        });
-        if (vendor) {
-            return res.status(400).send(JSON.stringify(req.flash('An account already exists with that email.')));
-        }
+    AuthController.register(req, res);
+    // const { firstName, lastName, phone, email, password } = req.body;
+    // try {
+    //     // Check if an account already exists with that email
+    //     let vendor = await Vendor.findOne({
+    //         email,
+    //     });
+    //     if (vendor) {
+    //         return res.status(400).send(JSON.stringify(req.flash('An account already exists with that email.')));
+    //     }
         
-        vendor = new Vendor({
-            partition: partition,
-            firstName: firstName,
-            lastName: lastName,
-            password: password,
-            phone: phone,
-            email: email,
-        });
+    //     vendor = new Vendor({
+    //         partition: partition,
+    //         firstName: firstName,
+    //         lastName: lastName,
+    //         password: password,
+    //         phone: phone,
+    //         email: email,
+    //     });
 
-        const salt = await bcrypt.genSalt(10);
-        vendor.password = await bcrypt.hash(password, salt);
+    //     const salt = await bcrypt.genSalt(10);
+    //     vendor.password = await bcrypt.hash(password, salt);
 
-        await vendor.save();
+    //     await vendor.save();
 
-        const payload = {
-            vendor: {
-                id: vendor.id,
-            },
-        };
+    //     const payload = {
+    //         vendor: {
+    //             id: vendor.id,
+    //         },
+    //     };
 
-        jwt.sign(
-            payload,
-            jwtKey,
-            {
-                algorithm: "HS256",
-                expiresIn: jwtExpirySeconds,
-            },
-            (err, token) => {
-                if (err) {
-                    throw err;
-                }
-                res.status(200).json({
-                    token,
-                });
-                res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
-            }
-        );
+    //     jwt.sign(
+    //         payload,
+    //         jwtKey,
+    //         {
+    //             algorithm: "HS256",
+    //             expiresIn: jwtExpirySeconds,
+    //         },
+    //         (err, token) => {
+    //             if (err) {
+    //                 throw err;
+    //             }
+    //             res.status(200).json({
+    //                 token,
+    //             });
+    //             res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
+    //         }
+    //     );
 
-        res.redirect('/signup/' + vendor._id + '/register');
+    //     res.redirect('/signup/' + vendor._id + '/register');
 
-    } catch (err) {
-        res.status(500).json({ success: false, error: err });
-        console.log("Error registering vendor", err);
-    }
-// var recipients = ['gabriel@captracks.com', 'ben@captracks.com'];
+    // } catch (err) {
+    //     res.status(500).json({ success: false, error: err });
+    //     console.log("Error registering vendor", err);
+    // }
+    
+    // var recipients = ['gabriel@captracks.com', 'ben@captracks.com'];
     // const data = fs.readFileSync(path.join(__dirname, './config.json'));
     // const pwd = JSON.parse(data).gmail;
     // var transporter = nodemailer.createTransport({
@@ -194,6 +194,7 @@ router.get('/signup/:id/register', (req, res) => {
 router.post('/signup/:id/register', async (req, res) => {
     if (req.body.existed) {
         const vendorId = req.params.id;
+        console.log(req.body.existed)
         Vendor.findById(vendorId, (err, vendor) => {
             if (err) {
                 return res.status(400).send(JSON.stringify(req.flash(err)));
@@ -201,18 +202,16 @@ router.post('/signup/:id/register', async (req, res) => {
             const update = {
                 vendor: vendor,
             }
-            Store.findByIdAndUpdate(req.body.existed._id, update, (err) => {
+            Store.findByIdAndUpdate(req.body.existed, update, (err, store) => {
                 if (err) {
                     return res.status(400).send(JSON.stringify(req.flash(err)));
                 }
-                res.status(200).json({ success: true, id: store.id });
                 console.log('Store assigned successfully!');
             });
         })
         res.redirect('/account/' + vendorId);
     }
     else {
-
         var address = req.body.street + ", " + req.body.city + ", " + req.body.state + " " + req.body.zip;
         try {
             // Check if an store already exists with that address
@@ -255,20 +254,25 @@ router.post('/signup/:id/register', async (req, res) => {
                 details: [],
             });
         
-            // store.save((err, store) => {
-            //     if (err) {
-            //         res.status(400).json({ success: false, error: err });
-            //     }
-            //     res.status(200).json({ success: true, id: store.id });
-            //     console.log('Store added successfully!');
-            // });
-            // res.redirect('/account');
+            store.save((err, store) => {
+                if (err) {
+                    return res.status(400).json({ success: false, error: err });
+                }
+                res.status(200).json({ success: true, id: store.id });
+                console.log('Store added successfully!');
+            });
+            res.redirect('/account/' + vendorId);
 
         } catch (err) {
             res.status(500).send(JSON.stringify(req.flash('Error registering store')));
             console.log("Error registering vendor", err);
         } 
     }   
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/login');
 });
 
 module.exports = router;

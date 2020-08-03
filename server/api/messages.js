@@ -1,9 +1,7 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 
-const db = require('../db.js');
 const partition = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/db.config.json'))).partition;
 
 const router = express.Router();

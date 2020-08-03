@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Vendor = require('../models/vendor.model');
+const Store = require('../models/store.model');
 
 // Vendor Account --> ACCOUNT
 router.get('/:id', (req, res) => {
@@ -9,7 +10,7 @@ router.get('/:id', (req, res) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
-        Store.find({vendor: vendor._id}, (err, store) => {
+        Store.find({vendor: req.params.id}, (err, store) => {
             if (err) {
                 return res.status(400).json({ success: false, error: err });
             }

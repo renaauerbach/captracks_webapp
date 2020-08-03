@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
             };
         });
 
-        res.render('map', { layout: 'layout', title: 'Home', intro: true, displayMap: true, stores: stores });
+        res.render('map', { layout: 'layout', title: 'Stores', intro: true, displayMap: true, stores: stores });
     });
 });
 

@@ -34,7 +34,7 @@
                         <nav class="navbar navbar-expand-lg">
                             <!-- Logo -->
                             <a class="navbar-brand" href="/">
-                                <img src="/assets/img/logo.png" alt="Logo">
+                                <a href="/map"><img src="/assets/img/logo.png" alt="Logo"></a>
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
@@ -44,10 +44,13 @@
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto">
-                                    <li {{#if (eq title 'Home')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/map">Home</a></li>
+                                    <li {{#if (eq title 'Stores')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/map">Find A Store</a></li>
                                     <li {{#if (eq title 'About')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/about">About Us</a></li>
-                                    <li {{#if (eq title 'Join')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/join">Join CapTracks</a></li>
-                                    <li class="login"><a href="/login">Vendor Login</a></li>
+                                    {{!-- {{#if}} --}}
+                                    <li class="nav-btn"><a href="/login">Vendor Login</a></li>
+                                    {{!-- {{else}}
+                                    <li class="nav-btn"><a href="/account">My Account</a></li>
+                                    {{/if}} --}}
                                 </ul>
                             </div> <!-- Navbar Collapse End -->
                         </nav> <!-- Navbar End -->
