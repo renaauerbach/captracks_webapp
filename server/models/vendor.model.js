@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
 const { ObjectID } = require('mongodb');
 
 // VENDOR SCHEMA
@@ -18,10 +17,10 @@ const vendorSchema = new mongoose.Schema({
 	email: { type: String, required: true },
 });
 
-vendorSchema.plugin(passportLocalMongoose, {
-	usernameField: 'email', // Use email (not 'username' default)
-	usernameLowerCase: true, // Make all emails lowercase
-	session: false, // Disable sessions - using JWTs
-});
+// vendorSchema.plugin(passportLocalMongoose, {
+// 	usernameField: 'email', // Use email (not 'username' default)
+// 	usernameLowerCase: true, // Make all emails lowercase
+// 	session: false, // Disable sessions - using JWTs
+// });
 
 module.exports = mongoose.model('vendors', vendorSchema);

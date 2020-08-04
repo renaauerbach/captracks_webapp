@@ -1,7 +1,6 @@
 {{!-- <!--====== ACCOUNT START ======--> --}}
 <section id="account" class="style-2">
     {{> header title=(concat 'Welcome back, ' vendor.firstName)}}
-    <span id="data" style="display: none">{{{ store }}}</span> 
 </section>
 <section id="forum">
     <div class="container">
@@ -16,10 +15,10 @@
                 <form class="forum" action="/post/{{store.id}}" method="POST">
                 <p>Add a post to your forum to keep your customers up to date.</p>
                     <div class="form-group row">
-                        <input class="forum form-control" id="title"  name="title" rows="5" placeholder="Title your post">
+                        <input class="forum form-control" id="title"  name="title" placeholder="Title your post">
                     </div>
                     <div class="form-group row">
-                        <textarea class="forum form-control" id="text"  name="text" rows="5" placeholder=""></textarea>
+                        <textarea class="forum form-control" id="text"  name="text" rows="5" placeholder="Update your customers about what's going on in your shop"></textarea>
                     </div>
                     <div style="display: none;">
                         <input name="storeId" value={{store.id}}>

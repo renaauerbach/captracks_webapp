@@ -1,10 +1,9 @@
 require('./db.js')
+const passport = require('passport')
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
-
 
 const hbs = require('hbs');
 const path = require('path');
@@ -13,7 +12,7 @@ const fs = require('fs');
 
 const parser = require('./parser.js');
 
-const authRouter = require('./api/auth/auth');
+const authRouter = require('./api/auth')(passport);
 const messageRouter = require('./api/messages');
 const vendorRouter = require('./api/vendors');
 const storeRouter = require('./api/stores');
@@ -49,27 +48,43 @@ hbs.registerHelper('len', (obj) => {
 hbs.registerPartials(__dirname + '/views/partials', err => {});
 
 // Bodyparser middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('*', cors());
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 
+// Sessions & Passport middlerware
 app.use(cookieParser("supersecret"));
-app.use(session({cookie: {maxAge: 60000 }}));
+app.use(session({
+    cookie: { maxAge: 60000 }
+}));
 
-app.use(passport.initialize(path.join(__dirname, '../middleware/passport')));
+// app.use(session({secret: 'mySecretKey'}));
+app.use(passport.initialize());
 app.use(passport.session());
+
+ // Using the flash middleware provided by connect-flash to store messages in session
+ // and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
+
+// Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
 
 // Routers
 app.use('/', authRouter);
 app.use('/map', storeRouter);
-app.use('/account', passport.authenticate('jwt', {session: false}), vendorRouter);
+// app.use('/account', passport.authenticate('jwt', {session: true}), vendorRouter);
+app.use('/account', vendorRouter);
 app.use('/post', messageRouter);
 
 app.use((req, res, next) => {
-    next();
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 app.get('/about', (req, res) => {
@@ -94,6 +109,21 @@ app.get('/about', (req, res) => {
     });
 });
 
+// development error handler
+// will print stacktrace
+// if (app.get('env') === 'development') {
+//     app.use(function(err, req, res, next) {
+//         res.status(err.status || 500);
+//         res.render('error', {
+//             message: err.message,
+//             error: err
+//         });
+//     });
+// }
+
+
 app.listen(PORT, () => {
     console.log('Server running on port', PORT);
 });
+
+module.exports = app;
