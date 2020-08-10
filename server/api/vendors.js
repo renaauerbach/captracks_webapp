@@ -19,6 +19,7 @@ var isAuthenticated = (req, res, next) => {
 // Vendor Account --> ACCOUNT
 router.get('/', isAuthenticated, (req, res) => {
     var vendor = req.user;
+    var loggedIn = req.user ? true : false;
     Store.find({vendor: vendor._id}, (err, store) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
@@ -28,6 +29,7 @@ router.get('/', isAuthenticated, (req, res) => {
             vendor: vendor,
             store: store[0],
             title: 'My Account',
+            loggedIn: loggedIn,
         });
     })
 });

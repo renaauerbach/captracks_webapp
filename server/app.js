@@ -20,33 +20,6 @@ const storeRouter = require('./api/stores');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.set('views', path.join(__dirname, '/views'));
-app.set('view engine', 'hbs');
-
-// Handlebars helpers & partials
-hbs.registerHelper('ifOdd', val => {
-    return val % 2 == 0 ? false : true;
-});
-hbs.registerHelper('ifEven', val => {
-    return val % 2 == 0 ? true : false;
-});
-hbs.registerHelper('convert', data => {
-    var stringify = JSON.stringify(data)
-        .split('"_id":')
-        .join('"id":');
-    return stringify;
-});
-hbs.registerHelper('eq', (val1, val2) => {
-    return val1 === val2;
-});
-hbs.registerHelper('concat', (val1, val2) => {
-    return val1 + val2;
-});
-hbs.registerHelper('len', (obj) => {
-    return Object.keys(obj).length;
-});
-hbs.registerPartials(__dirname + '/views/partials', err => {});
-
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -74,6 +47,34 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'hbs');
+
+// Handlebars helpers & partials
+hbs.registerHelper('ifOdd', val => {
+    return val % 2 == 0 ? false : true;
+});
+hbs.registerHelper('ifEven', val => {
+    return val % 2 == 0 ? true : false;
+});
+hbs.registerHelper('convert', data => {
+    var stringify = JSON.stringify(data)
+        .split('"_id":')
+        .join('"id":');
+    return stringify;
+});
+hbs.registerHelper('eq', (val1, val2) => {
+    return val1 === val2;
+});
+hbs.registerHelper('concat', (val1, val2) => {
+    return val1 + val2;
+});
+hbs.registerHelper('len', (obj) => {
+    return Object.keys(obj).length;
+});
+hbs.registerPartials(__dirname + '/views/partials', err => {});
+
+
 // Routers
 app.use('/', authRouter);
 app.use('/map', storeRouter);
@@ -82,12 +83,14 @@ app.use('/account', vendorRouter);
 app.use('/post', messageRouter);
 
 app.use((req, res, next) => {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    // var err = new Error('Not Found');
+    // err.status = 404;
+    // next(err);
+    next();
 });
 
 app.get('/about', (req, res) => {
+    var loggedIn = req.user ? true : false;
     // Load functionality box data
     const boxes = parser.parseData(
         fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
@@ -106,6 +109,7 @@ app.get('/about', (req, res) => {
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
         functionality: boxes,
         members: members,
+        loggedIn: loggedIn,
     });
 });
 

@@ -396,7 +396,7 @@ button.thin-btn:hover {
     transform: scaleX(1);
 }
 
-/* For Nav Button */
+/* For End Nav Button */
 .navigation .navbar .navbar-nav .nav-btn a {
     text-transform: uppercase;
     font-size: 16px;
@@ -408,6 +408,7 @@ button.thin-btn:hover {
     border-color: transparent;
     padding: 10px;
     margin-top: -10px;
+    z-index: 10;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -426,11 +427,53 @@ button.thin-btn:hover {
     background-color: #0000cd;
     text-decoration: none;
 }
-.navigation .navbar .navbar-nav .nav-btn a:active {
-    background-color: #b116e0;
-    text-decoration: none;
+
+/* Dropdown */
+.navigation .navbar .navbar-nav .dropdown {
+
 }
 
+/* Dropdown content (hidden by default) */
+.navigation .navbar .navbar-nav .dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #ffffff;
+    border: 3px #e708ae solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top: 6px;
+    margin-top: -10px;
+    margin-left: 30px;
+}
+
+/* Show the dropdown menu on hover */
+.navigation .navbar .navbar-nav .dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+/* Links inside the dropdown */
+.navigation .navbar .navbar-nav .dropdown .dropdown-content a {
+    width: 100%;
+    float: none;
+    color: #555;
+    padding: 12px 16px;
+    text-decoration: none;
+    text-align: left;
+}
+  
+/* Add a grey background color to dropdown links on hover */
+.navigation .navbar .navbar-nav .dropdown .dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.navigation .navbar .navbar-nav .dropdown .dropdown-content a:nth-last-child():hover {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+  
 /*====== HEADER ======*/
 .intro {
     padding-top: 20%;
@@ -959,7 +1002,9 @@ button.thin-btn:hover {
 }
 
 /* ====== LOGIN PAGE ====== */ 
-
+.login .details {
+    font-size: 16px;
+}
 
 /* ====== SIGNUP PAGE ====== */ 
 /* Spacing b/w first row inputs */
