@@ -1,4 +1,4 @@
-var signupForm = document.querySelector('.signup');
+var signup = document.querySelector('.signup');
 var password = document.getElementById('password');
 var confirmed = document.getElementById('confirmed');
 
@@ -65,8 +65,8 @@ if (password) {
 }
 
 // Check passwords on submit
-if (signupForm) {
-    signupForm.addEventListener('submit', e => {
+if (signup) {
+    signup.addEventListener('click', e => {
         // Check is password and confirm match 
         if (password.value !== confirmed.value) {
             e.preventDefault();

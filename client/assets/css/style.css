@@ -652,9 +652,10 @@ button.thin-btn:hover {
 .intro, 
 #about, 
 #store, 
-#register,
 #login,
-#signup,
+#forgot,
+#reset,
+#join,
 #account {
     padding-top: 18%;
     padding-bottom: 10%;
@@ -671,9 +672,10 @@ button.thin-btn:hover {
     .intro, 
     #about, 
     #store, 
-    #register,
     #login,
-    #signup,
+    #forgot,
+    #reset,
+    #join,
     #account {
         padding: 10%;
         padding-top: 25%;
@@ -691,9 +693,10 @@ button.thin-btn:hover {
     .intro, 
     #about, 
     #store, 
-    #register,
     #login,
-    #signup,
+    #forgot,
+    #reset,
+    #join,
     #account {
         padding: 10%;
         padding-top: 40%;
@@ -805,7 +808,7 @@ button.thin-btn:hover {
     color: #ffffff;
     font-size: 14px;
     margin-left: 5%;
-    top: 16%;
+    top: 18%;
     position: absolute;
 }
 
@@ -876,28 +879,35 @@ button.thin-btn:hover {
     );
 }
 
+.no-forum {
+    display: block;
+}
+
 .forum-content p {
     font-size: 16px;
 }
 
-/* ====== LOGIN / SIGNUP / REGISTER STORE PAGE ====== */ 
-#login form, 
-#signup form,
-#register form {
+/* ====== GENERAL FORM PAGES ====== */ 
+#login form,
+#forgot form,
+#reset form, 
+#join form {
     margin-top: 5%;
 }
 
-#login form {
+#login form,
+#forgot form,
+#reset form {
     max-width: 50%;
     width: 50%;
 }
-#signup form,
-#register form {
+
+#join form {
     max-width: 70%;
     width: 70%;
 }
 
-/* General links */
+/* General Form links */
 .form span.details {
     margin: 3% 0;
 }
@@ -912,7 +922,7 @@ button.thin-btn:hover {
     color: #e708ae
 }
 
-/* Input styles */
+/* Form Input styles */
 .form .form-inline .form-group {
     display: block;
     height: 75px;
@@ -994,6 +1004,11 @@ button.thin-btn:hover {
     color: #e708ae;
 }
 
+/* Details */
+form .details {
+    font-size: 16px;
+}
+
 /* Error Message */
 .form .errorMsg {
     color: #f72942;
@@ -1001,12 +1016,46 @@ button.thin-btn:hover {
     display: block;
 }
 
-/* ====== LOGIN PAGE ====== */ 
-.login .details {
-    font-size: 16px;
+/* ====== FORGOT PAGE ====== */ 
+.submitted {
+    display: none;
 }
 
-/* ====== SIGNUP PAGE ====== */ 
+/* ====== RESET PAGE ====== */ 
+
+
+/* ====== JOIN PAGE ====== */ 
+.tab {
+    display: none;
+}
+.tab-btn {
+    margin: 0 auto;
+}
+.tab-steps {
+    text-align: center;
+    margin-top: 40px;
+}
+/* Tab circles */
+.step {
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+/* Mark the active step: */
+.step.active {
+    opacity: 1;
+}
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #b116e0;
+}
+
+/****** TAB 1 - SIGNUP ******/
 /* Spacing b/w first row inputs */
 .signup .form-inline:nth-child(1) .form-control:nth-child(1),
 .signup .form-inline:nth-child(1) .form-control:nth-child(2) {
@@ -1034,7 +1083,7 @@ button.thin-btn:hover {
     content: 'x';
 }
 
-/* ====== REGISTER STORE PAGE ====== */ 
+/****** TAB 2 - REGISTRATION ******/
 .register span.heading {
     display: block;
     text-align: center;
@@ -1084,7 +1133,7 @@ button.thin-btn:hover {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-    #register form {
+    #join form {
         max-width: 75%;
         width: 75%;
     }
@@ -1096,7 +1145,7 @@ button.thin-btn:hover {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     /* #login form,  */
-    #register form {
+    #join form {
         max-width: 100%;
         width: 100%;
     }
@@ -1123,7 +1172,7 @@ button.thin-btn:hover {
 
 @media (max-width: 767px) {
     /* #login form,  */
-    #register form {
+    #join form {
         max-width: 100%;
         width: 100%;
     }

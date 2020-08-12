@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
+const { promisify } = require('util');
+const asyncify = require('express-asyncify');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 
@@ -31,116 +34,112 @@ module.exports = function(passport) {
         })
     );
 
-    // Sign up
-    router.get('/signup', (req, res) => {
-        var loggedIn = req.user ? true : false;
-        res.render('signup', {
+    // Forgot Password
+    router.get('/forgot', (req, res) => {
+        res.render('forgot', {
             layout: 'layout',
-            title: 'Sign Up',
-            message: req.flash('message'),
-            loggedIn: loggedIn,
+            title: 'Forgot Password',
         });
     });
 
-    /* Handle Registration POST */
-    router.post(
-        '/signup',
-        passport.authenticate('signup', {
-            successRedirect: '/signup/register',
-            failureRedirect: '/signup',
-            failureFlash: true,
-        })
-    );
-    // New account form POST
-    // router.post('/signup', async (req, res) => {
-    // AuthController.register(req, res);
-    // const { firstName, lastName, phone, email, password } = req.body;
-    // try {
-    //     // Check if an account already exists with that email
-    //     let vendor = await Vendor.findOne({
-    //         email,
-    //     });
-    //     if (vendor) {
-    //         return res.status(400).send(JSON.stringify(req.flash('An account already exists with that email.')));
-    //     }
+    router.post('/forgot', async (req, res, next) => {
+        const token = (await promisify(crypto.randomBytes)(20)).toString('hex');
+        const user = Vendors.find(u => u.email === req.body.email);
 
-    //     vendor = new Vendor({
-    //         partition: partition,
-    //         firstName: firstName,
-    //         lastName: lastName,
-    //         password: password,
-    //         phone: phone,
-    //         email: email,
-    //     });
+        if (!user) {
+            req.flash('error', 'No account with that email address exists.');
+            return res.redirect('/forgot');
+        }
 
-    //     const salt = await bcrypt.genSalt(10);
-    //     vendor.password = await bcrypt.hash(password, salt);
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000;
 
-    //     await vendor.save();
+        const resetEmail = {
+            to: user.email,
+            from: 'noreply@captracks.com',
+            subject: 'Reset Your CapTracks Account Password',
+            text: `
+            You are receiving this because you have requested the reset of the password for your account.
+            Please click on the following link, or paste this into your browser to complete the process:
+            http://${req.headers.host}/reset/${token}
+            If you did not request this, please ignore this email and your password will remain unchanged.
+        `,
+        };
 
-    //     const payload = {
-    //         vendor: {
-    //             id: vendor.id,
-    //         },
-    //     };
+        await transport.sendMail(resetEmail);
+        req.flash(
+            'info',
+            `An e-mail has been sent to ${user.email} with further instructions.`
+        );
 
-    //     jwt.sign(
-    //         payload,
-    //         jwtKey,
-    //         {
-    //             algorithm: "HS256",
-    //             expiresIn: jwtExpirySeconds,
-    //         },
-    //         (err, token) => {
-    //             if (err) {
-    //                 throw err;
-    //             }
-    //             res.status(200).json({
-    //                 token,
-    //             });
-    //             res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
-    //         }
-    //     );
+        res.redirect('/forgot');
+    });
 
-    //     res.redirect('/signup/' + vendor._id + '/register');
+    router.get('/reset/:token', (req, res) => {
+        const vendor = Vendor.find(
+            v =>
+                v.resetPasswordExpires > Date.now() &&
+                crypto.timingSafeEqual(
+                    Buffer.from(v.resetPasswordToken),
+                    Buffer.from(req.params.token)
+                )
+        );
 
-    // } catch (err) {
-    //     res.status(500).json({ success: false, error: err });
-    //     console.log("Error registering vendor", err);
-    // }
+        if (!vendor) {
+            req.flash(
+                'error',
+                'Password reset token is invalid or has expired.'
+            );
+            return res.redirect('/forgot');
+        }
 
-    // var recipients = ['gabriel@captracks.com', 'ben@captracks.com'];
-    // const data = fs.readFileSync(path.join(__dirname, './config.json'));
-    // const pwd = JSON.parse(data).gmail;
-    // var transporter = nodemailer.createTransport({
-    //     service: 'gmail',
-    //     auth: {
-    //         user: 'youremail@gmail.com',
-    //         pass: pwd,
-    //     },
-    // });
+        res.setHeader('Content-type', 'text/html');
+        res.render('reset', {
+            layout: 'layout',
+            title: 'Reset Password',
+            token: vendor.resetPasswordToken,
+        });
+    });
 
-    // // Email credentials
-    // recipients.forEach(email, () => {
-    //     var mailOptions = {
-    //         from: 'youremail@gmail.com',
-    //         to: email,
-    //         subject: 'A new vendor registered their store with CapTracks!',
-    //         text: 'That was easy!',
-    //     };
+    router.post('/reset/:token', async (req, res) => {
+        const vendor = Vendor.find(
+            v =>
+                v.resetPasswordExpires > Date.now() &&
+                crypto.timingSafeEqual(
+                    Buffer.from(v.resetPasswordToken),
+                    Buffer.from(req.params.token)
+                )
+        );
 
-    //     transporter.sendMail(mailOptions, (err, info) => {
-    //         if (err) {
-    //             console.log(err);
-    //         } else {
-    //             console.log('Email sent successfull! ' + info.response);
-    //         }
-    //     });
-    // });
-    // });
+        if (!vendor) {
+            req.flash(
+                'error',
+                'Password reset token is invalid or has expired.'
+            );
+            return res.redirect('/forgot');
+        }
 
-    // Register New Store
-    router.get('/signup/register', (req, res) => {
+        vendor.password = req.body.password;
+        delete vendor.resetPasswordToken;
+        delete vendor.resetPasswordExpires;
+
+        const resetEmail = {
+            to: vendor.email,
+            from: 'noreply@captracks.com',
+            subject: 'Your password has been reset',
+            text: `
+            This is a confirmation that the password for your account "${user.email}" has just been changed.
+        `,
+        };
+
+        await transport.sendMail(resetEmail);
+        req.flash('success', `Your password has been successfully reset`);
+
+        res.redirect('/login');
+    });
+    
+    // Join CapTracks
+    router.get('/join', (req, res) => {
         // Get stores without assigned vendors
         Store.find({ vendor: null }, (err, stores) => {
             if (err) {
@@ -160,15 +159,20 @@ module.exports = function(passport) {
                 };
             });
 
-            res.render('register', {
+            res.render('join', {
                 layout: 'layout',
-                title: 'Register Store',
+                title: 'Join',
                 stores: stores,
             });
         });
     });
 
-    router.post('/signup/register', async (req, res) => {
+    // passport.authenticate('signup', {
+    //     successRedirect: '/account',
+    //     failureRedirect: '/join',
+    //     failureFlash: true,
+    // })
+    router.post('/join', (res, req) => {
         if (req.body.existed) {
             const vendorId = req.user.id;
             console.log(req.body.existed);
@@ -204,7 +208,7 @@ module.exports = function(passport) {
                 req.body.zip;
             try {
                 // Check if an store already exists with that address
-                let store = await Store.findOne({
+                let store = Store.findOne({
                     address,
                 });
                 if (store) {
@@ -218,8 +222,6 @@ module.exports = function(passport) {
                             )
                         );
                 }
-
-                var survey = [req.body.survey1, req.body.survey1];
 
                 var hours = [];
                 if (!req.body['24hours']) {
@@ -261,6 +263,8 @@ module.exports = function(passport) {
                     details: [],
                 });
 
+                console.log(store);
+
                 store.save((err, store) => {
                     if (err) {
                         return res
@@ -270,7 +274,44 @@ module.exports = function(passport) {
                     res.status(200).json({ success: true, id: store.id });
                     console.log('Store added successfully!');
                 });
-                res.redirect('/account');
+
+                
+                var email = JSON.parse(fs.readFileSync(path.join(__dirname, '/config/mail.config.json'))).email;
+                console.log(email);
+                var transporter = nodemailer.createTransport({
+                    host: "smtp.gmail.com",
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        user: email,
+                        pass: JSON.parse(fs.readFileSync(path.join(__dirname, '/config/mail.config.json'))).password,
+                    }
+                });
+                
+                var textBody = `Vendor: ${req.body.name} Survey 1: ${req.body.survey1} Survey 2: ${req.body.survey2}`;
+                var htmlBody = `<h2>Mail From Contact Form</h2><p>from: ${req.body.name} <a href="mailto:${req.body.email}">${req.body.email}</a></p><p>${req.body.message}</p>`;
+                
+                // var recipients = ['gabriel@captracks.com', 'ben@captracks.com']
+                var recipients = ['renaauerbach@gmail.com', 'renaauerbach@gmail.com']
+                recipients.forEach((to) => {
+                    var msg = {
+                        from: email,
+                        to: to,
+                        subject: "A new vendor registered their store with CapTracks!", 
+                        text: textBody,
+                        html: htmlBody
+                    };
+                
+                    transporter.sendMail(msg, (err, info) => {
+                        if(err) {
+                            console.log(err);
+                            res.json({ message: "message not sent: an error occured; check the server's console log" });
+                        }
+                        else {
+                            res.json({ message: `message sent: ${info.messageId}` });
+                        }
+                    });
+                });
             } catch (err) {
                 res.status(500).send(
                     JSON.stringify(req.flash('Error registering store'))
@@ -278,104 +319,6 @@ module.exports = function(passport) {
                 console.log('Error registering vendor', err);
             }
         }
-    });
-
-    // Forgot Password
-    router.post('/forgot', async (req, res, next) => {
-        const token = (await promisify(crypto.randomBytes)(20)).toString('hex');
-        const user = users.find(u => u.email === req.body.email);
-
-        if (!user) {
-            req.flash('error', 'No account with that email address exists.');
-            return res.redirect('/forgot');
-        }
-
-        user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000;
-
-        const resetEmail = {
-            to: user.email,
-            from: 'noreply@captracks.com',
-            subject: 'Reset Your CapTracks Account Password',
-            text: `
-            You are receiving this because you have requested the reset of the password for your account.
-            Please click on the following link, or paste this into your browser to complete the process:
-            http://${req.headers.host}/reset/${token}
-            If you did not request this, please ignore this email and your password will remain unchanged.
-          `,
-        };
-
-        await transport.sendMail(resetEmail);
-        req.flash(
-            'info',
-            `An e-mail has been sent to ${user.email} with further instructions.`
-        );
-
-        res.redirect('/forgot');
-    });
-
-    router.get('/reset/:token', (req, res) => {
-        const user = users.find(
-            u =>
-                u.resetPasswordExpires > Date.now() &&
-                crypto.timingSafeEqual(
-                    Buffer.from(u.resetPasswordToken),
-                    Buffer.from(req.params.token)
-                )
-        );
-
-        if (!user) {
-            req.flash(
-                'error',
-                'Password reset token is invalid or has expired.'
-            );
-            return res.redirect('/forgot');
-        }
-
-        res.setHeader('Content-type', 'text/html');
-        res.end(
-            templates.layout(`
-          ${templates.error(req.flash())}
-          ${templates.resetPassword(user.resetPasswordToken)}
-        `)
-        );
-    });
-
-    router.post('/reset/:token', async (req, res) => {
-        const user = users.find(
-            u =>
-                u.resetPasswordExpires > Date.now() &&
-                crypto.timingSafeEqual(
-                    Buffer.from(u.resetPasswordToken),
-                    Buffer.from(req.params.token)
-                )
-        );
-
-        if (!user) {
-            req.flash(
-                'error',
-                'Password reset token is invalid or has expired.'
-            );
-            return res.redirect('/forgot');
-        }
-
-        user.password = req.body.password;
-        delete user.resetPasswordToken;
-        delete user.resetPasswordExpires;
-
-        const resetEmail = {
-            to: user.email,
-            from: 'passwordreset@example.com',
-            subject: 'Your password has been changed',
-            text: `
-            This is a confirmation that the password for your account "${user.email}" has just been changed.
-          `,
-        };
-
-        await transport.sendMail(resetEmail);
-        req.flash('success', `Success! Your password has been changed.`);
-
-        res.redirect('/');
     });
 
     router.get('/logout', (req, res) => {

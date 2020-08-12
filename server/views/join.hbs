@@ -1,0 +1,38 @@
+<!--====== JOIN STARTS ======-->
+<section id="join">
+    <div class="container">
+        {{> title_bar title="Join CapTracks!"}}
+        <div class="d-flex justify-content-center">
+            <form class="join form" method="POST">
+                <div class="tab">
+                    {{> signup}}
+                </div>
+                <div class="tab">
+                    {{> register}}
+                </div>
+                <div class="tab">
+                    {{> survey}}
+                </div>
+
+                <div style="overflow: auto; text-align: center;">
+                    <div class="tab-btn">
+                        <button type="button" id="prevBtn" class="main-btn" onclick="nextPrev(-1)">Back</button>
+                        <button type="button" id="nextBtn" class="main-btn" onclick="nextPrev(1)">Next</button>
+                    </div>
+                </div>
+
+                <div class="tab-steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+                
+                <div class="errorMsg">{{errMessage}}</div>
+            </form>
+        </div>
+    </div> <!-- Container End -->
+</section>
+<!--====== JOIN ENDS ======-->
+<script src="/assets/js/joinForm.js"></script>
+<script src="/assets/js/form.js"></script>
+<script src="/assets/js/validator.js"></script>

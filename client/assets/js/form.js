@@ -3,14 +3,21 @@ var selection = document.getElementsByTagName('select')[0];
 if (selection) {
     selection.addEventListener('change', (e) => {
         let form = document.getElementsByClassName('register')[0];
-        console.log(form)
+        let inputs = form.getElementsByTagName('input');
+        let selects = form.getElementsByTagName('select')
         if (e.target.value !== "") {
-            for (var i = 1; i < form.length-1; ++i) {
-                form[i].disabled = true;
+            for (var i = 0; i < inputs.length; ++i) {
+                inputs[i].disabled = true;
+            }
+            for (var i = 1; i < selects.length; ++i) {
+                selects[i].disabled = true;
             }
         } else {
-            for (var i = 1; i < form.length-1; ++i) {
-                form[i].disabled = false;
+            for (var i = 0; i < inputs.length; ++i) {
+                inputs[i].disabled = false;
+            }
+            for (var i = 1; i < selects.length; ++i) {
+                selects[i].disabled = false;
             }
         }
     });

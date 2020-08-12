@@ -1,10 +1,9 @@
 <!--====== STORE PAGE START ======-->
-    <div class="back">
-        <i class="fas fa-chevron-left"></i>
-        <a href="/">Back to map</a>
-    </div>
+<div class="back">
+    <i class="fas fa-chevron-left"></i>
+    <a href="/">Back to map</a>
+</div>
 <section id="store" class="style-2">
-
     {{> header title=store.name text1=(concat 'View recent updates directly from ' store.name)}}
     <span id="data" style="display: none">{{{ store }}}</span> 
 </section>
@@ -15,9 +14,16 @@
                 {{> store_info store=store}}
             </div>
             <div class="divider border-gradient"></div>
-            {{#each forum as |msg|}}
-                {{> forum_post msg=msg}}
-            {{/each}}
+            <div class="col">
+                {{> info_title title="Forum"}}
+                {{#if forum}}
+                    {{#each forum as |msg|}}
+                        {{> forum_post msg=msg}}
+                    {{/each}}
+                {{else}}
+                    <p class="no-forum">No forum posts yet. Check back soon for an update!</p>
+                {{/if}}
+            </div>
         </div>
     </div> <!-- Container End -->
 </section>

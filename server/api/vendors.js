@@ -18,7 +18,7 @@ var isAuthenticated = (req, res, next) => {
 
 // Vendor Account --> ACCOUNT
 router.get('/', isAuthenticated, (req, res) => {
-    var vendor = req.user;
+    var user = req.user;
     var loggedIn = req.user ? true : false;
     Store.find({vendor: vendor._id}, (err, store) => {
         if (err) {
@@ -34,6 +34,42 @@ router.get('/', isAuthenticated, (req, res) => {
     })
 });
 
+router.get('/profile', isAuthenticated, (req, res) => {
+    var user = req.user;
+    var loggedIn = req.user ? true : false;
+    Vendor.find({_id: user._id}, (err, vendor) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err });
+        }
+        res.render('profile', {
+            layout: 'layout',
+            vendor: vendor,
+            title: 'My Profile',
+            loggedIn: loggedIn,
+        });
+    })
+});
+
+router.get('/settings', isAuthenticated, (req, res) => {
+    var user = req.user;
+    var loggedIn = req.user ? true : false;
+    Vendor.find({_id: user._id}, (err, vendor) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err });
+        }
+        Store.find({vendor: vendor._id}, (err, store) => {
+            if (err) {
+                return res.status(400).json({ success: false, error: err });
+            }
+            res.render('settings', {
+                layout: 'layout',
+                vendor: vendor,
+                store: store[0],
+                title: 'Settings',
+                loggedIn: loggedIn,
+            });
+        })
+});
 
 // Delete Vendor Account
 router.delete('/:id', (req, res) => {

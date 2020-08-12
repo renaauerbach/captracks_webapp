@@ -46,13 +46,13 @@
                                 <ul class="navbar-nav ml-auto">
                                     <li {{#if (eq title 'Stores')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/map">Find A Store</a></li>
                                     <li {{#if (eq title 'About')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/about">About Us</a></li>
-                                    {{#if true}}
+                                    {{#if user}}
                                     <div class="dropdown">
                                         <li class="nav-btn">
                                             <a href="/account" class="">My Account <i class="fas fa-chevron-down"></i></a>
                                         </li>
                                         <div class="dropdown-content">
-                                            <a href="/profile">My Profile</a>
+                                            <a href="/account/profile">My Profile</a>
                                             <a href="/account/settings">Settings</a>
                                             <a href="/logout">Logout</a>
                                         </div>
@@ -89,6 +89,7 @@
     
     <!--====== Main JS ======-->
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/mailer.js"></script>
 
     {{#if displayMap}}
         <!--====== Map Script ======-->

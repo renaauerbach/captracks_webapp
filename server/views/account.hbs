@@ -10,15 +10,14 @@
             </div>
             <div class="divider border-gradient"></div>
             <div class="col">
-                <h5>Capacity</h5>
-                <hr>
+                {{!-- 
+                {{> info_title title="Capacity"}}
                 <form class="capacity" action="/{{store.id}}/details" method="POST">
                 <div class="d-flex justify-content-right">
                     <button class="forum thin-btn" type="submit">Update</button>
                 </div>
-                </form>
-                <h5>Forum</h5>
-                <hr>
+                </form> --}}
+                {{> info_title title="Forum"}}
                 <form class="forum" action="/post/{{store.id}}" method="POST">
                 <p>Add a post to your forum to keep your customers up to date.</p>
                     <div class="form-inline">

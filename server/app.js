@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const nodemailer = require("nodemailer");
 
 const hbs = require('hbs');
 const path = require('path');
@@ -86,6 +87,7 @@ app.use((req, res, next) => {
     // var err = new Error('Not Found');
     // err.status = 404;
     // next(err);
+    res.locals.user = req.user;
     next();
 });
 
@@ -125,6 +127,42 @@ app.get('/about', (req, res) => {
 //     });
 // }
 
+// const email = JSON.parse(fs.readFileSync(path.join(__dirname, '/config/mail.config.json')),
+// 'email');
+// const transporter = nodemailer.createTransport({
+//     host: "smtp.gmail.com",
+//     port: 465,
+//     secure: true,
+//     auth: {
+//         user: email,
+//         pass: parser.parseData(fs.readFileSync(path.join(__dirname, '/config/mail.config.json')),
+//             'password'),
+//     }
+// });
+
+// var textBody = `FROM: ${request.body.name} EMAIL: ${request.body.email} MESSAGE: ${request.body.message}`;
+// var htmlBody = `<h2>Mail From Contact Form</h2><p>from: ${request.body.name} <a href="mailto:${request.body.email}">${request.body.email}</a></p><p>${request.body.message}</p>`;
+
+// const recipients = ['gabriel@captracks.com', 'ben@captracks.com']
+// recipients.forEach((to, i, array) => {
+//     var msg = {
+//         from: email,
+//         to: to,
+//         subject: "CapTracks Contact Form Mail", 
+//         text: textBody,
+//         html: htmlBody
+//     };
+  
+//     transporter.sendMail(msg, function (err, info) {
+//         if(err) {
+//             console.log(err);
+//             response.json({ message: "message not sent: an error occured; check the server's console log" });
+//         }
+//         else {
+//             response.json({ message: `message sent: ${info.messageId}` });
+//         }
+//     });
+// });
 
 app.listen(PORT, () => {
     console.log('Server running on port', PORT);

@@ -1,0 +1,36 @@
+<!--====== FORGOT START ======-->
+<section id="forgot">
+    <div class="container">
+        {{> title_bar title="Forgot Password?"}}
+        <div class="d-flex justify-content-center">
+            <!--====== Form ======-->
+            <form class="forgot form" method="POST">
+                <span class="details">Remember your password? <a href="/login">Log in</a></span>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label>
+                        <input id="forgotEmail" type="text" class="form-control" name="email" required>
+                        <span class="help">Enter the email associated with your account.</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="error">{{message}}</span>
+                </div>
+                <div class="submit-btn d-flex justify-content-center">
+                    <input id="forgotBtn" class="main-btn" type="submit" value="Submit">
+                </div>
+            </form> <!--====== End Form ======-->
+            <!--====== Submitted Text ======-->      
+            <div class="submitted">
+                <p> If there is an account associated with the entered email, you will receive an email with a link to reset your account password.
+                </p>
+            </div> 
+        </div>
+    </div>
+</section>
+<!--====== FORGOT ENDS ======-->
+<script src="/assets/js/form.js"></script>
+<script src="/assets/js/validator.js"></script>
+
+
+
