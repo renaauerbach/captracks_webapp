@@ -10,13 +10,13 @@
         </select>
     </div>
     <hr>
-    <span class="heading">Or add your store info below</span>
+    <span class="heading">Or add your store's information below</span>
     {{/if}}
     <div class="form-inline">
         <div id="name-div" class="form-group">
             <label for="name" class="control-label">Store Name</label>
             <input id="name" type="text" class="form-control" name="name" required>
-            <span class="help">Please enter the name of your store.</span>
+            <span class="help">Enter the name of your store.</span>
         </div>
     </div>
     <div class="form-inline">
@@ -41,13 +41,14 @@
     </div>
     <div class="form-inline">
         <div class="form-group cold-md-6 col-md-6 col-sm-6">
-            <label for="phone" class="control-label">Phone</label>
-            <input id="phone" type="text" class="form-control" name="phone" minlength="14" maxlength="14" required>
-            <span class="help">Please enter the store's main phone number.</span>
+            <label for="storePhone" class="control-label">Phone</label>
+            <input type="text" class="form-control phone" name="storePhone" minlength="14" maxlength="14" required>
+            <span class="help">Enter the store's main phone number.</span>
         </div>
         <div class="form-group col-md-6 col-sm-6">
             <label for="url" class="control-label">Website URL</label>
             <input id="web" type="text" class="form-control" name="url" pattern="^\s*(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\s*$">
+            <span class="help">Enter the store's website (if applicable).</span>
         </div>
     </div>
     <div id="hr" class="form-group">

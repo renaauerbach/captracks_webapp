@@ -32,7 +32,9 @@ app.use(express.urlencoded({ extended: true }));
 // Sessions & Passport middlerware
 app.use(cookieParser("supersecret"));
 app.use(session({
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 60000 },
+    saveUninitialized: false,
+    resave: false,
 }));
 
 // app.use(session({secret: 'mySecretKey'}));
@@ -87,7 +89,7 @@ app.use((req, res, next) => {
     // var err = new Error('Not Found');
     // err.status = 404;
     // next(err);
-    res.locals.user = req.user;
+    res.locals.currUser = req.user;
     next();
 });
 

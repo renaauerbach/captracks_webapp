@@ -13,6 +13,7 @@ const partition = JSON.parse(
 
 const Store = require('../models/store.model');
 const Vendor = require('../models/vendor.model');
+const Details = require('../models/details.model');
 
 module.exports = function(passport) {
     // Login
@@ -39,6 +40,7 @@ module.exports = function(passport) {
         res.render('forgot', {
             layout: 'layout',
             title: 'Forgot Password',
+            message: req.flash('message'),
         });
     });
 
@@ -166,37 +168,28 @@ module.exports = function(passport) {
             });
         });
     });
-
-    // passport.authenticate('signup', {
-    //     successRedirect: '/account',
-    //     failureRedirect: '/join',
-    //     failureFlash: true,
-    // })
-    router.post('/join', (res, req) => {
+ 
+    router.post('/join', passport.authenticate('signup', { failureRedirect: '/join' }),
+    (req, res) => {
+        console.log("res.locals.currUser: ", res.locals.currUser);
+        const vendor = req.user;
         if (req.body.existed) {
-            const vendorId = req.user.id;
-            console.log(req.body.existed);
-            Vendor.findById(vendorId, (err, vendor) => {
+            Vendor.findOne({id: vendor.id}, (err, vendor) => {
                 if (err) {
                     return res.status(400).send(JSON.stringify(req.flash(err)));
                 }
-                const update = {
-                    vendor: vendor,
-                };
-                Store.findByIdAndUpdate(
-                    req.body.existed,
-                    update,
-                    (err, store) => {
-                        if (err) {
-                            return res
-                                .status(400)
-                                .send(JSON.stringify(req.flash(err)));
-                        }
-                        console.log('Store assigned successfully!');
+
+                Store.findOne({id: req.body.existed}), (err, store) => {
+                    if (err) {
+                        return res
+                            .status(400)
+                            .send(JSON.stringify(req.flash(err)));
                     }
-                );
+                    store.overwrite({vendor: vendor});
+                    store.save();
+                    console.log('Store assigned successfully!');
+                }
             });
-            res.redirect('/account');
         } else {
             var address =
                 req.body.street +
@@ -251,21 +244,37 @@ module.exports = function(passport) {
                     hours.push('Open 24/7');
                 }
 
-                store = new Store({
+                details = new Details({
+                    partition: partition,
+                    capacity: 0,
+                    waitTime: 0,
+                    registers: req.body.survey3,
+                    createdOn: Date(),
+                })
+
+                details.save((err, details) => {
+                    if (err) {
+                        return res
+                            .status(400)
+                            .json({ success: false, error: err });
+                    }
+                    res.status(200).json({ success: true, id: details.id });
+                    console.log('Details recorded successfully!');
+                });
+
+                newStore = new Store({
                     partition: partition,
                     name: req.body.name,
                     address: address,
-                    phone: req.body.phone,
+                    phone: req.body.storePhone,
                     url: req.body.url,
                     hours: hours,
                     forum: [],
-                    vendor: req.body.id,
-                    details: [],
+                    vendor: vendor.id,
+                    details: details.id,
                 });
 
-                console.log(store);
-
-                store.save((err, store) => {
+                newStore.save((err, store) => {
                     if (err) {
                         return res
                             .status(400)
@@ -274,44 +283,6 @@ module.exports = function(passport) {
                     res.status(200).json({ success: true, id: store.id });
                     console.log('Store added successfully!');
                 });
-
-                
-                var email = JSON.parse(fs.readFileSync(path.join(__dirname, '/config/mail.config.json'))).email;
-                console.log(email);
-                var transporter = nodemailer.createTransport({
-                    host: "smtp.gmail.com",
-                    port: 465,
-                    secure: true,
-                    auth: {
-                        user: email,
-                        pass: JSON.parse(fs.readFileSync(path.join(__dirname, '/config/mail.config.json'))).password,
-                    }
-                });
-                
-                var textBody = `Vendor: ${req.body.name} Survey 1: ${req.body.survey1} Survey 2: ${req.body.survey2}`;
-                var htmlBody = `<h2>Mail From Contact Form</h2><p>from: ${req.body.name} <a href="mailto:${req.body.email}">${req.body.email}</a></p><p>${req.body.message}</p>`;
-                
-                // var recipients = ['gabriel@captracks.com', 'ben@captracks.com']
-                var recipients = ['renaauerbach@gmail.com', 'renaauerbach@gmail.com']
-                recipients.forEach((to) => {
-                    var msg = {
-                        from: email,
-                        to: to,
-                        subject: "A new vendor registered their store with CapTracks!", 
-                        text: textBody,
-                        html: htmlBody
-                    };
-                
-                    transporter.sendMail(msg, (err, info) => {
-                        if(err) {
-                            console.log(err);
-                            res.json({ message: "message not sent: an error occured; check the server's console log" });
-                        }
-                        else {
-                            res.json({ message: `message sent: ${info.messageId}` });
-                        }
-                    });
-                });
             } catch (err) {
                 res.status(500).send(
                     JSON.stringify(req.flash('Error registering store'))
@@ -319,6 +290,44 @@ module.exports = function(passport) {
                 console.log('Error registering vendor', err);
             }
         }
+
+        var email = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/mail.config.json'))).email;
+        console.log(email);
+        // var transporter = nodemailer.createTransport({
+        //     host: "smtp.gmail.com",
+        //     port: 465,
+        //     secure: true,
+        //     auth: {
+        //         user: email,
+        //         pass: JSON.parse(fs.readFileSync(path.join(__dirname, '../config/mail.config.json'))).password,
+        //     }
+        // });
+        
+        // var textBody = `Vendor: ${req.body.name} Survey 1: ${req.body.survey1} Survey 2: ${req.body.survey2} Survey 3: ${req.body.survey3}`;
+        // var htmlBody = `<h2>Mail From Contact Form</h2><p>from: ${req.body.name} <a href="mailto:${req.body.email}">${req.body.email}</a></p><p>${req.body.message}</p>`;
+        
+        // // var recipients = ['gabriel@captracks.com', 'ben@captracks.com']
+        // var recipients = ['renaauerbach@gmail.com', 'renaauerbach@gmail.com']
+        // recipients.forEach((to) => {
+        //     var msg = {
+        //         from: email,
+        //         to: to,
+        //         subject: "A new vendor registered their store with CapTracks!", 
+        //         text: textBody,
+        //         html: htmlBody
+        //     };
+        
+        //     transporter.sendMail(msg, (err, info) => {
+        //         if(err) {
+        //             console.log(err);
+        //             res.json({ message: "message not sent: an error occured; check the server's console log" });
+        //         }
+        //         else {
+        //             console.log({ message: `message sent: ${info.messageId}` });
+        //         }
+        //     });
+        // });
+        res.redirect('/account');
     });
 
     router.get('/logout', (req, res) => {

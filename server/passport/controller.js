@@ -21,13 +21,13 @@ function login(passport) {
 					return done(err);
 				// vendor name does not exist, log the error and redirect back
 				if (!vendor){
-					console.log('Vendor Not Found with vendor name ' + email);
-					return done(null, false, req.flash('message', 'Vendor Not found.'));                 
+					console.log('Vendor Not Found.');
+					return done(null, false, req.flash('message', "We don't recognize that email. Want to <a href='/join'>create an account</a>?"));                 
 				}
 				// Vendor exists but wrong password, log the error 
 				if (!isValidPassword(vendor, password)) {
 					console.log('Invalid Password');
-					return done(null, false, req.flash('message', 'Invalid Password')); // redirect back to login page
+					return done(null, false, req.flash('message', 'Invalid password. Please try again or <a href="/forgot">reset your password</a>.')); // redirect back to login page
 				}
 				// Vendor and password both match, return Vendor from done method
 				// which will be treated like success
@@ -63,11 +63,11 @@ function signup(passport) {
 					// create the Vendor
 					newVendor = new Vendor({
 						partition: partition,
-						firstName: req.param('firstName'),
-						lastName: req.param('lastName'),
+						firstName: req.body.firstName,
+						lastName: req.body.lastName,
 						password: createHash(password),
-						phone: req.param('phone'),
-						email: req.param('email'),
+						phone: req.body.phone,
+						email: email,
 					});
 
 					// save the vendor
@@ -76,7 +76,7 @@ function signup(passport) {
 							console.log('Error in Saving Vendor: ' + err);  
 							throw err;  
 						}
-						console.log('Vendor Registration succesful');    
+						console.log('Vendor registered succesfully');    
 						return done(null, newVendor);
 					});
 				}

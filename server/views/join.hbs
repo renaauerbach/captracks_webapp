@@ -3,7 +3,7 @@
     <div class="container">
         {{> title_bar title="Join CapTracks!"}}
         <div class="d-flex justify-content-center">
-            <form class="join form" method="POST">
+            <form id="regForm" class="join form" method="POST">
                 <div class="tab">
                     {{> signup}}
                 </div>
@@ -13,6 +13,8 @@
                 <div class="tab">
                     {{> survey}}
                 </div>
+
+                <div class="errorMsg white">Temp temp temp temp temp</div>
 
                 <div style="overflow: auto; text-align: center;">
                     <div class="tab-btn">
@@ -26,13 +28,12 @@
                     <span class="step"></span>
                     <span class="step"></span>
                 </div>
-                
-                <div class="errorMsg">{{errMessage}}</div>
             </form>
         </div>
     </div> <!-- Container End -->
 </section>
 <!--====== JOIN ENDS ======-->
-<script src="/assets/js/joinForm.js"></script>
-<script src="/assets/js/form.js"></script>
-<script src="/assets/js/validator.js"></script>
+<script src="/assets/js/form-format.js"></script>
+<script src="/assets/js/form-password.js"></script>
+<script src="/assets/js/form-disable.js"></script>
+<script src="/assets/js/form-validate.js"></script>

@@ -1,0 +1,400 @@
+/* ====== GENERAL FORM PAGES ====== */ 
+#login form,
+#forgot form,
+#reset form, 
+#join form {
+    margin-top: 5%;
+}
+
+#login form,
+#forgot form,
+#reset form {
+    max-width: 50%;
+    width: 50%;
+}
+
+#join form {
+    max-width: 70%;
+    width: 70%;
+}
+
+/* General Form links */
+.form span.details {
+    margin: 3% 0;
+}
+
+.form span.details a,
+.form .form-group span a {
+    color: #0000cd;
+}
+
+.form span.details a:hover,
+.form .form-group span a:hover {
+    color: #e708ae
+}
+
+/* Form Input styles */
+.form .form-inline .form-group {
+    display: block;
+    height: 85px;
+    width: 100%;
+    padding: 0;
+}
+.form .form-group .form-control {
+    font-size: 18px;
+    border: 1px solid #b116e0;
+    max-width: 100%;
+    width: 100%;
+}
+
+/* Floating labels - Regular */
+.form .form-group .control-label {
+    font-size: 18px;
+    font-weight: 400;
+    opacity: 0.4;
+    pointer-events: none;
+    position: absolute;
+    transform: translate3d(8px, 9px, 0) scale(1);
+    transform-origin: top left;
+    transition: 240ms;
+}
+.form .form-group .form-control::-webkit-input-placeholder {
+    color: transparent;
+    transition: 240ms;
+}  
+/* Help box - Regular */
+.form .form-group span.help {
+    display: none;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 1px;
+}
+
+/* Floating labels - Focused */
+.form .form-group .form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #e708ae;
+}
+.form .form-group.focused .control-label {
+    opacity: 1;
+    transform: translate3d(0px, -10px, 0) scale(0.9);
+    line-height: 1px;
+    color: #e708ae;
+}
+.form .form-control:focus::-webkit-input-placeholder {
+    transition: none;
+}
+.form .form-group.focused .form-control::-webkit-input-placeholder {
+    color: #bbb;
+}
+/* Help box - Focused */
+.form .form-group.focused span.help {
+    display: inherit;
+}
+
+/* Floating labels - Filled */
+.form .form-group .form-control.filled,
+.form .form-group.filled .control-label {
+    border-color: #e708ae;
+    opacity: 1;
+    transform: translate3d(0px, -10px, 0) scale(0.9);
+    line-height: 1px;
+}
+.form .form-group.filled .control-label {
+    font-size: 16px;
+    color: #e708ae;
+}
+
+/* Details */
+.form .details {
+    font-size: 16px;
+}
+
+/* Error Message */
+.errorMsg {
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin: 5px 0;
+}
+.errorMsg.red {
+    color: #f72942;
+}
+.errorMsg.white {
+    color: #ffffff;
+}
+
+/* ====== LOGIN PAGE ====== */ 
+
+
+/* ====== FORGOT PAGE ====== */ 
+.submitted {
+    display: none;
+}
+
+/* ====== RESET PAGE ====== */ 
+
+
+/* ====== JOIN PAGE ====== */ 
+.tab {
+    display: none;
+}
+.tab-btn {
+    margin: 0 auto;
+}
+.tab-steps {
+    text-align: center;
+    margin-top: 40px;
+}
+/* Tab circles */
+.step {
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+/* Mark the active step: */
+.step.active {
+    background-color: #b116e0;
+    opacity: 1;
+}
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #b116e0;
+}
+
+.join span.heading {
+    display: block;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+/****** TAB 1 - SIGNUP ******/
+/* Spacing b/w first row inputs */
+.signup #firstName,
+.signup #lastName {
+    width: 95%;
+}
+
+/* Password requirements */
+.signup ul li.req {
+    font-size: 15px;
+    padding-left: 5%;
+}
+/* Add a green text color and a checkmark when the requirements are right */
+.signup ul li.req.valid {
+    color: #24b954;
+}
+.signup ul li.req.valid:before {
+    content: '✓';
+}
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.signup ul li.req.invalid {
+    color: #f72942;
+}
+.signup ul li.req.invalid:before {
+    color: #f72942;
+    content: 'x';
+}
+
+/****** TAB 2 - REGISTRATION ******/
+/* Space b/w label and checkbox */
+.register .form-group .form-check .col-form-label {
+    margin-right: 15px !important;
+}
+
+/* Hours - section title */
+.register #hr {
+    margin-bottom: 0;
+}
+/* Hours - whole group */
+.register fieldset.form-group {
+    margin-bottom: 7%;
+}
+/* Hours - indiv groups */
+.register fieldset .form-group {
+    margin-bottom: 2px;
+}
+/* Hours inputs */
+.register fieldset .form-inline.days .form-group {
+    height: auto;
+}
+
+/* Input sizes */
+.register #name-div {
+    margin-top: 10px;
+}
+.register #city,
+.register .phone {
+    width: 98.5%;
+}
+.register #state {
+    width: 95%;
+}
+.register .days .hours {
+    width: 98%;
+}
+
+/****** TAB 3 - SURVEY ******/
+.survey .form-group.header {
+    text-align: center;
+}
+
+.survey span.heading {
+    margin-bottom: 0;
+}
+
+.survey span.sub-heading{
+    font-size: 16px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+    #join form {
+        max-width: 75%;
+        width: 75%;
+    }
+
+    .form .form-group .form-control  {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #join form {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .form .control-label {
+        font-size: 16px;
+    }
+
+    .form .form-group span.help {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 767px) {
+    #join form {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .form .form-inline .form-group {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    .join span.heading {
+        font-size: 17px;
+    }
+    .join span.sub-heading {
+        font-size: 15px;
+    }
+
+    /* Inputs text size */
+    .form .form-group .control-label,
+    .form .form-group .form-control {
+        font-size: 16px;
+    }
+
+    /* Floating labels - regular */
+    .form .form-group .control-label {
+        transform: translate3d(8px, 9px, 0) scale(0.9);
+    } 
+    /* Floating labels - focused */
+    .form .form-group.focused .control-label {
+        transform: translate3d(0px, -9px, 0) scale(0.9);
+    }  
+    
+    /* Error message */
+    #errorMsg {
+        font-size: 14px;
+    }
+
+    /****** SIGNUP ******/
+    .signup #firstName,
+    .signup #lastName {
+        width: 100%;
+    }
+
+    .signup span.details {
+        margin-bottom: 5%;
+    }
+    /* Align passwords reqs directly under password field */
+    .signup .pwd .form-group:nth-child(1){
+        height: 55px;
+    }
+    .signup .pwd .form-group:nth-child(2){
+        height: 135px;
+    }
+    .signup .pwd .form-group:nth-child(3){
+        height: 60px;
+    }
+
+    /****** REGISTER ******/
+    /* Input height */
+    .register .form-inline .form-group {
+        height: 60px;
+    }
+    /* Input widths */
+    .register #city,
+    .register .phone {
+        width: 100%;
+    }
+
+    /* Hours section title */
+    .register #hr {
+        margin-top: 1em;
+        text-align: center;
+    }
+    .register #hr .col-form-label {
+        font-size: 17px;
+        width: 100%;
+        padding-bottom: 0;
+    }
+    .register .form-check-inline {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Hours day labels */
+    .register .form-group .form-check .col-form-label {
+        font-size: 17px;
+        padding-bottom: 0;
+    }
+    /* Hours inputs */
+    .register fieldset .form-inline.days .form-group {
+        height: auto;
+        width: auto;
+    }
+    .register fieldset .form-inline.days .form-group:nth-child(3),
+    .register fieldset .form-inline.days .form-group:nth-child(4) {
+        margin-top: 6%;
+    }
+
+    /* ***** SURVEY ***** */
+    .survey .form-group {
+        margin-bottom: 2em;
+    }
+    /* Text fields */
+    .survey .form-control {
+        padding-top: 0;
+    }
+    /* Input field */
+    .survey input.form-control {
+        height: 50px;
+    }
+
+    .survey .form-group .control-label {
+        line-height: 16px;
+    }
+
+}
+
+

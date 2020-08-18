@@ -17,6 +17,7 @@
 
     <!--====== Style CSS ======-->
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/form.css">
 
     <!--====== Bootstrap CSS ======-->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -46,7 +47,7 @@
                                 <ul class="navbar-nav ml-auto">
                                     <li {{#if (eq title 'Stores')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/map">Find A Store</a></li>
                                     <li {{#if (eq title 'About')}}class="nav-item active"{{else}}class="nav-item"{{/if}}><a href="/about">About Us</a></li>
-                                    {{#if user}}
+                                    {{#if loggedIn}}
                                     <div class="dropdown">
                                         <li class="nav-btn">
                                             <a href="/account" class="">My Account <i class="fas fa-chevron-down"></i></a>

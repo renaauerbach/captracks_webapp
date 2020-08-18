@@ -4,47 +4,45 @@
         <div class="form-group col-lg-4 col-md-4 col-sm-6">
             <label for="firstName" class="control-label">First name</label>
             <input id="firstName" type="text" class="form-control" name="firstName" required>
-            <span class="help">Please enter your first name.</span>
+            <span class="help">Enter your first name.</span>
         </div>
         <div class="form-group col-lg-4 col-md-4 col-sm-6">
             <label for="lastName" class="control-label">Last name</label>
             <input id="lastName" type="text" class="form-control" name="lastName" required>
-            <span class="help">Please enter your last name.</span>      
+            <span class="help">Enter your last name.</span>      
         </div>
         <div class="form-group col-lg-4 col-md-4 col-sm-12">
             <label for="phone" class="control-label">Phone</label>
-            <input type="text" id="phone" class="phone form-control" name="phone" minlength="14" maxlength="14" required>
-            <span class="help">Please enter your mobile phone number. We will never use this to contact you.</span>
+            <input type="text" class="phone form-control" name="phone" minlength="14" maxlength="14" required>
+            <span class="help">Enter your mobile phone number. We will never use this to contact you.</span>
         </div>
     </div>
     <div class="form-inline">
         <div class="form-group col-12"> 
             <label for="email" class="control-label">Email</label>
             <input type="email" class="form-control" name="email" required>
-            <span class="help">Please enter your email. We will never share your information with anyone.</span>
+            <span class="help">Enter your email. We will never share your information with anyone.</span>
         </div>
     </div>
-    <div class="form-inline">
+    <div class="form-inline pwd">
         <div class="form-group col-lg-6 col-md-6 col-sm-12">
             <label for="password" class="control-label">Password</label>
             <input id="password" type="password" class="form-control" name="password" minlength="8" required>
-            <span class="help">Please select a strong password.</span>
-            <span class="unmet" style="color: red;">Password doesn't meet the listed requirements.</span>                  
+            <span class="help">Select a strong password.</span>
         </div>
         <div class="form-group col-lg-6 col-md-6 col-sm-12">
             <ul>
-                <li class="reqs invalid">  At least 1 <b>UPPERCASE</b> letter</li> 
-                <li class="reqs invalid">  At least 1 <b>lowercase</b> Letter</li> 
-                <li class="reqs invalid">  At least 1 <b>Number</b></li> 
-                <li class="reqs invalid">  At least 1 <b>Special Character</b></li> 
-                <li class="reqs invalid">  Minimum length of 8 characters</li> 
+                <li class="req invalid">  At least 1 <b>UPPERCASE</b> letter</li> 
+                <li class="req invalid">  At least 1 <b>lowercase</b> Letter</li> 
+                <li class="req invalid">  At least 1 <b>Number</b></li> 
+                <li class="req invalid">  At least 1 <b>Special Character</b></li> 
+                <li class="req invalid">  Minimum length of 8 characters</li> 
             </ul>                
         </div>
         <div class="form-group col-lg-6 col-md-6 col-sm-12">
             <label for="confirmed" class="control-label">Confirm Password</label>
             <input id="confirmed" type="password" class="form-control" name="confirmed" minlength="8" required>
-            <span class="help">Please confirm your password.</span>
-            <span class="unmatched" style="color: red;">Passwords do not match. Please try again.</span>
+            <span class="help">Re-enter your password.</span>
         </div>
     </div>    
 </div>         
