@@ -2,31 +2,46 @@
     {{> info_title title="Store Info"}}
     <div class="store-links">
         <ul>
-            <li class="d-flex justify-content-start align-items-start">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>{{store.address}}</p>
-            </li>
-            <li class="d-flex justify-content-start align-items-center">
-                <i class="fas fa-phone"></i>
-                <a href="tel:{{store.phone}}">{{store.phone}}</a>
-            </li>
-            {{#if store.url}}
-            <li class="d-flex justify-content-start align-items-center">
-                <i class="fas fa-globe"></i>
-                <a href="{{store.url}}">{{store.url}}</a>
-            </li>
-            {{else}}
-            {{/if}}
+            <form method="POST" class='store-form'
+                action="/account/{{store._id}}">
+                {{!-- Address --}}
+                <li class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="address" class="edit" name="address"
+                        value="{{store.address}}" required/>
+                    <p class="saved">{{store.address}}</p>
+                </li>
+                {{!-- Phone --}}
+                <li class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" id="phone" class="edit" name="phone"
+                        value="{{store.phone}}" required/>
+                    <a href="tel:{{store.phone}}" class="saved">{{store.phone}}</a>
+                </li>
+                {{!-- Website URL --}}
+                {{#if store.url}}
+                <li class="d-flex justify-content-start align-items-center">
+                    <i class="fas fa-globe"></i>
+                    <input type="text" id="url" class="edit" name="url"
+                        value="{{store.url}}" required/>
+                    <a href="{{store.url}}" class="saved">{{store.url}}</a>
+                </li>
+                {{/if}}
+            </form>
+            {{!-- Store Hours --}}
             <li class="d-flex justify-content-start align-items-baseline">
                 <i class="far fa-hourglass"></i>
                 <div>
                     <p>Store Hours:</p>
                     {{#each store.hours as |day|}}
-                    {{#if (eq (len day) 1)}}
-                    <p class="hours">{{day.day}}: Closed</p>
-                    {{else}}
-                    <p class="hours">{{day.day}}: {{day.open}} - {{day.close}}</p>
-                    {{/if}}
+                    <p class="hours d-flex justify-content-between">
+                        {{#if (eq (len day) 1)}}
+                        <span class="day">{{day.day}}:</span> <span>Closed</span>
+                        {{else}}
+                        <span class="day">{{day.day}}:</span> <span>{{day.open}}
+                            - {{day.close}}</span>
+                        {{/if}}
+                    </p>
                     {{/each}}
                 </div>
             </li>

@@ -43,7 +43,7 @@
                 </form>
                 <hr>
                 {{#each store.forum as |msg|}}
-                {{> forum_post msg=msg}}
+                {{> forum_post id=store._id msg=msg}}
                 {{/each}}
             </div>
         </div>
@@ -52,3 +52,4 @@
 {{!-- <!--====== ACCOUNT ENDS ======--> --}}
 <script src="/assets/js/form-format.js"></script>
 <script src="/assets/js/form-validate.js"></script>
+<script src="/assets/js/format.js"></script>

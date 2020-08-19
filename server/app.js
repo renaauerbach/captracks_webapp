@@ -114,7 +114,7 @@ app.get('/about', (req, res) => {
 
     res.render('about', {
         layout: 'layout',
-        title: 'About CapTracks',
+        title: 'About Us',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
         functionality: boxes,
         members: members,

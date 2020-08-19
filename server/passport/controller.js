@@ -17,7 +17,10 @@ function login(passport) {
 		// check in mongo if a Vendor with vendor name exists or not
 		Vendor.findOne({ 'email': email }, (err, vendor) => {
 			// In case of any error, return using the done method
-			if (err) { return done(err); }
+			if (err) {
+				console.log('Error in Login: ' + err);
+				return done(err);
+			}
 			// vendor name does not exist, log the error and redirect back
 			if (!vendor) {
 				console.log('Vendor Not Found.');
@@ -29,11 +32,9 @@ function login(passport) {
 				return done(null, false, req.flash('message', "Wrong password. Please try again or <a href='/forgot'>reset your password</a>."));
 			}
 			// Vendor and password both match, return Vendor from done method
-			// which will be treated like success
 			return done(null, vendor);
 		});
-	})
-	);
+	}));
 	var isValidPassword = (vendor, password) => {
 		return bcrypt.compareSync(password, vendor.password);
 	};
@@ -43,7 +44,7 @@ function signup(passport) {
 	passport.use('signup', new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password',
-		passReqToCallback: true // allows us to pass back the entire request to the callback
+		passReqToCallback: true
 	}, (req, email, password, done) => {
 		findOrCreateVendor = () => {
 			// find a Vendor in Mongo with provided Vendor name

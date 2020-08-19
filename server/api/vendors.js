@@ -13,11 +13,37 @@ router.get('/', (req, res) => {
         res.render('account', {
             layout: 'layout',
             vendor: req.user,
-            store: store[ 0 ],
+            store: store[0],
             title: 'My Account',
             user: req.isAuthenticated(),
+            message: req.flash('message')
         });
     });
+});
+
+// Edit Store details from account page
+router.post('/:id', (req, res) => {
+    console.log('req', req);
+
+    if (req.isAuthenticated()) {
+        let update = {
+            address: req.body.address,
+            phone: req.body.phone,
+            url: req.body.url
+        };
+
+        Store.findByIdAndUpdate(req.params.id, update,
+            (err) => {
+                if (err) {
+                    return res.status(400).json({ success: false, error: err });
+                }
+                console.log('Store info updated successfully!');
+                return res.redirect('/account');
+            });
+    }
+    else {
+        return res.redirect('/login');
+    }
 });
 
 router.get('/profile', (req, res) => {
@@ -43,7 +69,7 @@ router.get('/settings', (req, res) => {
             res.render('settings', {
                 layout: 'layout',
                 vendor: req.user,
-                store: store[ 0 ],
+                store: store[0],
                 title: 'Settings',
                 user: true,     // Dynamic since already checked for authentication
             });

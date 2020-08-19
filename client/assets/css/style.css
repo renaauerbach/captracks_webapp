@@ -118,20 +118,9 @@ input {
     color: #32333c;
 }
 
-.label {
-    font-size: 13px;
-    font-weight: 300;
-    margin-top: 0;
-    text-transform: uppercase;
-}
-
 @media (max-width: 767px) {
     .sub-title {
         font-size: 19px;
-    }
-
-    .label {
-        font-size: 10px;
     }
 }
 
@@ -809,7 +798,7 @@ button.thin-btn:hover {
     text-decoration: none;
 }
 
-/* ====== STORE PAGE ====== */
+/* ====== ACCOUNT / STORE PAGE ====== */
 .back {
     color: #ffffff;
     font-size: 14px;
@@ -828,14 +817,13 @@ button.thin-btn:hover {
     color: #ffffff;
 }
 
+/* Store Details */
 .store-links ul {
     text-decoration: none;
 }
-
 .store-links li {
     line-height: 2em;
 }
-
 .store-links li i {
     color: #e708ae;
     text-align: center;
@@ -844,13 +832,11 @@ button.thin-btn:hover {
 	border-radius: 0;
 	margin-right: 15px;
 }
-
 .store-links li a {
     display: inline;
     color: #0000cd;
     font-size: 16px;
 }
-
 .store-links li a:hover {
     color: #e708ae;
 }
@@ -863,6 +849,30 @@ button.thin-btn:hover {
 
 .store-links p.hours {
     margin-bottom: 0;
+}
+
+/* Editing Store Info */
+.info-title #edit,
+.info-title #save {
+    color: #0000cd;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.store-info .edit,
+.info-title #save {
+    display: none;
+}
+
+.store-links .view {
+    border-radius: 10px;
+    font-size: 17px;
+    width: 100%;
+}
+.store-links .view:focus {
+    border-radius: 10px;
 }
 
 .divider {
@@ -885,16 +895,8 @@ button.thin-btn:hover {
     );
 }
 
-.no-forum {
-    display: block;
-}
-
-.forum-content p {
-    font-size: 16px;
-}
-
-/* ====== ACCOUNT PAGE ====== */
-/* Forum Inputs */
+/* ==== FORUM POSTS ==== */
+/* Forum inputs */
 .forum .form-group.title {
     height: 75px;
     margin-bottom: 0;
@@ -911,6 +913,40 @@ button.forum.thin-btn:hover {
     border-color: #e708ae;
     background-color: #e708ae;
 }
+
+.no-forum {
+    display: block;
+}
+
+/* Post styles */
+.forum-box {
+    border: 1px solid #b116e0;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+}
+/* Delete post button */
+a.post-delete {
+    position: relative;
+    float: right;
+    font-size: 16px;
+    color: #0000cd;
+    margin-left: 8px;
+}
+
+.post-title {
+    font-size: 20px;
+}
+.post-date {
+    font-size: 13px;
+    font-weight: 300;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+.post-text {
+    font-size: 16px;
+}
+
 
 /* ====== FOOTER ====== */
 footer {

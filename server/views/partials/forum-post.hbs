@@ -1,7 +1,13 @@
  <div class="forum-box">
     <div class="forum-content">
-        <h5 class="post-title float-left">{{msg.title}}</h5>
-        <h6 class="label float-right">{{msg.createdOn}}</h6>
+        {{#if user}}
+        <a href="/post/{{id}}/delete" class="post-delete"><i class="fas
+                fa-times"></i></a>
+        {{/if}}
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="post-title">{{msg.title}}</h5>
+            <h6 class="post-date">{{msg.createdOn}}</h6>
+        </div>
         <br>
         <p class="post-text">{{msg.text}}</p>
     </div>

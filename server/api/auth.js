@@ -20,17 +20,19 @@ module.exports = function(passport) {
     router.get('/login', (req, res) => {
         res.render('login', {
             layout: 'layout',
-            title: 'Vendor Login',
+            title: 'Login',
             message: req.flash('message'),
         });
     });
 
     // Login form POST
-    router.post('/login', passport.authenticate('login', { failureRedirect: '/login' }), (req, res) => {
-        res.cookie('firstName', req.user.firstName);
-        res.cookie('userId', req.user.id);
-        return res.redirect('/account');
-    });
+    router.post('/login', passport.authenticate('login', { failureRedirect: '/login' }),
+        (req, res) => {
+            console.log("req.user: ", req.uesr);
+            res.cookie('firstName', req.user.firstName);
+            res.cookie('userId', req.user.id);
+            return res.redirect('/account');
+        });
 
     // Forgot Password
     router.get('/forgot', (req, res) => {
@@ -141,7 +143,7 @@ module.exports = function(passport) {
         // Get stores without assigned vendors
         Store.find({ vendor: null }, (err, stores) => {
             if (err) {
-                res.status(400).send(JSON.stringify(req.flash(err)));
+                res.status(400).send(req.flash(err));
             }
             stores.map(store => {
                 var id = store._id;
@@ -201,7 +203,7 @@ module.exports = function(passport) {
                     }
 
                     var hours = [];
-                    if (!req.body[ '24hours' ]) {
+                    if (!req.body['24hours']) {
                         var days = [
                             'Sun',
                             'Mon',
@@ -213,15 +215,15 @@ module.exports = function(passport) {
                         ];
 
                         for (let i = 0; i < days.length; i++) {
-                            let curr = req.body[ days[ i ] ];
+                            let curr = req.body[days[i]];
                             if (curr) {
                                 hours.push({
-                                    day: days[ i ],
-                                    open: curr[ 0 ] + ' ' + curr[ 1 ],
-                                    close: curr[ 2 ] + ' ' + curr[ 3 ],
+                                    day: days[i],
+                                    open: curr[0] + ' ' + curr[1],
+                                    close: curr[2] + ' ' + curr[3],
                                 });
                             } else {
-                                hours.push({ day: days[ i ] });
+                                hours.push({ day: days[i] });
                             }
                         }
                     } else {

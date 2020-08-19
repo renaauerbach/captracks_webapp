@@ -11,38 +11,48 @@ const Store = require('../models/store.model');
 
 // Add new message to store's forum
 router.post('/:id', (req, res) => {
-	var newMessage = new Message({
-		partition: partition,
-		title: req.body.title,
-		text: req.body.text,
-		createdOn: new Date(),
-	});
-	newMessage.save((err, msg) => {
-		if (err) {
-			return res.status(400).json({ success: false, error: err });
-		}
-		console.log('Forum post added successfully!');
-	});
-	Store.findByIdAndUpdate(req.params.id, { $push: { forum: newMessage } },
-		(err) => {
-			if (err) {
-				return res.status(400).send(err);
-			}
-			console.log('Store updated successfully!');
+	if (req.isAuthenticated()) {
+		var newMessage = new Message({
+			partition: partition,
+			title: req.body.title,
+			text: req.body.text,
+			createdOn: new Date(),
 		});
-	res.redirect('/account');
+		newMessage.save((err, msg) => {
+			if (err) {
+				return res.status(400).json({ success: false, error: err });
+			}
+			console.log('Forum post added successfully!');
+		});
+		Store.findByIdAndUpdate(req.params.id, { $push: { forum: newMessage } },
+			(err) => {
+				if (err) {
+					return res.status(400).send(err);
+				}
+				console.log('Store updated successfully!');
+			});
+		return res.redirect('/account');
+	}
+	else {
+		return res.redirect('/login');
+	}
 });
 
 // Delete a message
 router.delete('/:id/delete', (req, res) => {
-	Message.findByIdAndRemove({ _id: req.params.id, useFindAndModify: false }),
-		err => {
-			if (err) {
-				return res.status(400).json({ success: false, error: err });
-			}
-			res.status(200).json({ success: true });
-			console.log('Forum post deleted successfully!');
-		};
+	if (req.isAuthenticated()) {
+		Message.findByIdAndRemove({ _id: req.params.id, useFindAndModify: false }),
+			err => {
+				if (err) {
+					return res.status(400).json({ success: false, error: err });
+				}
+				res.status(200).json({ success: true });
+				console.log('Forum post deleted successfully!');
+			};
+	}
+	else {
+		res.redirect('/login');
+	}
 });
 
 module.exports = router;

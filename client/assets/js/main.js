@@ -25,14 +25,31 @@
         }
     });
 
-    /* ===== Form Popup ===== */
-    $('.form-toggler').on('click', function() {
-        $('.form-popup').toggleClass('open');
+    // /* ===== Form Popup ===== */
+    // $('.form-toggler').on('click', function() {
+    //     $('.form-popup').toggleClass('open');
+    // });
+
+    // $('.form-container .close-btn').on('click', function() {
+    //     $('.form-popup').removeClass('open');
+    // });
+
+    /* ===== Edit Store Details ===== */
+    $('#edit').click(function(e) {
+        $(this).hide();
+        $('.edit').removeClass('edit').addClass('view');
+        $('.saved').removeClass('saved').addClass('edit');
+        $('#save').show();
     });
 
-    $('.form-container .close-btn').on('click', function() {
-        $('.form-popup').removeClass('open');
+    $('#save').click(function(e) {
+        $('.store-form').submit();
+        $(this).hide();
+        $('#edit').show();
+        $('.edit').removeClass('edit').addClass('saved');
+        $('.view').removeClass('view').addClass('edit');
     });
+
 
 })(jQuery);
 
