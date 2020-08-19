@@ -1,8 +1,10 @@
 <div class="info-title d-flex justify-content-between align-items-center">
     <h5>{{title}}</h5>
+    {{#if (eq title 'Store Info')}}
     {{#if user}}
     <a href="javascript:void(0);" id="edit"> Edit </a>
     <a href="javascript:void(0);" id="save"> Save </a>
+    {{/if}}
     {{/if}}
 </div>
 <hr>

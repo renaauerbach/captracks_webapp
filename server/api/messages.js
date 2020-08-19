@@ -24,7 +24,7 @@ router.post('/:id', (req, res) => {
 			}
 			console.log('Forum post added successfully!');
 		});
-		Store.findByIdAndUpdate(req.params.id, { $push: { forum: newMessage } },
+		Store.findByIdAndUpdate(req.params.id, { $push: { forum: { $each: [newMessage], $position: 0 } } },
 			(err) => {
 				if (err) {
 					return res.status(400).send(err);
@@ -33,26 +33,22 @@ router.post('/:id', (req, res) => {
 			});
 		return res.redirect('/account');
 	}
-	else {
-		return res.redirect('/login');
-	}
+	return res.redirect('/login');
 });
 
 // Delete a message
 router.delete('/:id/delete', (req, res) => {
 	if (req.isAuthenticated()) {
-		Message.findByIdAndRemove({ _id: req.params.id, useFindAndModify: false }),
+		Message.findOneAndRemove({ _id: req.params.id, useFindAndModify: false }),
 			err => {
 				if (err) {
 					return res.status(400).json({ success: false, error: err });
 				}
-				res.status(200).json({ success: true });
 				console.log('Forum post deleted successfully!');
 			};
+		return res.redirect('/account');
 	}
-	else {
-		res.redirect('/login');
-	}
+	return res.redirect('/login');
 });
 
 module.exports = router;

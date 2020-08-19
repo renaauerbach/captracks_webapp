@@ -50,6 +50,16 @@
         $('.view').removeClass('view').addClass('edit');
     });
 
+    /* ===== Hide Contact Form on Submit ===== */
+    $('#send-msg').click(function(e) {
+        $('#contact').submit(e => {
+            // Stop page refresh
+            e.preventDefault();
+        });
+        $('#contact').hide();
+        $('#success').removeClass('unsent').addClass('sent');
+    });
+
 
 })(jQuery);
 

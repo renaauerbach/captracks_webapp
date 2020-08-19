@@ -1,3 +1,4 @@
+// Handle link to existing store --> Disable rest of form
 const selection = document.getElementsByTagName('select')[0];
 if (selection) {
     selection.addEventListener('change', (e) => {
@@ -20,7 +21,7 @@ if (selection) {
             }
         }
     });
-} 
+}
 
 // Handle 24 Hour Checkbox --> Disable content
 const checkbox = document.getElementById('24hours');

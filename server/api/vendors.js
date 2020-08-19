@@ -48,7 +48,7 @@ router.post('/:id', (req, res) => {
 
 router.get('/profile', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('profile', {
+        res.render('account', {
             layout: 'layout',
             vendor: req.user,
             title: 'My Profile',
@@ -66,7 +66,7 @@ router.get('/settings', (req, res) => {
             if (err) {
                 return res.status(400).json({ success: false, error: err });
             }
-            res.render('settings', {
+            res.render('account', {
                 layout: 'layout',
                 vendor: req.user,
                 store: store[0],

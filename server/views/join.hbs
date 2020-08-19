@@ -5,21 +5,23 @@
         <div class="d-flex justify-content-center">
             <form id="regForm" class="join form" method="POST">
                 <div class="tab">
-                    {{> signup}}
+                    {{> join_signup}}
                 </div>
                 <div class="tab">
-                    {{> register}}
+                    {{> join_register}}
                 </div>
                 <div class="tab">
-                    {{> survey}}
+                    {{> join_survey}}
                 </div>
 
                 <div class="errorMsg white">{{message}}</div>
 
                 <div style="overflow: auto; text-align: center;">
                     <div class="tab-btn">
-                        <button type="button" id="prevBtn" class="main-btn" onclick="nextPrev(-1)">Back</button>
-                        <button type="button" id="nextBtn" class="main-btn" onclick="nextPrev(1)">Next</button>
+                        <button type="button" id="prevBtn" class="main-btn"
+                            onclick="nextPrev(-1)">Back</button>
+                        <button type="button" id="nextBtn" class="main-btn"
+                            onclick="nextPrev(1)">Next</button>
                     </div>
                 </div>
 
