@@ -5,13 +5,12 @@ const Store = require('../models/store.model');
 
 // Get all stores --> MAP (Home)
 router.get('/', (req, res) => {
-    var loggedIn = req.user ? true : false;
     Store.find((err, stores) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
         stores.map(store => {
-            var id = store._id;
+            const id = store._id;
             delete store._id;
             return {
                 id: id,
@@ -24,29 +23,28 @@ router.get('/', (req, res) => {
             };
         });
 
-        res.render('map', { 
-            layout: 'layout', 
-            title: 'Stores', 
-            intro: true, 
-            displayMap: true, 
+        res.render('map', {
+            layout: 'layout',
+            title: 'CapTracks',
+            intro: true,
+            displayMap: true,
             stores: stores,
-            loggedIn: loggedIn,
+            user: req.user,
         });
     });
 });
 
 // Get store by ID (for forum/store page)
 router.get('/store/:id', (req, res) => {
-    var loggedIn = req.user ? true : false;
     Store.findById(req.params.id, (err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.render('store', { 
-            layout: 'layout', 
-            title: store.name, 
+        res.render('store', {
+            layout: 'layout',
+            title: store.name,
             store: store,
-            loggedIn: loggedIn,
+            user: req.user,
         });
     });
 });

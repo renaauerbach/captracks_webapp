@@ -1,10 +1,10 @@
 (function(exports) {
     'use strict';
 
-    var infoWindow;
+    let infoWindow;
 
     // Each marker is labeled with a single alphabetical character.
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     exports.labels = labels;
     exports.labelIndex = 0;
 
@@ -21,18 +21,18 @@
         infoWindow = new google.maps.InfoWindow();
 
         // Initialize Geoencoder
-        var geocoder = new google.maps.Geocoder();
+        const geocoder = new google.maps.Geocoder();
         geocodeAddress(geocoder, map);
     }
 
     // Geoencode address
     function geocodeAddress(geocoder, map) {
-        var stores = document.getElementById('data').innerHTML;
-        var json = JSON.parse(stores);
+        const stores = document.getElementById('data').innerHTML;
+        const json = JSON.parse(stores);
 
         json.map(store => {
             geocoder.geocode({ address: store.address }, (results, status) => {
-                var location = results[0].geometry.location;
+                const location = results[0].geometry.location;
                 if (status === 'OK') {
                     map.setCenter(location);
                     addMarker(location, map, store);
@@ -45,7 +45,7 @@
 
     // Add Marker
     function addMarker(location, map, store) {
-        var colors = ['#fff500', '#4aad4e'];
+        const colors = ['#fff500', '#4aad4e'];
         exports.marker = new google.maps.Marker({
             position: location,
             label: labels[exports.labelIndex++ % labels.length],
@@ -65,7 +65,7 @@
 
     // Detail Content Formatter
     function contentFormatter(info) {
-        var contentString = '<div id="popup">' +
+        const contentString = '<div id="popup">' +
                         '<div class="popup-title">' + info.name + '</div>' +
                         '<div class="popup-content">' +
                             '<div class="popup-address">' + info.address + '</div>' + '<br/>' +

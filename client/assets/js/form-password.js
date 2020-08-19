@@ -1,6 +1,6 @@
 // Handle strong password requirements
-var password = document.getElementById('password');
-var reqs = document.querySelectorAll('.req');
+const password = document.getElementById('password');
+const reqs = document.querySelectorAll('.req');
 // 0: At least 1 UPPERCASE letter
 // 1: At least 1 lowercase Letter
 // 2: At least 1 Number
@@ -8,10 +8,10 @@ var reqs = document.querySelectorAll('.req');
 // 4: At least 8 characters in length
 
 function passwordReqs(e) {
-    var upper = /[A-Z]/g;
-    var lower = /[a-z]/g;
-    var num = /[0-9]/g;
-    var special = /[~!#$%\^&*+=\-\[\]\\;/{}|\\:<>\?]/g;
+    const upper = /[A-Z]/g;
+    const lower = /[a-z]/g;
+    const num = /[0-9]/g;
+    const special = /[~!#$%\^&*+=\-\[\]\\;/{}|\\:<>\?]/g;
 
     if (e.target.value.match(upper)) {
         reqs[0].classList.remove("invalid");
@@ -57,7 +57,7 @@ function passwordReqs(e) {
 
 if (password) {
     password.addEventListener('keyup', e => {
-        passwordReqs(e)});
+        passwordReqs(e);});
 }
 
 // // Activate login button on "Enter"

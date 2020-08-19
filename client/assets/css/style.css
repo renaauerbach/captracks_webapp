@@ -894,26 +894,19 @@ button.thin-btn:hover {
 }
 
 /* ====== ACCOUNT PAGE ====== */
-textarea.forum.form-control, 
-input.forum.form-control {
-    border-width: 3px;
-    border-style: solid;
-    padding: 1rem;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(
-        to bottom right,
-        #0000cd,
-        #b116e0,
-        #e708ae
-    );
+/* Forum Inputs */
+.forum .form-group.title {
+    height: 75px;
+    margin-bottom: 0;
 }
 
+/* Forum button */
 button.forum.thin-btn {
     color: #ffffff;
     border-color: #0000cd;
     background-color: #0000cd;
+    position: relative;
 }
-
 button.forum.thin-btn:hover {
     border-color: #e708ae;
     background-color: #e708ae;

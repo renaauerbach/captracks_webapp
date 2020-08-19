@@ -9,6 +9,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -35,6 +36,7 @@
     "swagger-ui-express": "^4.1.4",
     "sync-request": "^6.1.0",
     "util": "^0.12.3",
+    "uuid": "^8.3.0",
     "validator": "^13.1.1"
   },
   "scripts": {
@@ -57,7 +59,7 @@
   },
   "homepage": "https://github.com/renaauerbach/captracks#readme",
   "devDependencies": {
-    "eslint": "^7.6.0",
+    "eslint": "^7.7.0",
     "eslint-plugin-mocha": "^7.0.1"
   }
 }

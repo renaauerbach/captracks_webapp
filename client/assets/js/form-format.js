@@ -1,7 +1,7 @@
 // Format Floating Labels
 document.querySelectorAll('.form-control').forEach(input => {
     input.addEventListener('blur', function() {
-        var parent = this.parentElement;
+        const parent = this.parentElement;
         parent.classList.remove('focused');
         if (this.value.length > 0) {
             parent.classList.add('filled');
@@ -9,7 +9,7 @@ document.querySelectorAll('.form-control').forEach(input => {
     });
 
     input.addEventListener('focus', function() {
-        var parent = this.parentElement;
+        const parent = this.parentElement;
         parent.classList.remove('filled');
         parent.classList.add('focused');
     });
@@ -36,7 +36,7 @@ function enforceFormat(e) {
     if (!isNumeric(e) && !isModifier(e)) {
         e.preventDefault();
     }
-};
+}
 
 function phoneFormat(e) {
     if (isModifier(e)) {
@@ -55,12 +55,12 @@ function phoneFormat(e) {
     } else if (input.length > 0) {
         e.target.value = `(${zip}`;
     }
-};
+}
 
 function isNumeric(e) {
-    var key = e.keyCode;
+    const key = e.keyCode;
     return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
-};
+}
 
 function isModifier(e) {
     const key = e.keyCode;
@@ -77,14 +77,14 @@ function isModifier(e) {
                 key === 88 ||
                 key === 90))
     );
-};
+}
 
-var phone = document.getElementsByClassName('phone')[0];
+const phone = document.getElementsByClassName('phone')[0];
 if (phone) {
     phone.addEventListener('keydown', e => {
-        enforceFormat(e)
+        enforceFormat(e);
     });
     phone.addEventListener('keyup', e => {
-        phoneFormat(e)
+        phoneFormat(e);
     });
 }

@@ -15,12 +15,7 @@ const vendorSchema = new mongoose.Schema({
 	},
 	phone: { type: String, required: true },
 	email: { type: String, required: true },
+	session: { type: String },
 });
-
-// vendorSchema.plugin(passportLocalMongoose, {
-// 	usernameField: 'email', // Use email (not 'username' default)
-// 	usernameLowerCase: true, // Make all emails lowercase
-// 	session: false, // Disable sessions - using JWTs
-// });
 
 module.exports = mongoose.model('vendors', vendorSchema);

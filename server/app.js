@@ -1,15 +1,17 @@
-require('./db.js')
-const passport = require('passport')
+require('./db.js');
 const express = require('express');
+const mongoose = require('mongoose');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
+const MongoStore = require('connect-mongo')(session);
 const nodemailer = require("nodemailer");
 
 const hbs = require('hbs');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
+const uuid = require('uuid');
 
 const parser = require('./parser.js');
 
@@ -30,24 +32,30 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 
 // Sessions & Passport middlerware
-app.use(cookieParser("supersecret"));
 app.use(session({
-    cookie: { maxAge: 60000 },
-    saveUninitialized: false,
+    secret: 'supersecret',
+    // key:
     resave: false,
+    saveUninitialized: false,
+    autoRemove: 'disabled', //FOR PRODUCTION
+    cookie: {},
+    // touchAfter: 24 * 3600,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection,
+    })
 }));
 
 // app.use(session({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
- // Using the flash middleware provided by connect-flash to store messages in session
- // and displaying in templates
-var flash = require('connect-flash');
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
+const flash = require('connect-flash');
 app.use(flash());
 
 // Initialize Passport
-var initPassport = require('./passport/init');
+const initPassport = require('./passport/init');
 initPassport(passport);
 
 app.set('views', path.join(__dirname, '/views'));
@@ -61,7 +69,7 @@ hbs.registerHelper('ifEven', val => {
     return val % 2 == 0 ? true : false;
 });
 hbs.registerHelper('convert', data => {
-    var stringify = JSON.stringify(data)
+    const stringify = JSON.stringify(data)
         .split('"_id":')
         .join('"id":');
     return stringify;
@@ -75,26 +83,23 @@ hbs.registerHelper('concat', (val1, val2) => {
 hbs.registerHelper('len', (obj) => {
     return Object.keys(obj).length;
 });
-hbs.registerPartials(__dirname + '/views/partials', err => {});
-
+hbs.registerPartials(__dirname + '/views/partials', err => { });
 
 // Routers
 app.use('/', authRouter);
 app.use('/map', storeRouter);
-// app.use('/account', passport.authenticate('jwt', {session: true}), vendorRouter);
 app.use('/account', vendorRouter);
 app.use('/post', messageRouter);
 
 app.use((req, res, next) => {
-    // var err = new Error('Not Found');
-    // err.status = 404;
-    // next(err);
-    res.locals.currUser = req.user;
+    console.log(req.isAuthenticated());
+    if (req.isAuthenticated()) {
+        res.locals.user = req.session.passport.user;
+    }
     next();
 });
 
 app.get('/about', (req, res) => {
-    var loggedIn = req.user ? true : false;
     // Load functionality box data
     const boxes = parser.parseData(
         fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
@@ -109,11 +114,11 @@ app.get('/about', (req, res) => {
 
     res.render('about', {
         layout: 'layout',
-        title: 'About',
+        title: 'About CapTracks',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
         functionality: boxes,
         members: members,
-        loggedIn: loggedIn,
+        user: req.user,
     });
 });
 
@@ -154,7 +159,7 @@ app.get('/about', (req, res) => {
 //         text: textBody,
 //         html: htmlBody
 //     };
-  
+
 //     transporter.sendMail(msg, function (err, info) {
 //         if(err) {
 //             console.log(err);

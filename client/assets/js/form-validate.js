@@ -1,7 +1,7 @@
-var next = document.getElementById('nextBtn');
-var tabs = document.getElementsByClassName('tab');
+const next = document.getElementById('nextBtn');
+const tabs = document.getElementsByClassName('tab');
 
-var currentTab = 0; 
+let currentTab = 0; 
 showTab(currentTab); 
 
 // Display the specified tab of the form
@@ -36,9 +36,9 @@ function nextPrev(n) {
 
 // Removes the "active" class from all steps
 function stepIndicator(n) {
-	var steps = document.getElementsByClassName('step');
+	const steps = document.getElementsByClassName('step');
 	for (let i = 0; i < steps.length; i++) {
-		steps[i].classList.remove('active')
+		steps[i].classList.remove('active');
 	}
     // Reassign active step
     steps[n].classList.add('active');
@@ -46,45 +46,45 @@ function stepIndicator(n) {
 
 // Form validation before continuing
 function validateForm() {
-	let inputs = tabs[currentTab].getElementsByTagName('input');
-    let confirmed = document.getElementById('confirmed');
-	let err = document.getElementsByClassName('errorMsg')[0];
-	let tempTxt = 'temp temp temp temp temp';
+	const inputs = tabs[currentTab].getElementsByTagName('input');
+    const confirmed = document.getElementById('confirmed');
+	const err = document.getElementsByClassName('errorMsg')[0];
+	const tempTxt = 'temp temp temp temp temp';
 
 	// Check for any empty inputs
 	for (let i = 0; i < inputs.length; i++) {
-        var curr = inputs[i];
+        const curr = inputs[i];
 		if (curr.value == '' && curr.disabled == false) {
 			curr.classList.add('invalid');
-			err.innerHTML = 'Please fill in all text fields before continuing.'
-			err.className = 'red';
+			err.innerHTML = 'Please fill in all text fields before continuing.';
+			err.classList.add('red');
 			return false;
 		}
 	}
 	// Reset error msg
-	err.className = 'white';
+	err.classList.add('white');
 	err.innerHTML = tempTxt;
 
 	// Check that password and confirmed password match
     if (confirmed.value != password.value) {
 		err.innerHTML = "Passwords do not match. Please try again.";
-		err.className = 'red';
+		err.classList.add('red');
 		return false;
 	}
 	// Reset error msg
-	err.className = 'white';
+	err.classList.add('white');
 	err.innerHTML = tempTxt;
 
 	// Check if password requirements are still unmet
 	for (let i = 0; i < reqs.length; i++) {
 		if (reqs[i].classList.contains('invalid')) {
 			err.innerHTML = "Password does not meet the listed requirements.";
-			err.className = 'red';
+			err.classList.add('red');
 			return false;
 		}
 	}  
 	// Reset error msg
-	err.className = 'white';
+	err.classList.add('white');
 	err.innerHTML = tempTxt;
 
 

@@ -22,20 +22,20 @@
                 <div>
                     <p>Store Hours:</p>
                     {{#each store.hours as |day|}}
-                        {{#if (eq (len day) 1)}}
-                            <p class="hours">{{day.day}}: Closed</p>
-                        {{else}}
-                            <p class="hours">{{day.day}}: {{day.open}} - {{day.close}}</p>
-                        {{/if}}
+                    {{#if (eq (len day) 1)}}
+                    <p class="hours">{{day.day}}: Closed</p>
+                    {{else}}
+                    <p class="hours">{{day.day}}: {{day.open}} - {{day.close}}</p>
+                    {{/if}}
                     {{/each}}
                 </div>
             </li>
         </ul>
-        {{#if links}}
-            <hr>
-            {{#each links as |link|}}
-                <a href={{link}}>{{link.title}}</a>
-            {{/each}}
+        {{#if store.links}}
+        <hr>
+        {{#each store.links as |link|}}
+        <a href={{link}}>{{link.title}}</a>
+        {{/each}}
         {{/if}}
     </div>
 </div>

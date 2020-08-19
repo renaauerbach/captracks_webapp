@@ -4,81 +4,68 @@ const router = express.Router();
 const Vendor = require('../models/vendor.model');
 const Store = require('../models/store.model');
 
-var isAuthenticated = (req, res, next) => {
-	// if user is authenticated in the session, call the next() to call the next request handler 
-	// Passport adds this method to request object. A middleware is allowed to add properties to
-	// request and response objects
-	if (req.isAuthenticated())
-		return next();
-	// if the user is not authenticated then redirect him to the login page
-	res.redirect('/login');
-}
-
 // Vendor Account --> ACCOUNT
-router.get('/', isAuthenticated, (req, res) => {
-    var user = req.user;
-    var loggedIn = user ? true : false;
-    Store.find({vendor: user._id}, (err, store) => {
+router.get('/', (req, res) => {
+    Store.find({ vendor: req.user._id }, (err, store) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
         res.render('account', {
             layout: 'layout',
-            vendor: user,
-            store: store[0],
+            vendor: req.user,
+            store: store[ 0 ],
             title: 'My Account',
-            loggedIn: loggedIn,
+            user: req.isAuthenticated(),
         });
-    })
+    });
 });
 
-router.get('/profile', isAuthenticated, (req, res) => {
-    var user = req.user;
-    var loggedIn = user ? true : false;
-    Vendor.find({_id: user._id}, (err, vendor) => {
-        if (err) {
-            return res.status(400).json({ success: false, error: err });
-        }
+router.get('/profile', (req, res) => {
+    if (req.isAuthenticated()) {
         res.render('profile', {
             layout: 'layout',
-            vendor: vendor,
+            vendor: req.user,
             title: 'My Profile',
-            loggedIn: loggedIn,
+            user: true,     // Dynamic since already checked for authentication
         });
-    })
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
-router.get('/settings', isAuthenticated, (req, res) => {
-    var user = req.user;
-    var loggedIn = uesr ? true : false;
-    Vendor.find({_id: user._id}, (err, vendor) => {
-        if (err) {
-            return res.status(400).json({ success: false, error: err });
-        }
-        Store.find({vendor: vendor._id}, (err, store) => {
+router.get('/settings', (req, res) => {
+    if (req.isAuthenticated()) {
+        Store.find({ vendor: req.user._id }, (err, store) => {
             if (err) {
                 return res.status(400).json({ success: false, error: err });
             }
             res.render('settings', {
                 layout: 'layout',
-                vendor: vendor,
-                store: store[0],
+                vendor: req.user,
+                store: store[ 0 ],
                 title: 'Settings',
-                loggedIn: loggedIn,
+                user: true,     // Dynamic since already checked for authentication
             });
-        })
-    });
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
 // Delete Vendor Account
 router.delete('/:id', (req, res) => {
-    Vendor.findByIdAndRemove(req.user._id, err => {
-        if (err) {
-            res.status(400).json({ success: false, error: err });
-        }
-        res.status(200).json({ success: true });
-        console.log('Vendor account deleted successfully!');
-    });
+    if (req.isAuthenticated()) {
+        Vendor.findByIdAndRemove(res.locals.user._id, err => {
+            if (err) {
+                res.status(400).json({ success: false, error: err });
+            }
+            res.status(200).json({ success: true });
+            console.log('Vendor account deleted successfully!');
+        });
+    }
+    res.redirect('/login');
 });
 
 module.exports = router;
