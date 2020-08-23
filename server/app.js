@@ -5,13 +5,11 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const nodemailer = require("nodemailer");
 
 const hbs = require('hbs');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
-const uuid = require('uuid');
 
 const parser = require('./parser.js');
 
@@ -122,54 +120,22 @@ app.get('/about', (req, res) => {
     });
 });
 
-// development error handler
-// will print stacktrace
-// if (app.get('env') === 'development') {
-//     app.use(function(err, req, res, next) {
-//         res.status(err.status || 500);
-//         res.render('error', {
-//             message: err.message,
-//             error: err
-//         });
-//     });
-// }
+app.get('/terms', (req, res) => {
+    res.render('terms', {
+        layout: 'layout',
+        title: 'Terms & Conditions',
+        user: req.user,
+    });
+});
 
-// const email = JSON.parse(fs.readFileSync(path.join(__dirname, '/config/mail.config.json')),
-// 'email');
-// const transporter = nodemailer.createTransport({
-//     host: "smtp.gmail.com",
-//     port: 465,
-//     secure: true,
-//     auth: {
-//         user: email,
-//         pass: parser.parseData(fs.readFileSync(path.join(__dirname, '/config/mail.config.json')),
-//             'password'),
-//     }
-// });
+app.get('/privacy', (req, res) => {
+    res.render('privacy', {
+        layout: 'layout',
+        title: 'Privacy Policy',
+        user: req.user,
+    });
+});
 
-// var textBody = `FROM: ${request.body.name} EMAIL: ${request.body.email} MESSAGE: ${request.body.message}`;
-// var htmlBody = `<h2>Mail From Contact Form</h2><p>from: ${request.body.name} <a href="mailto:${request.body.email}">${request.body.email}</a></p><p>${request.body.message}</p>`;
-
-// const recipients = ['gabriel@captracks.com', 'ben@captracks.com']
-// recipients.forEach((to, i, array) => {
-//     var msg = {
-//         from: email,
-//         to: to,
-//         subject: "CapTracks Contact Form Mail", 
-//         text: textBody,
-//         html: htmlBody
-//     };
-
-//     transporter.sendMail(msg, function (err, info) {
-//         if(err) {
-//             console.log(err);
-//             response.json({ message: "message not sent: an error occured; check the server's console log" });
-//         }
-//         else {
-//             response.json({ message: `message sent: ${info.messageId}` });
-//         }
-//     });
-// });
 
 app.listen(PORT, () => {
     console.log('Server running on port', PORT);
