@@ -78,7 +78,7 @@
         <hr>
         {{!-- Forum Posts --}}
         {{#each store.forum as |msg|}}
-        {{> forum_post account=true store=store msg=msg}}
+        {{> forum_post account=true store=../store._id msg=msg}}
         {{/each}}
     </div>
 </div>

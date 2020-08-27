@@ -16,6 +16,8 @@ const vendorSchema = new mongoose.Schema({
 	phone: { type: String, required: true },
 	email: { type: String, required: true },
 	session: { type: String },
+	resetPasswordToken: String,
+	resetPasswordExpires: Date
 });
 
 module.exports = mongoose.model('vendors', vendorSchema);

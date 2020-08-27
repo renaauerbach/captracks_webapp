@@ -24,7 +24,8 @@ router.post('/:id', (req, res) => {
 			}
 			console.log('Forum post added successfully!');
 		});
-		Store.findByIdAndUpdate(req.params.id, { $push: { forum: { $each: [newMessage], $position: 0 } } },
+		Store.findByIdAndUpdate(req.params.id,
+			{ $push: { forum: { $each: [newMessage], $position: 0 } } },
 			(err) => {
 				if (err) {
 					return res.status(400).send(err);
@@ -37,15 +38,23 @@ router.post('/:id', (req, res) => {
 });
 
 // Delete a message
-router.delete('/:id/delete', (req, res) => {
+router.post('/:id/delete/:msg_id', (req, res) => {
 	if (req.isAuthenticated()) {
-		Message.findOneAndRemove({ _id: req.params.id, useFindAndModify: false }),
-			err => {
+		Store.findByIdAndUpdate(req.params.id,
+			{ $pull: { forum: { _id: req.params.msg_id } } },
+			(err) => {
 				if (err) {
-					return res.status(400).json({ success: false, error: err });
+					console.log("err: ", err);
+					return res.status(400).send(err);
 				}
-				console.log('Forum post deleted successfully!');
-			};
+				console.log('Store updated successfully!');
+			});
+		Message.findByIdAndDelete({ _id: req.params.msg_id }), err => {
+			if (err) {
+				return res.status(400).json({ success: false, error: err });
+			}
+			console.log('Forum post deleted successfully!');
+		};
 		return res.redirect('/account');
 	}
 	return res.redirect('/login');

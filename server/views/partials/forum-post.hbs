@@ -1,8 +1,11 @@
  <div class="forum-box">
     <div class="forum-content">
+        {{!-- TODO: CHECK IF ACCOUNT LOGGED IN --}}
         {{#if account}}
-        <a href="/post/{{store}}/delete" class="post-delete"><i class="fas
-                fa-times"></i></a>
+        <form method="POST" action="/post/{{store}}/delete/{{msg._id}}">
+            <button type="submit" class="post-delete"><i class="fas
+                    fa-times"></i></button>
+        </form>
         {{/if}}
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="post-title">{{msg.title}}</h5>

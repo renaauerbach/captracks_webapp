@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Store = require('../models/store.model');
+const Details = require('../models/details.model');
 
 // Get all stores --> MAP (Home)
 router.get('/', (req, res) => {
@@ -40,13 +41,18 @@ router.get('/store/:id', (req, res) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        res.render('store', {
-            layout: 'layout',
-            title: store.name,
-            store: store,
-            user: req.user,
+        Details.findById(store.details, (err, details) => {
+            res.render('store', {
+                layout: 'layout',
+                title: store.name,
+                store: store,
+                user: req.user,
+                details: details,
+            });
         });
     });
 });
+
+
 
 module.exports = router;
