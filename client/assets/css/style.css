@@ -239,9 +239,13 @@ button.thin-btn:hover {
     position: relative;
 }
 
+/* Logo */
 .navigation .navbar .navbar-brand {
-    padding-top: 0;
-    padding-bottom: 5px;
+    padding: 0;
+    width: 30%;
+}
+.navigation .navbar .navbar-brand .logo {
+    width: 85%;
 }
 
 .navigation .navbar .navbar-toggler {
@@ -421,11 +425,6 @@ button.thin-btn:hover {
 .navigation .navbar .navbar-nav .nav-btn a:hover {
     background-color: #0000cd;
     text-decoration: none;
-}
-
-/* Dropdown */
-.navigation .navbar .navbar-nav .dropdown {
-
 }
 
 /* Dropdown content (hidden by default) */
@@ -950,7 +949,9 @@ button.forum.thin-btn:hover {
     margin: 5px 0;
 }
 /* Delete post button */
-a.post-delete {
+button.post-delete {
+    border: none;
+    background-color: transparent;
     position: relative;
     float: right;
     font-size: 16px;
