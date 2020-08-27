@@ -4,25 +4,64 @@
     </div>
     <div class="divider border-gradient"></div>
     <div class="col">
-        {{!--
+        {{!-- Capacity Functions & Form --}}
         {{> info_title title="Capacity"}}
-        <form class="capacity" action="/{{store.id}}/details"
+        <form class="capacity form" action="/details/{{store.details}}"
             method="POST">
+            <div class="form-group">
+                <label for="capacity">What is the current capacity at your store?</label>
+                <input id="capacity" class="slider" name="capacity" type="range" min="1" max={{store.details.maxCapacity}} value="50">
+            </div>
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <label class="col-form-label" for="line">Is there currently a line outside?</label>
+                    <input class="form-check-input line" type="radio" for="line" name="line">
+                    <label class="form-check-label" for="line" style="margin-right: 10px;">Yes</label>
+                    <input class="form-check-input line" type="radio" for="line" name="line">
+                    <label class="form-check-label" for="noline">No</label>
+                </div>
+            </div>
+            <div class="form-group hide no-line">
+                <label for="people" class="control-label">How many people are currently in line?</label>
+                <input id="people" type="number" min="1" max="50" class="form-control"
+                    name="people" required>
+                <span class="help">Please be as precise as possible.</span>
+            </div>
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <label class="col-form-label" for="register">Are there any open registers?</label>
+                    <input class="form-check-input register" type="radio" for="register" name="register">
+                    <label class="form-check-label" for="register" style="margin-right: 10px;">Yes</label>
+                    <input class="form-check-input register" type="radio" for="register" name="register">
+                    <label class="form-check-label" for="register">No</label>
+                </div>
+            </div>
+            <div class="form-group hide no-register">
+                <label for="register" class="control-label">How many?</label>
+                <input id="register" type="number" min="1" max="5" class="form-control"
+                    name="registers" required>
+                <span class="help">Please be as precise as possible.</span>
+            </div>
+            {{!-- Submit Button --}}
             <div class="d-flex justify-content-right">
                 <button class="forum thin-btn" type="submit">Update</button>
             </div>
-        </form> --}}
+        </form>
+        <hr>
+        {{!-- Forum Functions & Form --}}
         {{> info_title title="Forum"}}
         <form class="forum form" action="/post/{{store._id}}"
             method="POST">
             <p>Add a post to your forum to keep your customers up to
                 date.</p>
+            {{!-- Post Title --}}
             <div class="form-group title">
                 <label for="title" class="control-label">Title</label>
                 <input id="title" type="text" class="form-control"
                     name="title" required>
                 <span class="help">Give a title to your post.</span>
             </div>
+            {{!-- Post Text --}}
             <div class="form-group">
                 <label for="title" class="control-label">Post
                     Messsage</label>
@@ -31,11 +70,13 @@
                 <span class="help">Update your customers of anything
                     from sales to current capacity.</span>
             </div>
+            {{!-- Submit Button --}}
             <div class="d-flex justify-content-right">
                 <button class="forum thin-btn" type="submit">Post</button>
             </div>
         </form>
         <hr>
+        {{!-- Forum Posts --}}
         {{#each store.forum as |msg|}}
         {{> forum_post account=true store=store msg=msg}}
         {{/each}}

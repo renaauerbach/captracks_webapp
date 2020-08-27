@@ -205,7 +205,7 @@
 
 /****** TAB 2 - REGISTRATION ******/
 /* Space b/w label and checkbox */
-.register .form-group .form-check .col-form-label {
+.form .form-group .form-check .col-form-label {
     margin-right: 15px !important;
 }
 

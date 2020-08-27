@@ -14,9 +14,10 @@ const fs = require('fs');
 const parser = require('./parser.js');
 
 const authRouter = require('./api/auth')(passport);
-const messageRouter = require('./api/messages');
-const vendorRouter = require('./api/vendors');
 const storeRouter = require('./api/stores');
+const vendorRouter = require('./api/vendors');
+const messageRouter = require('./api/messages');
+const detailsRouter = require('./api/details');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -88,6 +89,7 @@ app.use('/', authRouter);
 app.use('/map', storeRouter);
 app.use('/account', vendorRouter);
 app.use('/post', messageRouter);
+app.use('/details', detailsRouter);
 
 app.use((req, res, next) => {
     console.log(req.isAuthenticated());

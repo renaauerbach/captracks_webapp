@@ -645,6 +645,8 @@ button.thin-btn:hover {
 
 /*====== ALL PAGES/SECTIONS ======*/
 .intro, 
+#terms,
+#privacy,
 #about, 
 #store, 
 #login,
@@ -666,6 +668,8 @@ button.thin-btn:hover {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .intro, 
+    #terms,
+    #privacy,
     #about, 
     #store, 
     #login,
@@ -688,6 +692,8 @@ button.thin-btn:hover {
 
 @media (max-width: 767px) {
     .intro, 
+    #terms,
+    #privacy,
     #about, 
     #store, 
     #login,
@@ -898,6 +904,20 @@ button.thin-btn:hover {
     );
 }
 
+/* ==== CAPACITY ==== */
+.capacity {
+    margin-bottom: 1em;
+}
+
+.capacity .slider {
+    width: 100%;
+    background-color: #b116e0;
+}
+
+.no-line, 
+.no-register {
+    display: none;
+}
 
 /* ==== FORUM POSTS ==== */
 /* Forum inputs */
@@ -1050,5 +1070,49 @@ footer {
 }
 
 
+/* ====== TERMS / PRIVACY ====== */
+#terms p,
+#privacy p {
+    font-size: 12px;
+}
 
+#terms h5,
+#privacy h5 {
+    color: #0000cd;
+
+}
+
+#terms ul li,
+#privacy ul li {
+    list-style-type: circle;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+#terms ol li,
+#privacy ol li {
+    margin-left: 2em;
+    font-size: 14px;
+}
+
+#terms a,
+#privacy a {
+    color: #0000cd;
+}
+
+.answer {
+    font-weight: 600;
+}
+
+.short {
+    font-style: italic;
+}
+
+.indent {
+    margin-left: 3em;
+}
+
+.credit {
+    font-size: 10px;
+}
 

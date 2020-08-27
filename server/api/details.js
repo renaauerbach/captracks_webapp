@@ -3,39 +3,40 @@ const router = express.Router();
 
 const Details = require('../db.js').Details;
 
-// Get details by store ID
-router.get('/:id', (req, res) => {
-    Details.findById({ id: req.params._id }, (err, store) => {
-        if (err) {
-            res.status(400).json({ success: false, error: err });
-        }
-        res.json({
-            id: store._id,
-            name: store.name,
-            address: store.address,
-            vendor: store.vendor,
-            forum: store.forum,
-        });
-    });
+// Update store details by Details ID
+router.post('/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log(req.body);
+        const update = {
+            capacity: calcCapacity(details, req.body),
+            waitTime: calcWait(details, req.body),
+        };
+
+        Details.findByIdAndUpdate(req.params.id, update,
+            (err) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                console.log('Capacity updated successfully!');
+            });
+        return res.redirect('/account');
+    }
+    return res.redirect('/login');
 });
 
-// Edit store details
-// router.post('/register/store', (req, res) => {
-//     // const address; - DEFINE ADDRESS
-//     const newStore = new Store({
-//         name: req.body.name,
-//         address: address,
-//         forum: [],
-//         vendor: req.body.vendor,
-//     });
+// Helper functions
+// Calculate capacity
+function calcCapacity(details, data) {
+    // Divide current capacity by max capacity
+    return data.capacity / details.maxCapacity;
+}
 
-//     newStore.save((err, msg) => {
-//         if (err) {
-//             res.status(400).json({ success: false, error: err });
-//         }
-//         res.status(200).json({ success: true, id: msg.id });
-//         console.log('Store added successfully!');
-//     });
-// });
+// Calculate wait time
+function calcWait(details, date) {
+    // Check if store is full
+    if (data.capacity == details.maxCapacity) {
+        // Check if 
+    }
+}
 
 module.exports = router;
