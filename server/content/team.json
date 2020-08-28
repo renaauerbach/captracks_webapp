@@ -1,44 +1,36 @@
 {
-  "team": [
-    {
-      "id": 1,
-      "name": "Gabriel Low",
-      "image": "profile_gabriel.jpg",
-      "title": "Co-Founder",
-      "bio": "Gabriel hails from New York City. While finishing his degree in Finance and Management at Wharton, Gabriel is a corporate strategy analyst for an American multi-national corporation. He also has prior global strategy experience from working with rapidly-scaling start-ups in India and Israel.",
-      "about": "Gabriel hates wasting time in long lines when he could be swimming, making tahini, or spending time with his 7 siblings."
-    },
-    {
-      "id": 2,
-      "name": "Ben Shor",
-      "image": "profile_ben.jpg",
-      "title": "Co-Founder",
-      "bio": "Ben is from Great Neck, NY. He is currently completing his degree in Economics and Business Management at Columbia University, while working as an analyst for an independent multi-national investment bank. Ben also has financial analysis and investment strategy experience.",
-      "about": "With his busy schedule, Ben does everything he can to save time, so he can spend it running, trying new foods, and traveling."
-    },
-    {
-      "id": 3,
-      "name": "Rena Auerbach",
-      "image": "profile_rena.jpg",
-      "title": "Lead Engineer & Graphic Designer",
-      "bio": "Rena is back home in Chicago, IL after recently graduating from NYU with a BA in Computer Science. Rena is a full-stack developer with experience in a handful of programming languages, but her favorites are Java and JavaScript.",
-      "about": "When she's not avoiding long lines, Rena enjoys playing with her dog, painting, and running her eBay business."
-    },
-    {
-      "id": 4,
-      "name": "Leah Womelsdorf",
-      "image": "profile_leah.jpg",
-      "title": "iOS Developer",
-      "bio": "Leah comes from Fanwood, NJ and just received her BS in Computer Science from Cornell University. Although a full-stack developer, Leah's main interests are Ubiquitous Computing and Machine Learning.",
-      "about": "It's hard for Leah to make time for water skiing, learning German, and playing chess, when she doesn't know how long a trip to the grocery store will take."
-    },
-    {
-      "id": 5,
-      "name": "Lauren Treiman",
-      "image": "profile_lauren.jpg",
-      "title": "Data Analyst",
-      "bio": "Lauren was born and raised in Salt Lake City, UT and recently graduated with a BS in Applied Mathematics and Statistics from Emory University. She has a diverse background in data analytics with experience developing statistical models in epidemiology, social networking, swimming, and Major League Baseball operations.",
-      "about": "Instead of waiting in long lines, Lauren would much rather spend her free time playing water polo, swimming, or solving logic puzzles."
-    }
-  ]
+    "team": [
+        {
+            "id": 1,
+            "name": "Gabriel Low",
+            "image": "profile_gabriel.jpg",
+            "title": "Co-Founder",
+            "bio": "Gabriel hails from New York City. While finishing his degree in Finance and Management at Wharton, Gabriel is a corporate strategy analyst for an American multi-national corporation. He also has prior global strategy experience from working with rapidly-scaling start-ups in India and Israel.",
+            "about": "Gabriel hates wasting time in long lines when he could be swimming, making tahini, or spending time with his 7 siblings."
+        },
+        {
+            "id": 2,
+            "name": "Ben Shor",
+            "image": "profile_ben.jpg",
+            "title": "Co-Founder",
+            "bio": "Ben is from Great Neck, NY. He is currently completing his degree in Economics and Business Management at Columbia University, while working as an analyst for an independent multi-national investment bank. Ben also has financial analysis and investment strategy experience.",
+            "about": "With his busy schedule, Ben does everything he can to save time, so he can spend it running, trying new foods, and traveling."
+        },
+        {
+            "id": 3,
+            "name": "Rena Auerbach",
+            "image": "profile_rena.jpg",
+            "title": "Lead Engineer & Graphic Designer",
+            "bio": "Rena is back home in Chicago, IL after recently graduating from NYU with a BA in Computer Science. Rena is a full-stack developer with experience in a handful of programming languages, but her favorites are Java and JavaScript.",
+            "about": "When she's not avoiding long lines, Rena enjoys playing with her dog, painting, and running her eBay business."
+        },
+        {
+            "id": 4,
+            "name": "Lauren Treiman",
+            "image": "profile_lauren.jpg",
+            "title": "Data Analyst",
+            "bio": "Lauren was born and raised in Salt Lake City, UT and recently graduated with a BS in Applied Mathematics and Statistics from Emory University. She has a diverse background in data analytics with experience developing statistical models in epidemiology, social networking, swimming, and Major League Baseball operations.",
+            "about": "Instead of waiting in long lines, Lauren would much rather spend her free time playing water polo, swimming, or solving logic puzzles."
+        }
+    ]
 }

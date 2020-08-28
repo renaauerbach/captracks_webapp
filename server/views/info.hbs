@@ -1,0 +1,43 @@
+<!--====== INFO START ======-->
+<!--====== FUNCTIONALITY START ======-->
+<section id="func" class="style-2">
+    <div class="container">
+        {{> section_title title="How It Works"}}
+        <div class="row justify-content-center">
+            {{#each functionality as |box|}}
+            <div class="col-lg-4 col-md-8 col-sm-9">
+                <div class="box">
+                    <div class="content">
+                        <i class="{{box.icon}}"></i>
+                        <h4 class="sub-title">{{box.subtitle}}</h4>
+                        <p>{{box.text}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div> <!-- Row End -->
+    </div> <!-- Container End -->
+</section>
+<!--====== FUNCTIONALITY ENDS ======-->
+
+<!--====== VENDOR INFO START ======-->
+<section id="info">
+    <div class="container">
+        {{> header title="Why Use CapTracks?" subtitle_1="More than ever, consumers are dependent on real time and reliable information. Given the shifts in consumer behavior - more cooking at home, less cross shopping across retailers - each shopping occasion takes on greater importance."}}
+        <div class="row justify-content-center">
+            {{#each info as |box|}}
+            <div class="col-lg-4 col-md-8 col-sm-9">
+                <div class="box">
+                    <div class="content">
+                        <i class="{{box.icon}}"></i>
+                        <h4 class="sub-title">{{box.subtitle}}</h4>
+                        <p>{{box.text}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div> <!-- Row End -->
+    </div> <!-- Container End -->
+</section>
+<!--====== VENDOR INFO ENDS ======-->
+<!--====== INFO ENDS ======-->

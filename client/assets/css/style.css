@@ -646,7 +646,8 @@ button.thin-btn:hover {
 .intro, 
 #terms,
 #privacy,
-#about, 
+#about,
+#func,
 #store, 
 #login,
 #forgot,
@@ -657,7 +658,7 @@ button.thin-btn:hover {
     padding-bottom: 10%;
 }
 
-#func,
+#info,
 #team,
 #forum,
 #account-body {
@@ -670,6 +671,7 @@ button.thin-btn:hover {
     #terms,
     #privacy,
     #about, 
+    #func,
     #store, 
     #login,
     #forgot,
@@ -680,7 +682,7 @@ button.thin-btn:hover {
         padding-top: 25%;
     }
 
-    #func,
+    #info,
     #team ,
     #forum,
     #account-body {
@@ -694,6 +696,7 @@ button.thin-btn:hover {
     #terms,
     #privacy,
     #about, 
+    #func,
     #store, 
     #login,
     #forgot,
@@ -704,7 +707,7 @@ button.thin-btn:hover {
         padding-top: 40%;
     }
 
-    #func,
+    #info,
     #team,
     #forum,
     #account-body {

@@ -100,12 +100,6 @@ app.use((req, res, next) => {
 });
 
 app.get('/about', (req, res) => {
-    // Load functionality box data
-    const boxes = parser.parseData(
-        fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
-        'functionality'
-    );
-
     // Load team member data
     const members = parser.parseData(
         fs.readFileSync(path.join(__dirname, '/content/team.json')),
@@ -116,8 +110,30 @@ app.get('/about', (req, res) => {
         layout: 'layout',
         title: 'About Us',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
-        functionality: boxes,
         members: members,
+        user: req.user,
+    });
+});
+
+app.get('/info', (req, res) => {
+    // Load functionality box data
+    const boxes = parser.parseData(
+        fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
+        'functionality'
+    );
+
+    // Load vendor info data
+    const info = parser.parseData(
+        fs.readFileSync(path.join(__dirname, '/content/info.json')),
+        'info'
+    );
+
+    res.render('info', {
+        layout: 'layout',
+        title: 'How It Works',
+        helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
+        functionality: boxes,
+        info: info,
         user: req.user,
     });
 });
