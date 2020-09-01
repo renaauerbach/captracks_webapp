@@ -20,4 +20,4 @@ const vendorSchema = new mongoose.Schema({
 	resetPasswordExpires: Date
 });
 
-module.exports = mongoose.model('vendors', vendorSchema);
+module.exports = mongoose.model('vendors', vendorSchema, 'vendors');

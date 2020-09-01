@@ -79,6 +79,7 @@ hbs.registerHelper('eq', (val1, val2) => {
 hbs.registerHelper('concat', (val1, val2) => {
     return val1 + val2;
 });
+// TODO: CHECK IF USED ANYWHERE
 hbs.registerHelper('len', (obj) => {
     return Object.keys(obj).length;
 });

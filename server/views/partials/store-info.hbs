@@ -35,7 +35,7 @@
                     <p>Store Hours:</p>
                     {{#each store.hours as |day|}}
                     <p class="hours d-flex justify-content-between">
-                        {{#if (eq (len day) 1)}}
+                        {{#if (eq day.open undefined)}}
                         <span class="day">{{day.day}}:</span> <span>Closed</span>
                         {{else}}
                         <span class="day">{{day.day}}:</span> <span>{{day.open}}

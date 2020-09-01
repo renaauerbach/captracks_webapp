@@ -16,7 +16,7 @@
             },
             zoom: 10,
         });
-        
+
         // Define global infoWindow to display places data
         infoWindow = new google.maps.InfoWindow();
 
@@ -66,16 +66,16 @@
     // Detail Content Formatter
     function contentFormatter(info) {
         const contentString = '<div id="popup">' +
-                        '<div class="popup-title">' + info.name + '</div>' +
-                        '<div class="popup-content">' +
-                            '<div class="popup-address">' + info.address + '</div>' + '<br/>' +
-                            '<div class="popup-details">Current Capacity: ' + info.details + '</div>' +
-                            '<div class="popup-details">Current Wait Time: ' + info.details + '</div>' +
-                        '</div>' + 
-                    '</div>' +
-                    '<div class="popup-link">' +
-                        '<a href="/map/store/' + info.id + '">Store Details</a>' +
-                    '</div>';
+            '<div class="popup-title">' + info.name + '</div>' +
+            '<div class="popup-content">' +
+            '<div class="popup-address">' + info.address + '</div>' + '<br/>' +
+            '<div class="popup-details">Current Capacity: ' + info.details.capacity + '</div>' +
+            '<div class="popup-details">Current Wait Time: ' + info.details.waitTime + '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="popup-link">' +
+            '<a href="/map/store/' + info.id + '">Store Details</a>' +
+            '</div>';
         return contentString;
     }
 

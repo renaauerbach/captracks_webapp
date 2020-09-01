@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const { promisify } = require('util');
-const asyncify = require('express-asyncify');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 
@@ -232,10 +231,11 @@ module.exports = function(passport) {
 
                     details = new Details({
                         partition: partition,
+                        maxCapacity: req.body.max,
                         capacity: 0,
                         waitTime: 0,
                         registers: req.body.survey3,
-                        createdOn: Date(),
+                        updated: Date(),
                     });
 
                     details.save((err, details) => {

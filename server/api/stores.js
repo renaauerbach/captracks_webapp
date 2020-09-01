@@ -6,7 +6,8 @@ const Details = require('../models/details.model');
 
 // Get all stores --> MAP (Home)
 router.get('/', (req, res) => {
-    Store.find((err, stores) => {
+    Store.find({}).populate({ path: "store.details", populate: "details" }).exec((err, stores) => {
+        console.log(stores);
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
@@ -37,18 +38,15 @@ router.get('/', (req, res) => {
 
 // Get store by ID (for forum/store page)
 router.get('/store/:id', (req, res) => {
-    Store.findById(req.params.id, (err, store) => {
+    Store.findById(req.params.id).populate({ path: "store.details", populate: "details" }).exec((err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
-        Details.findById(store.details, (err, details) => {
-            res.render('store', {
-                layout: 'layout',
-                title: store.name,
-                store: store,
-                user: req.user,
-                details: details,
-            });
+        res.render('store', {
+            layout: 'layout',
+            title: store.name,
+            store: store,
+            user: req.user,
         });
     });
 });
