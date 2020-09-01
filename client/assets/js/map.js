@@ -65,18 +65,20 @@
 
     // Detail Content Formatter
     function contentFormatter(info) {
+        console.log("vendor", info);
         const contentString = '<div id="popup">' +
             '<div class="popup-title">' + info.name + '</div>' +
             '<div class="popup-content">' +
-            '<div class="popup-address">' + info.address + '</div>' + '<br/>' +
-            '<div class="popup-details">Current Capacity: ' + info.details.capacity + '</div>' +
+            '<div class="popup-address">' + info.address + '</div>' + '<br/>';
+        const hasVendor = '<div class="popup-details">Current Capacity: ' + info.details.capacity + '</div>' +
             '<div class="popup-details">Current Wait Time: ' + info.details.waitTime + '</div>' +
             '</div>' +
             '</div>' +
             '<div class="popup-link">' +
             '<a href="/map/store/' + info.id + '">Store Details</a>' +
             '</div>';
-        return contentString;
+        const noVendor = '<div class="popup-waiting">Waiting for vendor to join!</div>';
+        return (info.details.length !== 0) ? contentString + hasVendor : contentString + noVendor;
     }
 
     // Export functions

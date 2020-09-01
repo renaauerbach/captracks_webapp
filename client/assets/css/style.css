@@ -783,6 +783,12 @@ button.thin-btn:hover {
     font-weight: 500;
 }
 
+.popup-waiting {
+    text-align: center;
+    padding-bottom: 10px;
+    font-weight: 400;
+}
+
 .popup-details {
     display: flex;
     justify-content: space-between;
