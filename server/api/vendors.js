@@ -6,8 +6,8 @@ const Store = require('../models/store.model');
 
 // Vendor Account --> ACCOUNT
 router.get('/', (req, res) => {
+    // Get all store info and populate all fields
     Store.find({ vendor: req.user._id }).populate({ path: "details", model: "details" }).populate({ path: "vendor", model: "vendors" }).populate({ path: "forum", model: "messages" }).exec((err, store) => {
-        console.log("store:", store);
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
@@ -22,8 +22,9 @@ router.get('/', (req, res) => {
     });
 });
 
-// Edit Store details from account page
+// Edit Store info from account page
 router.post('/:id', (req, res) => {
+    // Check if user is authenticated
     if (req.isAuthenticated()) {
         let update = {
             address: req.body.address,
@@ -41,11 +42,13 @@ router.post('/:id', (req, res) => {
             });
     }
     else {
+        // Otherwise go back to login page
         return res.redirect('/login');
     }
 });
 
 router.get('/profile', (req, res) => {
+    // Check if user is authenticated
     if (req.isAuthenticated()) {
         res.render('account', {
             layout: 'layout',
@@ -55,7 +58,8 @@ router.get('/profile', (req, res) => {
         });
     }
     else {
-        res.redirect('/login');
+        // Otherwise go back to login page
+        return res.redirect('/login');
     }
 });
 

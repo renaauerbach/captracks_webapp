@@ -5,6 +5,7 @@ const Details = require('../db.js').Details;
 
 // Update store details by Details ID
 router.post('/:id', (req, res) => {
+    // Check if user is authenticated
     if (req.isAuthenticated()) {
         console.log(req.body);
         const update = {
@@ -21,7 +22,10 @@ router.post('/:id', (req, res) => {
             });
         return res.redirect('/account');
     }
-    return res.redirect('/login');
+    else {
+        // Otherwise go back to login page
+        return res.redirect('/login');
+    }
 });
 
 // Helper functions

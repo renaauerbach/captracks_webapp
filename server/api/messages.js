@@ -8,66 +8,61 @@ const router = express.Router();
 
 const Message = require('../models/message.model');
 const Store = require('../models/store.model');
+const { nextTick } = require('process');
 
 // Add new message to store's forum
-router.post('/:id', (req, res) => {
+router.post('/', async (req, res) => {
+	// Check if user is authenticated
 	if (req.isAuthenticated()) {
+		// Create new message from form
 		var newMessage = new Message({
 			partition: partition,
 			title: req.body.title,
 			text: req.body.text,
 			createdOn: new Date(),
 		});
-		newMessage.save((err) => {
+		// Save new message to messages collection
+		newMessage.save(await function(err) {
 			if (err) {
 				return res.status(400).json({ success: false, error: err });
 			}
-			console.log('Forum post added successfully!');
-			Store.findById(req.params.id, (err, store) => {
+			// Find associated store by current user as the vendor
+			Store.findOneAndUpdate({ vendor: req.user._id }, { $push: { forum: { $each: [newMessage._id], $position: 0 } } }, (err) => {
 				if (err) {
-					return res.status(400).send(err);
+					return res.status(400).json({ success: false, error: err });
 				}
-				store.forum.push(newMessage._id);
-				store.partition = partition;
-				console.log("Updated store:", store);
-				store.save((err) => {
-					console.log("SAVED STORE:", store);
-					if (err) {
-						return res.send(err);
-					}
-					return res.redirect('/account');
-				});
+				return res.redirect('/account');
 			});
-
 		});
+	}
+	else {
+		// Otherwise go back to login page
 		return res.redirect('/login');
 	}
 });
 
 // Delete a message from a forum
-router.post('/:id/delete/:msg_id', (req, res) => {
+router.post('/delete/:id', (req, res) => {
+	// Check if user is authenticated
 	if (req.isAuthenticated()) {
-		console.log('ID: ', req.params.id);
-		Message.findOneAndRemove({ _id: req.params.msg_id }), err => {
+		// Remove message from store forum
+		Store.findOneAndUpdate({ vendor: req.user._id }, { $pull: { forum: { _id: req.params.id } } }, (err) => {
 			if (err) {
 				return res.status(400).json({ success: false, error: err });
 			}
-			Store.findByIdAndUpdate(req.params.id,
-				{ $pull: { forum: { _id: req.params.msg_id } } },
-				(err, store) => {
-					console.log('STORE:', store);
-					if (err) {
-						console.log("err: ", err);
-						return res.status(400).send(err);
-					}
-					console.log('Store updated successfully!');
-				});
-
-			console.log('Forum post deleted successfully!');
-		};
-		return res.redirect('/account');
+			// Remove message from collection
+			Message.findOneAndRemove({ _id: req.params.id }, err => {
+				if (err) {
+					return res.status(400).json({ success: false, error: err });
+				}
+				return res.redirect('/account');
+			});
+		});
 	}
-	return res.redirect('/login');
+	else {
+		// Otherwise go back to login page
+		return res.redirect('/login');
+	}
 });
 
 module.exports = router;

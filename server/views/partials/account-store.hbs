@@ -50,7 +50,7 @@
         <hr>
         {{!-- Forum Functions & Form --}}
         {{> info_title title="Forum"}}
-        <form class="forum form" action="/post/{{store._id}}"
+        <form class="forum form" action="/post"
             method="POST">
             <p>Add a post to your forum to keep your customers up to
                 date.</p>
@@ -78,7 +78,7 @@
         <hr>
         {{!-- Forum Posts --}}
         {{#each store.forum as |msg|}}
-        {{> forum_post account=true store=../store._id msg=msg}}
+        {{> forum_post account=true msg=msg}}
         {{/each}}
     </div>
 </div>
