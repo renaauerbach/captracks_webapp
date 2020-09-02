@@ -1,4 +1,6 @@
+require('dotenv').config();
 require('./db.js');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -32,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Sessions & Passport middlerware
 app.use(session({
-    secret: 'supersecret',
+    secret: process.env.SECRET_KEY,
     // key:
     resave: false,
     saveUninitialized: false,
@@ -44,7 +46,6 @@ app.use(session({
     })
 }));
 
-// app.use(session({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 

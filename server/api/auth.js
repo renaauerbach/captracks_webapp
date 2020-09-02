@@ -1,18 +1,24 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
 const crypto = require('crypto');
-const { promisify } = require('util');
 const nodemailer = require('nodemailer');
+const async = require('async');
+const sgMail = require('@sendgrid/mail');
+
 const router = express.Router();
 
-const partition = JSON.parse(
-    fs.readFileSync(path.join(__dirname, '../config/db.config.json'))
-).partition;
+const createHash = require('../passport/controller').createHash;
 
 const Store = require('../models/store.model');
 const Vendor = require('../models/vendor.model');
 const Details = require('../models/details.model');
+
+var smtpTransport = nodemailer.createTransport({
+    service: 'SendGrid',
+    auth: {
+        user: process.env.SENDGRID_USER,
+        pass: process.env.SENDGRID_PASS,
+    },
+});
 
 module.exports = function(passport) {
     // Login
@@ -22,16 +28,28 @@ module.exports = function(passport) {
             title: 'Login',
             message: req.flash('message'),
         });
+
+        // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        // const msg = {
+        //     to: 'test@example.com',
+        //     from: 'noreplay@captracks.com',
+        //     subject: 'Sending with Twilio SendGrid is Fun',
+        //     text: 'and easy to do anywhere, even with Node.js',
+        //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        // };
+        // sgMail.send(msg);
     });
 
     // Login form POST
-    router.post('/login', passport.authenticate('login', { failureRedirect: '/login' }),
+    router.post(
+        '/login',
+        passport.authenticate('login', { failureRedirect: '/login' }),
         (req, res) => {
-            console.log("req.user: ", req.uesr);
             res.cookie('firstName', req.user.firstName);
             res.cookie('userId', req.user.id);
             return res.redirect('/account');
-        });
+        }
+    );
 
     // Forgot Password
     router.get('/forgot', (req, res) => {
@@ -42,99 +60,114 @@ module.exports = function(passport) {
         });
     });
 
-    router.post('/forgot', async (req, res, next) => {
-        const token = (await promisify(crypto.randomBytes)(20)).toString('hex');
-        const user = Vendor.find(u => u.email === req.body.email);
+    router.post('/forgot', (req, res, next) => {
+        async.waterfall(
+            [
+                function(done) {
+                    crypto.randomBytes(20, (err, buff) => {
+                        var token = buff.toString('hex');
+                        done(err, token);
+                    });
+                },
+                function(token, done) {
+                    Vendor.findOne({ email: req.body.email }, (err, user) => {
+                        if (!user || err) {
+                            req.flash(
+                                'error',
+                                'No account with that email address exists.'
+                            );
+                            return res.redirect('/forgot');
+                        }
 
-        if (!user) {
-            req.flash('error', 'No account with that email address exists.');
-            return res.redirect('/forgot');
-        }
+                        user.resetPasswordToken = token;
+                        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+                        console.log("user:", user);
 
-        user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000;
-
-        const resetEmail = {
-            to: user.email,
-            from: 'noreply@captracks.com',
-            subject: 'Reset Your CapTracks Account Password',
-            text: `
-            You are receiving this because you have requested the reset of the password for your account.
-            Please click on the following link, or paste this into your browser to complete the process:
-            http://${req.headers.host}/reset/${token}
-            If you did not request this, please ignore this email and your password will remain unchanged.
-        `,
-        };
-
-        await transport.sendMail(resetEmail);
-        req.flash(
-            'info',
-            `An e-mail has been sent to ${user.email} with further instructions.`
+                        user.save(err => {
+                            done(err, token, user);
+                        });
+                    });
+                },
+                function(token, user, done) {
+                    var resetEmail = {
+                        to: user.email,
+                        from: 'noreply@captracks.com',
+                        subject: 'Reset your CapTracks account password',
+                        text: '\nYou are receiving this because you (or someone else) requested to reset the password for your CapTracks account.\n\n' +
+                            'Please use the following link (valid for the next 60 minutes) to complete the process:\n\n' +
+                            'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                            'If you did not make this request, please ignore this email, and your password will remain unchanged.\n'
+                    };
+                    smtpTransport.sendMail(resetEmail, (err) => {
+                        req.flash(
+                            'message',
+                            'An email has been sent to ' +
+                            user.email +
+                            ' with further instructions.'
+                        );
+                        done(err, 'done');
+                    });
+                },
+            ],
+            function(err) {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/forgot');
+            }
         );
-
-        res.redirect('/forgot');
     });
 
     router.get('/reset/:token', (req, res) => {
-        const vendor = Vendor.find(
-            v =>
-                v.resetPasswordExpires > Date.now() &&
-                crypto.timingSafeEqual(
-                    Buffer.from(v.resetPasswordToken),
-                    Buffer.from(req.params.token)
-                )
-        );
-
-        if (!vendor) {
-            req.flash(
-                'error',
-                'Password reset token is invalid or has expired.'
-            );
-            return res.redirect('/forgot');
-        }
-
-        res.setHeader('Content-type', 'text/html');
-        res.render('reset', {
-            layout: 'layout',
-            title: 'Reset Password',
-            token: vendor.resetPasswordToken,
+        Vendor.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+            if (!user || err) {
+                req.flash('message', 'Password reset token is invalid or has expired.');
+                return res.redirect('/forgot');
+            }
+            res.render('reset', {
+                user: req.user,
+                message: req.flash('message'),
+            });
         });
     });
 
-    router.post('/reset/:token', async (req, res) => {
-        const vendor = Vendor.find(
-            v =>
-                v.resetPasswordExpires > Date.now() &&
-                crypto.timingSafeEqual(
-                    Buffer.from(v.resetPasswordToken),
-                    Buffer.from(req.params.token)
-                )
-        );
+    router.post('/reset/:token', (req, res) => {
+        async.waterfall([
+            function(done) {
+                Vendor.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+                    if (!user || err) {
+                        req.flash('message', 'Password reset token is invalid or has expired.');
+                        return res.redirect('/forgot');
+                    }
 
-        if (!vendor) {
-            req.flash(
-                'error',
-                'Password reset token is invalid or has expired.'
-            );
-            return res.redirect('/forgot');
-        }
+                    user.password = createHash(req.body.password);
+                    user.resetPasswordToken = undefined;
+                    user.resetPasswordExpires = undefined;
 
-        vendor.password = req.body.password;
-        delete vendor.resetPasswordToken;
-        delete vendor.resetPasswordExpires;
-
-        const resetEmail = {
-            to: vendor.email,
-            from: 'noreply@captracks.com',
-            subject: 'Your password has been reset',
-            text: `
-            This is a confirmation that the password for your account "${user.email}" has just been changed.
-        `,
-        };
-
-        await transport.sendMail(resetEmail);
-        req.flash('success', `Your password has been successfully reset`);
-        res.redirect('/login');
+                    user.save((err) => {
+                        req.logIn(user, (err) => {
+                            done(err, user);
+                        });
+                    });
+                });
+            },
+            function(user, done) {
+                var resetEmail = {
+                    to: user.email,
+                    from: 'noreply@captracks.com',
+                    subject: 'Your password has been reset',
+                    text: 'Hello,\n\n' +
+                        'This is a confirmation that the password for your CapTracks account ' + user.email + ' has just been reset.\n\n' +
+                        'If you did not make these changes, please contact rena@captracks.com.'
+                };
+                smtpTransport.sendMail(resetEmail, function(err) {
+                    req.flash('message', 'Your password has been successfully reset!');
+                    done(err);
+                });
+            }
+        ], function(err) {
+            res.redirect('/login');
+        });
     });
 
     // Join CapTracks
@@ -167,21 +200,28 @@ module.exports = function(passport) {
         });
     });
 
-    router.post('/join', passport.authenticate('signup', { failureRedirect: '/join' }),
+    router.post(
+        '/join',
+        passport.authenticate('signup', { failureRedirect: '/join' }),
         (req, res) => {
             if (req.body.existed) {
                 Vendor.findOne({ _id: req.user._id }, (err, vendor) => {
                     if (err) {
-                        return res.status(400).send("Error assinging vendor to store: ");
+                        return res
+                            .status(400)
+                            .send('Error assinging vendor to store: ');
                     }
 
-                    Store.findByIdAndUpdate(req.body.existed, { vendor: vendor },
-                        (err) => {
+                    Store.findByIdAndUpdate(
+                        req.body.existed,
+                        { vendor: vendor },
+                        err => {
                             if (err) {
                                 return res.status(400).send(err);
                             }
                             console.log('Store assigned successfully!');
-                        });
+                        }
+                    );
                 });
             } else {
                 var address =
@@ -196,9 +236,15 @@ module.exports = function(passport) {
                     // Check if an store already exists with that address
                     let store = Store.findOne({ address });
                     if (store) {
-                        return res.status(400).send(JSON.stringify(req.flash(
-                            'This store is already registered in our system. Please try again or contact us for assistance.'
-                        )));
+                        return res
+                            .status(400)
+                            .send(
+                                JSON.stringify(
+                                    req.flash(
+                                        'This store is already registered in our system. Please try again or contact us for assistance.'
+                                    )
+                                )
+                            );
                     }
 
                     var hours = [];
@@ -230,7 +276,7 @@ module.exports = function(passport) {
                     }
 
                     details = new Details({
-                        partition: partition,
+                        partition: process.env.DB_PARTITION,
                         maxCapacity: req.body.max,
                         capacity: 0,
                         waitTime: 0,
@@ -249,7 +295,7 @@ module.exports = function(passport) {
                     });
 
                     newStore = new Store({
-                        partition: partition,
+                        partition: process.env.DB_PARTITION,
                         name: req.body.name,
                         address: address,
                         phone: req.body.storePhone,
@@ -277,14 +323,14 @@ module.exports = function(passport) {
                 }
             }
 
-            var email = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/mail.config.json'))).email;
+            var email = process.env.MAIL_USER;
             // var transporter = nodemailer.createTransport({
             //     host: "smtp.gmail.com",
             //     port: 465,
             //     secure: true,
             //     auth: {
             //         user: email,
-            //         pass: JSON.parse(fs.readFileSync(path.join(__dirname, '../config/mail.config.json'))).password,
+            //         pass: process.env.MAIL_PASS,
             //     }
             // });
 
@@ -297,7 +343,7 @@ module.exports = function(passport) {
             //     var msg = {
             //         from: email,
             //         to: to,
-            //         subject: "A new vendor registered their store with CapTracks!", 
+            //         subject: "A new vendor registered their store with CapTracks!",
             //         text: textBody,
             //         html: htmlBody
             //     };
@@ -315,10 +361,11 @@ module.exports = function(passport) {
             res.cookie('firstName', user.firstName);
             res.cookie('userId', user.id);
             return res.redirect('/account');
-        });
+        }
+    );
 
     router.get('/logout', (req, res) => {
-        req.session.destroy((err) => {
+        req.session.destroy(err => {
             req.logout();
             res.clearCookie('firstName');
             res.clearCookie('userId');

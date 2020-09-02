@@ -1,12 +1,17 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt-nodejs');
+
 const Vendor = require('../models/vendor.model');
 
-const path = require('path');
-const fs = require('fs');
-const partition = JSON.parse(
-	fs.readFileSync(path.join(__dirname, '../config/db.config.json'))
-).partition;
+// Generate password hash using bcrypt
+const createHash = (password) => {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+};
+
+// Checks for valid password
+const isValidPassword = (vendor, password) => {
+	return bcrypt.compareSync(password, vendor.password);
+};
 
 function login(passport) {
 	passport.use('login', new LocalStrategy({
@@ -14,30 +19,26 @@ function login(passport) {
 		passwordField: 'password',
 		passReqToCallback: true
 	}, (req, email, password, done) => {
-		// check in mongo if a Vendor with vendor name exists or not
+		// Check if a Vendor with input email exists
 		Vendor.findOne({ 'email': email }, (err, vendor) => {
-			// In case of any error, return using the done method
 			if (err) {
 				console.log('Error in Login: ' + err);
 				return done(err);
 			}
-			// vendor name does not exist, log the error and redirect back
+			// Vendor does NOT already exist --> log error and redirect back
 			if (!vendor) {
-				console.log('Vendor Not Found.');
+				console.log('Vendor Not Found');
 				return done(null, false, req.flash('message', "We don't recognize that email. Want to <a href='/join'>create an account</a>?"));
 			}
-			// Vendor exists but wrong password, log the error 
+			// Vendor DOES exist BUT wrong password --> log the error 
 			if (!isValidPassword(vendor, password)) {
 				console.log('Invalid Password');
 				return done(null, false, req.flash('message', "Wrong password. Please try again or <a href='/forgot'>reset your password</a>."));
 			}
-			// Vendor and password both match, return Vendor from done method
+			// Vendor and password match --> return Vendor from done method
 			return done(null, vendor);
 		});
 	}));
-	const isValidPassword = (vendor, password) => {
-		return bcrypt.compareSync(password, vendor.password);
-	};
 }
 
 function signup(passport) {
@@ -62,7 +63,7 @@ function signup(passport) {
 					// if there is no vendor with that email
 					// create the Vendor
 					const newVendor = new Vendor({
-						partition: partition,
+						partition: process.env.DB_PARTITION,
 						firstName: req.body.firstName,
 						lastName: req.body.lastName,
 						password: createHash(password),
@@ -86,13 +87,11 @@ function signup(passport) {
 		// in the next tick of the event loop
 		process.nextTick(findOrCreateVendor);
 	}));
-	// Generates hash using bcrypt
-	const createHash = (password) => {
-		return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-	};
 }
 
 module.exports = {
+	createHash: createHash,
+	isValidPassword: isValidPassword,
 	login: login,
 	signup: signup,
 };

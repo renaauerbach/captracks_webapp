@@ -46,7 +46,9 @@ function stepIndicator(n) {
 // Form validation before continuing
 function validateForm() {
 	const inputs = tabs[currentTab].getElementsByTagName('input');
+	const password = document.getElementById('password');
 	const confirmed = document.getElementById('confirmed');
+	const reqs = document.querySelectorAll('.req');
 	const err = document.getElementsByClassName('errorMsg')[0];
 	const tempTxt = 'temp temp temp temp temp';
 

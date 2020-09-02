@@ -1,17 +1,14 @@
 const mongoose = require('mongoose');
-const path = require('path');
-const fs = require('fs');
 
 // Connect to MongoDB
 let uri;
+// TODO: REMOVE BEFORE PUBLISHING
 process.env.NODE_ENV = 'PRODUCTION';
 if (process.env.NODE_ENV === 'PRODUCTION') {
-    const data = fs.readFileSync(path.join(__dirname, './config/db.config.json'));
-    const conf = JSON.parse(data);
-    uri = conf.uri;
+    uri = process.env.DB_PROD_URI;
 } else {
     // If NOT in PRODUCTION mode
-    // uri = '"mongodb://captracks-rirqa.mongodb.net/cap_tracks';
+    uri = process.env.DB_URI;
 }
 
 mongoose.Promise = global.Promise;

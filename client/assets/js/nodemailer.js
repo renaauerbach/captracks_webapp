@@ -1,10 +1,8 @@
 const key = require('../../config/key.json');
 const nodemailer = require("nodemailer");
 
-const email = JSON.parse(fs.readFileSync(path.join(__dirname, '/config/mail.config.json')),
-    'email');
-const pass = parser.parseData(fs.readFileSync(path.join(__dirname, '/config/mail.config.json')),
-    'password'), ;
+const email = process.env.MAIL_USER;
+const pass = process.env.MAIL_PASS;
 const recipients = ['gabriel.low@captracks.com', 'ben.shor@captracks.com'];
 
 var textBody = `FROM: ${request.body.name} EMAIL: ${request.body.email} MESSAGE: ${request.body.message}`;

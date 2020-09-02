@@ -1,8 +1,4 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
-
-const partition = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/db.config.json'))).partition;
 
 const router = express.Router();
 
@@ -15,7 +11,7 @@ router.post('/', async (req, res) => {
 	if (req.isAuthenticated()) {
 		// Create new message from form
 		var newMessage = new Message({
-			partition: partition,
+			partition: process.env.DB_PARTITION,
 			title: req.body.title,
 			text: req.body.text,
 			createdOn: new Date(),

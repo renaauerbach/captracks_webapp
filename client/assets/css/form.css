@@ -7,10 +7,14 @@
 }
 
 #login form,
-#forgot form,
-#reset form {
+#forgot form {
     max-width: 50%;
     width: 50%;
+}
+
+#reset form {
+    max-width: 60%;
+    width: 60%;
 }
 
 #join form {
@@ -111,6 +115,27 @@
     font-size: 16px;
 }
 
+/* Password requirements */
+.form ul li.req {
+    font-size: 15px;
+    padding-left: 5%;
+}
+/* Add a green text color and a checkmark when the requirements are right */
+.form ul li.req.valid {
+    color: #24b954;
+}
+.form ul li.req.valid:before {
+    content: '✓';
+}
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.form ul li.req.invalid {
+    color: #f72942;
+}
+.form ul li.req.invalid:before {
+    color: #f72942;
+    content: 'x';
+}
+
 /* Error Message */
 .errorMsg {
     font-size: 16px;
@@ -175,35 +200,14 @@
     margin-bottom: 2%;
 }
 
-/****** TAB 1 - SIGNUP ******/
+/* ==== SIGNUP PAGE ==== */ 
 /* Spacing b/w first row inputs */
 .signup #firstName,
 .signup #lastName {
     width: 95%;
 }
 
-/* Password requirements */
-.signup ul li.req {
-    font-size: 15px;
-    padding-left: 5%;
-}
-/* Add a green text color and a checkmark when the requirements are right */
-.signup ul li.req.valid {
-    color: #24b954;
-}
-.signup ul li.req.valid:before {
-    content: '✓';
-}
-/* Add a red text color and an "x" icon when the requirements are wrong */
-.signup ul li.req.invalid {
-    color: #f72942;
-}
-.signup ul li.req.invalid:before {
-    color: #f72942;
-    content: 'x';
-}
-
-/****** TAB 2 - REGISTRATION ******/
+/* ==== REGISTRATION PAGE ==== */ 
 /* Space b/w label and checkbox */
 .form .form-group .form-check .col-form-label {
     margin-right: 15px !important;
@@ -241,7 +245,7 @@
     width: 98%;
 }
 
-/****** TAB 3 - SURVEY ******/
+/* ==== SURVEY PAGE ==== */ 
 .survey .form-group.header {
     text-align: center;
 }
@@ -313,12 +317,23 @@
         transform: translate3d(0px, -9px, 0) scale(0.9);
     }  
     
+    /* Align passwords reqs directly under password field */
+    .form .pwd .form-group:nth-child(1){
+        height: 55px;
+    }
+    .form .pwd .form-group:nth-child(2){
+        height: 135px;
+    }
+    .form .pwd .form-group:nth-child(3){
+        height: 60px;
+    }
+
     /* Error message */
     #errorMsg {
         font-size: 14px;
     }
 
-    /****** SIGNUP ******/
+    /* ==== SIGNUP ==== */ 
     .signup #firstName,
     .signup #lastName {
         width: 100%;
@@ -327,18 +342,8 @@
     .signup span.details {
         margin-bottom: 5%;
     }
-    /* Align passwords reqs directly under password field */
-    .signup .pwd .form-group:nth-child(1){
-        height: 55px;
-    }
-    .signup .pwd .form-group:nth-child(2){
-        height: 135px;
-    }
-    .signup .pwd .form-group:nth-child(3){
-        height: 60px;
-    }
-
-    /****** REGISTER ******/
+    
+    /* ==== REGISTRATION ==== */ 
     /* Input height */
     .register .form-inline .form-group {
         height: 60px;
@@ -379,7 +384,7 @@
         margin-top: 6%;
     }
 
-    /* ***** SURVEY ***** */
+    /* ==== SURVEY ==== */ 
     .survey .form-group {
         margin-bottom: 2em;
     }
@@ -395,7 +400,4 @@
     .survey .form-group .control-label {
         line-height: 16px;
     }
-
 }
-
-
