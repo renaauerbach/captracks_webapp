@@ -22,7 +22,7 @@
 
         // Initialize Geoencoder
         const geocoder = new google.maps.Geocoder();
-        geocodeAddress(geocoder, map);
+        geocodeAddress(geocoder, exports.map);
     }
 
     // Geoencode address

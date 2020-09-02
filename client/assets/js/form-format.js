@@ -24,7 +24,7 @@ function timeFormat(str) {
 }
 
 document.querySelectorAll('.hours').forEach(input => {
-    if (input.type == 'text') {
+    if (input.type === 'text') {
         input.addEventListener('change', e => {
             timeFormat(e.target.value);
         });
@@ -32,6 +32,28 @@ document.querySelectorAll('.hours').forEach(input => {
 });
 
 // Format Phone Number
+function isNumeric(e) {
+    const key = e.keyCode;
+    return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
+}
+
+function isModifier(e) {
+    const key = e.keyCode;
+    return (
+        e.shiftKey === true ||
+        key === 35 ||
+        key === 36 ||
+        (key === 8 || key === 9 || key === 13 || key === 46) ||
+        (key > 36 && key < 41) ||
+        ((e.ctrlKey === true || e.metaKey === true) &&
+            (key === 65 ||
+                key === 67 ||
+                key === 86 ||
+                key === 88 ||
+                key === 90))
+    );
+}
+
 function enforceFormat(e) {
     if (!isNumeric(e) && !isModifier(e)) {
         e.preventDefault();
@@ -55,28 +77,6 @@ function phoneFormat(e) {
     } else if (input.length > 0) {
         e.target.value = `(${zip}`;
     }
-}
-
-function isNumeric(e) {
-    const key = e.keyCode;
-    return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
-}
-
-function isModifier(e) {
-    const key = e.keyCode;
-    return (
-        e.shiftKey === true ||
-        key === 35 ||
-        key === 36 ||
-        (key === 8 || key === 9 || key === 13 || key === 46) ||
-        (key > 36 && key < 41) ||
-        ((e.ctrlKey === true || e.metaKey === true) &&
-            (key === 65 ||
-                key === 67 ||
-                key === 86 ||
-                key === 88 ||
-                key === 90))
-    );
 }
 
 const phone = document.getElementsByClassName('phone')[0];

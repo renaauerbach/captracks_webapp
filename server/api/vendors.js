@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 router.post('/:id', (req, res) => {
     // Check if user is authenticated
     if (req.isAuthenticated()) {
-        let update = {
+        const update = {
             address: req.body.address,
             phone: req.body.phone,
             url: req.body.url
@@ -57,7 +57,7 @@ router.get('/profile', (req, res) => {
             layout: 'layout',
             vendor: req.user,
             title: 'My Profile',
-            user: true,     // Dynamic since already checked for authentication
+            user: true, // Dynamic since already checked for authentication
         });
     }
     else {

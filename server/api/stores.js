@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const Store = require('../models/store.model');
-const Details = require('../models/details.model');
 
 // Get all stores --> MAP (Home)
 router.get('/', (req, res) => {

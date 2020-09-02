@@ -1,8 +1,8 @@
 function submitEmailForm(form) {
     const obj = new XMLHttpRequest();
     obj.onreadystatechange = function() {
-        if (obj.readyState == 4) {
-            if (obj.status == 200) {
+        if (obj.readyState === 4) {
+            if (obj.status === 200) {
                 const res = JSON.parse(obj.responseText);
                 alert(res.message);
             }

@@ -35,7 +35,7 @@ function login(passport) {
 			return done(null, vendor);
 		});
 	}));
-	var isValidPassword = (vendor, password) => {
+	const isValidPassword = (vendor, password) => {
 		return bcrypt.compareSync(password, vendor.password);
 	};
 }
@@ -46,7 +46,7 @@ function signup(passport) {
 		passwordField: 'password',
 		passReqToCallback: true
 	}, (req, email, password, done) => {
-		findOrCreateVendor = () => {
+		const findOrCreateVendor = () => {
 			// find a Vendor in Mongo with provided Vendor name
 			Vendor.findOne({ 'email': email }, (err, vendor) => {
 				// In case of any error, return using the done method
@@ -61,7 +61,7 @@ function signup(passport) {
 				} else {
 					// if there is no vendor with that email
 					// create the Vendor
-					newVendor = new Vendor({
+					const newVendor = new Vendor({
 						partition: partition,
 						firstName: req.body.firstName,
 						lastName: req.body.lastName,
@@ -87,7 +87,7 @@ function signup(passport) {
 		process.nextTick(findOrCreateVendor);
 	}));
 	// Generates hash using bcrypt
-	var createHash = (password) => {
+	const createHash = (password) => {
 		return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 	};
 }

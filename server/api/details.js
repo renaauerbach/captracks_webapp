@@ -3,6 +3,20 @@ const router = express.Router();
 
 const Details = require('../models/details.model');
 
+// Calculate capacity
+function calcCapacity(max, capacity) {
+    // Divide current capacity by max capacity
+    return (capacity / max) * 100;
+}
+
+// Calculate wait time
+function calcWait(max, capacity) {
+    // Check if store is full
+    if (capacity === max) {
+        // Check if 
+    }
+}
+
 // Update store details by Details ID
 router.post('/:id', (req, res) => {
     // Check if user is authenticated
@@ -25,19 +39,5 @@ router.post('/:id', (req, res) => {
     }
 });
 
-// Helper functions
-// Calculate capacity
-function calcCapacity(max, capacity) {
-    // Divide current capacity by max capacity
-    return (capacity / max) * 100;
-}
-
-// Calculate wait time
-function calcWait(max, capacity) {
-    // Check if store is full
-    if (capacity == max) {
-        // Check if 
-    }
-}
 
 module.exports = router;

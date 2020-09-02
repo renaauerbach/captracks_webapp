@@ -9,8 +9,8 @@ function showTab(n) {
 	tabs[n].style.display = 'block';
 
 	// Fix the Previous/Next buttons
-	document.getElementById('prevBtn').style.display = (n == 0) ? 'none' : 'inline';
-	next.innerHTML = (n == tabs.length - 1) ? 'Submit' : 'Next';
+	document.getElementById('prevBtn').style.display = (n === 0) ? 'none' : 'inline';
+	next.innerHTML = (n === tabs.length - 1) ? 'Submit' : 'Next';
 
 	// Call function to display correct step indicator
 	stepIndicator(n);
@@ -18,7 +18,7 @@ function showTab(n) {
 
 // Determine which tab to display
 function nextPrev(n) {
-	if (n == 1 && !validateForm()) {
+	if (n === 1 && !validateForm()) {
 		return false;
 	}
 	// Hide the current tab
@@ -32,7 +32,6 @@ function nextPrev(n) {
 	// Display correct tab
 	showTab(currentTab);
 }
-
 
 // Removes the "active" class from all steps
 function stepIndicator(n) {
@@ -54,7 +53,7 @@ function validateForm() {
 	// Check for any empty inputs
 	for (let i = 0; i < inputs.length; i++) {
 		const curr = inputs[i];
-		if (curr.value == '' && curr.disabled == false) {
+		if (curr.value === '' && curr.disabled === false) {
 			curr.classList.add('invalid');
 			err.innerHTML = 'Please fill in all text fields before continuing.';
 			err.classList.add('red');
@@ -66,7 +65,7 @@ function validateForm() {
 	err.innerHTML = tempTxt;
 
 	// Check that password and confirmed password match
-	if (confirmed.value != password.value) {
+	if (confirmed.value !== password.value) {
 		err.innerHTML = "Passwords do not match. Please try again.";
 		err.classList.add('red');
 		return false;
@@ -91,5 +90,3 @@ function validateForm() {
 	document.getElementsByClassName('step')[currentTab].classList.add('finish');
 	return true;
 }
-
-
