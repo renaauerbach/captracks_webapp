@@ -8,7 +8,6 @@ const router = express.Router();
 
 const Message = require('../models/message.model');
 const Store = require('../models/store.model');
-const { nextTick } = require('process');
 
 // Add new message to store's forum
 router.post('/', async (req, res) => {

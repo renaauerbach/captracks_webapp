@@ -67,9 +67,9 @@ function isModifier(e) {
     return (
         e.shiftKey === true ||
         key === 35 ||
-        key === 36 || 
-        (key === 8 || key === 9 || key === 13 || key === 46) || 
-        (key > 36 && key < 41) || 
+        key === 36 ||
+        (key === 8 || key === 9 || key === 13 || key === 46) ||
+        (key > 36 && key < 41) ||
         ((e.ctrlKey === true || e.metaKey === true) &&
             (key === 65 ||
                 key === 67 ||
@@ -87,4 +87,9 @@ if (phone) {
     phone.addEventListener('keyup', e => {
         phoneFormat(e);
     });
+}
+
+// Format Slider Value
+function updateSliderText(val) {
+    document.getElementById('sliderText').value = val;
 }

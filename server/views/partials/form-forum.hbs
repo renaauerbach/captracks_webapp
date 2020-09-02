@@ -1,0 +1,25 @@
+<form class="forum form" action="/post"
+    method="POST">
+    <p>Add a post to your forum to keep your customers up to
+        date.</p>
+    {{!-- Post Title --}}
+    <div class="form-group title">
+        <label for="title" class="control-label">Title</label>
+        <input id="title" type="text" class="form-control"
+            name="title" required>
+        <span class="help">Give a title to your post.</span>
+    </div>
+    {{!-- Post Text --}}
+    <div class="form-group">
+        <label for="title" class="control-label">Post
+            Messsage</label>
+        <textarea id="text" type="text" class="form-control"
+            name="text" rows="5" required></textarea>
+        <span class="help">Update your customers of anything
+            from sales to current capacity.</span>
+    </div>
+    {{!-- Submit Button --}}
+    <div class="d-flex justify-content-right">
+        <button class="forum thin-btn" type="submit">Post</button>
+    </div>
+</form>

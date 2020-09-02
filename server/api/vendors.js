@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
             layout: 'layout',
             vendor: req.user,
             store: store[0],
+            details: store[0].details[0],
             title: 'My Account',
             user: req.isAuthenticated(),
             message: req.flash('message')

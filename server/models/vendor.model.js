@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const { ObjectID } = require('mongodb');
+const Schema = mongoose.Schema;
 
 // VENDOR SCHEMA
 const vendorSchema = new mongoose.Schema({
-	id: { type: ObjectID, require: true },
+	id: { type: Schema.Types.ObjectId, require: true },
 	partition: { type: String, required: true },
 	firstName: { type: String, required: true },
 	lastName: { type: String, required: true },

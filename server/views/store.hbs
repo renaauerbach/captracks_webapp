@@ -1,22 +1,35 @@
 <!--====== STORE PAGE START ======-->
+{{!-- Link Back to Map --}}
 <div class="back">
     <i class="fas fa-chevron-left"></i>
     <a href="/map">Back to map</a>
 </div>
+{{!-- Section Header --}}
 <section id="store" class="style-2">
-    {{> header title=store.name text1=(concat 'View recent updates directly from
+    {{> header title=store.name subtitle_1=(concat 'View recent updates directly from
     ' store.name)}}
+    {{!-- TODO: CHECK IF NEED BELOW --}}
     <span id="data" style="display: none">{{{ store }}}</span>
 </section>
+{{!-- Forum Section --}}
 <section id="forum">
     <div class="container">
         <div class="row justify-content-between">
+            {{!-- Store Info Column --}}
             <div class="col-lg-4 col-md-4 col-sm-3">
                 {{> store_info store=store}}
             </div>
-            <div class="divider border-gradient"></div>
+            {{!-- Capacity & Forum --}}
             <div class="col">
-                {{> info_title title="Forum"}}
+                {{#if store.details}}
+                {{!-- Capacity --}}
+                {{> info_title label="Capacity"}}
+                <hr>
+                {{> capacity_data details=details}}
+                {{/if}}
+                {{!-- Forum --}}
+                {{> info_title label="Forum"}}
+                <hr>
                 {{#if store.forum}}
                 {{#each store.forum as |msg|}}
                 {{> forum_post msg=msg}}

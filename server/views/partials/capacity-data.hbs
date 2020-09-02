@@ -1,0 +1,21 @@
+ <div class="capacity-box info-box">
+    <div class="capacity-content">
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="cap-title">Max Capacity:</p>
+            <p class="cap-data">{{details.maxCapacity}} people</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="cap-title">Current Capacity:</p>
+            <p class="cap-data">{{details.capacity}}% full</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="cap-title">Current Wait Time:</p>
+            <p class="cap-data">{{details.waitTime}} minutes</p>
+        </div>
+        <div class="cap-date d-flex justify-content-between align-items-center">
+            <p class="cap-title">Last Updated:</p>
+            {{!-- Formatted as forum post date --}}
+            <p class="cap-data post-date">{{details.updated}}</p>
+        </div>
+    </div>
+</div>

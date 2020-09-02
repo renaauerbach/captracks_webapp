@@ -6,8 +6,7 @@ const Details = require('../models/details.model');
 
 // Get all stores --> MAP (Home)
 router.get('/', (req, res) => {
-    Store.find({}).populate({ path: "store.details", populate: "details" }).exec((err, stores) => {
-        console.log(stores);
+    Store.find({}).populate({ path: "details", populate: "details" }).exec((err, stores) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
@@ -38,7 +37,7 @@ router.get('/', (req, res) => {
 
 // Get store by ID (for forum/store page)
 router.get('/store/:id', (req, res) => {
-    Store.findById(req.params.id).populate({ path: "store.details", populate: "details" }).exec((err, store) => {
+    Store.findById(req.params.id).populate({ path: "details", model: "details" }).populate({ path: "forum", model: "messages" }).exec((err, store) => {
         if (err) {
             res.status(400).json({ success: false, error: err });
         }
@@ -46,6 +45,7 @@ router.get('/store/:id', (req, res) => {
             layout: 'layout',
             title: store.name,
             store: store,
+            details: store.details[0],
             user: req.user,
         });
     });
