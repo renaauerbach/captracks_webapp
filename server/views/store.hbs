@@ -24,12 +24,10 @@
                 {{#if store.details}}
                 {{!-- Capacity --}}
                 {{> info_title label="Capacity"}}
-                <hr>
                 {{> capacity_data details=details}}
                 {{/if}}
                 {{!-- Forum --}}
                 {{> info_title label="Forum"}}
-                <hr>
                 {{#if store.forum}}
                 {{#each store.forum as |msg|}}
                 {{> forum_post msg=msg}}

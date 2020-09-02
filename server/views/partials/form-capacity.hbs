@@ -1,4 +1,4 @@
-<form class="capacity form" action="/details/{{store.details}}"
+<form class="capacity form" action="/details/{{details._id}}"
     method="POST">
     {{!-- Current Capacity Slider --}}
     <div class="form-group">
@@ -21,8 +21,7 @@
     {{!-- Current Line Input --}}
     <div class="form-group hide no-line">
         <label for="people" class="control-label">How many people are currently in line?</label>
-        <input id="people" type="number" min="1" max="50" class="form-control"
-            name="people" required>
+        <input id="people" type="number" min="1" max="50" class="form-control" name="people">
         <span class="help">Please be as precise as possible.</span>
     </div>
     {{!-- Open Registers Radio --}}
@@ -38,8 +37,7 @@
     {{!-- Open Registers Input --}}
     <div class="form-group hide no-register">
         <label for="register" class="control-label">How many?</label>
-        <input id="register" type="number" min="1" max="5" class="form-control"
-            name="registers" required>
+        <input id="register" type="number" min="1" max="5" class="form-control" name="registers">
         <span class="help">Please be as precise as possible.</span>
     </div>
     {{!-- Submit Button --}}

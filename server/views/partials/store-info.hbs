@@ -46,9 +46,8 @@
                 </div>
             </li>
         </ul>
-        {{#if store.links}}
-        <hr>
-        {{#each store.links as |link|}}
+        {{#if details.links}}
+        {{#each details.links as |link|}}
         <a href={{link}}>{{link.title}}</a>
         {{/each}}
         {{/if}}

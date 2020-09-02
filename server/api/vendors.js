@@ -7,15 +7,17 @@ const Store = require('../models/store.model');
 // Vendor Account --> ACCOUNT
 router.get('/', (req, res) => {
     // Get all store info and populate all fields
-    Store.find({ vendor: req.user._id }).populate({ path: "details", model: "details" }).populate({ path: "vendor", model: "vendors" }).populate({ path: "forum", model: "messages" }).exec((err, store) => {
+    Store.findOne({ vendor: req.user._id }).populate({ path: "details", model: "details" }).populate({ path: "vendor", model: "vendors" }).populate({ path: "forum", model: "messages" }).exec((err, store) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
+        console.log("details", store.details[0]);
+
         res.render('account', {
             layout: 'layout',
             vendor: req.user,
-            store: store[0],
-            details: store[0].details[0],
+            store: store,
+            details: store.details[0],
             title: 'My Account',
             user: req.isAuthenticated(),
             message: req.flash('message')

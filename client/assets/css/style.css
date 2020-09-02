@@ -773,6 +773,10 @@ button.thin-btn:hover {
     position: absolute;
 }
 
+#popup {
+    margin: 10px 20px;
+}
+
 .popup-title, 
 .popup-address {
     text-align: center;
@@ -814,6 +818,15 @@ button.thin-btn:hover {
     background-color: #e708ae;
     text-decoration: none;
 }
+
+/* Google Maps styles */
+.gm-style .gm-style-iw-c {
+    padding-left: 0;
+}
+.gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+}
+
 
 /* ====== ACCOUNT / STORE PAGE ====== */
 .back {
@@ -913,11 +926,13 @@ button.thin-btn:hover {
 }
 
 /* ==== CAPACITY ==== */
+/* Capacity Form */
 .capacity {
     margin-bottom: 1em;
     font-size: 16px;
 }
 
+/* Capacity Data */
 .capacity-box {
     margin-bottom: 2rem;
 }
@@ -932,6 +947,7 @@ button.thin-btn:hover {
 }
 
 #sliderText {
+    color: #555;
     font-size: 17px;
     width: 10%;
     text-align: end;
@@ -942,7 +958,6 @@ button.thin-btn:hover {
 input[type=range] {
   height: 25px;
   -webkit-appearance: none;
-  margin: 10px 0;
   width: 94%;
   border: none;
 }

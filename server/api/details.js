@@ -1,26 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-const Details = require('../db.js').Details;
+const Details = require('../models/details.model');
 
 // Update store details by Details ID
 router.post('/:id', (req, res) => {
     // Check if user is authenticated
     if (req.isAuthenticated()) {
         console.log(req.body);
-        const update = {
-            capacity: calcCapacity(details, req.body),
-            waitTime: calcWait(details, req.body),
-        };
+        Details.findById(req.params.id, (err, details) => {
+            if (err) {
+                return res.status(400).json({ success: false, error: err });
+            }
+            details.capacity = calcCapacity(details.maxCapacity, req.body.capacity);
+            details.waitTime = calcWait(details.maxCapacity, req.body.capacity);
 
-        Details.findByIdAndUpdate(req.params.id, update,
-            (err) => {
-                if (err) {
-                    return res.status(400).send(err);
-                }
-                console.log('Capacity updated successfully!');
-            });
-        return res.redirect('/account');
+            return res.redirect('/account');
+        });
+
     }
     else {
         // Otherwise go back to login page
@@ -30,15 +27,15 @@ router.post('/:id', (req, res) => {
 
 // Helper functions
 // Calculate capacity
-function calcCapacity(details, data) {
+function calcCapacity(max, capacity) {
     // Divide current capacity by max capacity
-    return data.capacity / details.maxCapacity;
+    return (capacity / max) * 100;
 }
 
 // Calculate wait time
-function calcWait(details, date) {
+function calcWait(max, capacity) {
     // Check if store is full
-    if (data.capacity == details.maxCapacity) {
+    if (capacity == max) {
         // Check if 
     }
 }

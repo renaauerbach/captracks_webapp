@@ -3,10 +3,8 @@ var months = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var posts = document.querySelectorAll('.info-box');
-console.log(posts);
 posts.forEach(created => {
     let date = created.getElementsByClassName('post-date')[0].innerHTML.split(' ');
-    console.log("date", date);
 
     // Collect relevant date data
     let fullDate = date.slice(0, 4).join(' ');

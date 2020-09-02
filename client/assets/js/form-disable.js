@@ -65,11 +65,15 @@ const lines = document.getElementsByName('line');
 lines[0].addEventListener('click', e => {
     hidden[0].classList.remove('no-line');
     hidden[0].classList.add('yes-line');
+    // Make input required
+    hidden[0].children[1].required = true;
 });
 // Handle "No" Radio for "Current Line" --> Hide Input
 lines[1].addEventListener('click', e => {
     hidden[0].classList.remove('yes-line');
     hidden[0].classList.add('no-line');
+    // Make input not required
+    hidden[0].children[1].required = false;
 });
 
 // Handle Register Radios
@@ -78,9 +82,13 @@ const registers = document.getElementsByName('register');
 registers[0].addEventListener('click', e => {
     hidden[1].classList.remove('no-register');
     hidden[1].classList.add('yes-register');
+    // Make input required
+    hidden[1].children[1].required = true;
 });
 // Handle "No" Radio for "Open Registers" --> Hide Input
 registers[1].addEventListener('click', e => {
     hidden[1].classList.remove('yes-register');
     hidden[1].classList.add('no-register');
+    // Make input not required
+    hidden[1].children[1].required = false;
 });
