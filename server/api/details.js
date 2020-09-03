@@ -12,15 +12,14 @@ function calcCapacity(max, capacity) {
 }
 
 // Calculate waitTime
-function calcWait(max, capacity) {
+function calcWait(max, body) {
     // Check if Store is full
-    if (capacity === max) {
-        // Check if
+    if (body.capacity === max) {
+        return body.wait;
     }
+    // Not full --> No wait
+    return 0;
 }
-//  < 100%
-// How frequently are people waiting?
-// For now 1:1 (10 poeple= 10min)
 // TODO: FOR NOW: ESTIMATE WAIT TIME BELOW LINE QUESTION
 
 
@@ -32,14 +31,22 @@ router.post('/:id', (req, res) => {
             // Handle Error
             if (err) {
                 req.flash('error', process.env.CAPACITY_ERROR);
-                console.log('Error removing Message from forum:', err);
+                console.log('Error finding Details in DB:', err);
                 return res.redirect('/account');
             }
             details.capacity = calcCapacity(
                 details.maxCapacity,
                 req.body.capacity
             );
-            details.waitTime = calcWait(details.maxCapacity, req.body.capacity);
+            details.waitTime = calcWait(details.maxCapacity, req.body);
+            details.save((err) => {
+                // Handle Error
+                if (err) {
+                    req.flash('error', process.env.CAPACITY_ERROR);
+                    console.log('Error saving Details to DB:', err);
+                    return res.redirect('/account');
+                }
+            });
 
             return res.redirect('/account');
         });

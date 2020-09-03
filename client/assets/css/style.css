@@ -894,7 +894,7 @@ button.thin-btn:hover {
 .store-info .edit,
 .store-info #check,
 .store-info #cancel,
-.store-info .hide {
+.store-info .hide-link {
     display: none;
 }
 .store-info #check,
