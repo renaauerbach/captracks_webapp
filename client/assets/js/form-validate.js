@@ -88,7 +88,14 @@ function validateForm() {
 	err.classList.add('white');
 	err.innerHTML = tempTxt;
 
-
-	document.getElementsByClassName('step')[currentTab].classList.add('finish');
-	return true;
+	// Next if form has tabs
+	let step = document.getElementsByClassName('step');
+	if (step) {
+		step[currentTab].classList.add('finish');
+		return true;
+	}
+	// Next if single page form
+	else {
+		document.getElementsByTagName('submit')[0].submit();
+	}
 }

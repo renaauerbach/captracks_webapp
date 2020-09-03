@@ -1,20 +1,21 @@
 require('dotenv').config();
 require('./db.js');
-
+// ===== Modules ===== //
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const express = require('express');
+const flash = require('connect-flash');
+const fs = require('fs');
+const hbs = require('hbs');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const bodyParser = require('body-parser');
+const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-
-const hbs = require('hbs');
-const path = require('path');
-const cors = require('cors');
-const fs = require('fs');
-
+// ===== Helper Functions ===== //
 const parser = require('./parser.js');
-
+const initPassport = require('./passport/init');
+// ===== Routers ===== //
 const authRouter = require('./api/auth')(passport);
 const storeRouter = require('./api/stores');
 const vendorRouter = require('./api/vendors');
@@ -24,44 +25,40 @@ const detailsRouter = require('./api/details');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Bodyparser middleware
+// ===== Middleware ===== //
+// Bodyparser - parses JSON
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('*', cors());
+// app.use('*', cors()); //TODO: CHECK IF NEEDED
+// Express - server framework
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 
-// Sessions & Passport middlerware
+// Sessions & Passport - authentication and keeping user signed-in
 app.use(session({
     secret: process.env.SECRET_KEY,
     // key:
     resave: false,
     saveUninitialized: false,
-    autoRemove: 'disabled', //FOR PRODUCTION
+    autoRemove: 'disabled', //TODO: ONLY FOR PRODUCTION
     cookie: {},
     // touchAfter: 24 * 3600,
     store: new MongoStore({
         mongooseConnection: mongoose.connection,
     })
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Using the flash middleware provided by connect-flash to store messages in session
-// and displaying in templates
-const flash = require('connect-flash');
-app.use(flash());
-
-// Initialize Passport
-const initPassport = require('./passport/init');
 initPassport(passport);
 
+// Flash - error messages
+app.use(flash());
+
+// Hbs (Handlebars) - view engine
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
-
-// Handlebars helpers & partials
+// Hbs Helper Functions 
 hbs.registerHelper('ifOdd', val => {
     return val % 2 == 0 ? false : true;
 });
@@ -84,6 +81,7 @@ hbs.registerHelper('concat', (val1, val2) => {
 hbs.registerHelper('len', (obj) => {
     return Object.keys(obj).length;
 });
+// Hbs Partials
 hbs.registerPartials(__dirname + '/views/partials', err => { });
 
 // Routers
@@ -94,13 +92,37 @@ app.use('/post', messageRouter);
 app.use('/details', detailsRouter);
 
 app.use((req, res, next) => {
-    console.log(req.isAuthenticated());
     if (req.isAuthenticated()) {
         res.locals.user = req.session.passport.user;
     }
     next();
 });
 
+// ==================== HOW IT WORKS (GET) ==================== //
+app.get('/info', (req, res) => {
+    // Load functionality box data
+    const boxes = parser.parseData(
+        fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
+        'functionality'
+    );
+
+    // Load Vendor info data
+    const info = parser.parseData(
+        fs.readFileSync(path.join(__dirname, '/content/info.json')),
+        'info'
+    );
+
+    res.render('info', {
+        layout: 'layout',
+        title: 'How It Works',
+        helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
+        data: boxes,
+        info: info,
+        user: req.isAuthenticated(),
+    });
+});
+
+// ==================== ABOUT US (GET) ==================== //
 app.get('/about', (req, res) => {
     // Load team member data
     const members = parser.parseData(
@@ -112,50 +134,28 @@ app.get('/about', (req, res) => {
         layout: 'layout',
         title: 'About Us',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
-        members: members,
-        user: req.user,
+        data: members,
+        user: req.isAuthenticated(),
     });
 });
 
-app.get('/info', (req, res) => {
-    // Load functionality box data
-    const boxes = parser.parseData(
-        fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
-        'functionality'
-    );
-
-    // Load vendor info data
-    const info = parser.parseData(
-        fs.readFileSync(path.join(__dirname, '/content/info.json')),
-        'info'
-    );
-
-    res.render('info', {
-        layout: 'layout',
-        title: 'How It Works',
-        helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
-        functionality: boxes,
-        info: info,
-        user: req.user,
-    });
-});
-
+// ==================== TERMS & CONDITIONS (GET) ==================== //
 app.get('/terms', (req, res) => {
     res.render('terms', {
         layout: 'layout',
         title: 'Terms & Conditions',
-        user: req.user,
+        user: req.isAuthenticated(),
     });
 });
 
+// ==================== PRIVACY POLICY(GET) ==================== //
 app.get('/privacy', (req, res) => {
     res.render('privacy', {
         layout: 'layout',
         title: 'Privacy Policy',
-        user: req.user,
+        user: req.isAuthenticated(),
     });
 });
-
 
 app.listen(PORT, () => {
     console.log('Server running on port', PORT);

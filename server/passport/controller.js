@@ -1,6 +1,7 @@
+// ===== Modules ===== //
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt-nodejs');
-
+// ===== Models ===== //
 const Vendor = require('../models/vendor.model');
 
 // Generate password hash using bcrypt

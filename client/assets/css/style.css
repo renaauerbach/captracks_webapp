@@ -827,7 +827,6 @@ button.thin-btn:hover {
     overflow: hidden !important;
 }
 
-
 /* ====== ACCOUNT / STORE PAGE ====== */
 .back {
     color: #ffffff;
@@ -891,24 +890,41 @@ button.thin-btn:hover {
     text-transform: uppercase;
 }
 
+.info-title #save,
 .store-info .edit,
-.info-title #save {
+.store-info #check,
+.store-info #cancel,
+.store-info .hide {
     display: none;
 }
+.store-info #check,
+.store-info #cancel {
+    padding-left: 10px;
+    cursor: pointer;
+}
+.store-info #check {
+    color: #4aaa13;
+}
+.store-info #cancel {
+    color: #fa354d;
+}
 
-.store-links .view {
+.store-links .view,
+.store-links .show {
     border-radius: 10px;
     font-size: 17px;
     width: 100%;
+    padding-left: 10px;
 }
-.store-links .view:focus {
+.store-links .view:focus,
+.store-links .show:focus {
     border-radius: 10px;
 }
 
-.divider {
+/* .divider {
     position: absolute;
     left: 26.5%;
-    /* top: 55%; */
+    //top: 55%;
     bottom: 0;
     border-left: 2px dotted;
     border-image-slice: 1;
@@ -923,7 +939,7 @@ button.thin-btn:hover {
         #b116e0,
         #e708ae
     );
-}
+} */
 
 /* ==== CAPACITY ==== */
 /* Capacity Form */
@@ -1201,7 +1217,6 @@ footer {
         padding-left: 15px;
     }
 }
-
 
 /* ====== TERMS / PRIVACY ====== */
 #terms p,

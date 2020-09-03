@@ -1,73 +1,86 @@
+// ===== Modules ===== //
 const express = require('express');
+// ===== Router ===== //
 const router = express.Router();
-
-const Vendor = require('../models/vendor.model');
+// ===== Models ===== //
 const Store = require('../models/store.model');
+const Vendor = require('../models/vendor.model');
 
-// Vendor Account --> ACCOUNT
+// ==================== VENDOR ACCOUNT (GET) ==================== //
 router.get('/', (req, res) => {
     // Get all store info and populate all fields
-    Store.findOne({ vendor: req.user._id }).populate({ path: "details", model: "details" }).populate({ path: "vendor", model: "vendors" }).populate({ path: "forum", model: "messages" }).exec((err, store) => {
-        if (err) {
-            return res.status(400).json({ success: false, error: err });
-        }
-        console.log("details", store.details[0]);
-
-        res.render('account', {
-            layout: 'layout',
-            vendor: req.user,
-            store: store,
-            details: store.details[0],
-            title: 'My Account',
-            user: req.isAuthenticated(),
-            message: req.flash('message')
+    Store.findOne({ vendor: req.user._id })
+        .populate({ path: 'details', model: 'details' })
+        .populate({ path: 'vendor', model: 'vendors' })
+        .populate({ path: 'forum', model: 'messages' })
+        .exec((err, store) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            res.render('account', {
+                layout: 'layout',
+                vendor: req.user,
+                store: store,
+                details: store.details[0],
+                title: 'My Account',
+                user: req.isAuthenticated(),
+                error: req.flash('error'),
+            });
         });
-    });
 });
 
+// ==================== UPDATE STORE INFO (POST) ==================== //
 // Edit Store info from account page
 router.post('/:id', (req, res) => {
-    // Check if user is authenticated
+    // Check Vendor Authentication
     if (req.isAuthenticated()) {
-        const update = {
-            address: req.body.address,
-            phone: req.body.phone,
-            url: req.body.url
-        };
-
-        Store.findByIdAndUpdate(req.params.id, update,
-            (err) => {
-                if (err) {
-                    return res.status(400).json({ success: false, error: err });
-                }
-                console.log('Store info updated successfully!');
+        // Check update type (Add Link or Store Info)
+        const update = (req.body.link_url) ?
+            {
+                $push: {
+                    links: { $each: [{ 'title': req.body.link_title, 'url': req.body.link_url }], $position: 0 },
+                },
+            } : {
+                address: req.body.address,
+                phone: req.body.phone,
+                url: req.body.url,
+            };
+        // Update Store by ID
+        Store.findByIdAndUpdate(req.params.id, update, err => {
+            if (err) {
+                req.flash('error', process.env.STORE_INFO_ERROR);
+                console.log('Error updating Store info:', err);
                 return res.redirect('/account');
-            });
-    }
-    else {
-        // Otherwise go back to login page
-        return res.redirect('/login');
-    }
-});
-
-router.get('/profile', (req, res) => {
-    // Check if user is authenticated
-    if (req.isAuthenticated()) {
-        res.render('account', {
-            layout: 'layout',
-            vendor: req.user,
-            title: 'My Profile',
-            user: true, // Dynamic since already checked for authentication
+            }
+            return res.redirect('/account');
         });
     }
+    // Not Authenticated --> back to Login
     else {
-        // Otherwise go back to login page
         return res.redirect('/login');
     }
 });
 
-// // Account Settings
+// ==================== VENDOR PROFILE (GET) ==================== //
+// router.get('/profile', (req, res) => {
+//     // Check Vendor Authentication
+//     if (req.isAuthenticated()) {
+//         res.render('account', {
+//             layout: 'layout',
+//             vendor: req.user,
+//             title: 'My Profile',
+//              user: true,     // Dynamic since already checked for authentication
+//         });
+//     }
+//     // Not Authenticated --> back to Login
+//     else {
+//         return res.redirect('/login');
+//     }
+// });
+
+// ==================== ACCOUNT SETTINGS (GET) ==================== //
 // router.get('/settings', (req, res) => {
+// Check Vendor Authentication
 //     if (req.isAuthenticated()) {
 //      Store.find({ vendor: req.user._id }).populate({ path: "store.details", populate: "details" }).exec((err, store) => {
 //             if (err) {
@@ -82,15 +95,16 @@ router.get('/profile', (req, res) => {
 //             });
 //         });
 //     }
+// Not Authenticated --> back to Login
 //     else {
 //         res.redirect('/login');
 //     }
 // });
 
-// // Delete Vendor Account
-// router.delete('/:id', (req, res) => {
+// ==================== DELETE VENDOR ACCOUNT (POST) ==================== //
+// router.post('/:id', (req, res) => {
 //     if (req.isAuthenticated()) {
-//         Vendor.findByIdAndRemove(res.locals.user._id, err => {
+//         Vendor.findByIdAndRemove(req.user._id, err => {
 //             if (err) {
 //                 res.status(400).json({ success: false, error: err });
 //             }
@@ -98,6 +112,7 @@ router.get('/profile', (req, res) => {
 //             console.log('Vendor account deleted successfully!');
 //         });
 //     }
+// // TODO: MAKE SURE USER IS ALSO LOGGED OUT
 //     res.redirect('/login');
 // });
 

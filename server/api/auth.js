@@ -1,18 +1,24 @@
-const express = require('express');
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+// ===== Modules ===== //
 const async = require('async');
+const crypto = require('crypto');
+const express = require('express');
+const fs = require('fs');
+const nodemailer = require('nodemailer');
+const path = require('path');
 const sgMail = require('@sendgrid/mail');
-
+// ===== Router ===== //
 const router = express.Router();
-
-const createHash = require('../passport/controller').createHash;
-
+// ===== Models ===== //
+const Details = require('../models/details.model');
 const Store = require('../models/store.model');
 const Vendor = require('../models/vendor.model');
-const Details = require('../models/details.model');
 
-var smtpTransport = nodemailer.createTransport({
+// ===== Helper Functions & Data ===== //
+const createHash = require('../passport/controller').createHash;
+// Email content
+const emails = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/emails.json')));
+// Nodemailer Transporter
+const smtpTransport = nodemailer.createTransport({
     service: 'SendGrid',
     auth: {
         user: process.env.SENDGRID_USER,
@@ -21,11 +27,12 @@ var smtpTransport = nodemailer.createTransport({
 });
 
 module.exports = function(passport) {
-    // Login
+    // ==================== LOGIN (GET) ==================== //
     router.get('/login', (req, res) => {
         res.render('login', {
             layout: 'layout',
             title: 'Login',
+            error: req.flash('error'),
             message: req.flash('message'),
         });
 
@@ -39,27 +46,27 @@ module.exports = function(passport) {
         // };
         // sgMail.send(msg);
     });
-
-    // Login form POST
-    router.post(
-        '/login',
+    // ==================== LOGIN (POST) ==================== //
+    router.post('/login',
         passport.authenticate('login', { failureRedirect: '/login' }),
         (req, res) => {
+            // TODO: CHECK IF NEEDED
             res.cookie('firstName', req.user.firstName);
             res.cookie('userId', req.user.id);
             return res.redirect('/account');
         }
     );
 
-    // Forgot Password
+    // ==================== FORGOT (GET) ==================== //
     router.get('/forgot', (req, res) => {
         res.render('forgot', {
             layout: 'layout',
             title: 'Forgot Password',
+            error: req.flash('error'),
             message: req.flash('message'),
         });
     });
-
+    // ==================== FORGOT (POST) ==================== //
     router.post('/forgot', (req, res, next) => {
         async.waterfall(
             [
@@ -72,16 +79,12 @@ module.exports = function(passport) {
                 function(token, done) {
                     Vendor.findOne({ email: req.body.email }, (err, user) => {
                         if (!user || err) {
-                            req.flash(
-                                'error',
-                                'No account with that email address exists.'
-                            );
+                            req.flash('error', process.env.NO_VENDOR_EXISTS);
                             return res.redirect('/forgot');
                         }
 
                         user.resetPasswordToken = token;
                         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-                        console.log("user:", user);
 
                         user.save(err => {
                             done(err, token, user);
@@ -89,27 +92,21 @@ module.exports = function(passport) {
                     });
                 },
                 function(token, user, done) {
-                    var resetEmail = {
+                    var mailOptions = {
                         to: user.email,
                         from: 'noreply@captracks.com',
-                        subject: 'Reset your CapTracks account password',
-                        text: '\nYou are receiving this because you (or someone else) requested to reset the password for your CapTracks account.\n\n' +
-                            'Please use the following link (valid for the next 60 minutes) to complete the process:\n\n' +
-                            'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-                            'If you did not make this request, please ignore this email, and your password will remain unchanged.\n'
+                        subject: emails[0].subject,
+                        text: emails[0].text[0] + req.headers.host + emails[0].text[1]
+                            + token + emails[0].text[2]
                     };
-                    smtpTransport.sendMail(resetEmail, (err) => {
-                        req.flash(
-                            'message',
-                            'An email has been sent to ' +
-                            user.email +
-                            ' with further instructions.'
-                        );
+                    smtpTransport.sendMail(mailOptions, (err) => {
+                        req.flash('message', process.env.RESET_MESSAGE);
                         done(err, 'done');
                     });
                 },
             ],
             function(err) {
+                // Handle Error
                 if (err) {
                     return next(err);
                 }
@@ -118,64 +115,75 @@ module.exports = function(passport) {
         );
     });
 
+    // ==================== RESET (POST) ==================== //
     router.get('/reset/:token', (req, res) => {
-        Vendor.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
-            if (!user || err) {
-                req.flash('message', 'Password reset token is invalid or has expired.');
-                return res.redirect('/forgot');
-            }
-            res.render('reset', {
-                user: req.user,
-                message: req.flash('message'),
+        Vendor.findOne({
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() }
+        },
+            (err, user) => {
+                if (!user || err) {
+                    req.flash('error', process.env.RESET_INVALID);
+                    return res.redirect('/forgot');
+                }
+                res.render('reset', {
+                    user: req.user,
+                    error: req.flash('error'),
+                    message: req.flash('message'),
+                });
             });
-        });
     });
-
+    // ==================== RESET (GET) ==================== //
     router.post('/reset/:token', (req, res) => {
         async.waterfall([
             function(done) {
-                Vendor.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
-                    if (!user || err) {
-                        req.flash('message', 'Password reset token is invalid or has expired.');
-                        return res.redirect('/forgot');
-                    }
+                Vendor.findOne({
+                    resetPasswordToken: req.params.token,
+                    resetPasswordExpires: { $gt: Date.now() }
+                },
+                    (err, user) => {
+                        if (!user || err) {
+                            req.flash('error', process.env.RESET_INVALID);
+                            return res.redirect('/forgot');
+                        }
 
-                    user.password = createHash(req.body.password);
-                    user.resetPasswordToken = undefined;
-                    user.resetPasswordExpires = undefined;
+                        user.password = createHash(req.body.password);
+                        user.resetPasswordToken = undefined;
+                        user.resetPasswordExpires = undefined;
 
-                    user.save((err) => {
-                        req.logIn(user, (err) => {
+                        user.save((err) => {
                             done(err, user);
                         });
                     });
-                });
             },
             function(user, done) {
-                var resetEmail = {
+                var mailOptions = {
                     to: user.email,
                     from: 'noreply@captracks.com',
-                    subject: 'Your password has been reset',
-                    text: 'Hello,\n\n' +
-                        'This is a confirmation that the password for your CapTracks account ' + user.email + ' has just been reset.\n\n' +
-                        'If you did not make these changes, please contact rena@captracks.com.'
+                    subject: emails[1].subject,
+                    text: emails[1].text[0] + user.email + emails[1].text[1]
                 };
-                smtpTransport.sendMail(resetEmail, function(err) {
-                    req.flash('message', 'Your password has been successfully reset!');
+                smtpTransport.sendMail(mailOptions, function(err) {
+                    req.flash('message', process.env.RESET_SUCCESS);
                     done(err);
                 });
             }
         ], function(err) {
+            // Handle Error
+            if (err) {
+                return next(err);
+            }
             res.redirect('/login');
         });
     });
 
-    // Join CapTracks
+    // ==================== JOIN (GET) ==================== //
     router.get('/join', (req, res) => {
-        // Get stores without assigned vendors
+        // Get Stores in DB without Vendors
         Store.find({ vendor: null }, (err, stores) => {
+            // Handle Error
             if (err) {
-                res.status(400).send(req.flash(err));
+                return res.status(400).send(err);
             }
             stores.map(store => {
                 var id = store._id;
@@ -195,177 +203,162 @@ module.exports = function(passport) {
                 layout: 'layout',
                 title: 'Join CapTracks',
                 stores: stores,
+                error: req.flash('error'),
                 message: req.flash('message'),
             });
         });
     });
-
+    // ==================== JOIN (POST) ==================== //
     router.post(
         '/join',
         passport.authenticate('signup', { failureRedirect: '/join' }),
         (req, res) => {
-            if (req.body.existed) {
-                Vendor.findOne({ _id: req.user._id }, (err, vendor) => {
-                    if (err) {
-                        return res
-                            .status(400)
-                            .send('Error assinging vendor to store: ');
-                    }
-
-                    Store.findByIdAndUpdate(
-                        req.body.existed,
-                        { vendor: vendor },
-                        err => {
-                            if (err) {
-                                return res.status(400).send(err);
-                            }
-                            console.log('Store assigned successfully!');
-                        }
-                    );
-                });
-            } else {
-                var address =
-                    req.body.street +
-                    ', ' +
-                    req.body.city +
-                    ', ' +
-                    req.body.state +
-                    ' ' +
-                    req.body.zip;
-                try {
-                    // Check if an store already exists with that address
-                    let store = Store.findOne({ address });
-                    if (store) {
-                        return res
-                            .status(400)
-                            .send(
-                                JSON.stringify(
-                                    req.flash(
-                                        'This store is already registered in our system. Please try again or contact us for assistance.'
-                                    )
-                                )
-                            );
-                    }
-
-                    var hours = [];
-                    if (!req.body['24hours']) {
-                        var days = [
-                            'Sun',
-                            'Mon',
-                            'Tues',
-                            'Wed',
-                            'Thurs',
-                            'Fri',
-                            'Sat',
-                        ];
-
-                        for (let i = 0; i < days.length; i++) {
-                            let curr = req.body[days[i]];
-                            if (curr) {
-                                hours.push({
-                                    day: days[i],
-                                    open: curr[0] + ' ' + curr[1],
-                                    close: curr[2] + ' ' + curr[3],
-                                });
-                            } else {
-                                hours.push({ day: days[i] });
-                            }
-                        }
-                    } else {
-                        hours.push('Open 24/7');
-                    }
-
-                    details = new Details({
+            async.waterfall([
+                function(done) {
+                    // New Details Object
+                    let newDetails = new Details({
                         partition: process.env.DB_PARTITION,
                         maxCapacity: req.body.max,
                         capacity: 0,
                         waitTime: 0,
-                        registers: req.body.survey3,
+                        registers: req.body.regs,
                         updated: Date(),
                     });
-
-                    details.save((err, details) => {
+                    // Save Details to DB
+                    newDetails.save((err) => {
                         if (err) {
-                            return res
-                                .status(400)
-                                .json({ success: false, error: err });
+                            req.flash('error', process.env.STORE_REG_ERROR);
+                            return res.redirect('/join');
                         }
-                        res.status(200).json({ success: true, id: details.id });
-                        console.log('Details recorded successfully!');
                     });
 
-                    newStore = new Store({
-                        partition: process.env.DB_PARTITION,
-                        name: req.body.name,
-                        address: address,
-                        phone: req.body.storePhone,
-                        url: req.body.url,
-                        hours: hours,
-                        forum: [],
-                        vendor: vendor.id,
-                        details: details.id,
-                    });
+                    // Check if user is linking to existing Store
+                    if (req.body.existed) {
+                        // Get Vendor (just created through passport)
+                        Vendor.findOne({ _id: req.user._id }, (err, vendor) => {
+                            // Handle Error
+                            if (err) {
+                                return res.status(400).send(err);
+                            }
+                            // Assign Vendor and newDetails to the Store
+                            Store.findByIdAndUpdate(req.body.existed,
+                                { vendor: vendor, details: newDetails._id },
+                                err => {
+                                    // Handle Error
+                                    if (err) {
+                                        return res.status(400).send(err);
+                                    }
+                                }
+                            );
+                        });
+                    }
+                    // Otherwise add Store to DB
+                    else {
+                        // Store Address
+                        var address = req.body.street + ', ' + req.body.city + ', '
+                            + req.body.state + ' ' + req.body.zip;
+                        // Store Hours
+                        var hours = [];
+                        if (!req.body['24hours']) {
+                            var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 
-                    newStore.save((err, store) => {
-                        if (err) {
-                            return res
-                                .status(400)
-                                .json({ success: false, error: err });
+                            for (let i = 0; i < days.length; i++) {
+                                let curr = req.body[days[i]];
+                                if (curr) {
+                                    hours.push({
+                                        day: days[i],
+                                        open: curr[0] + ' ' + curr[1],
+                                        close: curr[2] + ' ' + curr[3],
+                                    });
+                                } else {
+                                    hours.push({ day: days[i] });
+                                }
+                            }
+                        } else {
+                            hours.push('Open 24/7');
                         }
-                        res.status(200).json({ success: true, id: store.id });
-                        console.log('Store added successfully!');
+
+                        // Check if Store already exists in DB with that address
+                        Store.findOne({ address }, (err, store) => {
+                            // Handle Error
+                            if (err) {
+                                req.flash('error', process.env.STORE_REG_ERROR);
+                                return res.redirect('/join');
+                            }
+                            // Handle Store Exists
+                            if (store) {
+                                req.flash('error', process.env.STORE_REG_EXISTS);
+                                return res.redirect('/join');
+                            }
+                            // New Store Object
+                            let newStore = new Store({
+                                partition: process.env.DB_PARTITION,
+                                name: req.body.name,
+                                address: address,
+                                phone: req.body.storePhone,
+                                url: req.body.url,
+                                hours: hours,
+                                forum: [],
+                                vendor: vendor.id,
+                                links: [],
+                            });
+                            // Save Store to DB
+                            newStore.save((err) => {
+                                done(err, newStore);
+                            });
+                        });
+                    }
+                },
+                function(done) {
+                    // Email team members when someone joins
+                    var recipients = [
+                        'gabriel.low@captracks.com',
+                        'ben.shor@captracks.com',
+                        'rena@captracks.com'
+                    ];
+                    recipients.forEach((to) => {
+                        var adminMailOptions = {
+                            from: 'rena@captracks.com',
+                            to: to,
+                            subject: "A new vendor joined CapTracks!",
+                            text: `Vendor: ${req.body.name} 
+                            \nSurvey 1: ${req.body.survey1} 
+                            \nSurvey 2: ${req.body.survey2} 
+                            \nNumber of Registers: ${req.body.reg} 
+                            \nMax Capacity: ${req.body.max}`,
+                        };
+                        smtpTransport.sendMail(adminMailOptions, function(err) {
+                            done(err);
+                        });
                     });
-                } catch (err) {
-                    res.status(500).send(
-                        JSON.stringify(req.flash('Error registering store'))
-                    );
-                    console.log('Error registering vendor', err);
+                    // Confirmation email to vendor
+                    var mailOptions = {
+                        to: user.email,
+                        from: 'noreply@captracks.com',
+                        subject: emails[3].subject,
+                        text: emails[3].text[0] + user.firstName + emails[3].text[1]
+                    };
+                    smtpTransport.sendMail(mailOptions, function(err) {
+                        req.flash('message', process.env.RESET_SUCCESS);
+                        done(err);
+                    });
                 }
-            }
-
-            var email = process.env.MAIL_USER;
-            // var transporter = nodemailer.createTransport({
-            //     host: "smtp.gmail.com",
-            //     port: 465,
-            //     secure: true,
-            //     auth: {
-            //         user: email,
-            //         pass: process.env.MAIL_PASS,
-            //     }
-            // });
-
-            // var textBody = `Vendor: ${req.body.name} Survey 1: ${req.body.survey1} Survey 2: ${req.body.survey2} Survey 3: ${req.body.survey3}`;
-            // var htmlBody = `<h2>Mail From Contact Form</h2><p>from: ${req.body.name} <a href="mailto:${req.body.email}">${req.body.email}</a></p><p>${req.body.message}</p>`;
-
-            // // var recipients = ['gabriel@captracks.com', 'ben@captracks.com']
-            // var recipients = ['renaauerbach@gmail.com', 'renaauerbach@gmail.com']
-            // recipients.forEach((to) => {
-            //     var msg = {
-            //         from: email,
-            //         to: to,
-            //         subject: "A new vendor registered their store with CapTracks!",
-            //         text: textBody,
-            //         html: htmlBody
-            //     };
-
-            //     transporter.sendMail(msg, (err, info) => {
-            //         if(err) {
-            //             console.log(err);
-            //             res.json({ message: "message not sent: an error occured; check the server's console log" });
-            //         }
-            //         else {
-            //             console.log({ message: `message sent: ${info.messageId}` });
-            //         }
-            //     });
-            // });
-            res.cookie('firstName', user.firstName);
-            res.cookie('userId', user.id);
-            return res.redirect('/account');
+            ], function(err) {
+                res.cookie('firstName', user.firstName);
+                res.cookie('userId', user.id);
+                res.redirect('/account');
+            });
         }
     );
 
+    // ==================== LOGOUT (GET) ==================== //
     router.get('/logout', (req, res) => {
         req.session.destroy(err => {
+            // Handle Error
+            if (err) {
+                req.flash('error', process.env.STORE_REG_ERROR);
+                return res.redirect('/account');
+            }
             req.logout();
             res.clearCookie('firstName');
             res.clearCookie('userId');

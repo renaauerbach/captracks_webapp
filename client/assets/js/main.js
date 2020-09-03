@@ -37,9 +37,9 @@
     /* ===== Edit Store Details ===== */
     $('#edit').click(function() {
         $(this).hide();
+        $('#save').show();
         $('.edit').removeClass('edit').addClass('view');
         $('.saved').removeClass('saved').addClass('edit');
-        $('#save').show();
     });
 
     $('#save').click(function() {
@@ -50,6 +50,30 @@
         $('.view').removeClass('view').addClass('edit');
     });
 
+    /* ===== Edit Store Details ===== */
+    $('#add').click(function() {
+        $(this).hide();
+        $('#check').show();
+        $('#cancel').show();
+        $('.hide').removeClass('hide').addClass('show');
+    });
+
+    $('#check').click(function() {
+        $('.link-form').submit();
+        $(this).hide();
+        $('#cancel').hide();
+        $('#add').show();
+        $('.show').removeClass('show').addClass('hide');
+    });
+
+    $('#cancel').click(function() {
+        $(this).hide();
+        $('#check').hide();
+        $('#add').show();
+        $('.show').removeClass('show').addClass('hide');
+    });
+
+
     /* ===== Hide Contact Form on Submit ===== */
     $('#send-msg').click(() => {
         $('#contact').submit(e => {
@@ -59,7 +83,6 @@
         $('#contact').hide();
         $('#success').removeClass('unsent').addClass('sent');
     });
-
 
 })(jQuery);
 

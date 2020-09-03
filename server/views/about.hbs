@@ -6,7 +6,7 @@
 <section id="team">
     <div class="container">
         {{> section_title title="Meet the Team"}}
-        {{#each members as |member|}}
+        {{#each data as |member|}}
         {{#if (ifOdd member.id)}}
         <div class="row justify-content-center">
             {{/if}}

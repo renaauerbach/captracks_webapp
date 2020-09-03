@@ -2,8 +2,7 @@
     {{> info_title label="Store Info"}}
     <div class="store-links">
         <ul>
-            <form method="POST" class='store-form'
-                action="/account/{{store._id}}">
+            <form method="POST" class='store-form' action="/account/{{store._id}}">
                 {{!-- Address --}}
                 <li class="d-flex justify-content-start align-items-center">
                     <i class="fas fa-map-marker-alt"></i>
@@ -27,29 +26,56 @@
                     <a href="{{store.url}}" class="saved">{{store.url}}</a>
                 </li>
                 {{/if}}
-            </form>
-            {{!-- Store Hours --}}
-            <li class="d-flex justify-content-start align-items-baseline">
-                <i class="far fa-hourglass"></i>
-                <div>
-                    <p>Store Hours:</p>
-                    {{#each store.hours as |day|}}
-                    <p class="hours d-flex justify-content-between">
-                        {{#if (eq day.open undefined)}}
-                        <span class="day">{{day.day}}:</span> <span>Closed</span>
-                        {{else}}
-                        <span class="day">{{day.day}}:</span> <span>{{day.open}}
-                            - {{day.close}}</span>
-                        {{/if}}
-                    </p>
-                    {{/each}}
-                </div>
+                {{!-- Store Hours --}}
+                <li class="d-flex justify-content-start align-items-baseline">
+                    <i class="far fa-hourglass"></i>
+                    <div>
+                        <p>Store Hours:</p>
+                        {{#each store.hours as |day|}}
+                        <p class="hours d-flex justify-content-between">
+                            {{#if (eq day.open undefined)}}
+                            <span class="day">{{day.day}}:</span> <span>Closed</span>
+                            {{else}}
+                            <span class="day">{{day.day}}:</span> <span>{{day.open}}
+                                - {{day.close}}</span>
+                            {{/if}}
+                        </p>
+                        {{/each}}
+                    </div>
+                </li>
+            </ul>
+        </form>
+        <form method="POST" class="link-form" action="/account/{{store._id}}">
+            {{#if (eq (len store.links) 0)}}
+            {{else}}
+            {{#each store.links as |link|}}
+            <li class="d-flex justify-content-start align-items-center">
+                <i class="fas fa-link"></i>
+                <input type="text" id="link-url" class="edit" name="link-url"
+                    value="{{link.url}}" required/>
             </li>
-        </ul>
-        {{#if details.links}}
-        {{#each details.links as |link|}}
-        <a href={{link}}>{{link.title}}</a>
-        {{/each}}
-        {{/if}}
+            <li class="d-flex justify-content-start align-items-center">
+                <input type="text" id="link-title" class="edit" name="link-title"
+                    value="{{link.title}}" required/>
+                <a href={{link.url}} class="saved">{{link.title}}</a>
+            </li>
+            </li>
+            {{/each}}
+            {{/if}}
+            <li class="d-flex justify-content-start align-items-center">
+                <input type="text" id="link-url" class="hide" name="link-url"
+                    placeholder="Link Title" required/>
+            </li>
+            <li class="d-flex justify-content-start align-items-center">
+                <input type="text" id="link-title" class="hide" name="link-title"
+                    placeholder="URL" required/>
+                <i class="fas fa-check" id="check"></i>
+                <i class="fas fa-times" id="cancel"></i>
+            </li>
+            <li id="add" class="d-flex align-items-center">
+                <i class="fas fa-plus"></i>
+                <a href="javascript:void(0);">Add Link</a>
+            </li>
+        </form>
     </div>
 </div>

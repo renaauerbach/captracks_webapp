@@ -1,61 +1,88 @@
+// ===== Modules ===== //
 const express = require('express');
-
+// ===== Router ===== //
 const router = express.Router();
-
+// ===== Models ===== //
 const Message = require('../models/message.model');
 const Store = require('../models/store.model');
 
-// Add new message to store's forum
+// ==================== ADD FORUM POST (POST) ==================== //
 router.post('/', async (req, res) => {
-	// Check if user is authenticated
+	// Check Vendor Authentication
 	if (req.isAuthenticated()) {
-		// Create new message from form
-		var newMessage = new Message({
+		// New Message Object
+		let newMessage = new Message({
 			partition: process.env.DB_PARTITION,
 			title: req.body.title,
 			text: req.body.text,
 			createdOn: new Date(),
 		});
-		// Save new message to messages collection
-		newMessage.save(await function(err) {
-			if (err) {
-				return res.status(400).json({ success: false, error: err });
-			}
-			// Find associated store by current user as the vendor
-			Store.findOneAndUpdate({ vendor: req.user._id }, { $push: { forum: { $each: [newMessage._id], $position: 0 } } }, (err) => {
+		// Save Message to DB
+		newMessage.save(
+			await function(err) {
+				// Handle Error
 				if (err) {
-					return res.status(400).json({ success: false, error: err });
+					req.flash('error', process.env.FORUM_POST_ERROR);
+					console.log('Error saving Message to the db:', err);
+					return res.redirect('/account');
 				}
-				return res.redirect('/account');
-			});
-		});
+				// Add Message to Store's forum
+				Store.findOneAndUpdate(
+					{ vendor: req.user._id },
+					{
+						$push: {
+							forum: { $each: [newMessage._id], $position: 0 },
+						},
+					},
+					err => {
+						// Handle Error
+						if (err) {
+							req.flash('error', process.env.FORUM_POST_ERROR);
+							console.log('Error posting Message to forum:', err);
+							return res.redirect('/account');
+						}
+						return res.redirect('/account');
+					}
+				);
+			}
+		);
 	}
+	// Not Authenticated --> back to Login
 	else {
-		// Otherwise go back to login page
 		return res.redirect('/login');
 	}
 });
 
-// Delete a message from a forum
+// ==================== DELETE FORUM POST (POST) ==================== //
 router.post('/delete/:id', (req, res) => {
-	// Check if user is authenticated
+	// Check Vendor Authentication
 	if (req.isAuthenticated()) {
-		// Remove message from store forum
-		Store.findOneAndUpdate({ vendor: req.user._id }, { $pull: { forum: { _id: req.params.id } } }, (err) => {
-			if (err) {
-				return res.status(400).json({ success: false, error: err });
-			}
-			// Remove message from collection
-			Message.findOneAndRemove({ _id: req.params.id }, err => {
+		// Remove Message from Store's forum
+		Store.findOneAndUpdate(
+			{ vendor: req.user._id },
+			{ $pull: { forum: { _id: req.params.id } } },
+			err => {
+				// Handle Error
 				if (err) {
-					return res.status(400).json({ success: false, error: err });
+					req.flash('error', process.env.FORUM_REMOVE_ERROR);
+					console.log('Error removing Message from forum:', err);
+					return res.redirect('/account');
 				}
-				return res.redirect('/account');
-			});
-		});
+				// Remove Message from DB
+				Message.findOneAndRemove({ _id: req.params.id }, err => {
+					// Handle Error
+					if (err) {
+						req.flash('error', process.env.FORUM_REMOVE_ERROR);
+						console.log('Error deleting Message from forum:', err);
+						return res.redirect('/account');
+					}
+					return res.redirect('/account');
+				});
+			}
+		);
 	}
+	// Not Authenticated --> back to Login
 	else {
-		// Otherwise go back to login page
 		return res.redirect('/login');
 	}
 });

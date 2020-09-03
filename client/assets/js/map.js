@@ -75,7 +75,7 @@
             '</div>' +
             '</div>' +
             '<div class="popup-link">' +
-            '<a href="/map/store/' + info.id + '">Store Details</a>' +
+            '<a href="/map/store/' + info.id + '">Store Details & Updates</a>' +
             '</div>';
         const noVendor = '<div class="popup-waiting">Waiting for vendor to join!</div>';
         return (info.details.length !== 0) ? contentString + hasVendor : contentString + noVendor;
