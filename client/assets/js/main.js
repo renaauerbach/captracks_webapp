@@ -55,7 +55,7 @@
         $(this).hide();
         $('#check').show();
         $('#cancel').show();
-        $('.hide').removeClass('hide').addClass('show');
+        $('.hide-link').removeClass('hide-link').addClass('show');
     });
 
     $('#check').click(function() {
@@ -63,16 +63,15 @@
         $(this).hide();
         $('#cancel').hide();
         $('#add').show();
-        $('.show').removeClass('show').addClass('hide');
+        $('.show').removeClass('show').addClass('hide-link');
     });
 
     $('#cancel').click(function() {
         $(this).hide();
         $('#check').hide();
         $('#add').show();
-        $('.show').removeClass('show').addClass('hide');
+        $('.show').removeClass('show').addClass('hide-link');
     });
-
 
     /* ===== Hide Contact Form on Submit ===== */
     $('#send-msg').click(() => {
@@ -85,5 +84,3 @@
     });
 
 })(jQuery);
-
-

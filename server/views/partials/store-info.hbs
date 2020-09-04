@@ -18,14 +18,12 @@
                     <a href="tel:{{store.phone}}" class="saved">{{store.phone}}</a>
                 </li>
                 {{!-- Website URL --}}
-                {{#if store.url}}
                 <li class="d-flex justify-content-start align-items-center">
                     <i class="fas fa-globe"></i>
                     <input type="text" id="url" class="edit" name="url"
                         value="{{store.url}}" required/>
                     <a href="{{store.url}}" class="saved">{{store.url}}</a>
                 </li>
-                {{/if}}
                 {{!-- Store Hours --}}
                 <li class="d-flex justify-content-start align-items-baseline">
                     <i class="far fa-hourglass"></i>
@@ -45,29 +43,25 @@
                 </li>
             </ul>
         </form>
-        <form method="POST" class="link-form" action="/account/{{store._id}}">
+        <form method="POST" class="link-removed" action="/account/{{store._id}}">
             {{#if (eq (len store.links) 0)}}
             {{else}}
             {{#each store.links as |link|}}
             <li class="d-flex justify-content-start align-items-center">
                 <i class="fas fa-link"></i>
-                <input type="text" id="link-url" class="edit" name="link-url"
-                    value="{{link.url}}" required/>
-            </li>
-            <li class="d-flex justify-content-start align-items-center">
-                <input type="text" id="link-title" class="edit" name="link-title"
-                    value="{{link.title}}" required/>
                 <a href={{link.url}} class="saved">{{link.title}}</a>
-            </li>
+                <i class="fas fa-minus-circle" id="remove"></i>
             </li>
             {{/each}}
             {{/if}}
+        </form>
+        <form method="POST" class="link-form" action="/account/{{store._id}}">
             <li class="d-flex justify-content-start align-items-center">
-                <input type="text" id="link-url" class="hide-link" name="link-url"
+                <input type="text" id="linkTitle" class="hide-link" name="linkTitle"
                     placeholder="Link Title" required/>
             </li>
             <li class="d-flex justify-content-start align-items-center">
-                <input type="text" id="link-title" class="hide-link" name="link-title"
+                <input type="text" id="linkUrl" class="hide-link" name="linkUrl"
                     placeholder="URL" required/>
                 <i class="fas fa-check" id="check"></i>
                 <i class="fas fa-times" id="cancel"></i>

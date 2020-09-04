@@ -1,43 +1,34 @@
 <!--====== INFO START ======-->
-<!--====== FUNCTIONALITY START ======-->
-<section id="func" class="style-2">
+<section id="info" class="style-2">
+    {{> header title="Why Use CapTracks?" subtitle_1="Now more than ever, consumers are dependent on reliable real-time data. Given the shifts in consumer behavior–more cooking at home, less cross shopping across retailers–each shopping trip takes on greater importance." subtitle_2="CapTracks offers a wide range of FREE services that benefit both vendors and customers."}}
+</section>
+<!--====== BENEFITS START ======-->
+<section id="benefits">
     <div class="container">
-        {{> section_title title="How It Works"}}
-        <div class="row justify-content-center">
+        <div class="col boxes">
+            <div class="row justify-content-around">
+                {{> section_title title="Customers"}}
+                {{> section_title title="Vendors"}}
+            </div>
             {{#each data as |box|}}
-            <div class="col-lg-4 col-md-8 col-sm-9">
-                <div class="box">
-                    <div class="content">
-                        <i class="{{box.icon}}"></i>
-                        <h4 class="sub-title">{{box.subtitle}}</h4>
-                        <p>{{box.text}}</p>
+            {{#if (ifOdd box.id)}}
+            <div class="row justify-content-around">
+                {{/if}}
+                <div class="col-lg-4 col-md-8 col-sm-9">
+                    <div class="box">
+                        <div class="content">
+                            <i class="{{box.icon}}"></i>
+                            <h4 class="sub-title">{{box.subtitle}}</h4>
+                            <p>{{box.text}}</p>
+                        </div>
                     </div>
                 </div>
+                {{#if (ifEven box.id)}}
             </div>
+            {{/if}}
             {{/each}}
-        </div> <!-- Row End -->
+        </div>
     </div> <!-- Container End -->
 </section>
-<!--====== FUNCTIONALITY ENDS ======-->
-
-<!--====== VENDOR INFO START ======-->
-<section id="info">
-    <div class="container">
-        {{> header title="Why Use CapTracks?" subtitle_1="More than ever, consumers are dependent on real time and reliable information. Given the shifts in consumer behavior - more cooking at home, less cross shopping across retailers - each shopping occasion takes on greater importance."}}
-        <div class="row justify-content-center">
-            {{#each info as |box|}}
-            <div class="col-lg-4 col-md-8 col-sm-9">
-                <div class="box">
-                    <div class="content">
-                        <i class="{{box.icon}}"></i>
-                        <h4 class="sub-title">{{box.subtitle}}</h4>
-                        <p>{{box.text}}</p>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
-        </div> <!-- Row End -->
-    </div> <!-- Container End -->
-</section>
-<!--====== VENDOR INFO ENDS ======-->
+<!--====== BENEFITS ENDS ======-->
 <!--====== INFO ENDS ======-->

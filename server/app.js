@@ -100,10 +100,10 @@ app.use((req, res, next) => {
 
 // ==================== HOW IT WORKS (GET) ==================== //
 app.get('/info', (req, res) => {
-    // Load functionality box data
-    const boxes = parser.parseData(
-        fs.readFileSync(path.join(__dirname, '/content/functionality.json')),
-        'functionality'
+    // Load Customer benefit data
+    const benefits = parser.parseData(
+        fs.readFileSync(path.join(__dirname, '/content/benefits.json')),
+        'benefits'
     );
 
     // Load Vendor info data
@@ -116,7 +116,7 @@ app.get('/info', (req, res) => {
         layout: 'layout',
         title: 'How It Works',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
-        data: boxes,
+        data: benefits,
         info: info,
         user: req.isAuthenticated(),
     });

@@ -39,6 +39,8 @@ router.post('/:id', (req, res) => {
                 req.body.capacity
             );
             details.waitTime = calcWait(details.maxCapacity, req.body);
+
+            // Save Updates to DB
             details.save((err) => {
                 // Handle Error
                 if (err) {

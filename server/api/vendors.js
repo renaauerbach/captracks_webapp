@@ -35,16 +35,22 @@ router.post('/:id', (req, res) => {
     // Check Vendor Authentication
     if (req.isAuthenticated()) {
         // Check update type (Add Link or Store Info)
-        const update = (req.body.link_url) ?
-            {
+        let update;
+        if (req.body.linkUrl) {
+            update = {
                 $push: {
-                    links: { $each: [{ 'title': req.body.link_title, 'url': req.body.link_url }], $position: 0 },
+                    links: { $each: [{ 'title': req.body.linkTitle, 'url': req.body.linkUrl }], $position: 0 },
                 },
-            } : {
+            };
+        }
+        else {
+            update = {
                 address: req.body.address,
                 phone: req.body.phone,
                 url: req.body.url,
             };
+        }
+
         // Update Store by ID
         Store.findByIdAndUpdate(req.params.id, update, err => {
             if (err) {

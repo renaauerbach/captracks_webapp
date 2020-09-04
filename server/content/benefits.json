@@ -1,0 +1,40 @@
+{
+    "benefits": [
+        {
+            "id": 1,
+            "icon": "fas fa-hourglass-half",
+            "subtitle": "Track Store Capacities",
+            "text": "CapTracks provides real-time in-store capacities and wait-times directly from vendors."
+        },
+        {
+            "id": 2,
+            "icon": "fas fa-hourglass-half",
+            "subtitle": "Track Store Capacity",
+            "text": ""
+        },
+        {
+            "id": 3,
+            "icon": "fas fa-store",
+            "subtitle": "View Updated Store Info",
+            "text": "View up-to-date information, such as stores’ daily promotions, COVID-19 guidelines, restocking days, and other vendor verified information."
+        },
+        {
+            "id": 4,
+            "icon": "fas fa-dollar-sign",
+            "subtitle": "Increase Revenue",
+            "text": ""
+        },
+        {
+            "id": 5,
+            "icon": "far fa-comments",
+            "subtitle": "Seamless Communication",
+            "text": ""
+        },
+        {
+            "id": 6,
+            "icon": "far fa-comments",
+            "subtitle": "Seamless Communication",
+            "text": "Use your store's forum to keep customers updated on essential information, such as daily promotions, restocking information, COVID-19 guidelines and more!"
+        }
+    ]
+}

@@ -21,13 +21,13 @@ class Box {
 function parseData(data, name) {
     const parsed = JSON.parse(data)[name];
 
-    const arr = [];
-    const Obj = (name == 'functionality') ? Box : Member;
+    let arr = [];
+    const Obj = (name.includes('benefit')) ? Box : Member;
 
     parsed.map((info, i) => {
         arr[i] = new Obj(info);
     });
-    
+
     return arr;
 }
 
