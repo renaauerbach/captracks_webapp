@@ -136,16 +136,21 @@ input[type=text]:focus {
     content: 'x';
 }
 
-/* Error Message */
+/* Flash Messages */
+.flashMsg,
 .errorMsg {
     font-size: 16px;
     text-align: center;
     display: block;
     margin: 5px 0;
 }
+.flashMsg.purple {
+    color: #b116e0;
+}
 .errorMsg.red {
     color: #f72942;
 }
+.flashMsg.white,
 .errorMsg.white {
     color: #ffffff;
 }

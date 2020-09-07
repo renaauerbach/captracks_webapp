@@ -1,11 +1,13 @@
-const login = require('./controller').login;
-const signup = require('./controller').signup;
+// ===== Models ===== //
 const Vendor = require('../models/vendor.model');
 
+// ===== Helper Functions ===== //
+const login = require('./controller').login;
+const signup = require('./controller').signup;
 
+// User serialize and deserialize for persistent login sessions
 module.exports = function(passport) {
 
-    // Passport needs to be able to serialize and deserialize users to support persistent login sessions
     passport.serializeUser((user, done) => {
         console.log("serialize user: ", user);
         done(null, user);
@@ -23,7 +25,7 @@ module.exports = function(passport) {
         });
     });
 
-    // Setting up Passport Strategies for Login and SignUp/Registration
+    // Set up Passport strategies for Login and Signup
     login(passport);
     signup(passport);
 };

@@ -50,7 +50,7 @@
         $('.view').removeClass('view').addClass('edit');
     });
 
-    /* ===== Edit Store Details ===== */
+    /* ===== Add Store Link ===== */
     $('#add').click(function() {
         $(this).hide();
         $('#check').show();
@@ -71,16 +71,6 @@
         $('#check').hide();
         $('#add').show();
         $('.show').removeClass('show').addClass('hide-link');
-    });
-
-    /* ===== Hide Contact Form on Submit ===== */
-    $('#send-msg').click(() => {
-        $('#contact').submit(e => {
-            // Stop page refresh
-            e.preventDefault();
-        });
-        $('#contact').hide();
-        $('#success').removeClass('unsent').addClass('sent');
     });
 
 })(jQuery);

@@ -1,46 +1,33 @@
 {{!-- Footer Contact Form --}}
-<form id="contact" class="contact-form" method="POST" name="contact"
-    enctype="multipart/form-data" action='/assets/js/nodemailer'>
+<form id="contact" class="contact-form" method="POST" action="contact.php">
     <div>
         <!-- Inputs Row -->
         <div class="row">
             <!-- Name -->
             <div class="name col-lg-6 col-md-6 col-sm-6">
                 <div class="form-item">
-                    <input type="text" class="form-control" placeholder="Name*"
-                        name="name" required
-                        data-validation-required-message="Please enter your
-                        name">
+                    <input type="text" class="form-control name" placeholder="Name*" name="name" required data-validation-required-message="Please enter your name">
                 </div>
             </div>
             <!-- Email -->
             <div class="email col-lg-6 col-md-6 col-sm-6">
                 <div class="form-item">
-                    <input type="email" class="form-control"
-                        placeholder="Email*" name="email" required
-                        data-validation-required-message="Please enter your
-                        email address">
+                    <input type="email" class="form-control email" placeholder="Email*" name="email" required data-validation-required-message="Please enter your email address">
                 </div>
             </div>
             <!-- Phone Number -->
             <div class="col-12">
                 <div class="phone form-item">
-                    <input type="text" class="form-control"
-                        placeholder="Subject" name="subject" required
-                        data-validation-required-message="Please enter a subject
-                        for your message">
+                    <input type="text" class="form-control subject" placeholder="Subject*" name="subject" required data-validation-required-message="Please enter a subject for your message">
                 </div>
             </div>
         </div> <!-- End Input Row -->
         <!-- Message Textarea -->
         <div class="form-item">
-            <textarea class="form-control" rows="4" placeholder="Message"
-                name="message" required data-validation-required-message="Please
-                enter a message"></textarea>
+            <textarea class="form-control" rows="4" placeholder="Message*" name="message" required data-validation-required-message="Please enter a message"></textarea>
         </div>
         <div class="d-flex justify-content-right">
-            <button id="send-msg" class="thin-btn" type="submit" name="submit"
-                onclick="">Send</button>
+            <button id="send-msg" class="thin-btn" type="submit" name="submit">Send</button>
         </div>
     </div>
 </form> <!-- End Form -->

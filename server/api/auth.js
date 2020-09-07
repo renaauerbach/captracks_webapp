@@ -79,7 +79,7 @@ module.exports = function(passport) {
                 function(token, done) {
                     Vendor.findOne({ email: req.body.email }, (err, user) => {
                         if (!user || err) {
-                            req.flash('error', process.env.NO_VENDOR_EXISTS);
+                            req.flash('error', process.env.WRONG_EMAIL);
                             return res.redirect('/forgot');
                         }
 
@@ -310,7 +310,7 @@ module.exports = function(passport) {
                     }
                 },
                 function(done) {
-                    // Email team members when someone joins
+                    // Email team members when a Vendor joins
                     var recipients = [
                         'gabriel.low@captracks.com',
                         'ben.shor@captracks.com',
@@ -331,7 +331,7 @@ module.exports = function(passport) {
                             done(err);
                         });
                     });
-                    // Confirmation email to vendor
+                    // Confirmation email to Vendor
                     var mailOptions = {
                         to: user.email,
                         from: 'noreply@captracks.com',

@@ -1,3 +1,4 @@
+// Member Class - for displaying team member data
 class Member {
     constructor(data) {
         this.id = data.id;
@@ -9,6 +10,7 @@ class Member {
     }
 }
 
+// Box Class - for displaying data in boxes
 class Box {
     constructor(data) {
         this.id = data.id;
@@ -18,6 +20,7 @@ class Box {
     }
 }
 
+// Function to parse data into the above classes
 function parseData(data, name) {
     const parsed = JSON.parse(data)[name];
 

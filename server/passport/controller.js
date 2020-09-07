@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt-nodejs');
 // ===== Models ===== //
 const Vendor = require('../models/vendor.model');
 
+// ===== Helper Functions ===== //
 // Generate password hash using bcrypt
 const createHash = (password) => {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
@@ -14,27 +15,31 @@ const isValidPassword = (vendor, password) => {
 	return bcrypt.compareSync(password, vendor.password);
 };
 
+// Passport local login
 function login(passport) {
 	passport.use('login', new LocalStrategy({
-		usernameField: 'email',
-		passwordField: 'password',
-		passReqToCallback: true
+		usernameField: 'email',			// Override username field
+		passwordField: 'password',		// Override password field
+		passReqToCallback: true			// Make req accessible after login
 	}, (req, email, password, done) => {
-		// Check if a Vendor with input email exists
+		// Check if Vendor exists with input email 
 		Vendor.findOne({ 'email': email }, (err, vendor) => {
+			// Handle Error
 			if (err) {
 				console.log('Error in Login: ' + err);
 				return done(err);
 			}
-			// Vendor does NOT already exist --> log error and redirect back
+			// Vendor does NOT exist --> send error message
 			if (!vendor) {
 				console.log('Vendor Not Found');
-				return done(null, false, req.flash('message', "We don't recognize that email. Want to <a href='/join'>create an account</a>?"));
+				let link = '/join';
+				return done(null, false, req.flash('error', process.env.WRONG_EMAIL));
 			}
-			// Vendor DOES exist BUT wrong password --> log the error 
+			// Vendor DOES exist BUT wrong password --> send error message
 			if (!isValidPassword(vendor, password)) {
 				console.log('Invalid Password');
-				return done(null, false, req.flash('message', "Wrong password. Please try again or <a href='/forgot'>reset your password</a>."));
+				let link = '/forgot';
+				return done(null, false, req.flash('error', process.env.WRONG_PASSWORD));
 			}
 			// Vendor and password match --> return Vendor from done method
 			return done(null, vendor);
@@ -42,27 +47,29 @@ function login(passport) {
 	}));
 }
 
+// Passport local signup
 function signup(passport) {
 	passport.use('signup', new LocalStrategy({
-		usernameField: 'email',
-		passwordField: 'password',
-		passReqToCallback: true
+		usernameField: 'email',			// Override username field
+		passwordField: 'password',		// Override password field
+		passReqToCallback: true			// Make req accessible after signup
 	}, (req, email, password, done) => {
 		const findOrCreateVendor = () => {
-			// find a Vendor in Mongo with provided Vendor name
+			// Check if email already exists in DB
 			Vendor.findOne({ 'email': email }, (err, vendor) => {
-				// In case of any error, return using the done method
+				// Handle Error
 				if (err) {
 					console.log('Error in Sign Up: ' + err);
 					return done(err);
 				}
-				// already exists
+				// Vendor already exists with that email --> send error message
 				if (vendor) {
 					console.log('Vendor Already Exists');
-					return done(null, false, req.flash('message', 'An account with that email already exists. Please try again.'));
-				} else {
-					// if there is no vendor with that email
-					// create the Vendor
+					return done(null, false, req.flash('error', process.env.VENDOR_EXISTS));
+				}
+				// Otherwise signup Vendor 
+				else {
+					// New Vendor Object
 					const newVendor = new Vendor({
 						partition: process.env.DB_PARTITION,
 						firstName: req.body.firstName,
@@ -72,20 +79,18 @@ function signup(passport) {
 						email: email,
 					});
 
-					// save the vendor
+					// Save Vendor to DB
 					newVendor.save((err) => {
+						// Handle Error
 						if (err) {
-							console.log('Error in Saving Vendor: ' + err);
-							throw err;
+							return done(err);
 						}
-						console.log('Vendor registered succesfully');
 						return done(null, newVendor);
 					});
 				}
 			});
 		};
-		// Delay the execution of findOrCreateVendor and execute the method
-		// in the next tick of the event loop
+		// Delay execution of findOrCreateVendor until next tick of event loop
 		process.nextTick(findOrCreateVendor);
 	}));
 }
