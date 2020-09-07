@@ -639,15 +639,10 @@ button.thin-btn:hover {
 
 /*====== ALL PAGES/SECTIONS ======*/
 .intro, 
-#terms,
-#privacy,
-#about,
+#legal,
 #info,
 #store, 
-#login,
-#forgot,
-#reset,
-#join,
+#auth,
 #account {
     padding-top: 18%;
     padding-bottom: 10%;
@@ -663,15 +658,10 @@ button.thin-btn:hover {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .intro, 
-    #terms,
-    #privacy,
-    #about, 
+    #legal,
     #info,
     #store, 
-    #login,
-    #forgot,
-    #reset,
-    #join,
+    #auth,
     #account {
         padding: 10%;
         padding-top: 25%;
@@ -688,15 +678,10 @@ button.thin-btn:hover {
 
 @media (max-width: 767px) {
     .intro, 
-    #terms,
-    #privacy,
-    #about, 
+    #legal,
     #info,
     #store, 
-    #login,
-    #forgot,
-    #reset,
-    #join,
+    #auth,
     #account {
         padding: 10%;
         padding-top: 40%;
@@ -1239,32 +1224,27 @@ footer {
 }
 
 /* ====== TERMS / PRIVACY ====== */
-#terms p,
-#privacy p {
+#legal p {
     font-size: 12px;
 }
 
-#terms h5,
-#privacy h5 {
+#legal h5 {
     color: #0000cd;
 
 }
 
-#terms ul li,
-#privacy ul li {
+#legal ul li {
     list-style-type: circle;
     font-size: 12px;
     margin-bottom: 10px;
 }
 
-#terms ol li,
-#privacy ol li {
+#legal ol li {
     margin-left: 2em;
     font-size: 14px;
 }
 
-#terms a,
-#privacy a {
+#legal a {
     color: #0000cd;
 }
 

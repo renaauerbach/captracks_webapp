@@ -1,0 +1,32 @@
+<!--====== FORUM SECTION START ======-->
+<section id="forum">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Row Start -->
+        <div class="row justify-content-between">
+            {{!-- Store Info Column --}}
+            <div class="col-lg-4 col-md-4 col-sm-3">
+                {{> store_details store=store}}
+            </div>
+            {{!-- Capacity & Forum --}}
+            <div class="col">
+                {{#if store.details}}
+                {{!-- Capacity --}}
+                {{> store_titles label="Capacity"}}
+                {{> store_capacity details=details}}
+                {{/if}}
+                {{!-- Forum --}}
+                {{> store_titles label="Forum"}}
+                {{#if store.forum}}
+                {{#each store.forum as |msg|}}
+                {{> forum_post msg=msg}}
+                {{/each}}
+                {{else}}
+                <p class="no-forum">No forum posts yet. Check back soon for an
+                    update!</p>
+                {{/if}}
+            </div>
+        </div> <!-- Row End -->
+    </div> <!-- Container End -->
+</section>
+<!--====== FORUM SECTION END ======-->

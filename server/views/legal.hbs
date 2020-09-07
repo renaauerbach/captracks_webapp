@@ -1,0 +1,17 @@
+<!--================ TERMS & CONDTIONS PAGE START ================-->
+<section id="legal">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Header Start -->
+        {{> header title=title text1="Last updated August 20, 2020"}}
+        <!-- Header End -->
+
+        {{#if (eq title 'Terms & Conditions')}}
+        {{> legal_terms}}
+        {{else}}
+        {{> legal_privacy}}
+        {{/if}}
+
+    </div> <!-- Container End -->
+</section>
+<!--================ TERMS & CONDTIONS PAGE END ================-->

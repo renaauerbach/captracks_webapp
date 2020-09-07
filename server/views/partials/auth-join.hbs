@@ -1,0 +1,28 @@
+<form id="regForm" class="join form" method="POST">
+    <div class="tab">
+        {{> join_signup}}
+    </div>
+    <div class="tab">
+        {{> join_register}}
+    </div>
+    <div class="tab">
+        {{> join_survey}}
+    </div>
+
+    <span class="flashMsg purple">{{message}}</span>
+    <span class="errorMsg red">{{error}}</span>
+    <div style="overflow: auto; text-align: center;">
+        <div class="tab-btn">
+            <button type="button" id="prevBtn" class="main-btn"
+                onclick="nextPrev(-1)">Back</button>
+            <button type="button" id="nextBtn" class="main-btn"
+                onclick="nextPrev(1)">Next</button>
+        </div>
+    </div>
+
+    <div class="tab-steps">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+    </div>
+</form>

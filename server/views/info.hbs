@@ -1,34 +1,15 @@
-<!--====== INFO START ======-->
+<!--================ HOW IT WORKS PAGE START ================-->
 <section id="info" class="style-2">
+    {{#if (eq title 'How It Works')}}
     {{> header title="Why Use CapTracks?" subtitle_1="Now more than ever, consumers are dependent on reliable real-time data. Given the shifts in consumer behavior–more cooking at home, less cross shopping across retailers–each shopping trip takes on greater importance." subtitle_2="CapTracks offers a wide range of FREE services that benefit both vendors and customers."}}
+    {{else}}
+    {{> header title="About Us" subtitle_1="CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies." subtitle_2="We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond."}}
+    {{/if}}
 </section>
-<!--====== BENEFITS START ======-->
-<section id="benefits">
-    <div class="container">
-        <div class="col boxes">
-            <div class="row justify-content-around">
-                {{> section_title title="Customers"}}
-                {{> section_title title="Vendors"}}
-            </div>
-            {{#each data as |box|}}
-            {{#if (ifOdd box.id)}}
-            <div class="row justify-content-around">
-                {{/if}}
-                <div class="col-lg-4 col-md-8 col-sm-9">
-                    <div class="box">
-                        <div class="content">
-                            <i class="{{box.icon}}"></i>
-                            <h4 class="sub-title">{{box.subtitle}}</h4>
-                            <p>{{box.text}}</p>
-                        </div>
-                    </div>
-                </div>
-                {{#if (ifEven box.id)}}
-            </div>
-            {{/if}}
-            {{/each}}
-        </div>
-    </div> <!-- Container End -->
-</section>
-<!--====== BENEFITS ENDS ======-->
-<!--====== INFO ENDS ======-->
+
+{{#if (eq title 'How It Works')}}
+{{> benefits}}
+{{else}}
+{{> team}}
+{{/if}}
+<!--================ HOW IT WORKS PAGE ENDS ================-->

@@ -1,0 +1,9 @@
+<!-- Form Start -->
+<form class="reset form" method="POST">
+    {{> form_password label1="New Password" label2="Confirm New Password"}}
+    <span class="flashMsg purple">{{message}}</span>
+    <span class="errorMsg white">{{error}}</span>
+    <div class="submit-btn d-flex justify-content-center">
+        <input id="resetBtn" class="main-btn" type="submit" value="Submit" onclick="validateForm();">
+    </div>
+</form> <!-- Form End -->

@@ -1,18 +1,20 @@
-{{!-- <!--====== ACCOUNT START ======--> --}}
+<!--================ ACCOUNT PAGE START ================-->
 <section id="account" class="style-2">
     {{> header title=(concat 'Hello, ' vendor.firstName)}}
 </section>
 <section id="account-body">
+    <!-- Container Start -->
     <div class="container">
+
         {{#if (eq title 'My Account')}}
         {{> account_store}}
-        {{#else}}
+        {{else}}
         {{> account_profile}}
-        {{/else}}
         {{/if}}
+
     </div> <!-- Container End -->
 </section>
-{{!-- <!--====== ACCOUNT ENDS ======--> --}}
+<!--================ ACCOUNT PAGE ENDS ================-->
 <script src="/assets/js/form-format.js"></script>
 <script src="/assets/js/form-disable.js"></script>
 <script src="/assets/js/form-validate.js"></script>

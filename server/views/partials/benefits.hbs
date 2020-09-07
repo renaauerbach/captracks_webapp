@@ -1,0 +1,31 @@
+<!--====== BENEFITS SECTION START ======-->
+<section id="benefits">
+    <!-- Container Start -->
+    <div class="container">
+        <div class="col boxes">
+            <div class="row justify-content-around">
+                {{> section_title title="Customers"}}
+                {{> section_title title="Vendors"}}
+            </div>
+            {{#each data as |box|}}
+            {{#if (ifOdd box.id)}}
+            <!-- Row Start -->
+            <div class="row justify-content-around">
+                {{/if}}
+                <div class="col-lg-4 col-md-8 col-sm-9">
+                    <div class="box">
+                        <div class="content">
+                            <i class="{{box.icon}}"></i>
+                            <h4 class="sub-title">{{box.subtitle}}</h4>
+                            <p>{{box.text}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{#if (ifEven box.id)}}
+            </div>
+            {{/if}}
+            {{/each}}
+        </div> <!-- Row Start -->
+    </div> <!-- Container End -->
+</section>
+<!--====== BENEFITS SECTION ENDS ======-->

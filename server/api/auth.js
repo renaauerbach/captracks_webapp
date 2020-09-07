@@ -29,7 +29,7 @@ const smtpTransport = nodemailer.createTransport({
 module.exports = function(passport) {
     // ==================== LOGIN (GET) ==================== //
     router.get('/login', (req, res) => {
-        res.render('login', {
+        res.render('auth', {
             layout: 'layout',
             title: 'Login',
             error: req.flash('error'),
@@ -59,7 +59,7 @@ module.exports = function(passport) {
 
     // ==================== FORGOT (GET) ==================== //
     router.get('/forgot', (req, res) => {
-        res.render('forgot', {
+        res.render('auth', {
             layout: 'layout',
             title: 'Forgot Password',
             error: req.flash('error'),
@@ -126,8 +126,9 @@ module.exports = function(passport) {
                     req.flash('error', process.env.RESET_INVALID);
                     return res.redirect('/forgot');
                 }
-                res.render('reset', {
+                res.render('auth', {
                     user: req.user,
+                    title: 'Reset Password',
                     error: req.flash('error'),
                     message: req.flash('message'),
                 });
@@ -199,7 +200,7 @@ module.exports = function(passport) {
                 };
             });
 
-            res.render('join', {
+            res.render('auth', {
                 layout: 'layout',
                 title: 'Join CapTracks',
                 stores: stores,

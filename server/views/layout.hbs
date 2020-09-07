@@ -29,72 +29,11 @@
 
     <body>
         <!--====== HEADER START ======-->
-        <header id="home" class="style-2 header-area">
-            <!--====== NAV START ======-->
-            <div class="navigation fixed-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <nav class="navbar navbar-expand-lg">
-                                <!-- Logo -->
-                                <a class="navbar-brand" href="/map">
-                                    <img class="logo" src="/assets/img/logo.png"
-                                        alt="Logo">
-                                </a>
-                                <button class="navbar-toggler" type="button"
-                                    data-toggle="collapse"
-                                    data-target="#navbarSupportedContent"
-                                    aria-controls="navbarSupportedContent"
-                                    aria-expanded="false" aria-label="Toggle
-                                    navigation">
-                                    <span class="toggler-icon"></span>
-                                    <span class="toggler-icon"></span>
-                                    <span class="toggler-icon"></span>
-                                </button>
+        <header id="home" class="style-2">
+            {{> nav}}
 
-                                <div class="collapse navbar-collapse"
-                                    id="navbarSupportedContent">
-                                    <ul class="navbar-nav ml-auto">
-                                        <li {{#if (eq title
-                                            'Stores')}}class="nav-item active"
-                                            {{else}}class="nav-item" {{/if}}><a
-                                                href="/map">Find A Store</a></li>
-                                        <li {{#if (eq title
-                                            'How It Works')}}class="nav-item active"
-                                            {{else}}class="nav-item" {{/if}}><a
-                                                href="/info">How It Works</a></li>
-                                        <li {{#if (eq title
-                                            'About')}}class="nav-item active"
-                                            {{else}}class="nav-item" {{/if}}><a
-                                                href="/about">About Us</a></li>
-                                        {{#if user}}
-                                        <div class="dropdown">
-                                            <li class="nav-btn">
-                                                <a href="/account" class="">My Account <i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <div class="dropdown-content">
-                                                <a href="/account">My Store</a>
-                                                {{!-- <a href="/account/profile">My Profile</a> --}}
-                                                {{!-- <a href="/account/settings">Settings</a> --}}
-                                                {{!-- <a href="/report">Report a Problem</a> --}}
-                                                <a href="/logout">Logout</a>
-                                            </div>
-                                        </div>
-                                        {{else}}
-                                        <li class="nav-btn"><a href="/login">Vendor
-                                                Login</a></li>
-                                        {{/if}}
-                                    </ul>
-                                </div> <!-- Navbar Collapse End -->
-                            </nav> <!-- Navbar End -->
-                        </div>
-                    </div> <!-- Row End -->
-                </div> <!-- Container End -->
-            </div>
-            <!--====== NAV END ======-->
             {{#if intro}}
             {{> intro}}
-            {{else}}
             {{/if}}
         </header>
         <!--====== HEADER ENDS ======-->
@@ -123,7 +62,6 @@
         <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=&v=weekly"
             defer></script>
-        {{else}}
         {{/if}}
 
     </body>

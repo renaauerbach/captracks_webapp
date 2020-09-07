@@ -1,0 +1,31 @@
+<form class="login form" method="POST">
+    <span class="details">New to CapTracks? <a href="/join">Create
+            an account</a>.</span>
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="email" class="control-label">Email</label>
+            <input id="loginEmail" type="text" class="form-control"
+                name="email" required>
+            <span class="help">Enter the email associated with your
+                account.</span>
+        </div>
+    </div>
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="password" class="control-label">Password</label>
+            <input id="loginPassword" type="password"
+                class="form-control" name="password" required>
+            <span class="details"><a href="/forgot">Forgot password?</a></span>
+        </div>
+    </div>
+    <span class="details">By signing in to your account, you agree
+        to our <a href="/privacy">Privacy Policy</a> and <a
+            href="/terms">Terms &amp; Conditions</a>.</span>
+
+    <span class="flashMsg purple">{{message}}</span>
+    <span class="errorMsg red">{{error}}</span>
+    <div class="submit-btn d-flex justify-content-center">
+        <input id="loginBtn" class="main-btn" type="submit"
+            value="Log In">
+    </div>
+</form>

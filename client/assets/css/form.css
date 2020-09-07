@@ -1,23 +1,20 @@
 /* ====== GENERAL FORM PAGES ====== */ 
-#login form,
-#forgot form,
-#reset form, 
-#join form {
+#auth form {
     margin-top: 5%;
 }
 
-#login form,
-#forgot form {
+.login form,
+.forgot form {
     max-width: 50%;
     width: 50%;
 }
 
-#reset form {
+.reset form {
     max-width: 60%;
     width: 60%;
 }
 
-#join form {
+.join form {
     max-width: 70%;
     width: 70%;
 }
@@ -155,17 +152,10 @@ input[type=text]:focus {
     color: #ffffff;
 }
 
-/* ====== LOGIN PAGE ====== */ 
-
-
-
 /* ====== FORGOT PAGE ====== */ 
 .submitted {
     display: none;
 }
-
-/* ====== RESET PAGE ====== */ 
-
 
 /* ====== JOIN PAGE ====== */ 
 .tab {
@@ -264,7 +254,7 @@ input[type=text]:focus {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-    #join form {
+    .join form {
         max-width: 75%;
         width: 75%;
     }
@@ -275,7 +265,7 @@ input[type=text]:focus {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    #join form {
+    .join form {
         max-width: 100%;
         width: 100%;
     }
@@ -290,7 +280,7 @@ input[type=text]:focus {
 }
 
 @media (max-width: 767px) {
-    #join form {
+    .join form {
         max-width: 100%;
         width: 100%;
     }

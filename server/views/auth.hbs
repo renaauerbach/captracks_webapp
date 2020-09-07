@@ -1,0 +1,29 @@
+<!--================ AUTHENTICATION FORMS PAGE START ================-->
+<section id="auth">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Title Start -->
+        {{> title_bar title=title}}
+        <!-- Title End -->
+        <!-- Flexbox Start -->
+        <div class="d-flex justify-content-center">
+
+            {{#if (eq title 'Login')}}
+            {{> auth_login}}
+            {{else if (eq title 'Forgot Password')}}
+            {{> auth_forgot}}
+            {{else if (eq title 'Reset Password')}}
+            {{> auth_reset}}
+            {{else}}
+            {{> auth_join}}
+            {{/if}}
+
+        </div> <!-- Flexbox End -->
+    </div> <!-- Container End -->
+</section>
+<!--================ AUTHENTICATION FORMS PAGE END ================-->
+<!--===== Form Scripts =====-->
+<script src="/assets/js/form-disable.js"></script>
+<script src="/assets/js/form-format.js"></script>
+<script src="/assets/js/form-password.js"></script>
+<script src="/assets/js/form-validate.js"></script>

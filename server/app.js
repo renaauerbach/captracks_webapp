@@ -130,7 +130,7 @@ app.get('/about', (req, res) => {
         'team'
     );
 
-    res.render('about', {
+    res.render('info', {
         layout: 'layout',
         title: 'About Us',
         helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
@@ -141,7 +141,7 @@ app.get('/about', (req, res) => {
 
 // ==================== TERMS & CONDITIONS (GET) ==================== //
 app.get('/terms', (req, res) => {
-    res.render('terms', {
+    res.render('legal', {
         layout: 'layout',
         title: 'Terms & Conditions',
         user: req.isAuthenticated(),
@@ -150,7 +150,7 @@ app.get('/terms', (req, res) => {
 
 // ==================== PRIVACY POLICY(GET) ==================== //
 app.get('/privacy', (req, res) => {
-    res.render('privacy', {
+    res.render('legal', {
         layout: 'layout',
         title: 'Privacy Policy',
         user: req.isAuthenticated(),
