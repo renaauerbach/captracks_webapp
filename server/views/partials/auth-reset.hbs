@@ -1,9 +1,15 @@
-<!-- Form Start -->
+<!--====== AUTHENTICATION - RESET FORM ======-->
 <form class="reset form" method="POST">
-    {{> form_password label1="New Password" label2="Confirm New Password"}}
+
+    <!-- Password Inputs & Requirements -->
+    {{> input_password label1="New Password" label2="Confirm New Password"}}
+
+    <!-- Flash & Error Messages -->
     <span class="flashMsg purple">{{message}}</span>
     <span class="errorMsg white">{{error}}</span>
+
+    <!-- Button - Submit -->
     <div class="submit-btn d-flex justify-content-center">
         <input id="resetBtn" class="main-btn" type="submit" value="Submit" onclick="validateForm();">
     </div>
-</form> <!-- Form End -->
+</form>

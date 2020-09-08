@@ -1,18 +1,20 @@
 <!--================ STORE PAGE START ================-->
-{{!-- Link Back to Map --}}
+<!-- Link Back to Map -->
 <div class="back">
     <i class="fas fa-chevron-left"></i>
     <a href="/map">Back to map</a>
 </div>
-{{!-- Section Header --}}
-<section id="store" class="style-2">
-    {{> header title=store.name subtitle_1=(concat 'View recent updates directly from
-    ' store.name)}}
-    {{!-- TODO: CHECK IF NEED BELOW --}}
-    <span id="data" style="display: none">{{{ store }}}</span>
-</section>
 
+<!-- Header -->
+{{> header id="store" title=store.name subtitle_1=(concat 'View recent updates directly from
+' store.name)}}
+
+<!-- Google Map Data -->
+<span id="data" style="display: none">{{{ store }}}</span>
+
+<!-- Page Content -->
 {{> forum}}
-
 <!--================ STORE PAGE END ================-->
+
+<!--===== Form Scripts =====-->
 <script src="/assets/js/format.js"></script>

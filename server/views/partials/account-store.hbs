@@ -1,23 +1,30 @@
+<!--====== ACCOUNT - STORE INFO ======-->
+<!-- Row Start -->
 <div class="row justify-content-between">
-    {{!-- Store Info Column --}}
+
+    <!-- Column - Store Details -->
     <div class="col-lg-5 col-md-4 col-sm-3">
         {{> store_details store=store}}
     </div>
-    {{!-- Capacity & Forum --}}
+    <!-- Column End -->
+
+    <!-- Column - Capacity & Forum -->
     <div class="col">
-        {{!-- Capacity Functions & Form --}}
-        {{> store_titles label="Capacity"}}
+        <!-- Capacity Form & Data -->
+        {{> store_title label="Capacity"}}
         {{> form_capacity details=details}}
         <hr>
-        {{!-- Capacity Data --}}
         {{> store_capacity details=details}}
-        {{!-- Forum Functions & Form --}}
-        {{> store_titles label="Forum"}}
+
+        <!-- Forum Form & Data -->
+        {{> store_title label="Forum"}}
         {{> form_forum}}
         <hr>
-        {{!-- Forum Posts --}}
         {{#each store.forum as |msg|}}
         {{> forum_post account=true msg=msg}}
         {{/each}}
     </div>
+    <!-- Column End -->
+
 </div>
+<!-- Row End -->

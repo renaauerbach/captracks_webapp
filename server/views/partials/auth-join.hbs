@@ -1,25 +1,35 @@
+<!--====== AUTHENTICATION - JOIN FORM ======-->
 <form id="regForm" class="join form" method="POST">
+
+    <!-- Form Tabs -->
+    <!-- Tab 1 - Signup -->
     <div class="tab">
         {{> join_signup}}
     </div>
+    <!-- Tab 2 - Register -->
     <div class="tab">
         {{> join_register}}
     </div>
+    <!-- Tab 3 - Survey -->
     <div class="tab">
         {{> join_survey}}
     </div>
 
+    <!-- Flash & Error Messages -->
     <span class="flashMsg purple">{{message}}</span>
     <span class="errorMsg red">{{error}}</span>
+
+    <!-- Buttons -->
     <div style="overflow: auto; text-align: center;">
         <div class="tab-btn">
-            <button type="button" id="prevBtn" class="main-btn"
-                onclick="nextPrev(-1)">Back</button>
-            <button type="button" id="nextBtn" class="main-btn"
-                onclick="nextPrev(1)">Next</button>
+            <!-- Button - Previous (Back) -->
+            <button type="button" id="prevBtn" class="main-btn" onclick="nextPrev(-1)">Back</button>
+            <!-- Button - Next (Submit) -->
+            <button type="button" id="nextBtn" class="main-btn" onclick="nextPrev(1)">Next</button>
         </div>
     </div>
 
+    <!-- Tab Steps -->
     <div class="tab-steps">
         <span class="step"></span>
         <span class="step"></span>

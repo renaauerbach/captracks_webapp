@@ -1,6 +1,7 @@
-<form class="capacity form" action="/details/{{details._id}}"
-    method="POST">
-    {{!-- Current Capacity Slider --}}
+<!--====== INLINE FORM - STORE CAPACITY ======-->
+<form class="capacity form" action="/details/{{details._id}}" method="POST">
+
+    <!-- Input Row - Current Capacity (Slider) -->
     <div class="form-group">
         <label for="capacity">What is the current capacity at your store?</label>
         <div class="d-flex justify-content-between">
@@ -10,7 +11,8 @@
             <input type="text" id="sliderText" value="">
         </div>
     </div>
-    {{!-- Current Line Radio --}}
+
+    <!-- Input Row - Current Line (Radio) -->
     <div class="form-group">
         <div class="form-check form-check-inline">
             <label class="col-form-label" for="line">Is there currently a line outside?</label>
@@ -20,18 +22,20 @@
             <label class="form-check-label" for="noline">No</label>
         </div>
     </div>
-    {{!-- Current Line Input --}}
+    <!-- Input Row - Current Line (Number Input) -->
     <div class="form-group hide-cap no-line">
         <label for="people" class="control-label">How many people are currently in line?</label>
         <input id="people" type="number" min="1" max="50" class="form-control" name="people">
         <span class="help">Please be as precise as possible.</span>
     </div>
+    <!-- Input Row - Current Wait Time (Number Input) -->
     <div class="form-group hide-cap no-line">
         <label for="wait" class="control-label">What is the estimated wait time (in minutes)?</label>
         <input id="wait" type="number" min="1" max="60" class="form-control" name="wait">
         <span class="help">Please be as precise as possible.</span>
     </div>
-    {{!-- Open Registers Radio --}}
+
+    <!-- Input Row - Open Registers (Radio) -->
     <div class="form-group">
         <div class="form-check form-check-inline">
             <label class="col-form-label" for="register">Are there any open registers?</label>
@@ -41,13 +45,14 @@
             <label class="form-check-label" for="register">No</label>
         </div>
     </div>
-    {{!-- Open Registers Input --}}
+    <!-- Input Row - Open Registers (Number Input) -->
     <div class="form-group hide-cap no-register">
         <label for="register" class="control-label">How many?</label>
         <input id="register" type="number" min="1" max="5" class="form-control" name="registers">
         <span class="help">Please be as precise as possible.</span>
     </div>
-    {{!-- Submit Button --}}
+
+    <!-- Button - Submit -->
     <div class="d-flex justify-content-right">
         <button class="forum thin-btn" type="submit">Update</button>
     </div>

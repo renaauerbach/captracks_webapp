@@ -1,17 +1,22 @@
+<!--====== JOIN - STORE REGISTRATION FORM ======-->
 <div class="register">
+
+    <!-- Input Row - Link to Existing Store (Select) -->
     {{#if stores}}
     <div class="form-group">
         <span class="heading" for="existed">Link to a store already on our map</span>
         <select type="select" class="form-control" name="existed">
             <option value="">Select your store</option>
             {{#each stores as |store|}}
-                <option value="{{store._id}}">{{store.name}} - {{store.address}}</option>
+            <option value="{{store._id}}">{{store.name}} - {{store.address}}</option>
             {{/each}}
         </select>
     </div>
     <hr>
     <span class="heading">Or add your store's information below</span>
     {{/if}}
+
+    <!-- Input Row - Store Name -->
     <div class="form-inline">
         <div id="name-div" class="form-group">
             <label for="name" class="control-label">Store Name</label>
@@ -19,38 +24,51 @@
             <span class="help">Enter the name of your store.</span>
         </div>
     </div>
+
+    <!-- Input Row - Store Address - Street -->
     <div class="form-inline">
         <div class="form-group" style="height: 61px;">
             <label for="street" class="control-label">Street Address</label>
             <input id="street" type="text" class="form-control" name="street" required>
         </div>
     </div>
+
+    <!-- Input Row - Store Address -->
     <div class="form-inline">
+        <!-- Input - City -->
         <div id="city-div" class="form-group col-lg-6 col-md-6 col-sm-8">
             <label for="city" class="control-label">City</label>
             <input id="city" type="text" class="form-control" name="city" required>
         </div>
+        <!-- Input - State -->
         <div class="form-group col-lg-2 col-md-2 col-sm-2 col-4">
             <label for="state" class="control-label">State</label>
-            <input id="state" type="text" class="form-control" name="state" minlength="2" maxlength="2" oninput="this.value = this.value.toUpperCase()" required>
+            <input id="state" type="text" class="form-control" name="state" minlength="2" maxlength="2" oninput="this.value= this.value.toUpperCase()" required>
         </div>
+        <!-- Input - Zip Code -->
         <div class="form-group col-lg-4 col-md-4 col-sm-2 col-8">
             <label for="zip" class="control-label">Zip Code</label>
-            <input id="zip" type="text" class="form-control" name="zip" minlength="5" maxlength="5" oninput="this.value = this.value.slice(0, this.maxLength)" required>
+            <input id="zip" type="text" class="form-control" name="zip" minlength="5" maxlength="5" oninput="this.value= this.value.slice(0, this.maxLength)" required>
         </div>
     </div>
+
+    <!-- Input Row - Contact -->
     <div class="form-inline">
+        <!-- Input - Phone -->
         <div class="form-group cold-md-6 col-md-6 col-sm-6">
             <label for="storePhone" class="control-label">Phone</label>
             <input type="text" class="form-control phone" name="storePhone" minlength="14" maxlength="14" required>
             <span class="help">Enter the store's main phone number.</span>
         </div>
+        <!-- Input - Website -->
         <div class="form-group col-md-6 col-sm-6">
             <label for="url" class="control-label">Website URL</label>
             <input id="web" type="text" class="form-control" name="url" pattern="^\s*(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\s*$">
             <span class="help">Enter the store's website (if applicable).</span>
         </div>
     </div>
+
+    <!-- Input Row - Hours Header -->
     <div id="hr" class="form-group">
         <div class="form-check form-check-inline">
             <label class="col-form-label" for="hours">Hours of Operation: </label>
@@ -58,14 +76,15 @@
             <label class="form-check-label" for="24hours" name="24hours">Open 24/7</label>
         </div>
     </div>
+
+    <!-- Input Rows - Daily Hours -->
     <fieldset class="form-group">
-        {{> time_input name='Sun'}}
-        {{> time_input name='Mon'}}
-        {{> time_input name='Tues'}}
-        {{> time_input name='Wed'}}
-        {{> time_input name='Thurs'}} 
-        {{> time_input name='Fri'}}
-        {{> time_input name='Sat'}}
+        {{> input_hours name='Sun'}}
+        {{> input_hours name='Mon'}}
+        {{> input_hours name='Tues'}}
+        {{> input_hours name='Wed'}}
+        {{> input_hours name='Thurs'}}
+        {{> input_hours name='Fri'}}
+        {{> input_hours name='Sat'}}
     </fieldset>
 </div>
-            

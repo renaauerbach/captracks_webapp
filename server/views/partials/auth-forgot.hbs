@@ -1,5 +1,10 @@
+<!--====== AUTHENTICATION - FORGOT FORM ======-->
 <form class="forgot form" method="POST">
+
+    <!-- Link - Login -->
     <span class="details">Remember your password? <a href="/login">Log in</a></span>
+
+    <!-- Input Row - Email -->
     <div class="form-inline">
         <div class="form-group">
             <label for="email" class="control-label">Email</label>
@@ -7,13 +12,18 @@
             <span class="help">Enter the email associated with your account.</span>
         </div>
     </div>
+
+    <!-- Flash & Error Messages -->
     <span class="flashMsg purple">{{message}}</span>
     <span class="errorMsg red">{{error}}</span>
+
+    <!-- Button - Submit -->
     <div class="submit-btn d-flex justify-content-center">
         <input id="forgotBtn" class="main-btn" type="submit" value="Submit">
     </div>
-</form> <!--====== End Form ======-->
-<!--====== Submitted Text ======-->
+</form>
+
+<!--=== Submitted Text Message ===-->
 <div class="submitted">
     <p> If there is an account associated with the entered email, you will receive an email with a link to reset your account password.
     </p>

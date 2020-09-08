@@ -1,3 +1,5 @@
+<!--====== INPUT PARTIAL - STORE HOURS ======-->
+<!-- Input Row - Closed (Checkbox)-->
 <div class="form-group">
     <div class="form-check form-check-inline">
         <label class="col-form-label" for="hours">{{name}}</label>
@@ -5,21 +7,27 @@
         <label class="form-check-label" for="closed">Closed</label>
     </div>
 </div>
+
+<!-- Input Row -->
 <div class="form-inline days">
+    <!-- Input - Open -->
     <div id='open' class="form-group col-lg-4 col-md-4 col-sm-3 col-8">
         <label for="open" class="control-label">Open</label>
         <input type="text" class="form-control hours" name={{name}} minlength="4" maxlength="5">
     </div>
+    <!-- Input - AM/PM (Select) -->
     <div class="form-group col-lg-2 col-md-2 col-sm-2 col-4">
         <select type="select" class="form-control hours" name={{name}}>
             <option name="am">AM</option>
             <option name="pm">PM</option>
         </select>
     </div>
+    <!-- Input - Close -->
     <div id="close" class="form-group col-lg-4 col-md-4 col-sm-4 col-8">
         <label for="close" class="control-label">Close</label>
         <input type="text" class="form-control hours" name={{name}} minlength="4" maxlength="5">
     </div>
+    <!-- Input - AM/PM (Select) -->
     <div class="form-group col-lg-2 col-md-2 col-sm-2 col-4">
         <select type="select" class="form-control hours" name={{name}}>
             <option name="am">AM</option>

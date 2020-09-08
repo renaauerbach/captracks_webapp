@@ -1,24 +1,28 @@
- <div class="capacity-box info-box">
+<!--====== STORE CONTENT - CAPACITY INFO ======-->
+<div class="capacity-box info-box">
     <div class="capacity-content">
-        {{!-- Max Capacity --}}
-        <div class="d-flex justify-content-between align-items-center">
+
+        <!-- Row - Max Capacity -->
+        <div class="row d-flex justify-content-between align-items-center">
             <p class="cap-title">Max Capacity:</p>
             <p class="cap-data">{{details.maxCapacity}} people</p>
         </div>
-        {{!-- Current Capacity --}}
-        <div class="d-flex justify-content-between align-items-center">
+
+        <!-- Row - Current Capacity -->
+        <div class="row d-flex justify-content-between align-items-center">
             <p class="cap-title">Current Capacity:</p>
             <p class="cap-data">{{details.capacity}}% full</p>
         </div>
-        {{!-- Current Wait Time --}}
-        <div class="d-flex justify-content-between align-items-center">
+
+        <!-- Row - Current Wait Time -->
+        <div class="row d-flex justify-content-between align-items-center">
             <p class="cap-title">Current Wait Time:</p>
             <p class="cap-data">{{details.waitTime}} minutes</p>
         </div>
-        {{!-- Last Update --}}
-        <div class="cap-date d-flex justify-content-between align-items-center">
+
+        <!-- Row - Last Update -->
+        <div class="row cap-date d-flex justify-content-between align-items-center">
             <p class="cap-title">Last Updated:</p>
-            {{!-- Formatted as forum post date --}}
             <p class="cap-data post-date">{{details.updated}}</p>
         </div>
     </div>

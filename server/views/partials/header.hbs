@@ -1,14 +1,25 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-10 col-md-7 col-sm-6">
-            <div class="section-title text-center">
-                <h2 class="title">{{title}}</h2>
-                <p>{{subtitle_1}}</p>
-                {{#if subtitle_2}}
-                <br />
-                <p>{{subtitle_2}}</p>
-                {{/if}}
+<!--====== HEADER ======-->
+<section id={{id}} class="style-2">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Row Start -->
+        <div class="row justify-content-center">
+
+            <!-- Column - Title Info -->
+            <div class="col-lg-10 col-md-7 col-sm-6">
+                <div class="section-title text-center">
+                    <h2 class="title">{{title}}</h2>
+                    <p>{{subtitle_1}}</p>
+                    {{#if subtitle_2}}
+                    <br>
+                    <p>{{subtitle_2}}</p>
+                    {{/if}}
+                </div>
             </div>
+            <!-- Column End -->
+
         </div>
+        <!-- Row End -->
     </div>
-</div>
+    <!-- Container End -->
+</section>

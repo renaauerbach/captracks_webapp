@@ -1,12 +1,21 @@
-<!--====== POPUP START ======-->
+<!--====== PARTIAL - POPUP ======-->
 <div class="popup">
+    <!-- Container -->
     <div class="popup-container">
+
+        <!-- Button - Close -->
         <span class="close-btn"><i class="fas fa-times"></i></span>
+
+        <!-- Background Overlay -->
         <div class="overlay"></div>
+
         {{ content }}
+
+        <!-- Button - Submit -->
         <div class="submit-btn d-flex justify-content-center">
             <input id="ok" class="main-btn" type="submit" value="Ok">
         </div>
+
     </div>
+    <!-- Container End -->
 </div>
-<!--====== POPUP END ======-->

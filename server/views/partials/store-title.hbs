@@ -1,0 +1,20 @@
+<!--====== STORE CONTENT - CAPACITY INFO ======-->
+<div class="store-title d-flex justify-content-between align-items-center">
+    <!-- Title Label -->
+    <h5>{{label}}</h5>
+
+    <!-- Buttons -->
+    {{#if (eq title 'My Account')}} <!-- (Check if on My Account page) -->
+    {{#if (eq label 'Store Info')}}
+    <!-- Button - Edit -->
+    <a href="javascript:void(0);" id="edit"> Edit </a>
+    <!-- Button - Save -->
+    <a href="javascript:void(0);" id="save"> Save </a>
+    {{/if}}
+    {{/if}}
+
+</div>
+
+<!-- Flash & Error Messages -->
+<span class="errorMsg white">{{error}}</span>
+<hr>

@@ -1,32 +1,57 @@
-<!--====== FORUM SECTION START ======-->
+<!--====== STORE CONTENT SECTION ======-->
 <section id="forum">
     <!-- Container Start -->
     <div class="container">
         <!-- Row Start -->
         <div class="row justify-content-between">
-            {{!-- Store Info Column --}}
+
+            <!-- Column - Store Info Column -->
             <div class="col-lg-4 col-md-4 col-sm-3">
                 {{> store_details store=store}}
             </div>
-            {{!-- Capacity & Forum --}}
+            <!-- Column End -->
+
+            <!-- Column - Capacity & Forum -->
             <div class="col">
                 {{#if store.details}}
-                {{!-- Capacity --}}
-                {{> store_titles label="Capacity"}}
+                <!-- Capacity -->
+                {{> store_title label="Capacity"}}
                 {{> store_capacity details=details}}
                 {{/if}}
-                {{!-- Forum --}}
-                {{> store_titles label="Forum"}}
+                <!-- Forum -->
+                {{> store_title label="Forum"}}
                 {{#if store.forum}}
                 {{#each store.forum as |msg|}}
-                {{> forum_post msg=msg}}
+                <div class="forum-box info-box">
+                    <div class="forum-content">
+
+                        <!-- Button - Delete Post -->
+                        {{#if account}}
+                        <form method="POST" action="/post/delete/{{msg._id}}">
+                            <button type="submit" class="post-delete">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </form>
+                        {{/if}}
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="post-title">{{msg.title}}</h5>
+                            <h6 class="post-date">{{msg.createdOn}}</h6>
+                        </div>
+                        <br>
+                        <p class="post-text">{{msg.text}}</p>
+                    </div>
+                </div>
                 {{/each}}
                 {{else}}
                 <p class="no-forum">No forum posts yet. Check back soon for an
                     update!</p>
                 {{/if}}
             </div>
-        </div> <!-- Row End -->
-    </div> <!-- Container End -->
+            <!-- Column End -->
+
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
 </section>
-<!--====== FORUM SECTION END ======-->

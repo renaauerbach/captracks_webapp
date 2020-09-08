@@ -4,19 +4,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1,
-            shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Title -->
         <title>{{title}}</title>
 
         <!--====== Favicon Icon ======-->
-        <link rel="shortcut icon" href="/assets/img/favicon.ico"
-            type="image/x-icon">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
         <!--====== Icons CSS ======-->
-        <link rel="stylesheet" type="text/css"
-            href="/assets/fonts/font-awesome/css/all.css">
-        <link rel="stylesheet" type="text/css"
-            href="/assets/fonts/font-awesome/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome/css/all.css">
+        <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome/css/all.min.css">
 
         <!--====== Style CSS ======-->
         <link rel="stylesheet" href="/assets/css/style.css">
@@ -24,19 +23,19 @@
 
         <!--====== Bootstrap CSS ======-->
         <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-
     </head>
 
     <body>
-        <!--====== HEADER START ======-->
+        <!--====== Header ======-->
         <header id="home" class="style-2">
+            <!-- Navigation -->
             {{> nav}}
 
+            <!-- Introduction (First Page Only) -->
             {{#if intro}}
             {{> intro}}
             {{/if}}
         </header>
-        <!--====== HEADER ENDS ======-->
 
         {{{body}}}
 
@@ -55,15 +54,12 @@
         <script src="/assets/js/main.js"></script>
         <script src="/assets/js/form-post.js"></script>
 
-        {{#if displayMap}}
         <!--====== Map Script ======-->
+        {{#if displayMap}}
         <script src="/assets/js/map.js"></script>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=&v=weekly"
-            defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=&v=weekly" defer></script>
         {{/if}}
 
     </body>
-
 </html>

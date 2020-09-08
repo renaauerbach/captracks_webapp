@@ -2,12 +2,14 @@
 <section id="auth">
     <!-- Container Start -->
     <div class="container">
-        <!-- Title Start -->
-        {{> title_bar title=title}}
-        <!-- Title End -->
+
+        <!-- Title -->
+        {{> section_title title=title id="rounded-container" style='style-2'}}
+
         <!-- Flexbox Start -->
         <div class="d-flex justify-content-center">
 
+            <!-- Page Content -->
             {{#if (eq title 'Login')}}
             {{> auth_login}}
             {{else if (eq title 'Forgot Password')}}
@@ -18,10 +20,14 @@
             {{> auth_join}}
             {{/if}}
 
-        </div> <!-- Flexbox End -->
-    </div> <!-- Container End -->
+        </div>
+        <!-- Flexbox End -->
+
+    </div>
+    <!-- Container End -->
 </section>
 <!--================ AUTHENTICATION FORMS PAGE END ================-->
+
 <!--===== Form Scripts =====-->
 <script src="/assets/js/form-disable.js"></script>
 <script src="/assets/js/form-format.js"></script>

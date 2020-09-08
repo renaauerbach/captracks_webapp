@@ -72,8 +72,7 @@ input {
 }
 
 /*===== Title Style =====*/
-.section-title .title,
-.rounded-title .title {
+.section-title .title {
     font: normal normal 600 45px "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
 }
 
@@ -82,25 +81,27 @@ input {
     padding-bottom: 20px;
 }
 
-.rounded-title {
+.section-title.style-2 {
+    border-radius: 15px;
+}
+.section-title.style-2 .title {
     color: #ffffff;
     padding: 5%;
-    border-radius: 15px;
 }
 
 @media (max-width: 769px) {
     .section-title .title {
         font-size: 36px;
     }
+    
+    .section-title.style-2 .title {
+        font-size: 25px;
+        margin: 5px 0;
+    }
 
     div#rounded-continer {
         padding-left: 0;
         padding-right: 0;
-    }
-
-    .rounded-title .title {
-        font-size: 25px;
-        margin: 5px 0;
     }
 }
 
@@ -810,9 +811,9 @@ button.thin-btn:hover {
 /* ====== HOW IT WORKS ====== */
 
 /*=== Box Style ===*/
-.boxes .row h2.title {
+/* .boxes .row h2.title {
     padding-right: 3.3em;
-}
+} */
 
 .box {
     margin-top: 25px;
@@ -872,8 +873,10 @@ button.thin-btn:hover {
 }
 
 /* Editing Store Info */
-.info-title #edit,
-.info-title #save {
+.store-title
+ #edit,
+.store-title
+ #save {
     color: #0000cd;
     font-size: 14px;
     font-weight: 400;
@@ -881,27 +884,39 @@ button.thin-btn:hover {
     text-transform: uppercase;
 }
 
-.info-title #save,
-.store-info .edit,
-.store-info #check,
-.store-info #cancel,
-.store-info .hide-link {
+.store-title
+ #save,
+.store-details
+ .edit,
+.store-details
+ #check,
+.store-details
+ #cancel,
+.store-details
+ .hide-link {
     display: none;
 }
-.store-info #check,
-.store-info #cancel,
-.store-info #remove {
+.store-details
+ #check,
+.store-details
+ #cancel,
+.store-details
+ #remove {
     padding-left: 10px;
     cursor: pointer;
 }
-.store-info #check {
+.store-details
+ #check {
     color: #4aaa13;
 }
-.store-info #cancel,
-.store-info #remove {
+.store-details
+ #cancel,
+.store-details
+ #remove {
     color: #fa354d;
 }
-.store-info #remove {
+.store-details
+ #remove {
   font-size: 10px;  
 }
 

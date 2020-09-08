@@ -1,14 +1,20 @@
-<!--====== NAV START ======-->
+<!--====== PARTIAL - NAVIGATION ======-->
 <div class="navigation fixed-top">
+    <!-- Container Start -->
     <div class="container">
+        <!-- Row Start -->
         <div class="row">
             <div class="col-lg-12">
+
+                <!-- Navigation Start -->
                 <nav class="navbar navbar-expand-lg">
+
                     <!-- Logo -->
                     <a class="navbar-brand" href="/map">
-                        <img class="logo" src="/assets/img/logo.png"
-                            alt="Logo">
+                        <img class="logo" src="/assets/img/logo.png" alt="Logo">
                     </a>
+
+                    <!-- Button - Toggle Icon (Mobile) -->
                     <button class="navbar-toggler" type="button"
                         data-toggle="collapse"
                         data-target="#navbarSupportedContent"
@@ -20,22 +26,38 @@
                         <span class="toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse"
-                        id="navbarSupportedContent">
+                    <!-- Nav Links (Collapse) -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li {{#if (eq title
-                                'Stores')}}class="nav-item active"
-                                {{else}}class="nav-item" {{/if}}><a
-                                    href="/map">Find A Store</a></li>
-                            <li {{#if (eq title
-                                'How It Works')}}class="nav-item active"
-                                {{else}}class="nav-item" {{/if}}><a
-                                    href="/info">How It Works</a></li>
-                            <li {{#if (eq title
-                                'About')}}class="nav-item active"
-                                {{else}}class="nav-item" {{/if}}><a
-                                    href="/about">About Us</a></li>
+                            <!-- Find a Store -->
+                            <li
+                                {{#if (eq title 'Stores')}}
+                                class="nav-item active"
+                                {{else}}
+                                class="nav-item"
+                                {{/if}}>
+                                <a href="/map">Find A Store</a>
+                            </li>
+                            <!-- How It Works -->
+                            <li
+                                {{#if (eq title 'How It Works')}}
+                                class="nav-item active"
+                                {{else}}
+                                class="nav-item"
+                                {{/if}}>
+                                <a href="/info">How It Works</a>
+                            </li>
+                            <!-- About Us -->
+                            <li
+                                {{#if (eq title 'About Us')}}
+                                class="nav-item active"
+                                {{else}}
+                                class="nav-item"
+                                {{/if}}>
+                                <a href="/about">About Us</a>
+                            </li>
                             {{#if user}}
+                            <!-- Nav - Dropdown -->
                             <div class="dropdown">
                                 <li class="nav-btn">
                                     <a href="/account" class="">My Account <i class="fas fa-chevron-down"></i></a>
@@ -49,14 +71,18 @@
                                 </div>
                             </div>
                             {{else}}
-                            <li class="nav-btn"><a href="/login">Vendor
-                                    Login</a></li>
+                            <li class="nav-btn">
+                                <a href="/login">Vendor Login</a>
+                            </li>
                             {{/if}}
                         </ul>
-                    </div> <!-- Navbar Collapse End -->
-                </nav> <!-- Navbar End -->
+                    </div>
+                </nav>
+                <!-- Navigation End -->
+
             </div>
-        </div> <!-- Row End -->
-    </div> <!-- Container End -->
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
 </div>
-<!--====== NAV END ======-->

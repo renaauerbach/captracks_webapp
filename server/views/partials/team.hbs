@@ -1,27 +1,37 @@
-<!--====== TEAM SECTION START ======-->
+<!--====== TEAM SECTION ======-->
 <section id="team">
+    <!-- Container Start -->
     <div class="container">
+
+        <!-- Title -->
         {{> section_title title="Meet the Team"}}
+
+        <!-- Team Member Info -->
         {{#each data as |member|}}
         {{#if (ifOdd member.id)}}
+        <!-- Row Start -->
         <div class="row justify-content-center">
             {{/if}}
             <div class="col-lg-6 col-md-8 col-sm-9">
+                <!-- Info Box Start -->
                 <div class="box">
                     <div class="content">
                         <img src="assets/img/profiles/{{member.image}}" width="300" height="388" alt="{{member.name}}">
                         <h4 class="sub-title profile">{{member.name}}</h4>
                         <h6 class="label">{{member.title}}</h6>
                         <p>{{member.bio}}</p>
-                        <br />
+                        <br>
                         <p>{{member.about}}</p>
                     </div>
                 </div>
+                <!-- Info Box End -->
             </div>
             {{#if (ifEven member.id)}}
         </div>
+        <!-- Row End -->
         {{/if}}
         {{/each}}
-    </div> <!-- Container End -->
+
+    </div>
+    <!-- Container End -->
 </section>
-<!--====== TEAM SECTION ENDS ======-->
