@@ -2,61 +2,24 @@
 <section id="benefits">
     <!-- Container Start -->
     <div class="container">
-        <!-- Flexbox Start -->
-        <div class="d-flex justify-content-between">
-
-            <!-- Column - Customer Benefits Start -->
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                {{> section_title title="Customers"}}
-                {{#each data as |box|}}
-                {{#if (ifOdd box.id)}}
-                <!-- Row Start -->
-                <div class="row justify-content-center">
-                    <div class="col-lg-10 col-md-10 col-sm-12">
-                        <!-- Info Box Start -->
-                        <div class="box">
-                            <div class="content">
-                                <i class="{{box.icon}}"></i>
-                                <h4 class="sub-title">{{box.subtitle}}</h4>
-                                <p>{{box.text}}</p>
-                            </div>
-                        </div>
-                        <!-- Info Box End -->
+        <!-- Title -->
+        {{> section_title title=title}}
+        <!-- Row Start -->
+        <div class="row justify-content-center">
+            {{#each data as |box|}}
+            <div class="col-lg-4 col-md-8 col-sm-9">
+                <div class="box">
+                    <div class="content">
+                        <i class="{{box.icon}}"></i>
+                        <h4 class="sub-title">{{box.subtitle}}</h4>
+                        <p>{{box.text}}</p>
                     </div>
                 </div>
-                <!-- Row End -->
-                {{/if}}
-                {{/each}}
             </div>
-            <!-- Column End -->
-
-            <!-- Column - Vendor Benefits Start -->
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                {{> section_title title="Vendors"}}
-                {{#each data as |box|}}
-                {{#if (ifEven box.id)}}
-                <!-- Row Start -->
-                <div class="row justify-content-center">
-                    <div class="col-lg-10 col-md-10 col-sm-12">
-                        <!-- Info Box Start -->
-                        <div class="box">
-                            <div class="content">
-                                <i class="{{box.icon}}"></i>
-                                <h4 class="sub-title">{{box.subtitle}}</h4>
-                                <p>{{box.text}}</p>
-                            </div>
-                        </div>
-                        <!-- Info Box End -->
-                    </div>
-                </div>
-                <!-- Row End -->
-                {{/if}}
-                {{/each}}
-            </div>
-            <!-- Column End -->
-
+            {{/each}}
         </div>
-        <!-- Flexbox End -->
+        <!-- Row End -->
+
     </div>
     <!-- Container End -->
 </section>

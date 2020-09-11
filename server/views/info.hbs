@@ -1,15 +1,17 @@
 <!--================ INFO PAGE START ================-->
 <!-- Header -->
-{{#if (eq title 'How It Works')}}
+{{#if (eq title 'Customer Benefits')}}
+{{> header id="info" title="Why Use CapTracks?" subtitle_1="Now more than ever, consumers are dependent on reliable real-time data. Given the shifts in consumer behavior–more cooking at home, less cross shopping across retailers–each shopping trip takes on greater importance." subtitle_2="CapTracks offers a wide range of FREE services that benefit both vendors and customers."}}
+{{else if (eq title 'Vendor Benefits')}}
 {{> header id="info" title="Why Use CapTracks?" subtitle_1="Now more than ever, consumers are dependent on reliable real-time data. Given the shifts in consumer behavior–more cooking at home, less cross shopping across retailers–each shopping trip takes on greater importance." subtitle_2="CapTracks offers a wide range of FREE services that benefit both vendors and customers."}}
 {{else}}
 {{> header id="info" title="About Us" subtitle_1="CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies." subtitle_2="We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond."}}
 {{/if}}
 
 <!-- Page Content -->
-{{#if (eq title 'How It Works')}}
-{{> benefits}}
-{{else}}
+{{#if (eq title 'About Us')}}
 {{> team}}
+{{else}}
+{{> benefits}}
 {{/if}}
 <!--================ INFO PAGE ENDS ================-->

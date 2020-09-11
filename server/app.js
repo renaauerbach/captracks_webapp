@@ -1,8 +1,8 @@
-require('dotenv').config();
+require('dotenv').config({ path: __dirname + '/../.env' });
 require('./db.js');
 // ===== Modules ===== //
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const express = require('express');
 const flash = require('connect-flash');
 const fs = require('fs');
@@ -98,26 +98,27 @@ app.use((req, res, next) => {
     next();
 });
 
-// ==================== HOW IT WORKS (GET) ==================== //
-app.get('/info', (req, res) => {
-    // Load Customer benefit data
-    const benefits = parser.parseData(
-        fs.readFileSync(path.join(__dirname, '/content/benefits.json')),
-        'benefits'
-    );
-
-    // Load Vendor info data
-    const info = parser.parseData(
-        fs.readFileSync(path.join(__dirname, '/content/info.json')),
-        'info'
-    );
-
+// ==================== WHY USE CAPTRACKS ==================== //
+// Load Customer/Vendor benefits data
+let benefits = parser.parseData(
+    fs.readFileSync(path.join(__dirname, '/content/benefits.json')),
+    'benefits'
+);
+// ========== CUSTOMERS (GET) ========== //
+app.get('/customers', (req, res) => {
     res.render('info', {
         layout: 'layout',
-        title: 'How It Works',
-        helpers: { ifOdd: 'ifOdd', ifEven: 'ifEven' },
-        data: benefits,
-        info: info,
+        title: 'Customer Benefits',
+        data: benefits.slice(0, 3),
+        user: req.isAuthenticated(),
+    });
+});
+// ========== VENDORS (GET) ========== //
+app.get('/vendors', (req, res) => {
+    res.render('info', {
+        layout: 'layout',
+        title: 'Vendor Benefits',
+        data: benefits.slice(3, 6),
         user: req.isAuthenticated(),
     });
 });
