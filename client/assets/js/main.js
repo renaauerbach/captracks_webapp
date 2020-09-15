@@ -25,6 +25,12 @@
         }
     });
 
+    /* ===== Dropdown Navbar ===== */
+    $('.dropbtn').on('click', function() {
+        const dropdown = $(this).parent().parent();
+        dropdown.toggleClass('show');
+    });
+
     // /* ===== Form Popup ===== */
     // $('.form-toggler').on('click', function() {
     //     $('.form-popup').toggleClass('open');

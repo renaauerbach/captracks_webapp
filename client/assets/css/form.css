@@ -1,4 +1,20 @@
 /* ====== GENERAL FORM PAGES ====== */ 
+input[type=text]:focus,
+input[type=number]:focus,
+input[type=email]:focus,
+input[type=submit]:focus,
+textarea:focus,
+.form .form-group .form-control:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #e708ae;
+}
+
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 #auth form {
     margin-top: 5%;
 }
@@ -42,7 +58,7 @@
     padding: 0;
 }
 .form .form-group .form-control {
-    font-size: 18px;
+    font-size: 16px;
     border: 1px solid #b116e0;
     max-width: 100%;
     width: 100%;
@@ -50,12 +66,11 @@
 
 /* Floating labels - Regular */
 .form .form-group .control-label {
-    font-size: 18px;
     font-weight: 400;
     opacity: 0.4;
     pointer-events: none;
     position: absolute;
-    transform: translate3d(8px, 9px, 0) scale(1);
+    transform: translate3d(6px, 7px, 0) scale(1);
     transform-origin: top left;
     transition: 240ms;
 }
@@ -72,11 +87,6 @@
 }
 
 /* Floating labels - Focused */
-input[type=text]:focus {
-    outline: none;
-    box-shadow: none;
-    border-color: #e708ae;
-}
 .form .form-group.focused .control-label {
     opacity: 1;
     transform: translate3d(0px, -10px, 0) scale(0.9);
@@ -251,6 +261,32 @@ input[type=text]:focus {
 
 .survey span.sub-heading{
     font-size: 16px;
+}
+
+/* ====== CONTACT FORM ====== */ 
+.contact .form-item input.form-control {
+    line-height: 1.2;
+}
+.contact .form-item input.form-control,
+.contact .form-item textarea.form-control {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.contact .email {
+    padding-left: 0;
+}
+#success.unsent {
+    display: none;
+}
+#success.sent {
+    display: block;
+    margin: auto;
+    padding-top: 10%;
+    text-align: center;
+}
+#success.sent p {
+    font-size: 15px;
+    margin-bottom: 0;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) {

@@ -40,7 +40,7 @@ ul {
 
 p, 
 label {
-    font: normal normal 300 17px 'Arial', sans-serif;
+    font: normal normal 300 16px 'Arial', sans-serif;
     line-height: 28px;
     color: #555;
     margin: 0px;
@@ -284,7 +284,7 @@ button.thin-btn:hover {
     top: -7px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 991px) {
     .navigation .navbar .navbar-collapse {
         position: absolute;
         top: 158%;
@@ -292,48 +292,41 @@ button.thin-btn:hover {
         width: 100%;
         background-color: #fff;
         z-index: 99;
+    }
+
+    /* Make up for break between collapsed nav and bar */
+    .navigation.sticky .navbar .navbar-collapse {
+        top: 121%;
+    }
+
+    .navigation .navbar .navbar-collapse ul li {
         padding: 3px 12px;
+    }
+    .navigation .navbar .navbar-collapse ul:nth-last-child() {
+        padding: 0;
     }
 }
 
-@media (max-width: 767px) {
-    .navigation .navbar .navbar-collapse {
-        position: absolute;
-        top: 158%;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        z-index: 99;
-        padding: 3px 12px;
-    }
-}
-
-.navigation .navbar .navbar-nav .nav-item, .navigation .navbar .navbar-nav .nav-btn {
+.navigation .navbar .navbar-nav .nav-item, 
+.navigation .navbar .navbar-nav .nav-btn {
     margin-left: 30px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .navigation .navbar .navbar-nav .nav-item{
-        margin: 4px 0;
-    }
-}
-
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .navigation .navbar .navbar-nav .nav-item {
         margin: 4px 0;
     }
 }
 
-.navigation .navbar .navbar-nav .nav-item:first-child {
-    margin-left: 0;
-}
-
-.navigation .navbar .navbar-nav .nav-item a {
+.navigation .navbar .navbar-nav .nav-item a,
+.navigation .navbar .navbar-nav .nav-item button {
     text-transform: uppercase;
     font-size: 16px;
     color: #555;
     font-weight: 500;
     position: relative;
+    background: none;
+    border: none;
     -webkit-transition: all 0.3s ease-out 0s;
     -moz-transition: all 0.3s ease-out 0s;
     -ms-transition: all 0.3s ease-out 0s;
@@ -341,7 +334,8 @@ button.thin-btn:hover {
     transition: all 0.3s ease-out 0s;
 }
 
-.navigation .navbar .navbar-nav .nav-item a::before {
+.navigation .navbar .navbar-nav .nav-item a::before,
+.navigation .navbar .navbar-nav .nav-item button::before {
     position: absolute;
     content: '';
     width: 100%;
@@ -363,20 +357,17 @@ button.thin-btn:hover {
     transition: all 0.3s ease-in-out 0s;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .navigation .navbar .navbar-nav .nav-item a::before {
-        display: none;
-    }
-}
-
-@media (max-width: 767px) {
-    .navigation .navbar .navbar-nav .nav-item a::before {
+@media (max-width: 991px) {
+    .navigation .navbar .navbar-nav .nav-item a::before,
+    .navigation .navbar .navbar-nav .nav-item button::before {
         display: none;
     }
 }
 
 .navigation .navbar .navbar-nav .nav-item.active a,
-.navigation .navbar .navbar-nav .nav-item:hover a {
+.navigation .navbar .navbar-nav .nav-item:hover a,
+.navigation .navbar .navbar-nav .nav-item.active button,
+.navigation .navbar .navbar-nav .nav-item:hover button {
     color: #0000cd;
     text-decoration: none;
 }
@@ -391,8 +382,8 @@ button.thin-btn:hover {
     transform: scaleX(1);
 }
 
-/* For End Nav Button */
-.navigation .navbar .navbar-nav .nav-btn a {
+/* End Nav Button (Login/Account) */
+.navigation .navbar .navbar-nav .nav-btn button {
     text-transform: uppercase;
     font-size: 16px;
     color: #fff;
@@ -401,26 +392,32 @@ button.thin-btn:hover {
     background-color: #e708ae;
     border-radius: 10px;
     border-color: transparent;
-    padding: 10px;
+    padding: 10px 0;
     margin-top: -10px;
     z-index: 10;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .navigation .navbar .navbar-nav .nav-btn {
-        margin: 4px -2px;
-    }
-}
-
-@media (max-width: 767px) {
-    .navigation .navbar .navbar-nav .nav-btn {
-        margin: 4px -2px;
-    }
-}
-
-.navigation .navbar .navbar-nav .nav-btn a:hover {
+.navigation .navbar .navbar-nav .nav-btn button:hover {
     background-color: #0000cd;
     text-decoration: none;
+}
+
+@media (max-width: 991px) {
+    /* For collapsed nav */
+    .navigation .navbar .navbar-nav .nav-btn {
+        margin: 0;
+        background-color: #e708ae;
+    }
+
+    .navigation .navbar .navbar-nav .nav-btn:hover {
+        background-color: #0000cd;
+    }
+
+    .navigation .navbar .navbar-nav .nav-btn button {
+        background-color: transparent;
+        border-radius: 0;
+        margin-top: 0;
+    }
 }
 
 /* Dropdown content (hidden by default) */
@@ -431,24 +428,38 @@ button.thin-btn:hover {
     font-size: 14px;
     font-weight: 500;
     background-color: #ffffff;
-    border: 3px #e708ae solid;
+    border: 1px #bbbbbb solid;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    padding-top: 6px;
-    margin-top: -10px;
+    border-top: none;
+    /* margin-top: -10px; */
     margin-left: 30px;
 }
-
-/* Show the dropdown menu on hover */
-.navigation .navbar .navbar-nav .dropdown:hover .dropdown-content {
-    display: block;
+@media (min-width: 992px) {
+    /* Show dropdown menu on hover */
+    .navigation .navbar .navbar-nav .dropdown:hover .dropdown-content{
+        display: block;
+    }
 }
+
+@media (max-width: 991px) {
+    /* Show the dropdown menu on click */
+    .navigation .navbar .navbar-nav .dropdown.show .dropdown-content {
+        display: block;
+        border: 2px solid #e708ae;
+        margin-left: 0;
+        position: relative;
+        border-radius: 0;
+    }
+}
+
   
 /* Links inside the dropdown */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a {
     width: 100%;
     float: none;
     color: #555;
+    font-size: 14px;
     padding: 12px 16px;
     text-decoration: none;
     text-align: left;
@@ -458,12 +469,12 @@ button.thin-btn:hover {
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a:hover {
     background-color: #ddd;
 }
-
+/* TODO: FIX */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a:nth-last-child():hover {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-  
+
 /*====== HEADER ======*/
 .intro {
     padding-top: 20%;
@@ -808,7 +819,7 @@ button.thin-btn:hover {
     overflow: hidden !important;
 }
 
-/* ====== HOW IT WORKS ====== */
+/* ====== WHY USE CAPTRACKS ====== */
 
 /*=== Box Style ===*/
 /* .boxes .row h2.title {
@@ -868,8 +879,10 @@ button.thin-btn:hover {
     }
 }
 
-.store-links p.hours {
+.store-links li.hours span {
     margin-bottom: 0;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 /* Editing Store Info */
@@ -932,26 +945,6 @@ button.thin-btn:hover {
     border-radius: 10px;
 }
 
-/* .divider {
-    position: absolute;
-    left: 26.5%;
-    //top: 55%;
-    bottom: 0;
-    border-left: 2px dotted;
-    border-image-slice: 1;
-    z-index: -1000;
-}
-
-.border-gradient {
-    border-image-slice: 1;
-    border-image-source: linear-gradient(
-        to top,
-        #0000cd,
-        #b116e0,
-        #e708ae
-    );
-} */
-
 /* ==== CAPACITY ==== */
 /* Capacity Form */
 .capacity {
@@ -990,7 +983,10 @@ button.thin-btn:hover {
 }
 
 .capacity-box .capacity-content .cap-date p {
+    color: #0000cd;
     font-size: 13px;
+    margin-top: 10px;
+    text-transform: capitalize;
 }
 
 /* Slider Style */
@@ -1116,8 +1112,8 @@ button.forum.thin-btn:hover {
     padding: 10px;
     margin: 5px 0;
 }
-/* Delete post button */
-button.post-delete {
+/* Remove post button */
+.post-delete {
     border: none;
     background-color: transparent;
     position: relative;
@@ -1181,32 +1177,6 @@ footer {
 	margin-bottom: 28px;
 }
 
-/* Contact Form */
-.footer-widget .contact-form .form-item input.form-control {
-    line-height: 1.2;
-}
-.footer-widget .contact-form .form-item input.form-control,
-.footer-widget .contact-form .form-item textarea.form-control {
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-.footer-widget .contact-form .email {
-    padding-left: 0;
-}
-.footer-widget #success.unsent {
-    display: none;
-}
-.footer-widget #success.sent {
-    display: block;
-    margin: auto;
-    padding-top: 10%;
-    text-align: center;
-}
-.footer-widget #success.sent p {
-    font-size: 15px;
-    margin-bottom: 0;
-}
-
 @media (max-width: 1199px) {
 	.footer-title {
 		font-size: 18px;
@@ -1218,7 +1188,7 @@ footer {
 		margin-bottom: 10px;
     }
     
-    #footer .contact-form {
+    .footer-widget .contact {
 		margin: 20px 0;
 	}
 }
@@ -1233,7 +1203,7 @@ footer {
         margin: 0 10px 15px 0;
     }
 
-    .footer-widget .contact-form .email {
+    .footer-widget .contact .email {
         padding-left: 15px;
     }
 }
@@ -1278,4 +1248,3 @@ footer {
 .credit {
     font-size: 10px;
 }
-

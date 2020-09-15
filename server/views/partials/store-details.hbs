@@ -7,11 +7,10 @@
     <div class="store-links">
         <ul>
             <!-- Form Start - Store Details -->
-            <form method="POST" class='store-form' action="/account/{{store._id}}">
+            <form class='store form' action="/account/{{store._id}}" method="POST">
 
                 <!-- Store Address -->
                 <li class="d-flex justify-content-start align-items-center">
-                    <!-- Icon - Map -->
                     <i class="fas fa-map-marker-alt"></i>
                     <!-- Editable Input -->
                     <input type="text" id="address" class="edit" name="address" value="{{store.address}}" required/>
@@ -21,7 +20,6 @@
 
                 <!-- Store Phone -->
                 <li class="d-flex justify-content-start align-items-center">
-                    <!-- Icon - Phone -->
                     <i class="fas fa-phone"></i>
                     <!-- Editable Input -->
                     <input type="text" id="phone" class="edit" name="phone" value="{{store.phone}}" required/>
@@ -31,7 +29,6 @@
 
                 <!-- Store Website -->
                 <li class="d-flex justify-content-start align-items-center">
-                    <!-- Icon - Globe -->
                     <i class="fas fa-globe"></i>
                     <!-- Editable Input -->
                     <input type="text" id="url" class="edit" name="url" value="{{store.url}}" required/>
@@ -41,22 +38,21 @@
 
                 <!-- Store Hours -->
                 <li class="d-flex justify-content-start align-items-baseline">
-                    <!-- Icon - Hourglass -->
                     <i class="far fa-hourglass"></i>
 
-                    <div>
+                    <ul>
                         <p>Store Hours:</p>
                         {{#each store.hours as |day|}}
-                        <p class="hours d-flex justify-content-between">
+                        <li class="hours d-flex justify-content-between">
                             {{#if (eq day.open undefined)}}
                             <span class="day">{{day.day}}:</span> <span>Closed</span>
                             {{else}}
                             <span class="day">{{day.day}}:</span> <span>{{day.open}}
                                 - {{day.close}}</span>
                             {{/if}}
-                        </p>
+                        </li>
                         {{/each}}
-                    </div>
+                    </ul>
                 </li>
 
             </ul>
@@ -67,23 +63,22 @@
         {{#if (eq (len store.links) 0)}}
         {{else}}
         {{#each store.links as |link|}}
-        <li class="row d-flex justify-content-start align-items-center">
-            <!-- Icon - Link -->
-            <i class="fas fa-link"></i>
-            <a href={{link.url}} class="saved">{{link.title}}</a>
-            <!-- Form Start - Remove Link -->
-            <form method="POST" class="link-removed" action="/account/{{store._id}}">
-                <a href="javascript:void(0);">
-                    <i class="fas fa-minus-circle" id="remove"></i>
+        <!-- Form Start - Remove Link -->
+        <form class="delete-link" action="/account/{{store._id}}" method="POST">
+            <li class="d-flex justify-content-start align-items-center">
+                <i class="fas fa-link"></i>
+                <a href={{link.url}} class="saved">{{link.title}}</a>
+                <a href="javascript:void(0);" id="remove-link">
+                    <i class="fas fa-minus-circle" id='remove'></i>
                 </a>
-            </form>
-            <!-- Form End -->
-        </li>
+            </li>
+        </form>
+        <!-- Form End -->
         {{/each}}
         {{/if}}
 
         <!-- Form Start - Add Link -->
-        <form method="POST" class="link-form" action="/account/{{store._id}}">
+        <form class="link" action="/account/{{store._id}}" method="POST">
 
             <!-- Input Row - Link Title -->
             <li class="d-flex justify-content-start align-items-center">
@@ -101,9 +96,9 @@
             </li>
 
             <!-- Button - Add Link -->
-            <li id="add" class="d-flex align-items-center">
+            <li class="d-flex align-items-center">
                 <i class="fas fa-plus"></i>
-                <a href="javascript:void(0);">Add Link</a>
+                <a href="javascript:void(0);" id="post-link">Add Link</a>
             </li>
         </form>
         <!-- Form End -->

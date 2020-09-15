@@ -59,46 +59,52 @@ document.querySelectorAll('.closed').forEach(cb => {
 
 // Capacity
 const hidden = document.getElementsByClassName('hide-cap');
+
 // Handle Line Radios
 const lines = document.getElementsByName('line');
-// Handle "Yes" Radio for "Current Line" --> Show Input
-lines[0].addEventListener('click', () => {
-    // Line Length Input
-    hidden[0].classList.remove('no-line');
-    hidden[0].classList.add('yes-line');
-    // Wait Time Input
-    hidden[1].classList.remove('no-line');
-    hidden[1].classList.add('yes-line');
-    // Make inputsrequired
-    hidden[0].children[1].required = true;
-    hidden[1].children[1].required = true;
-});
-// Handle "No" Radio for "Current Line" --> Hide Input
-lines[1].addEventListener('click', () => {
-    // Line Length Input
-    hidden[0].classList.remove('yes-line');
-    hidden[0].classList.add('no-line');
-    // Wait Time Input
-    hidden[1].classList.remove('yes-line');
-    hidden[1].classList.add('no-line');
-    // Make input not required
-    hidden[0].children[1].required = false;
-    hidden[1].children[1].required = false;
-});
+if (lines.length > 0) {
+    // Handle "Yes" Radio for "Current Line" --> Show Input
+    lines[0].addEventListener('click', () => {
+        // Line Length Input
+        hidden[0].classList.remove('no-line');
+        hidden[0].classList.add('yes-line');
+        // Wait Time Input
+        hidden[1].classList.remove('no-line');
+        hidden[1].classList.add('yes-line');
+        // Make inputsrequired
+        hidden[0].children[1].required = true;
+        hidden[1].children[1].required = true;
+    });
+
+    // Handle "No" Radio for "Current Line" --> Hide Input
+    lines[1].addEventListener('click', () => {
+        // Line Length Input
+        hidden[0].classList.remove('yes-line');
+        hidden[0].classList.add('no-line');
+        // Wait Time Input
+        hidden[1].classList.remove('yes-line');
+        hidden[1].classList.add('no-line');
+        // Make input not required
+        hidden[0].children[1].required = false;
+        hidden[1].children[1].required = false;
+    });
+}
 
 // Handle Register Radios
 const registers = document.getElementsByName('register');
-// Handle "Yes" Radio for "Open Registers" --> Show Input
-registers[0].addEventListener('click', () => {
-    hidden[2].classList.remove('no-register');
-    hidden[2].classList.add('yes-register');
-    // Make input required
-    hidden[2].children[1].required = true;
-});
-// Handle "No" Radio for "Open Registers" --> Hide Input
-registers[2].addEventListener('click', () => {
-    hidden[2].classList.remove('yes-register');
-    hidden[2].classList.add('no-register');
-    // Make input not required
-    hidden[2].children[1].required = false;
-});
+if (registers.length > 0) {
+    // Handle "Yes" Radio for "Open Registers" --> Show Input
+    registers[0].addEventListener('click', () => {
+        hidden[2].classList.remove('no-register');
+        hidden[2].classList.add('yes-register');
+        // Make input required
+        hidden[2].children[1].required = true;
+    });
+    // Handle "No" Radio for "Open Registers" --> Hide Input
+    registers[1].addEventListener('click', () => {
+        hidden[2].classList.remove('yes-register');
+        hidden[2].classList.add('no-register');
+        // Make input not required
+        hidden[2].children[1].required = false;
+    });
+}
