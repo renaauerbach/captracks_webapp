@@ -6,13 +6,13 @@
         <div class="row justify-content-center">
 
             <!-- Column - Title Info -->
-            <div class="col-lg-10 col-md-7 col-sm-6">
+            <div class="col-10">
                 <div class="section-title text-center">
                     <h2 class="title">{{title}}</h2>
-                    <p>{{subtitle_1}}</p>
-                    {{#if subtitle_2}}
-                    <br>
-                    <p>{{subtitle_2}}</p>
+                    {{#if quote}}
+                    {{> header_quote}}
+                    {{else}}
+                    {{> header_text}}
                     {{/if}}
                 </div>
             </div>
