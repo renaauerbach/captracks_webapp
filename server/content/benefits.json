@@ -25,6 +25,12 @@
             "text": "Track and manage your store's current capacity through a FREE, integrative web application."
         },
         {
+            "id": 4,
+            "icon": "fas fa-people-arrows",
+            "subtitle": "Manage Store Capacity",
+            "text": "Track and manage your store's current capacity through a FREE, integrative web application."
+        },
+        {
             "id": 5,
             "icon": "fas fa-chart-line",
             "subtitle": "Increase Revenue",
