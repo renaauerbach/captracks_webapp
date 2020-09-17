@@ -1,12 +1,22 @@
 <!--================ INFO PAGE START ================-->
-<!-- Header -->
+<!-- Header - Customers -->
 {{#if (eq title 'Customer Benefits')}}
-{{> header id="info" title="Why Use CapTracks?" subtitle_1='"Americans spend roughly 37 billion hours each year waiting in line. The dominant cost of waiting is an emotional one: stress, boredom, that nagging sensation that one’s life is slipping away. The last thing we want to do with our dwindling leisure time is squander it in stasis. We’ll never eliminate lines altogether, but a better understanding of the psychology of waiting can help make those inevitable delays that inject themselves into our daily lives a touch more bearable." -The New York Times'}}
+{{> header id="info"
+title="Why Use CapTracks?"
+quote='Americans spend roughly 37 billion hours each year waiting in line. The dominant cost of waiting is an emotional one: stress, boredom, that nagging sensation that one’s life is slipping away. The last thing we want to do with our dwindling leisure time is squander it in stasis. We’ll never eliminate lines altogether, but a better understanding of the psychology of waiting can help make those inevitable delays that inject themselves into our daily lives a touch more bearable.'
+link="https://www.nytimes.com/2012/08/19/opinion/sunday/why-waiting-in-line-is-torture.html"
+credit="The New York Times"}}
+<!-- Header - Vendor -->
 {{else if (eq title 'Vendor Benefits')}}
-{{> header id="info" title="Why Use CapTracks?" subtitle_1='"Given the shifts in consumer behavior—more cooking at home, larger baskets, less cross-shopping across retailers—each shopping occasion, for loyal and new customers alike, takes on greater importance for retailers. Find new ways to communicate and deliver value. First, use your unique value proposition as a base for value communications, expanding beyond purely communicating price points. Highlight the areas in which you are best positioned relative to your competitors, whether that’s the broadest private-label offering, the freshest produce, or the best shopping experience."
-—McKinsey Retail Insights, June 2020'}}
+{{> header id="info"
+title="Why Use CapTracks?"
+quote='Given the shifts in consumer behavior—more cooking at home, larger baskets, less cross-shopping across retailers—each shopping occasion, for loyal and new customers alike, takes on greater importance for retailers. Find new ways to communicate and deliver value. First, use your unique value proposition as a base for value communications, expanding beyond purely communicating price points. Highlight the areas in which you are best positioned relative to your competitors, whether that’s the broadest private-label offering, the freshest produce, or the best shopping experience.'
+link="https://www.wsj.com/articles/trader-joes-line-coronavirus-lockdown-grocery-market-reopen-11591975485
+"
+credit="McKinsey Retail Insights, June 2020"}}
+<!-- Header - About Us -->
 {{else}}
-{{> header id="info" title="About Us" subtitle_1="CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies." subtitle_2="We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond."}}
+{{> header id="info" title="About Us" text="CapTracks is a mobile application that provides the information consumers need, when they need it. We are a two-sided, integrative platform that matches capacity to demand through direct vendor-to-customer engagement, crowdsourced information, and location-based technologies." subtext="We envision better management of foot traffic and time to foster safe environments in the wake of COVID-19 and beyond."}}
 {{/if}}
 
 <!-- Page Content -->
