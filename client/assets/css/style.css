@@ -240,8 +240,22 @@ button.thin-btn:hover {
     padding: 0;
     width: 30%;
 }
-.navigation .navbar .navbar-brand .logo {
+
+.navigation .navbar .navbar-brand .logo-full {
     width: 85%;
+}
+.navigation .navbar .navbar-brand .logo-icon {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .navigation .navbar .navbar-brand .logo-full {
+        display: none;
+    }
+    .navigation .navbar .navbar-brand .logo-icon {
+        display: inline;
+        max-width: 40%;
+    }
 }
 
 .navigation .navbar .navbar-toggler {
@@ -392,7 +406,7 @@ button.thin-btn:hover {
     background-color: #e708ae;
     border-radius: 10px;
     border-color: transparent;
-    padding: 10px 0;
+    padding: 10px;
     margin-top: -10px;
     z-index: 10;
 }
@@ -416,7 +430,8 @@ button.thin-btn:hover {
     .navigation .navbar .navbar-nav .nav-btn button {
         background-color: transparent;
         border-radius: 0;
-        margin-top: 0;
+        margin-top: 0;    
+        padding: 10px 0;
     }
 }
 
@@ -551,7 +566,16 @@ button.thin-btn:hover {
     color: #080891;
 }
 
-.header-image {
+/* Header Quote */
+.header-quote {
+    font-style: italic;
+}
+.header-credit a,
+.header-credit a:hover {
+    color: #ffffff;
+}
+
+/* .header-image {
     max-width: 430px;
     margin: 0 auto;
     position: relative;
@@ -580,7 +604,7 @@ button.thin-btn:hover {
     left: 0;
     bottom: 58px;
     z-index: 11;
-}
+} */
 
 .header-image img {
     position: relative;
@@ -849,7 +873,75 @@ button.thin-btn:hover {
     color: #ffffff;
 }
 
-/* Store Details */
+/* Store Details Sidebar */
+.store-details {
+
+}
+.sidebar {
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
+    top: 51px;
+    width: 200px;
+    z-index: 8;
+    overflow: hidden;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+.sidebar.collapsed {
+    width: 60px;
+}
+.sidebar.collapsed .glyphicon {
+    font-size: 22px;
+}
+.sidebar.collapsed .nav-label {
+    display: none;
+}
+.btn-expand-collapse {
+    position: absolute;
+    display: block;
+    left: 0px;
+    bottom:0;
+    width: 100%;
+    padding: 8px 0;
+    color: #ffffff;
+    background-color: #e708ae;
+    font-size: 20px;
+    text-align: center;
+}
+.btn-expand-collapse:hover,
+.btn-expand-collapse:focus {
+    background-color: #e708ae;
+    color: white;
+}
+.btn-expand-collapse:active {
+    background-color: #e708ae;
+}
+
+/* Store Links */
+.store-links,
+.store-links li {
+  margin:0; padding:0;
+  list-style: none;
+}
+
+.store-links li a {
+  display: block;
+  padding: 10px 18px;
+  text-align: left;
+  border-bottom:solid 1px #444;
+  color: #ccc;
+}
+
+.store-links li a:hover {
+  background-color: #000;
+  text-decoration: none;
+  color: white;
+}
+
 .store-links ul {
     text-decoration: none;
 }
