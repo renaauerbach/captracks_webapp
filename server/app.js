@@ -42,7 +42,6 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     autoRemove: 'disabled', //TODO: ONLY FOR PRODUCTION
-    cookie: {},
     // touchAfter: 24 * 3600,
     store: new MongoStore({
         mongooseConnection: mongoose.connection,
@@ -77,7 +76,6 @@ hbs.registerHelper('eq', (val1, val2) => {
 hbs.registerHelper('concat', (val1, val2) => {
     return val1 + val2;
 });
-// TODO: CHECK IF USED ANYWHERE
 hbs.registerHelper('len', (obj) => {
     return Object.keys(obj).length;
 });
@@ -92,9 +90,6 @@ app.use('/post', messageRouter);
 app.use('/details', detailsRouter);
 
 app.use((req, res, next) => {
-    if (req.isAuthenticated()) {
-        res.locals.user = req.session.passport.user;
-    }
     next();
 });
 
