@@ -9,7 +9,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    color: #555;
+    color: #555555;
 }
 
 img {
@@ -42,7 +42,7 @@ p,
 label {
     font: normal normal 300 16px 'Arial', sans-serif;
     line-height: 28px;
-    color: #555;
+    color: #555555;
     margin: 0px;
 }
 
@@ -68,7 +68,7 @@ input {
 
 .style-2 .section-title .title,
 .style-2 p {
-    color: #fff;
+    color: #ffffff;
 }
 
 /*===== Title Style =====*/
@@ -141,7 +141,7 @@ input {
 	font-size: 15px;
 	line-height: 48px;
 	border-radius: 15px;
-	color: #fff;
+	color: #ffffff;
 	z-index: 5;
 	-webkit-transition: all 0.3s ease-out 0s;
 	-moz-transition: all 0.3s ease-out 0s;
@@ -167,7 +167,7 @@ input {
 	line-height: 48px;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
-	color: #fff;
+	color: #ffffff;
 	z-index: 5;
 	background-color: #e708ae;
 	text-transform: uppercase;
@@ -212,7 +212,7 @@ button.thin-btn:hover {
 /*====== NAV ======*/
 .navigation {
     padding: 30px 0;
-    background-color: #fff;
+    background-color: #ffffff;
     border-bottom: 1px solid #0000cd;
     -webkit-transition: all 0.3s ease-out 0s;
     -moz-transition: all 0.3s ease-out 0s;
@@ -304,7 +304,7 @@ button.thin-btn:hover {
         top: 158%;
         left: 0;
         width: 100%;
-        background-color: #fff;
+        background-color: #ffffff;
         z-index: 99;
     }
 
@@ -323,7 +323,8 @@ button.thin-btn:hover {
 
 .navigation .navbar .navbar-nav .nav-item, 
 .navigation .navbar .navbar-nav .nav-btn {
-    margin-left: 30px;
+    margin-left: 20px;
+    right: 0;
 }
 
 @media (max-width: 991px) {
@@ -336,7 +337,7 @@ button.thin-btn:hover {
 .navigation .navbar .navbar-nav .nav-item button {
     text-transform: uppercase;
     font-size: 16px;
-    color: #555;
+    color: #555555;
     font-weight: 500;
     position: relative;
     background: none;
@@ -400,7 +401,7 @@ button.thin-btn:hover {
 .navigation .navbar .navbar-nav .nav-btn button {
     text-transform: uppercase;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     font-weight: 500;
     position: relative;
     background-color: #e708ae;
@@ -473,7 +474,7 @@ button.thin-btn:hover {
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a {
     width: 100%;
     float: none;
-    color: #555;
+    color: #555555;
     font-size: 14px;
     padding: 12px 16px;
     text-decoration: none;
@@ -534,7 +535,7 @@ button.thin-btn:hover {
 .header-content-left .slogan {
     font-family: "Arial Narrow", Arial, sans-serif;
     font-size: 50px;
-    color: #fff;
+    color: #ffffff;
     text-transform: uppercase;
     padding-bottom: 30px;
     word-spacing: 3px;
@@ -558,7 +559,7 @@ button.thin-btn:hover {
 }
 
 .header-content-left p a {
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -736,7 +737,7 @@ button.thin-btn:hover {
     position: relative;
     bottom: 0;
     left: 0;
-    background-color: #fff;
+    background-color: #ffffff;
     border: #0000cd solid 2px;
     border-radius: 15px;
     padding: 25px;
@@ -756,7 +757,7 @@ button.thin-btn:hover {
 
 .content p {
     font-size: 16px;
-    color: #555;
+    color: #555555;
     -webkit-transition: all 0.3s ease-out 0s;
     -moz-transition: all 0.3s ease-out 0s;
     -ms-transition: all 0.3s ease-out 0s;
@@ -875,15 +876,16 @@ button.thin-btn:hover {
 
 /* Store Details Sidebar */
 .store-details {
-
-}
-.sidebar {
     bottom: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
     left: 0px;
-    position: absolute;
-    top: 51px;
-    width: 200px;
-    z-index: 8;
+    position: fixed;
+    /* top: 51px; */
+    width: 40%;
+    z-index: 1;
+    padding: 30px 12px;  /* Impacts how far button sticks out*/ 
+    background-color: #ffffff;
     overflow: hidden;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
@@ -891,57 +893,39 @@ button.thin-btn:hover {
     -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
 }
-.sidebar.collapsed {
-    width: 60px;
+.store-details.collapsed {
+    width: 0px;
 }
-.sidebar.collapsed .glyphicon {
-    font-size: 22px;
-}
-.sidebar.collapsed .nav-label {
-    display: none;
-}
+
 .btn-expand-collapse {
     position: absolute;
-    display: block;
-    left: 0px;
-    bottom:0;
-    width: 100%;
-    padding: 8px 0;
+    display: inline;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 25px;
+    font-size: 20px;
     color: #ffffff;
     background-color: #e708ae;
-    font-size: 20px;
     text-align: center;
 }
-.btn-expand-collapse:hover,
-.btn-expand-collapse:focus {
-    background-color: #e708ae;
-    color: white;
+.btn-expand-collapse:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
-.btn-expand-collapse:active {
-    background-color: #e708ae;
+.btn-expand-collapse p {
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+    padding: 1350% 0;
 }
 
 /* Store Links */
-.store-links,
-.store-links li {
-  margin:0; padding:0;
-  list-style: none;
-}
-
-.store-links li a {
-  display: block;
-  padding: 10px 18px;
-  text-align: left;
-  border-bottom:solid 1px #444;
-  color: #ccc;
-}
-
-.store-links li a:hover {
-  background-color: #000;
-  text-decoration: none;
-  color: white;
-}
-
 .store-links ul {
     text-decoration: none;
 }
@@ -955,6 +939,13 @@ button.thin-btn:hover {
     padding: 15px 0;
 	border-radius: 0;
 	margin-right: 15px;
+}
+.store-links li p {
+    margin-bottom: 0;
+    color: #555555;
+}
+.store-links .hours span {
+    color: #555555;
 }
 .store-links li a {
     display: inline;
@@ -1045,7 +1036,7 @@ button.thin-btn:hover {
 }
 
 .capacity .cap-details {
-    color: #555;
+    color: #555555;
     font-size: 13px;
     text-transform: uppercase;
 }
@@ -1057,7 +1048,7 @@ button.thin-btn:hover {
 }
 
 #sliderText {
-    color: #555;
+    color: #555555;
     font-size: 17px;
     width: 10%;
     text-align: end;
@@ -1265,7 +1256,7 @@ footer {
 
 .footer-title {
     font: normal bold 30px "Ariel", sans-serif;
-	color: #fff;
+	color: #ffffff;
 	margin-bottom: 28px;
 }
 

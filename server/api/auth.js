@@ -345,8 +345,6 @@ module.exports = function(passport) {
                     });
                 }
             ], function(err) {
-                res.cookie('firstName', user.firstName);
-                res.cookie('userId', user.id);
                 res.redirect('/account');
             });
         }
@@ -361,8 +359,6 @@ module.exports = function(passport) {
                 return res.redirect('/account');
             }
             req.logout();
-            res.clearCookie('firstName');
-            res.clearCookie('userId');
             res.redirect('/map');
         });
     });

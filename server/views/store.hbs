@@ -6,8 +6,10 @@
 </div>
 
 <!-- Header -->
-{{> header id="store" title=store.name text=(concat 'View recent updates directly from
-' store.name)}}
+{{> header
+id="store"
+title=store.name
+text=(concat 'View recent updates directly from ' store.name)}}
 
 <!-- Google Map Data -->
 <span id="data" style="display: none">{{{ store }}}</span>

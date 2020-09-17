@@ -1,10 +1,10 @@
-<!--====== STORE CONTENT - CAPACITY INFO ======-->
-<div class="store-details">
-    <!-- Title -->
-    {{> store_title label="Store Info"}}
+<!--====== STORE CONTENT - STORE INFO ======-->
+<div class="store-details d-flex justify-content-around collapsed">
 
-    <!-- Store Details -->
+    <!-- Store Links -->
     <div class="store-links">
+        <!-- Title -->
+        {{> store_title label="Store Info"}}
         <ul>
             <!-- Form Start - Store Details -->
             <form class='store form' action="/account/{{store._id}}" method="POST">
@@ -104,4 +104,13 @@
         <!-- Form End -->
 
     </div>
+    <a href="#" class="btn-expand-collapse">
+        <p>
+            <i class="fas fa-angle-down"></i>
+            Store Details
+            <i class="fas fa-angle-down"></i>
+        </p>
+
+    </a>
+
 </div>
