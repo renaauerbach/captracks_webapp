@@ -1,15 +1,15 @@
 /*===== General =====*/
 * {
-    margin: 0;
-    padding: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
     color: #555555;
+    font-family: 'Arial', sans-serif;
 }
 
 img {
@@ -18,38 +18,32 @@ img {
 
 a:focus,
 button:focus {
-    text-decoration: none;
     outline: none;
+    text-decoration: none;
 }
 
 a:hover {
     text-decoration: none;
 }
 
+a,
 i,
-span,
-a {
+span {
     display: inline-block;
 }
 
 ul {
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    list-style-type: none;
 }
 
 p, 
 label {
+    color: #555555;
     font: normal normal 300 16px 'Arial', sans-serif;
     line-height: 28px;
-    color: #555555;
     margin: 0px;
-}
-
-@media (max-width: 767px) {
-    p, label {
-        font-size: 15px;
-    }
 }
 
 input {
@@ -89,67 +83,45 @@ input {
     padding: 5%;
 }
 
-@media (max-width: 769px) {
-    .section-title .title {
-        font-size: 36px;
-    }
-    
-    .section-title.style-2 .title {
-        font-size: 25px;
-        margin: 5px 0;
-    }
-
-    div#rounded-continer {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
 .sub-title {
+    color: #32333c;
     font-size: 22px;
     font-weight: 600;
-    padding-top: 8%;
-    padding-bottom: 5px;
     margin: 0;
+    padding-bottom: 5px;
+    padding-top: 8%;
     -webkit-transition: all 0.3s ease-out 0s;
     -moz-transition: all 0.3s ease-out 0s;
     -ms-transition: all 0.3s ease-out 0s;
     -o-transition: all 0.3s ease-out 0s;
     transition: all 0.3s ease-out 0s;
-    color: #32333c;
-}
-
-@media (max-width: 767px) {
-    .sub-title {
-        font-size: 19px;
-    }
 }
 
 /*===== Button Style =====*/
 .main-btn {
+	background-color: #e708ae;
+	border-radius: 15px;
+	border: 2px solid #e708ae;
+	color: #ffffff;
 	display: inline-block;
+	font-size: 15px;
 	font-weight: 500;
+	line-height: 48px;
+	padding: 0 40px;
 	text-align: center;
-	white-space: nowrap;
 	vertical-align: middle;
+	white-space: nowrap;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	border: 2px solid #e708ae;
-	padding: 0 40px;
-	font-size: 15px;
-	line-height: 48px;
-	border-radius: 15px;
-	color: #ffffff;
-	z-index: 5;
 	-webkit-transition: all 0.3s ease-out 0s;
 	-moz-transition: all 0.3s ease-out 0s;
 	-ms-transition: all 0.3s ease-out 0s;
 	-o-transition: all 0.3s ease-out 0s;
 	transition: all 0.3s ease-out 0s;
-	background-color: #e708ae;
 	text-transform: uppercase;
+	z-index: 5;
 }
 
 .sub-btn {
@@ -202,12 +174,6 @@ button.thin-btn:hover {
     background-color: transparent;
     color: #ffffff;
 }
-@media (max-width: 767px) {
-    .main-btn {
-        font-size: 12px;
-        padding: 0 30px;
-    }
-}
 
 /*====== NAV ======*/
 .navigation {
@@ -246,16 +212,6 @@ button.thin-btn:hover {
 }
 .navigation .navbar .navbar-brand .logo-icon {
     display: none;
-}
-
-@media (max-width: 767px) {
-    .navigation .navbar .navbar-brand .logo-full {
-        display: none;
-    }
-    .navigation .navbar .navbar-brand .logo-icon {
-        display: inline;
-        max-width: 40%;
-    }
 }
 
 .navigation .navbar .navbar-toggler {
@@ -298,39 +254,11 @@ button.thin-btn:hover {
     top: -7px;
 }
 
-@media (max-width: 991px) {
-    .navigation .navbar .navbar-collapse {
-        position: absolute;
-        top: 158%;
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        z-index: 99;
-    }
-
-    /* Make up for break between collapsed nav and bar */
-    .navigation.sticky .navbar .navbar-collapse {
-        top: 121%;
-    }
-
-    .navigation .navbar .navbar-collapse ul li {
-        padding: 3px 12px;
-    }
-    .navigation .navbar .navbar-collapse ul:nth-last-child() {
-        padding: 0;
-    }
-}
 
 .navigation .navbar .navbar-nav .nav-item, 
 .navigation .navbar .navbar-nav .nav-btn {
     margin-left: 20px;
     right: 0;
-}
-
-@media (max-width: 991px) {
-    .navigation .navbar .navbar-nav .nav-item {
-        margin: 4px 0;
-    }
 }
 
 .navigation .navbar .navbar-nav .nav-item a,
@@ -372,13 +300,6 @@ button.thin-btn:hover {
     transition: all 0.3s ease-in-out 0s;
 }
 
-@media (max-width: 991px) {
-    .navigation .navbar .navbar-nav .nav-item a::before,
-    .navigation .navbar .navbar-nav .nav-item button::before {
-        display: none;
-    }
-}
-
 .navigation .navbar .navbar-nav .nav-item.active a,
 .navigation .navbar .navbar-nav .nav-item:hover a,
 .navigation .navbar .navbar-nav .nav-item.active button,
@@ -417,25 +338,6 @@ button.thin-btn:hover {
     text-decoration: none;
 }
 
-@media (max-width: 991px) {
-    /* For collapsed nav */
-    .navigation .navbar .navbar-nav .nav-btn {
-        margin: 0;
-        background-color: #e708ae;
-    }
-
-    .navigation .navbar .navbar-nav .nav-btn:hover {
-        background-color: #0000cd;
-    }
-
-    .navigation .navbar .navbar-nav .nav-btn button {
-        background-color: transparent;
-        border-radius: 0;
-        margin-top: 0;    
-        padding: 10px 0;
-    }
-}
-
 /* Dropdown content (hidden by default) */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content {
     display: none;
@@ -451,24 +353,6 @@ button.thin-btn:hover {
     /* margin-top: -10px; */
     margin-left: 30px;
 }
-@media (min-width: 992px) {
-    /* Show dropdown menu on hover */
-    .navigation .navbar .navbar-nav .dropdown:hover .dropdown-content{
-        display: block;
-    }
-}
-
-@media (max-width: 991px) {
-    /* Show the dropdown menu on click */
-    .navigation .navbar .navbar-nav .dropdown.show .dropdown-content {
-        display: block;
-        border: 2px solid #e708ae;
-        margin-left: 0;
-        position: relative;
-        border-radius: 0;
-    }
-}
-
   
 /* Links inside the dropdown */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a {
@@ -482,8 +366,12 @@ button.thin-btn:hover {
 }
   
 /* Add a grey background color to dropdown links on hover */
-.navigation .navbar .navbar-nav .dropdown .dropdown-content a:hover {
-    background-color: #ddd;
+.navigation .navbar .navbar-nav .dropdown.benefits .dropdown-content a:hover {
+    background-color: #dddddd;
+}
+/* Add a grey background color to dropdown links on hover */
+.navigation .navbar .navbar-nav .dropdown.account .dropdown-content a:hover {
+    background-color: #fc88de;
 }
 /* TODO: FIX */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a:nth-last-child():hover {
@@ -506,28 +394,6 @@ button.thin-btn:hover {
     background-color: #fbfbfb;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .intro {
-        padding: 10%;
-        padding-top: 25%;
-    }
-
-    .header-content {
-        height: 550px;
-    }
-}
-
-@media (max-width: 767px) {
-    .intro {
-        padding: 10%;
-        padding-top: 40%;
-    }
-
-    .header-content {
-        height: 550px;
-    }
-}
-
 .header-content-left {
     position: relative;
 }
@@ -541,21 +407,9 @@ button.thin-btn:hover {
     word-spacing: 3px;
 }
 
-@media (max-width: 767px) {
-    .header-content-left .slogan {
-        font-size: 40px;
-    }
-}
-
 .header-content-left .title {
     font-size: 60px;
     padding-bottom: 15px;
-}
-
-@media (max-width: 767px) {
-    .header-content-left .title {
-        font-size: 38px;
-    }
 }
 
 .header-content-left p a {
@@ -575,37 +429,6 @@ button.thin-btn:hover {
 .header-credit a:hover {
     color: #ffffff;
 }
-
-/* .header-image {
-    max-width: 430px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.header-image::before {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 82%;
-    border-bottom: 0;
-    top: 50%;
-    left: 0;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
-.header-image::after {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 20px;
-    left: 0;
-    bottom: 58px;
-    z-index: 11;
-} */
 
 .header-image img {
     position: relative;
@@ -642,22 +465,6 @@ button.thin-btn:hover {
     z-index: 9999;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .popup-container {
-        font-size: 15px;
-        margin: 0 5%;
-        width: 90%;
-    }
-}
-
-@media (max-width: 767px) {
-    .popup-container {
-        font-size: 15px;
-        margin: 0;
-        width: 100%;
-    }
-}
-
 /* Close Button */
 .close-btn {
     color: #0000cd;
@@ -681,8 +488,8 @@ button.thin-btn:hover {
 #store, 
 #auth,
 #account {
-    padding-top: 18%;
-    padding-bottom: 10%;
+    padding-top: 20%;
+    padding-bottom: 8%;
 }
 
 #benefits,
@@ -691,46 +498,6 @@ button.thin-btn:hover {
 #account-body {
     padding-top: 70px;
     padding-bottom: 130px;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .intro, 
-    #legal,
-    #info,
-    #store, 
-    #auth,
-    #account {
-        padding: 10%;
-        padding-top: 25%;
-    }
-
-    #benefits,
-    #team,
-    #forum,
-    #account-body {
-        padding-top: 50px;
-        padding-bottom: 100px;
-    }
-}
-
-@media (max-width: 767px) {
-    .intro, 
-    #legal,
-    #info,
-    #store, 
-    #auth,
-    #account {
-        padding: 10%;
-        padding-top: 40%;
-    }
-
-    #benefits,
-    #team,
-    #forum,
-    #account-body {
-        padding-top: 45px;
-        padding-bottom: 80px;
-    }
 }
 
 .content {
@@ -749,15 +516,10 @@ button.thin-btn:hover {
     transition: all 0.3s ease-out 0s;
 }
 
-@media (max-width: 767px) {
-    .content {
-        padding: 20px;
-    }
-}
-
 .content p {
     font-size: 16px;
     color: #555555;
+    margin-bottom: 0;
     -webkit-transition: all 0.3s ease-out 0s;
     -moz-transition: all 0.3s ease-out 0s;
     -ms-transition: all 0.3s ease-out 0s;
@@ -844,8 +606,13 @@ button.thin-btn:hover {
     overflow: hidden !important;
 }
 
-/* ====== WHY USE CAPTRACKS ====== */
+/* ====== ABOUT US ====== */
+/* Team Members */
+.box .label {
+    font: italic normal 300 18px 'Arial', sans-serif;
+}
 
+/* ====== WHY USE CAPTRACKS ====== */
 /*=== Box Style ===*/
 /* .boxes .row h2.title {
     padding-right: 3.3em;
@@ -954,12 +721,6 @@ button.thin-btn:hover {
 }
 .store-links li a:hover {
     color: #e708ae;
-}
-
-@media (max-width: 767px) {
-    .store-links li i {
-        padding: 15px 0;
-    }
 }
 
 .store-links li.hours span {
@@ -1219,9 +980,6 @@ button.forum.thin-btn:hover {
     font-size: 16px;
 }
 
-/* ====== PROFILE ====== */
-
-
 /* ====== FOOTER ====== */
 footer {
 	padding: 4% 0 2%;
@@ -1229,66 +987,35 @@ footer {
 
 .footer-widget .icon span {
     position: relative;
-    margin: 0 10px 15px -30px;
-	display: inline-block;
-	width: 26px;
-	height: 26px;
 	line-height: 22px;
 	text-align: center;
+    color: #ffffff;
+    margin: 0 10px 15px -110px;
+}
+.footer-widget .icon span i {
+    font-size: 14px;
+    width: 26px;
+    height: 26px;
     border: 1px solid #ffffff;
     border-radius: 20px;
-    color: #ffffff;
-}
-
-.footer-widget .icon span i {
-    font-size: 12px;
+    padding-top: 5px;   /* Center icon in border cirlce */
+    margin-right: 5px;
 }
 
 .footer-widget .list li {
 	margin-bottom: 5px;
 }
 
-.footer-widget .icon a,
+.footer-widget .icon span a,
 .footer-widget .list li a {
     color: #ffffff;
-    font: 14px "Ariel", sans-serif; 
+    font: 16px "Ariel", sans-serif; 
 }
 
 .footer-title {
     font: normal bold 30px "Ariel", sans-serif;
 	color: #ffffff;
 	margin-bottom: 28px;
-}
-
-@media (max-width: 1199px) {
-	.footer-title {
-		font-size: 18px;
-    }  
-}
-
-@media (max-width: 991px) {
-	.footer-title {
-		margin-bottom: 10px;
-    }
-    
-    .footer-widget .contact {
-		margin: 20px 0;
-	}
-}
-
-@media (max-width: 767px) {
-    #footer .links, 
-    #footer .contact-info {
-        margin-bottom: 2%;
-    }
-
-    .footer-widget .icon span {
-        margin: 0 10px 15px 0;
-    }
-
-    .footer-widget .contact .email {
-        padding-left: 15px;
-    }
 }
 
 /* ====== TERMS / PRIVACY ====== */
