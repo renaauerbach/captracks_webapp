@@ -8,7 +8,7 @@ const Store = require('../models/store.model');
 // ==================== MAP (GET) ==================== //
 router.get('/', (req, res) => {
     // Get all Stores
-    Store.find({}, (err, stores) => {
+    Store.find({}).populate({ path: 'details', model: 'details' }).exec((err, stores) => {
         if (err) {
             return res.status(400).send(err);
         }
@@ -20,10 +20,7 @@ router.get('/', (req, res) => {
                 id: id,
                 name: store.name,
                 address: store.address,
-                details: store.populate({
-                    path: 'details',
-                    populate: 'details',
-                }),
+                details: store.details[0],
                 phone: store.phone,
                 url: store.url,
                 hours: store.hours,

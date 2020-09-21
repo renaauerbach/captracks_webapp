@@ -554,38 +554,42 @@ button.thin-btn:hover {
     position: absolute;
 }
 
-#popup {
+#tooltip {
     margin: 10px 20px;
 }
 
-.popup-title, 
-.popup-address {
+.tooltip-title, 
+.tooltip-address {
     text-align: center;
     color: #0000cd;
 }
 
-.popup-title {
+.tooltip-title {
     font-weight: 500;
 }
 
-.popup-waiting {
+.tooltip-waiting {
     text-align: center;
     padding-bottom: 10px;
     font-weight: 400;
 }
 
-.popup-details {
+.tooltip-details {
     display: flex;
     justify-content: space-between;
 }
 
-.popup-link {
+.tooltip-details .data {
+    color: #b116e0;
+}
+
+.tooltip-link {
     text-align: center;
     margin-top: 5px;
     bottom: 0;
 }
 
-.popup-link a {
+.tooltip-link a {
     width: 100%;
     color: #ffffff;
     background-color: #0000cd;
@@ -594,7 +598,7 @@ button.thin-btn:hover {
     border-bottom-right-radius: 5px;
 }
 
-.popup-link a:hover {
+.tooltip-link a:hover {
     color: #ffffff;
     background-color: #e708ae;
     text-decoration: none;
