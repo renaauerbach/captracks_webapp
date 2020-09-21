@@ -29,4 +29,3 @@ posts.forEach(created => {
 
     return created.getElementsByClassName('post-date')[0].innerText = fullDate + ' - ' + fullTime;
 });
-

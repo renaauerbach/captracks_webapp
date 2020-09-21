@@ -4,7 +4,7 @@
             "name": "forgot",
             "subject": "Reset your CapTracks account password",
             "text": [
-                "\nYou are receiving this because you (or someone else) requested to reset the password for your CapTracks account.\n Please use the following link (valid for the next 60 minutes) to complete the process:\n\n http: //",
+                "\nYou are receiving this because you (or someone else) requested to reset the password for your CapTracks account. \nPlease use the following link (valid for the next 60 minutes) to complete the process: \n\nhttp://",
                 "/reset/",
                 "\n\nIf you did not make this request, please ignore this email, and your password will remain unchanged.\n"
             ]
@@ -13,8 +13,8 @@
             "name": "reset",
             "subject": "Your password has been reset",
             "text": [
-                "Hello,\n\n This is a confirmation that the password for your CapTracks account",
-                "has just been reset.\n\n If you did not make these changes, please contact rena@captracks.com."
+                "Hello! \n\nThis is a confirmation that the password for your CapTracks account ",
+                " has just been reset. \n\nIf you did not make this change, please contact rena@captracks.com. \n\nThank you for using CapTracks!"
             ]
         },
         {

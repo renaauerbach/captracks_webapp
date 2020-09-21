@@ -1,8 +1,11 @@
 const next = document.getElementById('nextBtn');
 const tabs = document.getElementsByClassName('tab');
 
+console.log(tabs);
 let currentTab = 0;
-showTab(currentTab);
+if (tabs.length > 0) {
+	showTab(currentTab);
+}
 
 // Display the specified tab of the form
 function showTab(n) {
@@ -21,14 +24,14 @@ function nextPrev(n) {
 	if (n === 1 && !validateForm()) {
 		return false;
 	}
+	// Check if at end of form --> submit
+	if (next.innerHTML === 'Submit') {
+		document.getElementById('join').submit();
+		return false;
+	}
 	// Hide the current tab
 	tabs[currentTab].style.display = 'none';
 	currentTab += n;
-	// Check if at end of form --> submit
-	if (currentTab >= tabs.length) {
-		document.getElementById('regForm').submit();
-		return false;
-	}
 	// Display correct tab
 	showTab(currentTab);
 }
@@ -57,8 +60,9 @@ function validateForm() {
 		const curr = inputs[i];
 		if (curr.value === '' && curr.disabled === false) {
 			curr.classList.add('invalid');
-			err.innerHTML = 'Please fill in all text fields before continuing.';
+			err.classList.remove('white');
 			err.classList.add('red');
+			err.innerHTML = 'Please fill in all text fields before continuing.';
 			return false;
 		}
 	}
@@ -68,8 +72,10 @@ function validateForm() {
 
 	// Check that password and confirmed password match
 	if (confirmed.value !== password.value) {
-		err.innerHTML = "Passwords do not match. Please try again.";
+		console.log("DONT MATCH");
+		err.classList.remove('white');
 		err.classList.add('red');
+		err.innerHTML = "Passwords do not match. Please try again.";
 		return false;
 	}
 	// Reset error msg
@@ -79,8 +85,9 @@ function validateForm() {
 	// Check if password requirements are still unmet
 	for (let i = 0; i < reqs.length; i++) {
 		if (reqs[i].classList.contains('invalid')) {
-			err.innerHTML = "Password does not meet the listed requirements.";
+			err.classList.remove('white');
 			err.classList.add('red');
+			err.innerHTML = "Password does not meet the listed requirements.";
 			return false;
 		}
 	}
@@ -98,4 +105,14 @@ function validateForm() {
 	else {
 		document.getElementsByTagName('submit')[0].submit();
 	}
+}
+
+let reset = document.getElementById('resetBtn');
+if (reset) {
+	reset.addEventListener('submit', (e) => {
+		e.preventDefault();
+		if (validateForm()) {
+			reset.submit();
+		}
+	});
 }

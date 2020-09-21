@@ -48,7 +48,8 @@
         background-color: #0000cd;
     }
 
-    .navigation .navbar .navbar-nav .nav-btn button {
+    .navigation .navbar .navbar-nav .nav-btn button,
+    .navigation .navbar .navbar-nav .nav-btn a {
         background-color: transparent;
         border-radius: 0;
         margin-top: 0;    
@@ -161,7 +162,7 @@
     }
     .section-title.style-2 .title {
         font-size: 25px;
-        margin: 5px 0;
+        margin: 0 8%;
     }
 
     div#rounded-continer {

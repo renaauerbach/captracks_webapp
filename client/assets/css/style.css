@@ -319,7 +319,8 @@ button.thin-btn:hover {
 }
 
 /* End Nav Button (Login/Account) */
-.navigation .navbar .navbar-nav .nav-btn button {
+.navigation .navbar .navbar-nav .nav-btn button,
+.navigation .navbar .navbar-nav .nav-btn a {
     text-transform: uppercase;
     font-size: 16px;
     color: #ffffff;
@@ -333,7 +334,8 @@ button.thin-btn:hover {
     z-index: 10;
 }
 
-.navigation .navbar .navbar-nav .nav-btn button:hover {
+.navigation .navbar .navbar-nav .nav-btn button:hover,
+.navigation .navbar .navbar-nav .nav-btn a:hover {
     background-color: #0000cd;
     text-decoration: none;
 }

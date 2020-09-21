@@ -53,18 +53,10 @@ function passwordReqs(e) {
         reqs[4].classList.remove("valid");
         reqs[4].classList.add("invalid");
     }
-} 
+}
 
 if (password) {
     password.addEventListener('keyup', e => {
-        passwordReqs(e);});
+        passwordReqs(e);
+    });
 }
-
-// // Activate login button on "Enter"
-// const loginForm = document.getElementById('login');
-// loginForm.addEventListener("keyup", (e) => {
-//     if (e.keyCode === 13) {
-//         e.preventDefault();
-//         document.getElementById("loginBtn").click();
-//     }
-// });

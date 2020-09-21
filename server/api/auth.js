@@ -16,7 +16,7 @@ const Vendor = require('../models/vendor.model');
 // ===== Helper Functions & Data ===== //
 const createHash = require('../passport/controller').createHash;
 // Email content
-const emails = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/emails.json')));
+const emails = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/emails.json')))['emails'];
 // Nodemailer Transporter
 const smtpTransport = nodemailer.createTransport({
     service: 'SendGrid',
@@ -147,7 +147,12 @@ module.exports = function(passport) {
                             req.flash('error', process.env.RESET_INVALID);
                             return res.redirect('/forgot');
                         }
-
+                        console.log(req.body.password);
+                        console.log(req.body.confirmed);
+                        if (req.body.password !== req.body.confirmed) {
+                            req.flash('error', process.env.RESET_INVALID);
+                            return res.redirect('/reset/:token');
+                        }
                         user.password = createHash(req.body.password);
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpires = undefined;

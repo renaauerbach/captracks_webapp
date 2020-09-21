@@ -15,29 +15,28 @@ button:focus {
     box-shadow: none !important;
 }
 
+textarea {
+    overflow: hidden;
+}
+
 #auth form {
     margin-top: 5%;
 }
 
-.login form,
-.forgot form {
+form.login,
+form.forgot {
     max-width: 50%;
-    width: 50%;
+    width: 80%;
 }
 
-.reset form {
+form.reset {
     max-width: 60%;
     width: 60%;
 }
 
-.join form {
-    max-width: 70%;
-    width: 70%;
-}
-
 /* General Form links */
 .form span.details {
-    margin: 3% 0;
+    margin: 3.7% 0;
 }
 
 .form span.details a,
@@ -53,7 +52,7 @@ button:focus {
 /* Form Input styles */
 .form .form-inline .form-group {
     display: block;
-    height: 85px;
+    height: 75px;
     width: 100%;
     padding: 0;
 }
@@ -62,6 +61,7 @@ button:focus {
     border: 1px solid #b116e0;
     max-width: 100%;
     width: 100%;
+    padding: .375rem .375rem;
 }
 
 /* Floating labels - Regular */
@@ -70,6 +70,10 @@ button:focus {
     opacity: 0.4;
     pointer-events: none;
     position: absolute;
+    -webkit-transform: translate3d(6px, 7px, 0) scale(1);
+    -moz-transform: translate3d(6px, 7px, 0) scale(1);
+    -ms-transform: translate3d(6px, 7px, 0) scale(1);
+    -o-transform: translate3d(6px, 7px, 0) scale(1);
     transform: translate3d(6px, 7px, 0) scale(1);
     transform-origin: top left;
     transition: 240ms;
@@ -83,12 +87,17 @@ button:focus {
     display: none;
     font-size: 10px;
     line-height: 12px;
-    margin-top: 1px;
+    margin-top: 2px;
 }
 
 /* Floating labels - Focused */
 .form .form-group.focused .control-label {
     opacity: 1;
+    font-size: 16px;
+    -webkit-transform: translate3d(0px, -10px, 0) scale(0.9);
+    -moz-transform: translate3d(0px, -10px, 0) scale(0.9);
+    -ms-transform: translate3d(0px, -10px, 0) scale(0.9);
+    -o-transform: translate3d(0px, -10px, 0) scale(0.9);
     transform: translate3d(0px, -10px, 0) scale(0.9);
     line-height: 1px;
     color: #e708ae;
@@ -101,7 +110,7 @@ button:focus {
 }
 /* Help box - Focused */
 .form .form-group.focused span.help {
-    display: inherit;
+    display: block;
 }
 
 /* Floating labels - Filled */
@@ -109,8 +118,12 @@ button:focus {
 .form .form-group.filled .control-label {
     border-color: #e708ae;
     opacity: 1;
+    -webkit-transform: translate3d(0px, -10px, 0) scale(0.9);
+    -moz-transform: translate3d(0px, -10px, 0) scale(0.9);
+    -ms-transform: translate3d(0px, -10px, 0) scale(0.9);
+    -o-transform: translate3d(0px, -10px, 0) scale(0.9);
     transform: translate3d(0px, -10px, 0) scale(0.9);
-    line-height: 1px;
+    line-height: 1;
 }
 .form .form-group.filled .control-label {
     font-size: 16px;
@@ -149,7 +162,7 @@ button:focus {
     font-size: 16px;
     text-align: center;
     display: block;
-    margin: 5px 0;
+    margin: 5px 0 15px;
 }
 .flashMsg.purple {
     color: #b116e0;
@@ -162,7 +175,15 @@ button:focus {
     color: #ffffff;
 }
 
+/* ====== LOGIN PAGE ====== */ 
+.login .form-inline:nth-of-type(1) .form-group {
+    height: 65px;
+}
+
 /* ====== FORGOT PAGE ====== */ 
+.forgot .form-inline .form-group {
+    height: 65px;
+}
 .submitted {
     display: none;
 }
@@ -203,6 +224,7 @@ button:focus {
     display: block;
     text-align: center;
     margin-bottom: 2%;
+    font-size: 18px;
 }
 
 /* ==== SIGNUP PAGE ==== */ 
@@ -240,11 +262,11 @@ button:focus {
     margin-top: 10px;
 }
 .register #city,
-.register .phone {
+.register .form-group .form-control.phone {
     width: 98.5%;
 }
 .register #state {
-    width: 95%;
+    width: 96%;
 }
 .register .days .hours {
     width: 98%;
@@ -290,19 +312,20 @@ button:focus {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) {
-    .join form {
-        max-width: 75%;
-        width: 75%;
-    }
-
     .form .form-group .form-control  {
         font-size: 16px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .join form {
-        max-width: 100%;
+    form.login,
+    form.forgot {
+        max-width: 80%;
+        width: 100%;
+    }
+
+    form.reset {
+        max-width: 95%;
         width: 100%;
     }
 
@@ -311,12 +334,25 @@ button:focus {
     }
 
     .form .form-group span.help {
+        line-height: 14px;
         font-size: 8px;
+    }
+
+    /* ==== JOIN ==== */ 
+    /* Tab circles */
+    .tab-steps {
+        margin-top: 25px;
+    }
+    .step {
+        height: 8px;
+        width: 8px;
     }
 }
 
 @media (max-width: 767px) {
-    .join form {
+    form.login,
+    form.forgot,
+    form.reset {
         max-width: 100%;
         width: 100%;
     }
@@ -326,11 +362,13 @@ button:focus {
         margin-bottom: 0;
     }
 
-    .join span.heading {
-        font-size: 17px;
+    .form span.details {
+        margin: 6% 0;
     }
+
     .join span.sub-heading {
         font-size: 15px;
+        line-height: normal;
     }
 
     /* Inputs text size */
@@ -341,19 +379,29 @@ button:focus {
 
     /* Floating labels - regular */
     .form .form-group .control-label {
-        transform: translate3d(8px, 9px, 0) scale(0.9);
+        line-height: 1;
+        -webkit-transform: translate3d(8px, 9px, 0) scale(0.9) perspective(1px);
+        -moz-transform: translate3d(8px, 9px, 0) scale(0.9) perspective(1px);
+        -ms-transform: translate3d(8px, 9px, 0) scale(0.9) perspective(1px);
+        -o-transform: translate3d(8px, 9px, 0) scale(0.9) perspective(1px);
+        transform: translate3d(8px, 9px, 0) scale(0.9) perspective(1px);
     } 
     /* Floating labels - focused */
     .form .form-group.focused .control-label {
-        transform: translate3d(0px, -9px, 0) scale(0.9);
+        line-height: 1;
+        -webkit-transform: translate3d(0px, -9px, 0) scale(0.9) perspective(1px);
+        -moz-transform: translate3d(0px, -9px, 0) scale(0.9) perspective(1px);
+        -ms-transform: translate3d(0px, -9px, 0) scale(0.9) perspective(1px);
+        -o-transform: translate3d(0px, -9px, 0) scale(0.9) perspective(1px);
+        transform: translate3d(0px, -9px, 0) scale(0.9) perspective(1px);
     }  
     
-    /* Align passwords reqs directly under password field */
+    /* Align passwords reqs directly between password field & confirmed field */
     .form .pwd .form-group:nth-child(1){
         height: 55px;
     }
     .form .pwd .form-group:nth-child(2){
-        height: 135px;
+        height: 155px;
     }
     .form .pwd .form-group:nth-child(3){
         height: 60px;
@@ -364,14 +412,20 @@ button:focus {
         font-size: 14px;
     }
 
+    /* ==== JOIN ==== */ 
+    /* Tab circles */
+    .tab-steps {
+        margin-top: 15px;
+    }
+    .step {
+        height: 7px;
+        width: 7px;
+    }
+
     /* ==== SIGNUP ==== */ 
     .signup #firstName,
     .signup #lastName {
         width: 100%;
-    }
-
-    .signup span.details {
-        margin-bottom: 5%;
     }
     
     /* ==== REGISTRATION ==== */ 
@@ -416,13 +470,32 @@ button:focus {
     }
 
     /* ==== SURVEY ==== */ 
+    .survey span.heading {
+        margin-bottom: 4%;
+    }
+
     .survey .form-group {
-        margin-bottom: 2em;
+        margin-bottom: 1.8em;
     }
     /* Text fields */
     .survey .form-control {
         padding-top: 0;
     }
+
+    /* Floating labels - focused */
+    .survey .form-group.focused .control-label {
+        -webkit-transform: translate3d(0px, -32px, 0) scale(0.9) perspective(1px);
+        -moz-transform: translate3d(0px, -32px, 0) scale(0.9) perspective(1px);
+        -ms-transform: translate3d(0px, -32px, 0) scale(0.9) perspective(1px);
+        -o-transform: translate3d(0px, -32px, 0) scale(0.9) perspective(1px);
+        transform: translate3d(0px, -32px, 0) scale(0.9) perspective(1px);
+    }  
+
+    .survey .form-group span.help {
+        line-height: 14px;
+        font-size: 8px;
+    }
+
     /* Input field */
     .survey input.form-control {
         height: 50px;
