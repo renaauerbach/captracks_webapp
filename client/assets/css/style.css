@@ -999,9 +999,9 @@ footer {
     margin: 0 10px 15px -110px;
 }
 .footer-widget .icon span i {
-    font-size: 14px;
-    width: 26px;
-    height: 26px;
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
     border: 1px solid #ffffff;
     border-radius: 20px;
     padding-top: 5px;   /* Center icon in border cirlce */
@@ -1015,13 +1015,13 @@ footer {
 .footer-widget .icon span a,
 .footer-widget .list li a {
     color: #ffffff;
-    font: 16px "Ariel", sans-serif; 
+    font: 12px "Ariel", sans-serif; 
 }
 
 .footer-title {
-    font: normal bold 30px "Ariel", sans-serif;
+    font: normal bold 24px "Ariel", sans-serif;
 	color: #ffffff;
-	margin-bottom: 28px;
+	margin-bottom: 25px;
 }
 
 /* ====== TERMS / PRIVACY ====== */

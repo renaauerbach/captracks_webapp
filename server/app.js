@@ -95,7 +95,7 @@ app.use((req, res, next) => {
 
 // ==================== WHY USE CAPTRACKS ==================== //
 // Load Customer/Vendor benefits data
-let benefits = parser.parseData(
+const benefits = parser.parseData(
     fs.readFileSync(path.join(__dirname, '/content/benefits.json')),
     'benefits'
 );

@@ -96,7 +96,7 @@ function validateForm() {
 	err.innerHTML = tempTxt;
 
 	// Next if form has tabs
-	let step = document.getElementsByClassName('step');
+	const step = document.getElementsByClassName('step');
 	if (step) {
 		step[currentTab].classList.add('finish');
 		return true;
@@ -107,7 +107,7 @@ function validateForm() {
 	}
 }
 
-let reset = document.getElementById('resetBtn');
+const reset = document.getElementById('resetBtn');
 if (reset) {
 	reset.addEventListener('submit', (e) => {
 		e.preventDefault();

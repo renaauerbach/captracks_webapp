@@ -49,9 +49,9 @@
         const green = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/009900/009900/A0A0A0/");
 
         // Default icon = purple
-        let icon = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/D532FC/D532FC/A0A0A0/");
+        let icon = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/AC01D5/AC01D5/A0A0A0/");
         if (store.details.length > 0) {
-            let capacity = store.details[0].capacity;
+            const capacity = store.details[0].capacity;
 
             // Green Marker = capacity < 50%
             if (capacity < 50) {

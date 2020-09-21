@@ -24,7 +24,7 @@ class Box {
 function parseData(data, name) {
     const parsed = JSON.parse(data)[name];
 
-    let arr = [];
+    const arr = [];
     const Obj = (name.includes('benefit')) ? Box : Member;
 
     parsed.map((info, i) => {

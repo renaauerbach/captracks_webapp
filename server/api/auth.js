@@ -72,7 +72,7 @@ module.exports = function(passport) {
             [
                 function(done) {
                     crypto.randomBytes(20, (err, buff) => {
-                        var token = buff.toString('hex');
+                        const token = buff.toString('hex');
                         done(err, token);
                     });
                 },
@@ -92,7 +92,7 @@ module.exports = function(passport) {
                     });
                 },
                 function(token, user, done) {
-                    var mailOptions = {
+                    const mailOptions = {
                         to: user.email,
                         from: 'noreply@captracks.com',
                         subject: emails[0].subject,
@@ -163,7 +163,7 @@ module.exports = function(passport) {
                     });
             },
             function(user, done) {
-                var mailOptions = {
+                const mailOptions = {
                     to: user.email,
                     from: 'noreply@captracks.com',
                     subject: emails[1].subject,
@@ -192,7 +192,7 @@ module.exports = function(passport) {
                 return res.status(400).send(err);
             }
             stores.map(store => {
-                var id = store._id;
+                const id = store._id;
                 delete store._id;
                 return {
                     id: id,
@@ -222,7 +222,7 @@ module.exports = function(passport) {
             async.waterfall([
                 function(done) {
                     // New Details Object
-                    let newDetails = new Details({
+                    const newDetails = new Details({
                         partition: process.env.DB_PARTITION,
                         maxCapacity: req.body.max,
                         capacity: 0,
@@ -261,15 +261,15 @@ module.exports = function(passport) {
                     // Otherwise add Store to DB
                     else {
                         // Store Address
-                        var address = req.body.street + ', ' + req.body.city + ', '
+                        const address = req.body.street + ', ' + req.body.city + ', '
                             + req.body.state + ' ' + req.body.zip;
                         // Store Hours
-                        var hours = [];
+                        const hours = [];
                         if (!req.body['24hours']) {
-                            var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
+                            const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 
                             for (let i = 0; i < days.length; i++) {
-                                let curr = req.body[days[i]];
+                                const curr = req.body[days[i]];
                                 if (curr) {
                                     hours.push({
                                         day: days[i],
@@ -297,7 +297,7 @@ module.exports = function(passport) {
                                 return res.redirect('/join');
                             }
                             // New Store Object
-                            let newStore = new Store({
+                            const newStore = new Store({
                                 partition: process.env.DB_PARTITION,
                                 name: req.body.name,
                                 address: address,
@@ -317,13 +317,13 @@ module.exports = function(passport) {
                 },
                 function(done) {
                     // Email team members when a Vendor joins
-                    var recipients = [
+                    const recipients = [
                         'gabriel.low@captracks.com',
                         'ben.shor@captracks.com',
                         'rena@captracks.com'
                     ];
                     recipients.forEach((to) => {
-                        var adminMailOptions = {
+                        const adminMailOptions = {
                             from: 'rena@captracks.com',
                             to: to,
                             subject: "A new vendor joined CapTracks!",
@@ -338,7 +338,7 @@ module.exports = function(passport) {
                         });
                     });
                     // Confirmation email to Vendor
-                    var mailOptions = {
+                    const mailOptions = {
                         to: user.email,
                         from: 'noreply@captracks.com',
                         subject: emails[3].subject,

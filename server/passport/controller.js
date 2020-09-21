@@ -32,13 +32,13 @@ function login(passport) {
 			// Vendor does NOT exist --> send error message
 			if (!vendor) {
 				console.log('Vendor Not Found');
-				let link = '/join';
+				const link = '/join';
 				return done(null, false, req.flash('error', process.env.WRONG_EMAIL));
 			}
 			// Vendor DOES exist BUT wrong password --> send error message
 			if (!isValidPassword(vendor, password)) {
 				console.log('Invalid Password');
-				let link = '/forgot';
+				const link = '/forgot';
 				return done(null, false, req.flash('error', process.env.WRONG_PASSWORD));
 			}
 			// Vendor and password match --> return Vendor from done method
