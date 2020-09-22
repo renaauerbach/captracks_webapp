@@ -235,30 +235,18 @@ module.exports = function(passport) {
 
                     // Check if user is linking to existing Store
                     if (req.body.existed) {
-                        // Get Vendor (just created through passport)
-                        Vendor.findOne({ _id: req.user._id }, (err, vendor) => {
-                            // Handle Error
-                            if (err) {
-                                // TODO: DELETE USER
-                                req.flash('error', process.env.STORE_REG_ERROR);
-                                return res.redirect('/join');
-                            }
-                            let update = {
-                                vendor: vendor.id,
-                                details: newDetails._id
-                            };
-                            // Assign Vendor and newDetails to the Store
-                            Store.findByIdAndUpdate(req.body.existed, update,
-                                (err, store) => {
-                                    // Handle Error
-                                    if (err) {
-                                        req.flash('error', process.env.STORE_REG_ERROR);
-                                        return res.redirect('/join');
-                                    }
-                                    done(err, store);
+                        // Assign Vendor (user) and newDetails to the Store
+                        Store.findByIdAndUpdate(req.body.existed,
+                            { vendor: req.user._id, details: newDetails._id },
+                            (err, store) => {
+                                // Handle Error
+                                if (err) {
+                                    req.flash('error', process.env.STORE_REG_ERROR);
+                                    return res.redirect('/join');
                                 }
-                            );
-                        });
+                                done(err, store);
+                            }
+                        );
                     }
                     // Otherwise add Store to DB
                     else {
@@ -321,7 +309,6 @@ module.exports = function(passport) {
                     }
                 },
                 function(store, done) {
-                    console.log("EMAILS");
                     // Email team members when a Vendor joins
                     const admins = [
                         'gabriel.low@captracks.com',
@@ -344,7 +331,6 @@ module.exports = function(passport) {
                     smtpTransport.sendMail(adminMailOptions, (err) => {
                         // Handle Error
                         if (err) {
-                            console.log("Error?", err);
                             return next(err);
                         }
                         next();
@@ -360,7 +346,6 @@ module.exports = function(passport) {
                     smtpTransport.sendMail(mailOptions, (err) => {
                         // Handle Error
                         if (err) {
-                            console.log("Error?", err);
                             return next(err);
                         }
                         done(err);

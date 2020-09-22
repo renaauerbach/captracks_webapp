@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
                 id: id,
                 name: store.name,
                 address: store.address,
-                details: store.details[0],
+                details: store.details,
                 phone: store.phone,
                 url: store.url,
                 hours: store.hours,

@@ -50,8 +50,8 @@
 
         // Default icon = purple
         let icon = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/AC01D5/AC01D5/A0A0A0/");
-        if (store.details.length > 0) {
-            const capacity = store.details[0].capacity;
+        if (store.details) {
+            const capacity = store.details.capacity;
 
             // Green Marker = capacity < 50%
             if (capacity < 50) {
@@ -91,8 +91,7 @@
 
     // Detail Content Formatter
     function contentFormatter(info) {
-        console.log('vendor', info);
-        const contentString =
+        var contentString =
             '<div id="tooltip">' +
             '<div class="tooltip-title">' +
             info.name +
@@ -102,23 +101,8 @@
             info.address +
             '</div>' +
             '<br/>';
-        return info.details.length !== 0
-            ? contentString +
-            '<div class="tooltip-details">Current Capacity: <span class="data">' +
-            info.details[0].capacity +
-            '</span></div>' +
-            '<div class="tooltip-details">Current Wait Time: <span class="data">' +
-            info.details[0].waitTime +
-            ' minutes</span></div>' +
-            '</div>' +
-            '</div>' +
-            '<div class="tooltip-link">' +
-            '<a href="/map/store/' +
-            info.id +
-            '">Store Details & Updates</a>' +
-            '</div>'
-            : contentString +
-            '<div class="tooltip-waiting">Waiting for vendor to join!</div>';
+        contentString += info.details ? '<div class="tooltip-details">Current Capacity: <span class="data">' + info.details.capacity + '</span></div>' + '<div class="tooltip-details">Current Wait Time: <span class="data">' + info.details.waitTime + ' minutes</span></div>' + '</div>' + '</div>' + '<div class="tooltip-link">' + '<a href="/map/store/' + info.id + '">Store Details & Updates</a>' + '</div>' : '<div class="tooltip-waiting">Waiting for vendor to join!</div>';
+        return contentString;
     }
 
     // Export functions
