@@ -50,9 +50,7 @@ module.exports = function(passport) {
     router.post('/login',
         passport.authenticate('login', { failureRedirect: '/login' }),
         (req, res) => {
-            // TODO: CHECK IF NEEDED
-            res.cookie('firstName', req.user.firstName);
-            res.cookie('userId', req.user.id);
+            // TODO: CHECK FOR COOKIES AND REQ
             return res.redirect('/account');
         }
     );
@@ -135,7 +133,7 @@ module.exports = function(passport) {
             });
     });
     // ==================== RESET (GET) ==================== //
-    router.post('/reset/:token', (req, res) => {
+    router.post('/reset/:token', (req, res, next) => {
         async.waterfall([
             function(done) {
                 Vendor.findOne({
@@ -169,7 +167,7 @@ module.exports = function(passport) {
                     subject: emails[1].subject,
                     text: emails[1].text[0] + user.email + emails[1].text[1]
                 };
-                smtpTransport.sendMail(mailOptions, function(err) {
+                smtpTransport.sendMail(mailOptions, (err) => {
                     req.flash('message', process.env.RESET_SUCCESS);
                     done(err);
                 });
@@ -198,10 +196,6 @@ module.exports = function(passport) {
                     id: id,
                     name: store.name,
                     address: store.address,
-                    details: store.details,
-                    phone: store.phone,
-                    url: store.url,
-                    hours: store.hours,
                 };
             });
 
@@ -218,21 +212,22 @@ module.exports = function(passport) {
     router.post(
         '/join',
         passport.authenticate('signup', { failureRedirect: '/join' }),
-        (req, res) => {
+        (req, res, next) => {
             async.waterfall([
                 function(done) {
                     // New Details Object
                     const newDetails = new Details({
                         partition: process.env.DB_PARTITION,
-                        maxCapacity: req.body.max,
                         capacity: 0,
-                        waitTime: 0,
-                        registers: req.body.regs,
+                        maxCapacity: req.body.max,
+                        registers: req.body.reg,
                         updated: Date(),
+                        waitTime: 0,
                     });
                     // Save Details to DB
                     newDetails.save((err) => {
                         if (err) {
+                            // TODO: DELETE USER
                             req.flash('error', process.env.STORE_REG_ERROR);
                             return res.redirect('/join');
                         }
@@ -244,16 +239,23 @@ module.exports = function(passport) {
                         Vendor.findOne({ _id: req.user._id }, (err, vendor) => {
                             // Handle Error
                             if (err) {
-                                return res.status(400).send(err);
+                                // TODO: DELETE USER
+                                req.flash('error', process.env.STORE_REG_ERROR);
+                                return res.redirect('/join');
                             }
+                            let update = {
+                                vendor: vendor.id,
+                                details: newDetails._id
+                            };
                             // Assign Vendor and newDetails to the Store
-                            Store.findByIdAndUpdate(req.body.existed,
-                                { vendor: vendor, details: newDetails._id },
-                                err => {
+                            Store.findByIdAndUpdate(req.body.existed, update,
+                                (err, store) => {
                                     // Handle Error
                                     if (err) {
-                                        return res.status(400).send(err);
+                                        req.flash('error', process.env.STORE_REG_ERROR);
+                                        return res.redirect('/join');
                                     }
+                                    done(err, store);
                                 }
                             );
                         });
@@ -288,25 +290,28 @@ module.exports = function(passport) {
                         Store.findOne({ address }, (err, store) => {
                             // Handle Error
                             if (err) {
+                                // TODO: DELETE USER
                                 req.flash('error', process.env.STORE_REG_ERROR);
                                 return res.redirect('/join');
                             }
                             // Handle Store Exists
                             if (store) {
+                                // TODO: DELETE USER
                                 req.flash('error', process.env.STORE_REG_EXISTS);
                                 return res.redirect('/join');
                             }
                             // New Store Object
                             const newStore = new Store({
                                 partition: process.env.DB_PARTITION,
-                                name: req.body.name,
                                 address: address,
+                                details: newDetails._id,
+                                forum: [],
+                                hours: hours,
+                                links: [],
+                                name: req.body.name,
                                 phone: req.body.storePhone,
                                 url: req.body.url,
-                                hours: hours,
-                                forum: [],
-                                vendor: vendor.id,
-                                links: [],
+                                vendor: req.user._id,
                             });
                             // Save Store to DB
                             newStore.save((err) => {
@@ -315,41 +320,57 @@ module.exports = function(passport) {
                         });
                     }
                 },
-                function(done) {
+                function(store, done) {
+                    console.log("EMAILS");
                     // Email team members when a Vendor joins
-                    const recipients = [
+                    const admins = [
                         'gabriel.low@captracks.com',
                         'ben.shor@captracks.com',
                         'rena@captracks.com'
                     ];
-                    recipients.forEach((to) => {
-                        const adminMailOptions = {
-                            from: 'rena@captracks.com',
-                            to: to,
-                            subject: "A new vendor joined CapTracks!",
-                            text: `Vendor: ${req.body.name} 
-                            \nSurvey 1: ${req.body.survey1} 
-                            \nSurvey 2: ${req.body.survey2} 
+                    const adminMailOptions = {
+                        from: 'rena@captracks.com',
+                        to: admins,
+                        subject: "A new vendor joined CapTracks!",
+                        text: `We got a new vendor!
+                            \nVendor's Name: ${req.body.firstName} ${req.body.lastName} 
+                            Store: ${store.name}
+                            Address: ${store.address}
+                            \nSurvey 1 - Type of Business: ${req.body.survey1} 
+                            Survey 2 - Ad Services: ${req.body.survey2} 
                             \nNumber of Registers: ${req.body.reg} 
-                            \nMax Capacity: ${req.body.max}`,
-                        };
-                        smtpTransport.sendMail(adminMailOptions, function(err) {
-                            done(err);
-                        });
+                            Max Capacity: ${req.body.max}`,
+                    };
+                    smtpTransport.sendMail(adminMailOptions, (err) => {
+                        // Handle Error
+                        if (err) {
+                            console.log("Error?", err);
+                            return next(err);
+                        }
+                        next();
                     });
+
                     // Confirmation email to Vendor
                     const mailOptions = {
-                        to: user.email,
+                        to: req.body.email,
                         from: 'noreply@captracks.com',
-                        subject: emails[3].subject,
-                        text: emails[3].text[0] + user.firstName + emails[3].text[1]
+                        subject: emails[2].subject,
+                        text: emails[2].text[0] + 'https://' + req.headers.host + "/account" + emails[2].text[1]
                     };
-                    smtpTransport.sendMail(mailOptions, function(err) {
-                        req.flash('message', process.env.RESET_SUCCESS);
+                    smtpTransport.sendMail(mailOptions, (err) => {
+                        // Handle Error
+                        if (err) {
+                            console.log("Error?", err);
+                            return next(err);
+                        }
                         done(err);
                     });
                 }
             ], function(err) {
+                // Handle Error
+                if (err) {
+                    return next(err);
+                }
                 res.redirect('/account');
             });
         }
