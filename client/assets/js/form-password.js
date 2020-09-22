@@ -14,44 +14,39 @@ function passwordReqs(e) {
     const special = /[~!#$%\^&*+=\-\[\]\\;/{}|\\:<>\?]/g;
 
     if (e.target.value.match(upper)) {
-        reqs[0].classList.remove("invalid");
-        reqs[0].classList.add("valid");
-    }
-    else {
-        reqs[0].classList.remove("valid");
-        reqs[0].classList.add("invalid");
+        reqs[0].classList.remove('invalid');
+        reqs[0].classList.add('valid');
+    } else {
+        reqs[0].classList.remove('valid');
+        reqs[0].classList.add('invalid');
     }
     if (e.target.value.match(lower)) {
-        reqs[1].classList.remove("invalid");
-        reqs[1].classList.add("valid");
-    }
-    else {
-        reqs[1].classList.remove("valid");
-        reqs[1].classList.add("invalid");
+        reqs[1].classList.remove('invalid');
+        reqs[1].classList.add('valid');
+    } else {
+        reqs[1].classList.remove('valid');
+        reqs[1].classList.add('invalid');
     }
     if (e.target.value.match(num)) {
-        reqs[2].classList.remove("invalid");
-        reqs[2].classList.add("valid");
-    }
-    else {
-        reqs[2].classList.remove("valid");
-        reqs[2].classList.add("invalid");
+        reqs[2].classList.remove('invalid');
+        reqs[2].classList.add('valid');
+    } else {
+        reqs[2].classList.remove('valid');
+        reqs[2].classList.add('invalid');
     }
     if (e.target.value.match(special)) {
-        reqs[3].classList.remove("invalid");
-        reqs[3].classList.add("valid");
-    }
-    else {
-        reqs[3].classList.remove("valid");
-        reqs[3].classList.add("invalid");
+        reqs[3].classList.remove('invalid');
+        reqs[3].classList.add('valid');
+    } else {
+        reqs[3].classList.remove('valid');
+        reqs[3].classList.add('invalid');
     }
     if (e.target.value.length >= 8) {
-        reqs[4].classList.remove("invalid");
-        reqs[4].classList.add("valid");
-    }
-    else {
-        reqs[4].classList.remove("valid");
-        reqs[4].classList.add("invalid");
+        reqs[4].classList.remove('invalid');
+        reqs[4].classList.add('valid');
+    } else {
+        reqs[4].classList.remove('valid');
+        reqs[4].classList.add('invalid');
     }
 }
 

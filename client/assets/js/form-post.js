@@ -45,24 +45,24 @@
         submitted(this);
     });
 
-
     // ========== CONTACT ========== //
     // Contact Form
-    $('#send-msg').click((e) => {
-        submitted(e, ".contact-form", () => {
+    $('#send-msg').click(e => {
+        submitted(e, '.contact-form', () => {
             $('.contact-form').hide();
-            $('#success').removeClass('unsent').addClass('sent');
+            $('#success')
+                .removeClass('unsent')
+                .addClass('sent');
         });
     });
 
     function submitted(e, success) {
-        $.ajax
-            ({
-                type: 'POST',
-                url: $(e).attr('action'),
-                data: $(e).serialize(), // serializes the form's elements
-                success: success ? success : () => { },
-            });
+        $.ajax({
+            type: 'POST',
+            url: $(e).attr('action'),
+            data: $(e).serialize(), // serializes the form's elements
+            success: success ? success : () => {},
+        });
     }
 
     // $(document).ready(function() {
@@ -82,5 +82,4 @@
     //     });
 
     // });
-
 })(jQuery);

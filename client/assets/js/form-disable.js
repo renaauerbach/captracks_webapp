@@ -1,11 +1,11 @@
 // Handle link to existing store --> Disable rest of form
 const selection = document.getElementsByTagName('select')[0];
 if (selection) {
-    selection.addEventListener('change', (e) => {
+    selection.addEventListener('change', e => {
         const form = document.getElementsByClassName('register')[0];
         const inputs = form.getElementsByTagName('input');
         const selects = form.getElementsByTagName('select');
-        if (e.target.value !== "") {
+        if (e.target.value !== '') {
             for (let i = 0; i < inputs.length; ++i) {
                 inputs[i].disabled = true;
             }

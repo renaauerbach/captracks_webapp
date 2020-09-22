@@ -12,8 +12,9 @@ function showTab(n) {
 	tabs[n].style.display = 'block';
 
 	// Fix the Previous/Next buttons
-	document.getElementById('prevBtn').style.display = (n === 0) ? 'none' : 'inline';
-	next.innerHTML = (n === tabs.length - 1) ? 'Submit' : 'Next';
+	document.getElementById('prevBtn').style.display =
+		n === 0 ? 'none' : 'inline';
+	next.innerHTML = n === tabs.length - 1 ? 'Submit' : 'Next';
 
 	// Call function to display correct step indicator
 	stepIndicator(n);
@@ -72,10 +73,10 @@ function validateForm() {
 
 	// Check that password and confirmed password match
 	if (confirmed.value !== password.value) {
-		console.log("DONT MATCH");
+		console.log('DONT MATCH');
 		err.classList.remove('white');
 		err.classList.add('red');
-		err.innerHTML = "Passwords do not match. Please try again.";
+		err.innerHTML = 'Passwords do not match. Please try again.';
 		return false;
 	}
 	// Reset error msg
@@ -87,7 +88,7 @@ function validateForm() {
 		if (reqs[i].classList.contains('invalid')) {
 			err.classList.remove('white');
 			err.classList.add('red');
-			err.innerHTML = "Password does not meet the listed requirements.";
+			err.innerHTML = 'Password does not meet the listed requirements.';
 			return false;
 		}
 	}
@@ -109,7 +110,7 @@ function validateForm() {
 
 const reset = document.getElementById('resetBtn');
 if (reset) {
-	reset.addEventListener('submit', (e) => {
+	reset.addEventListener('submit', e => {
 		e.preventDefault();
 		if (validateForm()) {
 			reset.submit();

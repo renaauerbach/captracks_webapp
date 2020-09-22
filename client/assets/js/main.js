@@ -27,7 +27,9 @@
 
     /* ===== Dropdown Navbar ===== */
     $('.dropbtn').on('click', function() {
-        const dropdown = $(this).parent().parent();
+        const dropdown = $(this)
+            .parent()
+            .parent();
         dropdown.toggleClass('show');
     });
 
@@ -44,10 +46,17 @@
     $('.btn-expand-collapse').click(function() {
         $('.store-details').toggleClass('collapsed');
         if ($('.store-details').hasClass('collapsed')) {
-            $(this).children(0).children().removeClass('fa-angle-up').addClass('fa-angle-down');
-        }
-        else {
-            $(this).children(0).children().removeClass('fa-angle-down').addClass('fa-angle-up');
+            $(this)
+                .children(0)
+                .children()
+                .removeClass('fa-angle-up')
+                .addClass('fa-angle-down');
+        } else {
+            $(this)
+                .children(0)
+                .children()
+                .removeClass('fa-angle-down')
+                .addClass('fa-angle-up');
         }
     });
 
@@ -55,16 +64,24 @@
     $('#edit').click(function() {
         $(this).hide();
         $('#save').show();
-        $('.edit').removeClass('edit').addClass('view');
-        $('.saved').removeClass('saved').addClass('edit');
+        $('.edit')
+            .removeClass('edit')
+            .addClass('view');
+        $('.saved')
+            .removeClass('saved')
+            .addClass('edit');
     });
 
     $('#save').click(function() {
         $('.store-form').submit();
         $(this).hide();
         $('#edit').show();
-        $('.edit').removeClass('edit').addClass('saved');
-        $('.view').removeClass('view').addClass('edit');
+        $('.edit')
+            .removeClass('edit')
+            .addClass('saved');
+        $('.view')
+            .removeClass('view')
+            .addClass('edit');
     });
 
     /* ===== Add Store Link ===== */
@@ -72,7 +89,9 @@
         $(this).hide();
         $('#check').show();
         $('#cancel').show();
-        $('.hide-link').removeClass('hide-link').addClass('show');
+        $('.hide-link')
+            .removeClass('hide-link')
+            .addClass('show');
     });
 
     $('#check').click(function() {
@@ -80,14 +99,17 @@
         $(this).hide();
         $('#cancel').hide();
         $('#add').show();
-        $('.show').removeClass('show').addClass('hide-link');
+        $('.show')
+            .removeClass('show')
+            .addClass('hide-link');
     });
 
     $('#cancel').click(function() {
         $(this).hide();
         $('#check').hide();
         $('#add').show();
-        $('.show').removeClass('show').addClass('hide-link');
+        $('.show')
+            .removeClass('show')
+            .addClass('hide-link');
     });
-
 })(jQuery);

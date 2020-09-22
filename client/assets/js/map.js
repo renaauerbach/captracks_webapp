@@ -44,12 +44,20 @@
 
     // Add Marker
     function addMarker(location, map, store) {
-        const red = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/FA2043/FA2043/A0A0A0/");
-        const yellow = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/FFF500/FFF500/A0A0A0/");
-        const green = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/009900/009900/A0A0A0/");
+        const red = new google.maps.MarkerImage(
+            'http://www.googlemapsmarkers.com/v1/A/FA2043/FA2043/A0A0A0/'
+        );
+        const yellow = new google.maps.MarkerImage(
+            'http://www.googlemapsmarkers.com/v1/A/FFF500/FFF500/A0A0A0/'
+        );
+        const green = new google.maps.MarkerImage(
+            'http://www.googlemapsmarkers.com/v1/A/009900/009900/A0A0A0/'
+        );
 
         // Default icon = purple
-        let icon = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/A/AC01D5/AC01D5/A0A0A0/");
+        let icon = new google.maps.MarkerImage(
+            'http://www.googlemapsmarkers.com/v1/A/AC01D5/AC01D5/A0A0A0/'
+        );
         if (store.details) {
             const capacity = store.details.capacity;
 
@@ -101,7 +109,21 @@
             info.address +
             '</div>' +
             '<br/>';
-        contentString += info.details ? '<div class="tooltip-details">Current Capacity: <span class="data">' + info.details.capacity + '</span></div>' + '<div class="tooltip-details">Current Wait Time: <span class="data">' + info.details.waitTime + ' minutes</span></div>' + '</div>' + '</div>' + '<div class="tooltip-link">' + '<a href="/map/store/' + info.id + '">Store Details & Updates</a>' + '</div>' : '<div class="tooltip-waiting">Waiting for vendor to join!</div>';
+        contentString += info.details
+            ? '<div class="tooltip-details">Current Capacity: <span class="data">' +
+              info.details.capacity +
+              '</span></div>' +
+              '<div class="tooltip-details">Current Wait Time: <span class="data">' +
+              info.details.waitTime +
+              ' minutes</span></div>' +
+              '</div>' +
+              '</div>' +
+              '<div class="tooltip-link">' +
+              '<a href="/map/store/' +
+              info.id +
+              '">Store Details & Updates</a>' +
+              '</div>'
+            : '<div class="tooltip-waiting">Waiting for vendor to join!</div>';
         return contentString;
     }
 
