@@ -6,7 +6,7 @@
         <label for="capacity">What is the current capacity at your store?</label>
         <div class="d-flex justify-content-between">
             <span class="cap-details empty">Empty</span>
-            <input id="capacity" class="slider" name="capacity" type="range" min="1" max={{store.details.maxCapacity}} value="50" onchange="updateSliderText(this.value);">
+            <input id="capacity" class="slider" name="capacity" type="range" min="1" max={{store.details.maxCapacity}} value={{div store.details.maxCapacity 2}} onchange="updateSliderText(this.value);">
             <span class="cap-details full">Full</span>
             <input type="text" id="sliderText" value="">
         </div>

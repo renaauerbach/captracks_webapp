@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
                 layout: 'layout',
                 vendor: req.user,
                 store: store,
-                details: store.details[0],
+                details: store.details,
                 title: 'My Account',
                 user: req.isAuthenticated(),
                 error: req.flash('error'),

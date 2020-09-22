@@ -52,7 +52,7 @@ router.get('/store/:id', (req, res) => {
                 layout: 'layout',
                 title: store.name,
                 store: store,
-                details: store.details[0],
+                details: store.details,
                 user: req.isAuthenticated(),
             });
         });

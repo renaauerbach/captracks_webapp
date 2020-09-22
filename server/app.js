@@ -73,6 +73,9 @@ hbs.registerHelper('convert', data => {
 hbs.registerHelper('eq', (val1, val2) => {
     return val1 === val2;
 });
+hbs.registerHelper('div', (val1, val2) => {
+    return val1 / val2;
+});
 hbs.registerHelper('concat', (val1, val2) => {
     return val1 + val2;
 });

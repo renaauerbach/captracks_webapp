@@ -5,19 +5,14 @@
         <!-- Row Start -->
         <div class="row justify-content-between">
 
-            <!-- Column - Store Info Column -->
-            <div class="col-lg-4 col-md-4 col-sm-3">
-                {{> store_details store=store}}
-            </div>
-            <!-- Column End -->
+            <!-- Store Details -->
+            {{> store_details store=store}}
 
             <!-- Column - Capacity & Forum -->
             <div class="col">
-                {{#if store.details}}
                 <!-- Capacity -->
                 {{> store_title label="Capacity"}}
                 {{> store_capacity details=details}}
-                {{/if}}
                 <!-- Forum -->
                 {{> store_title label="Forum"}}
                 {{#if store.forum}}
