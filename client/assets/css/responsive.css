@@ -145,7 +145,7 @@
     /* ====== ACCOUNT / STORE PAGE ====== */
     /* Store Details Sidebar */
     .store-details {
-        width: 55%;
+        max-width: 50%;
     }
 }
 
@@ -236,6 +236,10 @@
     }
 
     /*====== ACCOUNT / STORE PAGE ======*/
+    /* Store Details Sidebar */
+    .store-details {
+        max-width: 60%;
+    }
     .store-links li i {
         padding: 15px 0;
     }
@@ -248,8 +252,12 @@
     .footer-widget .icon span {
         margin: 0 10px 15px 0;
     }
+}
 
-    .footer-widget .contact .email {
-        padding-left: 15px;
+@media (max-width: 600px) {
+    /*====== ACCOUNT / STORE PAGE ======*/
+    /* Store Details Sidebar */
+    .store-details {
+        max-width: 100%;
     }
 }

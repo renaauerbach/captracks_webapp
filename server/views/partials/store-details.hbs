@@ -64,10 +64,10 @@
         {{else}}
         {{#each store.links as |link|}}
         <!-- Form Start - Remove Link -->
-        <form class="delete-link" action="/account/{{store._id}}" method="POST">
+        <form class="delete-link" action="/account/remove/{{../store._id}}/{{link.url}}" method="POST">
             <li class="d-flex justify-content-start align-items-center">
                 <i class="fas fa-link"></i>
-                <a href={{link.url}} class="saved">{{link.title}}</a>
+                <a href={{link.url}} alt={{link.url}} class="saved">{{link.title}}</a>
                 <a href="javascript:void(0);" id="remove-link">
                     <i class="fas fa-minus-circle" id='remove'></i>
                 </a>
@@ -98,7 +98,7 @@
             <!-- Button - Add Link -->
             <li class="d-flex align-items-center">
                 <i class="fas fa-plus"></i>
-                <a href="javascript:void(0);" id="post-link">Add Link</a>
+                <a href="javascript:void(0);" id="add">Add Link</a>
             </li>
         </form>
         <!-- Form End -->
@@ -110,7 +110,5 @@
             Store Details
             <i class="fas fa-angle-down"></i>
         </p>
-
     </a>
-
 </div>

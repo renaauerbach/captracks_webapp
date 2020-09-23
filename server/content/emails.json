@@ -18,7 +18,20 @@
             ]
         },
         {
-            "name": "join",
+            "name": "join_admind",
+            "subject": "A new vendor joined CapTracks!",
+            "text": [
+                "We got a new vendor! \n\nVendor's Name: ",
+                "\nStore: ",
+                "\nAddress: ",
+                "\n\nSurvey 1 - Type of Business: ",
+                "\nSurvey 2 - Ad Services: ",
+                "\n\nNumber of Registers: ",
+                "\nMax Capacity: "
+            ]
+        },
+        {
+            "name": "join_customer",
             "subject": "Welcome to CapTracks!",
             "text": [
                 "Welcome to CapTracks! \n\nWe are so glad you joined the CapTracks ecosystem. \n\nIf you haven't had a chance already, take a look at your new store page: \n",

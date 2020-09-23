@@ -86,7 +86,6 @@
 
     /* ===== Add Store Link ===== */
     $('#add').click(function() {
-        $(this).hide();
         $('#check').show();
         $('#cancel').show();
         $('.hide-link')
@@ -95,7 +94,7 @@
     });
 
     $('#check').click(function() {
-        $('.link-form').submit();
+        $('.link').submit();
         $(this).hide();
         $('#cancel').hide();
         $('#add').show();

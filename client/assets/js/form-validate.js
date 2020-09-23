@@ -1,7 +1,6 @@
 const next = document.getElementById('nextBtn');
 const tabs = document.getElementsByClassName('tab');
 
-console.log(tabs);
 let currentTab = 0;
 if (tabs.length > 0) {
 	showTab(currentTab);
@@ -73,7 +72,6 @@ function validateForm() {
 
 	// Check that password and confirmed password match
 	if (confirmed.value !== password.value) {
-		console.log('DONT MATCH');
 		err.classList.remove('white');
 		err.classList.add('red');
 		err.innerHTML = 'Passwords do not match. Please try again.';

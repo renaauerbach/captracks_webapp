@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
         .populate({ path: 'vendor', model: 'vendors' })
         .populate({ path: 'forum', model: 'messages' })
         .exec((err, store) => {
-            console.log("store", store);
             if (err) {
                 return res.status(400).send(err);
             }
@@ -61,6 +60,30 @@ router.post('/:id', (req, res) => {
             }
             return res.redirect('/account');
         });
+    }
+    // Not Authenticated --> back to Login
+    else {
+        return res.redirect('/login');
+    }
+});
+
+// ==================== REMOVE STORE LINK (POST) ==================== //
+router.post('/remove/:id/:link', (req, res) => {
+    // Check Vendor Authentication
+    if (req.isAuthenticated()) {
+
+        // Update Store by ID
+        Store.findOneAndUpdate({ _id: req.params.id },
+            {
+                $pull: { links: { 'url': req.params.link } }
+            }, err => {
+                if (err) {
+                    req.flash('error', process.env.STORE_INFO_ERROR);
+                    console.log('Error removing link:', err);
+                    return res.redirect('/account');
+                }
+                return res.redirect('/account');
+            });
     }
     // Not Authenticated --> back to Login
     else {

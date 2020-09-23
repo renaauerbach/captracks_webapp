@@ -17,9 +17,11 @@
     });
 
     // Remove Store Link
-    $('.delete-link').on('submit', function(e) {
-        e.preventDefault();
-        submitted(this);
+    $('#remove-link').on('click', () => {
+        $('.delete-link').submit((e) => {
+            e.preventDefault();
+            submitted(this);
+        });
     });
 
     // ========== CAPACITY ========== //
@@ -61,7 +63,7 @@
             type: 'POST',
             url: $(e).attr('action'),
             data: $(e).serialize(), // serializes the form's elements
-            success: success ? success : () => {},
+            success: success ? success : () => { },
         });
     }
 
