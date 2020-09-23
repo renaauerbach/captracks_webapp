@@ -8,6 +8,7 @@ const flash = require('connect-flash');
 const fs = require('fs');
 const hbs = require('hbs');
 const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
 const passport = require('passport');
 const path = require('path');
 const session = require('express-session');
@@ -15,6 +16,22 @@ const MongoStore = require('connect-mongo')(session);
 // ===== Helper Functions ===== //
 const parser = require('./parser.js');
 const initPassport = require('./passport/init');
+
+// Global Variables
+var globals = {
+    // Email content
+    emails: JSON.parse(
+        fs.readFileSync(path.join(__dirname, './content/emails.json'))
+    )['emails'],
+    // Nodemailer Transporter
+    smtpTransport: nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+            user: process.env.SENDGRID_USER,
+            pass: process.env.SENDGRID_PASS,
+        },
+    }),
+};
 // ===== Routers ===== //
 const authRouter = require('./api/auth')(passport);
 const storeRouter = require('./api/stores');
@@ -36,17 +53,19 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 
 // Sessions & Passport - authentication and keeping user signed-in
-app.use(session({
-    secret: process.env.SECRET_KEY,
-    // key:
-    resave: false,
-    saveUninitialized: false,
-    autoRemove: 'disabled', //TODO: ONLY FOR PRODUCTION
-    // touchAfter: 24 * 3600,
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection,
+app.use(
+    session({
+        secret: process.env.SECRET_KEY,
+        // key:
+        resave: false,
+        saveUninitialized: false,
+        autoRemove: 'disabled', //TODO: ONLY FOR PRODUCTION
+        // touchAfter: 24 * 3600,
+        store: new MongoStore({
+            mongooseConnection: mongoose.connection,
+        }),
     })
-}));
+);
 app.use(passport.initialize());
 app.use(passport.session());
 initPassport(passport);
@@ -57,7 +76,7 @@ app.use(flash());
 // Hbs (Handlebars) - view engine
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
-// Hbs Helper Functions 
+// Hbs Helper Functions
 hbs.registerHelper('ifOdd', val => {
     return val % 2 == 0 ? false : true;
 });
@@ -79,7 +98,7 @@ hbs.registerHelper('div', (val1, val2) => {
 hbs.registerHelper('concat', (val1, val2) => {
     return val1 + val2;
 });
-hbs.registerHelper('len', (obj) => {
+hbs.registerHelper('len', obj => {
     return Object.keys(obj).length;
 });
 // Hbs Partials
@@ -147,7 +166,7 @@ app.get('/terms', (req, res) => {
     });
 });
 
-// ==================== PRIVACY POLICY(GET) ==================== //
+// ==================== PRIVACY POLICY (GET) ==================== //
 app.get('/privacy', (req, res) => {
     res.render('legal', {
         layout: 'layout',
@@ -156,8 +175,35 @@ app.get('/privacy', (req, res) => {
     });
 });
 
+// ==================== FOOTER - CONTACT FORM (POST) ==================== //
+// Confirmation email to Vendor
+app.post('/contact', (req, res) => {
+    const mailOptions = {
+        // to: 'info@captracks.com',
+        to: 'rena@captracks.com',
+        from: 'noreply@captracks.com',
+        subject: req.body.subject,
+        text:
+            req.body.name +
+            globals.emails[4].text[0] +
+            req.body.message +
+            globals.emails[4].text[1] +
+            req.body.email,
+    };
+    globals.smtpTransport.sendMail(mailOptions, err => {
+        // Handle Error
+        if (err) {
+            return next(err);
+        }
+        next();
+    });
+});
+
 app.listen(PORT, () => {
     console.log('Server running on port', PORT);
 });
 
-module.exports = app;
+module.exports = {
+    app,
+    globals
+};

@@ -49,13 +49,13 @@
 
     // ========== CONTACT ========== //
     // Contact Form
-    $('#send-msg').click(e => {
-        submitted(e, '.contact-form', () => {
-            $('.contact-form').hide();
-            $('#success')
-                .removeClass('unsent')
-                .addClass('sent');
+    $('#send-msg').on('click', () => {
+        $('.contact').submit(function(e) {
+            e.preventDefault();
+            submitted(this);
         });
+        $('.contact').hide();
+        $('#success').removeClass('unsent').addClass('sent');
     });
 
     function submitted(e, success) {
@@ -63,25 +63,9 @@
             type: 'POST',
             url: $(e).attr('action'),
             data: $(e).serialize(), // serializes the form's elements
+            dataType: 'html',
             success: success ? success : () => { },
         });
     }
 
-    // $(document).ready(function() {
-
-    //     $('#test-form').on('submit', function(e) {
-    //         e.preventDefault();
-
-    //         $.ajax({
-    //             type: $(this).attr('method'),
-    //             url: $(this).attr('action'),
-    //             data: $(this).serialize(),
-    //             success: function(data) {
-    //                 $('#ajax-response').html(data);
-    //             }
-    //         });
-
-    //     });
-
-    // });
 })(jQuery);

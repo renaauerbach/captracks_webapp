@@ -111,18 +111,18 @@
             '<br/>';
         contentString += info.details
             ? '<div class="tooltip-details">Current Capacity: <span class="data">' +
-              info.details.capacity +
-              '</span></div>' +
-              '<div class="tooltip-details">Current Wait Time: <span class="data">' +
-              info.details.waitTime +
-              ' minutes</span></div>' +
-              '</div>' +
-              '</div>' +
-              '<div class="tooltip-link">' +
-              '<a href="/map/store/' +
-              info.id +
-              '">Store Details & Updates</a>' +
-              '</div>'
+            info.details.capacity +
+            '%</span></div>' +
+            '<div class="tooltip-details">Current Wait Time: <span class="data">' +
+            info.details.waitTime +
+            ' minutes</span></div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="tooltip-link">' +
+            '<a href="/map/store/' +
+            info.id +
+            '">Store Details & Updates</a>' +
+            '</div>'
             : '<div class="tooltip-waiting">Waiting for vendor to join!</div>';
         return contentString;
     }

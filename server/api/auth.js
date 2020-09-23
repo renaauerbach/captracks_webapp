@@ -3,7 +3,6 @@ const async = require('async');
 const crypto = require('crypto');
 const express = require('express');
 const fs = require('fs');
-const nodemailer = require('nodemailer');
 const path = require('path');
 const sgMail = require('@sendgrid/mail');
 // ===== Router ===== //
@@ -15,18 +14,8 @@ const Vendor = require('../models/vendor.model');
 
 // ===== Helper Functions & Data ===== //
 const createHash = require('../passport/controller').createHash;
-// Email content
-const emails = JSON.parse(
-    fs.readFileSync(path.join(__dirname, '../content/emails.json'))
-)['emails'];
-// Nodemailer Transporter
-const smtpTransport = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-        user: process.env.SENDGRID_USER,
-        pass: process.env.SENDGRID_PASS,
-    },
-});
+const smtpTransport = require('globals').smtpTransport;
+const emails = require('globals').emails;
 
 module.exports = function(passport) {
     // ==================== LOGIN (GET) ==================== //

@@ -18,7 +18,7 @@
             ]
         },
         {
-            "name": "join_admind",
+            "name": "join_admin",
             "subject": "A new vendor joined CapTracks!",
             "text": [
                 "We got a new vendor! \n\nVendor's Name: ",
@@ -36,6 +36,13 @@
             "text": [
                 "Welcome to CapTracks! \n\nWe are so glad you joined the CapTracks ecosystem. \n\nIf you haven't had a chance already, take a look at your new store page: \n",
                 "\n\nYour page is where you'll be able to \n- Update your store's currecnt capacity \n- Post informatio to your forum \n- Add useful links for your customers (like a link to your store's weekly deals) \n- And update your store's information \n\nBe sure to bookmark your account page to access it easily. \n\nPlease note that CapTracks is still a work in progress. We hope you won't run into any issues with the site, but if you do, please help us out by emailing a screenshot of the error along with a few words describing the problem to rena@captracks.com. \n\nIf you have any questions, comments, or concerns, please contact us at info@captracks.com. \n\nThank you for joining the CapTracks community! We look forward to working with you!\n\n- Team CapTracks"
+            ]
+        },
+        {
+            "name": "contact",
+            "text": [
+                " sent a message from CapTracks.com:\n\n",
+                "\n\nReply to: "
             ]
         }
     ]
