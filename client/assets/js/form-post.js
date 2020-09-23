@@ -54,6 +54,7 @@
             e.preventDefault();
             submitted(this);
         });
+        // Hide form after send
         $('.contact').hide();
         $('#success').removeClass('unsent').addClass('sent');
     });
