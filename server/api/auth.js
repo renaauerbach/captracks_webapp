@@ -145,8 +145,8 @@ module.exports = function(passport) {
                                 req.flash('error', process.env.RESET_INVALID);
                                 return res.redirect('/forgot');
                             }
-                            console.log(req.body.password);
-                            console.log(req.body.confirmed);
+                            // console.log(req.body.password);
+                            // console.log(req.body.confirmed);
                             if (req.body.password !== req.body.confirmed) {
                                 req.flash('error', process.env.RESET_INVALID);
                                 return res.redirect('/reset/:token');
