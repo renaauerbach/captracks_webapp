@@ -39,6 +39,8 @@ const detailsRouter = require('./api/details');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+
 // ===== Middleware ===== //
 // Bodyparser - parses JSON
 app.use(bodyParser.urlencoded({ extended: false }));

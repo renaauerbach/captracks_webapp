@@ -44,6 +44,10 @@
         background-color: #e708ae;
     }
 
+    .navigation .navbar .navbar-nav .nav-btn button:hover, 
+    .navigation .navbar .navbar-nav .nav-btn a:hover {
+        background-color: transparent;
+    }
     .navigation .navbar .navbar-nav .nav-btn:hover {
         background-color: #0000cd;
     }
@@ -69,7 +73,11 @@
     .navigation .navbar .navbar-nav .dropdown.account.show .dropdown-content {
         border: 1.5px solid #e708ae;
     }
-
+    /* Remove curved dropdown hover */
+    .navigation .navbar .navbar-nav .dropdown .dropdown-content:nth-last-child(1) a:hover {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 
     /*====== Popup ======*/
     .popup-container {
