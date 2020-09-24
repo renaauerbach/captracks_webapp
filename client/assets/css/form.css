@@ -164,15 +164,17 @@ form.reset {
     display: block;
     margin: 5px 0 15px;
 }
-.flashMsg.purple {
+.flashMsg {
     color: #b116e0;
 }
-.errorMsg.red {
+.errorMsg {
     color: #f72942;
 }
-.flashMsg.white,
-.errorMsg.white {
-    color: #ffffff;
+
+/* Message Links */
+.flashMsg .msg-link,
+.errorMsg .msg-link {
+    color: #0000cd;
 }
 
 /* ====== LOGIN PAGE ====== */ 

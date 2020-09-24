@@ -16,22 +16,19 @@ const MongoStore = require('connect-mongo')(session);
 // ===== Helper Functions ===== //
 const parser = require('./parser.js');
 const initPassport = require('./passport/init');
-
-// Global Variables
-var globals = {
-    // Email content
-    emails: JSON.parse(
-        fs.readFileSync(path.join(__dirname, './content/emails.json'))
-    )['emails'],
-    // Nodemailer Transporter
-    smtpTransport: nodemailer.createTransport({
-        service: 'SendGrid',
-        auth: {
-            user: process.env.SENDGRID_USER,
-            pass: process.env.SENDGRID_PASS,
-        },
-    }),
-};
+// ===== Global Variables ===== //
+// Email Contents
+global.emails = JSON.parse(
+    fs.readFileSync(path.join(__dirname, './content/emails.json'))
+)['emails'];
+// Nodemailer Transporter
+global.smtpTransport = nodemailer.createTransport({
+    service: 'SendGrid',
+    auth: {
+        user: process.env.SENDGRID_USER,
+        pass: process.env.SENDGRID_PASS,
+    },
+});
 // ===== Routers ===== //
 const authRouter = require('./api/auth')(passport);
 const storeRouter = require('./api/stores');
@@ -202,8 +199,4 @@ app.post('/contact', (req, res) => {
 app.listen(PORT, () => {
     console.log('Server running on port', PORT);
 });
-
-module.exports = {
-    app,
-    globals
-};
+module.exports = app;

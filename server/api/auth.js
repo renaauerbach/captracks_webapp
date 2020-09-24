@@ -14,8 +14,8 @@ const Vendor = require('../models/vendor.model');
 
 // ===== Helper Functions & Data ===== //
 const createHash = require('../passport/controller').createHash;
-const smtpTransport = require('globals').smtpTransport;
-const emails = require('globals').emails;
+const emails = global.emails;
+const smtpTransport = global.smtpTransport;
 
 module.exports = function(passport) {
     // ==================== LOGIN (GET) ==================== //
@@ -145,12 +145,7 @@ module.exports = function(passport) {
                                 req.flash('error', process.env.RESET_INVALID);
                                 return res.redirect('/forgot');
                             }
-                            // console.log(req.body.password);
-                            // console.log(req.body.confirmed);
-                            if (req.body.password !== req.body.confirmed) {
-                                req.flash('error', process.env.RESET_INVALID);
-                                return res.redirect('/reset/:token');
-                            }
+
                             user.password = createHash(req.body.password);
                             user.resetPasswordToken = undefined;
                             user.resetPasswordExpires = undefined;

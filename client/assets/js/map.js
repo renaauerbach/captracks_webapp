@@ -99,7 +99,7 @@
 
     // Detail Content Formatter
     function contentFormatter(info) {
-        var contentString =
+        let contentString =
             '<div id="tooltip">' +
             '<div class="tooltip-title">' +
             info.name +

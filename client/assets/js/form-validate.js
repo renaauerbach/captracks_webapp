@@ -48,70 +48,61 @@ function stepIndicator(n) {
 
 // Form validation before continuing
 function validateForm() {
-	const inputs = tabs[currentTab].getElementsByTagName('input');
 	const password = document.getElementById('password');
 	const confirmed = document.getElementById('confirmed');
 	const reqs = document.querySelectorAll('.req');
 	const err = document.getElementsByClassName('errorMsg')[0];
-	const tempTxt = 'temp temp temp temp temp';
 
-	// Check for any empty inputs
-	for (let i = 0; i < inputs.length; i++) {
-		const curr = inputs[i];
-		if (curr.value === '' && curr.disabled === false) {
-			curr.classList.add('invalid');
-			err.classList.remove('white');
-			err.classList.add('red');
-			err.innerHTML = 'Please fill in all text fields before continuing.';
-			return false;
+	// If form has tabs
+	if (tabs.length > 0) {
+		const inputs = tabs[currentTab].getElementsByTagName('input');
+		// Check for any empty inputs
+		for (let i = 0; i < inputs.length; i++) {
+			const curr = inputs[i];
+			if (curr.value === '' && curr.disabled === false) {
+				curr.classList.add('invalid');
+				err.innerHTML = 'Please fill in all text fields before continuing.';
+				return false;
+			}
 		}
+		// Reset error msg
+		err.innerHTML = '';
 	}
-	// Reset error msg
-	err.classList.add('white');
-	err.innerHTML = tempTxt;
 
 	// Check that password and confirmed password match
 	if (confirmed.value !== password.value) {
-		err.classList.remove('white');
-		err.classList.add('red');
 		err.innerHTML = 'Passwords do not match. Please try again.';
 		return false;
 	}
 	// Reset error msg
-	err.classList.add('white');
-	err.innerHTML = tempTxt;
+	err.innerHTML = '';
 
 	// Check if password requirements are still unmet
 	for (let i = 0; i < reqs.length; i++) {
 		if (reqs[i].classList.contains('invalid')) {
-			err.classList.remove('white');
-			err.classList.add('red');
 			err.innerHTML = 'Password does not meet the listed requirements.';
 			return false;
 		}
 	}
 	// Reset error msg
-	err.classList.add('white');
-	err.innerHTML = tempTxt;
+	err.innerHTML = '';
 
 	// Next if form has tabs
 	const step = document.getElementsByClassName('step');
-	if (step) {
+	if (step.length > 0) {
 		step[currentTab].classList.add('finish');
-		return true;
 	}
-	// Next if single page form
-	else {
-		document.getElementsByTagName('submit')[0].submit();
-	}
+
+	return true;
 }
 
+// Validate Password Reset
 const reset = document.getElementById('resetBtn');
 if (reset) {
-	reset.addEventListener('submit', e => {
+	reset.addEventListener('click', e => {
 		e.preventDefault();
 		if (validateForm()) {
-			reset.submit();
+			document.getElementsByTagName('form')[0].submit();
 		}
 	});
 }
