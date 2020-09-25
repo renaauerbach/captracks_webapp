@@ -9,7 +9,6 @@ const signup = require('./controller').signup;
 module.exports = function(passport) {
 
     passport.serializeUser((user, done) => {
-        console.log("serialize user: ", user);
         done(null, user);
     });
 
@@ -19,7 +18,6 @@ module.exports = function(passport) {
                 done(err, false);
             }
             else {
-                console.log("deserialize user: ", vendor);
                 done(null, vendor);
             }
         });
