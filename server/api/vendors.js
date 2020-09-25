@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 // ===== Models ===== //
 const Store = require('../models/store.model');
-const Vendor = require('../models/vendor.model');
 
 // ==================== VENDOR ACCOUNT (GET) ==================== //
 router.get('/', (req, res) => {
@@ -90,60 +89,5 @@ router.post('/remove/:id/:link', (req, res) => {
         return res.redirect('/login');
     }
 });
-
-// ==================== VENDOR PROFILE (GET) ==================== //
-// router.get('/profile', (req, res) => {
-//     // Check Vendor Authentication
-//     if (req.isAuthenticated()) {
-//         res.render('account', {
-//             layout: 'layout',
-//             vendor: req.user,
-//             title: 'My Profile',
-//              user: true,     // Dynamic since already checked for authentication
-//         });
-//     }
-//     // Not Authenticated --> back to Login
-//     else {
-//         return res.redirect('/login');
-//     }
-// });
-
-// ==================== ACCOUNT SETTINGS (GET) ==================== //
-// router.get('/settings', (req, res) => {
-// Check Vendor Authentication
-//     if (req.isAuthenticated()) {
-//      Store.find({ vendor: req.user._id }).populate({ path: "store.details", populate: "details" }).exec((err, store) => {
-//             if (err) {
-//                 return res.status(400).json({ success: false, error: err });
-//             }
-//             res.render('account', {
-//                 layout: 'layout',
-//                 vendor: req.user,
-//                 store: store[0],
-//                 title: 'Settings',
-//                 user: true,     // Dynamic since already checked for authentication
-//             });
-//         });
-//     }
-// Not Authenticated --> back to Login
-//     else {
-//         res.redirect('/login');
-//     }
-// });
-
-// ==================== DELETE VENDOR ACCOUNT (POST) ==================== //
-// router.post('/:id', (req, res) => {
-//     if (req.isAuthenticated()) {
-//         Vendor.findByIdAndRemove(req.user._id, err => {
-//             if (err) {
-//                 res.status(400).json({ success: false, error: err });
-//             }
-//             res.status(200).json({ success: true });
-//             console.log('Vendor account deleted successfully!');
-//         });
-//     }
-// // TODO: MAKE SURE USER IS ALSO LOGGED OUT
-//     res.redirect('/login');
-// });
 
 module.exports = router;

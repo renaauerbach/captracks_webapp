@@ -77,10 +77,10 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
 // Hbs Helper Functions
 hbs.registerHelper('ifOdd', val => {
-    return val % 2 == 0 ? false : true;
+    return val % 2 === 0 ? false : true;
 });
 hbs.registerHelper('ifEven', val => {
-    return val % 2 == 0 ? true : false;
+    return val % 2 === 0 ? true : false;
 });
 hbs.registerHelper('convert', data => {
     const stringify = JSON.stringify(data)
@@ -101,7 +101,7 @@ hbs.registerHelper('len', obj => {
     return Object.keys(obj).length;
 });
 // Hbs Partials
-hbs.registerPartials(__dirname + '/views/partials', err => { });
+hbs.registerPartials(__dirname + '/views/partials', err => { console.log(err); });
 
 // Routers
 app.use('/', authRouter);
@@ -176,7 +176,7 @@ app.get('/privacy', (req, res) => {
 
 // ==================== FOOTER - CONTACT FORM (POST) ==================== //
 // Confirmation email to Vendor
-app.post('/contact', (req, res) => {
+app.post('/contact', (req, res, next) => {
     const mailOptions = {
         // to: 'info@captracks.com',
         to: 'rena@captracks.com',
@@ -184,12 +184,12 @@ app.post('/contact', (req, res) => {
         subject: req.body.subject,
         text:
             req.body.name +
-            globals.emails[4].text[0] +
+            global.emails[4].text[0] +
             req.body.message +
-            globals.emails[4].text[1] +
+            global.emails[4].text[1] +
             req.body.email,
     };
-    globals.smtpTransport.sendMail(mailOptions, err => {
+    global.smtpTransport.sendMail(mailOptions, err => {
         // Handle Error
         if (err) {
             return next(err);

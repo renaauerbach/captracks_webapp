@@ -2,18 +2,18 @@
     "team": [
         {
             "id": 1,
-            "name": "Gabriel Low",
+            "name": "Gabe Low",
             "image": "profile_gabriel.jpg",
             "title": "Co-Founder",
-            "bio": "Gabriel hails from New York City. While finishing his degree in Finance and Management at Wharton, Gabriel is a corporate strategy analyst for an American multi-national corporation. He also has prior global strategy experience from working with rapidly-scaling start-ups in India and Israel.",
-            "about": "Gabriel hates wasting time in long lines when he could be swimming, making tahini, or spending time with his 7 siblings."
+            "bio": "Gabe hails from New York City. He is pursuing a degree in Finance and Management at Wharton and was recently elected into Beta Gamma Sigma, an academic honors society. After college, Gabe plans to start his career as a business analyst at a top consulting firm. He also has prior global strategy experience from interning at PepsiCo, as well as rapidly-scaling start-ups in India and Israel.",
+            "about": "Gabe hates wasting time in long lines when he could be swimming, making tahini, or spending time with his 7 siblings."
         },
         {
             "id": 2,
             "name": "Ben Shor",
             "image": "profile_ben.jpg",
             "title": "Co-Founder",
-            "bio": "Ben is from Great Neck, NY. He is currently completing his degree in Economics and Business Management at Columbia University, while working as an analyst for an independent multi-national investment bank. Ben also has financial analysis and investment strategy experience.",
+            "bio": "Ben is from Great Neck, NY. He is currently completing his degree in Economics and Business Management at Columbia University and will be joining a consumer and retail focused investment bank after he graduated. Ben also has financial analysis and investment strategy experience.",
             "about": "With his busy schedule, Ben does everything he can to save time, so he can spend it running, trying new foods, and traveling."
         },
         {
@@ -21,7 +21,7 @@
             "name": "Rena Auerbach",
             "image": "profile_rena.jpg",
             "title": "Lead Engineer & Graphic Designer",
-            "bio": "Rena is back home in Chicago, IL after recently graduating from NYU with a BA in Computer Science. Rena is a full-stack developer with experience in a handful of programming languages, but her favorites are Java and JavaScript.",
+            "bio": "After receiving her BA in Computer Science from NYU, Rena went back home to Chicago, IL. Now she is taking CapTracks international to Herzliya, Israel, where she hopes to start her professional career as a Software Engineer. Rena is a full-stack developer with experience in a handful of programming languages, but her favorites are Java and JavaScript.",
             "about": "When she's not avoiding long lines, Rena enjoys playing with her dog, painting, and running her eBay business."
         },
         {

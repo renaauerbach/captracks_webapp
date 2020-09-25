@@ -2,9 +2,6 @@
 const async = require('async');
 const crypto = require('crypto');
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const sgMail = require('@sendgrid/mail');
 // ===== Router ===== //
 const router = express.Router();
 // ===== Models ===== //
@@ -26,16 +23,6 @@ module.exports = function(passport) {
             error: req.flash('error'),
             message: req.flash('message'),
         });
-
-        // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        // const msg = {
-        //     to: 'test@example.com',
-        //     from: 'noreplay@captracks.com',
-        //     subject: 'Sending with Twilio SendGrid is Fun',
-        //     text: 'and easy to do anywhere, even with Node.js',
-        //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-        // };
-        // sgMail.send(msg);
     });
     // ==================== LOGIN (POST) ==================== //
     router.post(

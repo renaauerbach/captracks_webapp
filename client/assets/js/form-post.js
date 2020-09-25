@@ -79,9 +79,6 @@
             success: function(result) {
                 console.log(result);
             },
-            error: function(request, status, error) {
-                serviceError();
-            }
         });
     }
 

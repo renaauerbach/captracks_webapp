@@ -20,8 +20,6 @@ function calcWait(max, body) {
     // Not full --> No wait
     return 0;
 }
-// TODO: FOR NOW: ESTIMATE WAIT TIME BELOW LINE QUESTION
-
 
 // ==================== UPDATE CAPACITY (POST) ==================== //
 router.post('/:id', (req, res) => {
