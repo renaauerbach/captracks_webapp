@@ -20,10 +20,13 @@ router.get('/', (req, res) => {
                 layout: 'layout',
                 vendor: req.user,
                 store: store,
-                details: store.details,
+                details: store.details[0],
                 title: 'My Account',
                 user: req.isAuthenticated(),
                 error: req.flash('error'),
+                errorCap: req.flash('errorCap'),
+                errorForum: req.flash('errorForum'),
+                errorStore: req.flash('errorStore')
             });
         });
 });
@@ -53,9 +56,8 @@ router.post('/:id', (req, res) => {
         // Update Store by ID
         Store.findByIdAndUpdate(req.params.id, update, err => {
             if (err) {
-                req.flash('error', process.env.STORE_INFO_ERROR);
+                req.flash('errorStore', process.env.STORE_INFO_ERROR);
                 console.log('Error updating Store info:', err);
-                return res.redirect('/account');
             }
             return res.redirect('/account');
         });
@@ -77,9 +79,8 @@ router.post('/remove/:id/:link', (req, res) => {
                 $pull: { links: { 'url': req.params.link } }
             }, err => {
                 if (err) {
-                    req.flash('error', process.env.STORE_INFO_ERROR);
+                    req.flash('errorStore', process.env.STORE_INFO_ERROR);
                     console.log('Error removing link:', err);
-                    return res.redirect('/account');
                 }
                 return res.redirect('/account');
             });

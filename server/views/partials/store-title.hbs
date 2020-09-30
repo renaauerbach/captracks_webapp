@@ -16,5 +16,11 @@
 </div>
 
 <!-- Flash & Error Messages -->
-<span class="errorMsg">{{error}}</span>
+{{#if (eq label 'Capacity')}}
+<span class="errorMsgCap">{{errorCap}}</span>
+{{else if (eq label 'Forum')}}
+<span class="errorMsgForum">{{errorForum}}</span>
+{{else}}
+<span class="errorMsgStore">{{errorStore}}</span>
+{{/if}}
 <hr>

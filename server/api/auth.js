@@ -205,11 +205,12 @@ module.exports = function(passport) {
                         // New Details Object
                         const newDetails = new Details({
                             partition: process.env.DB_PARTITION,
-                            capacity: 0,
                             maxCapacity: req.body.max,
-                            registers: req.body.reg,
-                            updated: Date(),
+                            capacity: 0,
                             waitTime: 0,
+                            maxRegisters: req.body.reg,
+                            registers: req.body.reg,
+                            updated: new Date(),
                         });
                         // Save Details to DB
                         newDetails.save(err => {
@@ -332,7 +333,7 @@ module.exports = function(passport) {
                                 const newStore = new Store({
                                     partition: process.env.DB_PARTITION,
                                     address: address,
-                                    details: newDetails._id,
+                                    details: [newDetails._id],
                                     forum: [],
                                     hours: hours,
                                     links: [],

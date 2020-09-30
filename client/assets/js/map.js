@@ -58,8 +58,8 @@
         let icon = new google.maps.MarkerImage(
             'http://www.googlemapsmarkers.com/v1/A/AC01D5/AC01D5/A0A0A0/'
         );
-        if (store.details) {
-            const capacity = store.details.capacity;
+        if (store.details[0]) {
+            const capacity = store.details[0].capacity;
 
             // Green Marker = capacity < 50%
             if (capacity < 50) {
@@ -109,12 +109,12 @@
             info.address +
             '</div>' +
             '<br/>';
-        contentString += info.details
+        contentString += info.details[0]
             ? '<div class="tooltip-details">Current Capacity: <span class="data">' +
-            info.details.capacity +
+            info.details[0].capacity +
             '%</span></div>' +
             '<div class="tooltip-details">Current Wait Time: <span class="data">' +
-            info.details.waitTime +
+            info.details[0].waitTime +
             ' minutes</span></div>' +
             '</div>' +
             '</div>' +

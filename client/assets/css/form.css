@@ -158,16 +158,25 @@ form.reset {
 
 /* Flash Messages */
 .flashMsg,
-.errorMsg {
+.errorMsg,
+.errorMsgCap,
+.errorMsgForum,
+.errorMsgStore {
     font-size: 16px;
-    text-align: center;
     display: block;
     margin: 5px 0 15px;
+}
+.flashMsg,
+.errorMsg {
+    text-align: center;
 }
 .flashMsg {
     color: #b116e0;
 }
-.errorMsg {
+.errorMsg,
+.errorMsgCap,
+.errorMsgForum,
+.errorMsgStore {
     color: #f72942;
 }
 

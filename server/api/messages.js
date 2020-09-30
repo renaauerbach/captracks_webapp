@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 			await function(err) {
 				// Handle Error
 				if (err) {
-					req.flash('error', process.env.FORUM_POST_ERROR);
+					req.flash('errorForum', process.env.FORUM_POST_ERROR);
 					console.log('Error saving Message to the db:', err);
 					return res.redirect('/account');
 				}
@@ -37,9 +37,11 @@ router.post('/', async (req, res) => {
 					err => {
 						// Handle Error
 						if (err) {
-							req.flash('error', process.env.FORUM_POST_ERROR);
+							req.flash(
+								'errorForum',
+								process.env.FORUM_POST_ERROR
+							);
 							console.log('Error posting Message to forum:', err);
-							return res.redirect('/account');
 						}
 						return res.redirect('/account');
 					}
@@ -74,7 +76,6 @@ router.post('/delete/:id', (req, res) => {
 					if (err) {
 						req.flash('error', process.env.FORUM_REMOVE_ERROR);
 						console.log('Error deleting Message from forum:', err);
-						return res.redirect('/account');
 					}
 					return res.redirect('/account');
 				});
