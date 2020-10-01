@@ -29,7 +29,7 @@ module.exports = function(passport) {
         '/login',
         passport.authenticate('login', { failureRedirect: '/login' }),
         (req, res) => {
-            // TODO: CHECK FOR COOKIES AND REQ
+            console.log("REQ", req);
             return res.redirect('/account');
         }
     );

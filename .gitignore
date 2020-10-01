@@ -1,5 +1,3 @@
-server/config/*
-
 # Logs
 logs
 *.log
