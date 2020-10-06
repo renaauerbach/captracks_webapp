@@ -59,7 +59,7 @@
         </form>
         <!-- Form End -->
 
-        <!-- Added Store Links -->
+        <!-- Store Links -->
         {{#if (eq (len store.links) 0)}}
         {{else}}
         {{#each store.links as |link|}}
@@ -77,6 +77,7 @@
         {{/each}}
         {{/if}}
 
+        {{#if (eq title 'My Account')}}
         <!-- Form Start - Add Link -->
         <form class="link" action="/account/{{store._id}}" method="POST">
 
@@ -102,6 +103,7 @@
             </li>
         </form>
         <!-- Form End -->
+        {{/if}}
 
     </div>
     <a href="#" class="btn-expand-collapse">
