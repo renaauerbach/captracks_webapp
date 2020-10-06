@@ -13,20 +13,19 @@ const initPassport = require('../passport/init');
 
 // ===== Middleware ===== //
 module.exports = function(app, express) {
-    // Bodyparser - parses JSON
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
-
     // Express - server framework
     app.use(express.static(path.join(__dirname, '../../client')));
     app.use(express.urlencoded({ extended: true }));
     app.use('*', cors());
 
+    // Bodyparser - parses JSON
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+
     // Sessions & Passport - authentication and keeping user signed-in
     app.use(
         session({
             secret: process.env.SECRET_KEY,
-            cookie: { secure: true },
             resave: false,
             saveUninitialized: false,
             store: new MongoStore({
@@ -36,7 +35,6 @@ module.exports = function(app, express) {
             }),
         })
     );
-
     app.use(passport.initialize());
     app.use(passport.session());
     initPassport(passport);

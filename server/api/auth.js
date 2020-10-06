@@ -2,6 +2,7 @@
 const async = require('async');
 const crypto = require('crypto');
 const express = require('express');
+const mongoose = require('mongoose');
 // ===== Router ===== //
 const router = express.Router();
 // ===== Models ===== //
@@ -29,7 +30,7 @@ module.exports = function(passport) {
         '/login',
         passport.authenticate('login', { failureRedirect: '/login' }),
         (req, res) => {
-            console.log("REQ", req);
+            req.session.user = req.user;
             return res.redirect('/account');
         }
     );

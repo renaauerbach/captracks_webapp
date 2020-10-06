@@ -65,6 +65,6 @@
 //             console.log('Vendor account deleted successfully!');
 //         });
 //     }
-// // TODO: MAKE SURE USER IS ALSO LOGGED OUT
+//     req.logout();
 //     res.redirect('/login');
 // });
