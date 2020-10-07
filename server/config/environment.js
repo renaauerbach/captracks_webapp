@@ -26,12 +26,13 @@ module.exports = function(app, express) {
     app.use(
         session({
             secret: process.env.SECRET_KEY,
+            // cookie: { secure: true } // hides req info
             resave: false,
             saveUninitialized: false,
             store: new MongoStore({
                 mongooseConnection: mongoose.connection,
                 touchAfter: 72 * 3600,  // 72 hour period
-                autoRemove: 'interval', //PROD: 'disabled'
+                autoRemove: 'interval', // PROD: 'disabled'
             }),
         })
     );

@@ -13,8 +13,16 @@
                 lat: 40.7128,
                 lng: 74.006,
             },
-            zoom: 10,
+            zoom: 12,
         });
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    exports.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                },
+            );
+        }
 
         // Define global infoWindow to display places data
         infoWindow = new google.maps.InfoWindow();
@@ -22,7 +30,7 @@
         // Initialize Geoencoder
         const geocoder = new google.maps.Geocoder();
         geocodeAddress(geocoder, exports.map);
-    }
+    };
 
     // Geoencode Address
     function geocodeAddress(geocoder, map) {
