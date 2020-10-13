@@ -14,7 +14,7 @@ const initPassport = require('../passport/init');
 // ===== Middleware ===== //
 module.exports = function(app, express) {
     // Express - server framework
-    app.use(express.static(path.join(__dirname, '../../client')));
+    app.use(express.static(path.join(__dirname, '../../public')));
     app.use(express.urlencoded({ extended: true }));
     app.use('*', cors());
 
