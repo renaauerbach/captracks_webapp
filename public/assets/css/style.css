@@ -611,6 +611,64 @@ button.thin-btn:hover {
     overflow: hidden !important;
 }
 
+/* Key Panel */
+.map-key {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    max-height: 9%;
+    z-index: 1;
+    padding: 15px 0;  /* Impacts how far button sticks out */
+    background-color: #ffffff;
+    overflow: hidden;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+.map-key.collapsed {
+    height: 0px;
+}
+
+.map-key .key-list {
+    list-style-type: none;
+    overflow: hidden;
+}
+.map-key .key-list li {
+    float: left;
+}
+
+.map-key .key-list li p {
+    font-size: 14px;
+    display: block;
+    padding: 0 16px;
+}
+
+.map-key .btn-expand-collapse {
+    position: absolute;
+    display: inline;
+    font-size: 14px;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    color: #ffffff;
+    background-color: #e708ae;
+    text-align: center;
+}
+.map-key .btn-expand-collapse:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+.map-key .btn-expand-collapse p {
+    color: #ffffff;
+    margin: 0;
+    padding-top: 2px;
+}
+
 /* ====== ABOUT US ====== */
 /* Team Members */
 .box .label {
@@ -669,8 +727,7 @@ button.thin-btn:hover {
 .store-details.collapsed {
     width: 0px;
 }
-
-.btn-expand-collapse {
+.store-details .btn-expand-collapse {
     position: absolute;
     display: inline;
     right: 0;
@@ -682,11 +739,11 @@ button.thin-btn:hover {
     background-color: #e708ae;
     text-align: center;
 }
-.btn-expand-collapse:hover {
+.store-details .btn-expand-collapse:hover {
     color: #ffffff;
     text-decoration: none;
 }
-.btn-expand-collapse p {
+.store-details .btn-expand-collapse p {
     color: #ffffff;
     margin: 0 0 10px 0;
     white-space: nowrap;

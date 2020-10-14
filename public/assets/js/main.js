@@ -42,6 +42,24 @@
     //     $('.form-popup').removeClass('open');
     // });
 
+    /* ===== Map Key Panel ===== */
+    $('.btn-expand-collapse').click(function() {
+        $('.map-key').toggleClass('collapsed');
+        if ($('.map-key').hasClass('collapsed')) {
+            $(this)
+                .children(0)
+                .children()
+                .removeClass('fa-angle-up')
+                .addClass('fa-angle-down');
+        } else {
+            $(this)
+                .children(0)
+                .children()
+                .removeClass('fa-angle-down')
+                .addClass('fa-angle-up');
+        }
+    });
+
     /* ===== Store Details Sidepanel ===== */
     $('.btn-expand-collapse').click(function() {
         $('.store-details').toggleClass('collapsed');
