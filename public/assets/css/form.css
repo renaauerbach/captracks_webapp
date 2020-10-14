@@ -516,4 +516,9 @@ form.reset {
     .survey .form-group .control-label {
         line-height: 16px;
     }
+
+    /* ==== CONTACT ==== */ 
+    .contact .email {
+        padding-left: 15px;
+    }
 }

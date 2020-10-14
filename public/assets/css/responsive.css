@@ -27,9 +27,6 @@
     .navigation .navbar .navbar-collapse ul li {
         padding: 3px 12px;
     }
-    .navigation .navbar .navbar-collapse ul:nth-last-child() {
-        padding: 0;
-    }
     .navigation .navbar .navbar-nav .nav-item {
         margin: 4px 0;
     }
@@ -42,14 +39,6 @@
     .navigation .navbar .navbar-nav .nav-btn {
         margin: 0;
         background-color: #e708ae;
-    }
-
-    .navigation .navbar .navbar-nav .nav-btn button:hover, 
-    .navigation .navbar .navbar-nav .nav-btn a:hover {
-        background-color: transparent;
-    }
-    .navigation .navbar .navbar-nav .nav-btn:hover {
-        background-color: #0000cd;
     }
 
     .navigation .navbar .navbar-nav .nav-btn button,
@@ -80,11 +69,11 @@
     }
 
     /*====== Popup ======*/
-    .popup-container {
+    /* .popup-container {
         font-size: 15px;
         margin: 0 5%;
         width: 90%;
-    }
+    } */
 
     /*====== FOOTER ======*/
     .footer-title {
@@ -148,6 +137,12 @@
     #account-body {
         padding-top: 50px;
         padding-bottom: 100px;
+    }
+
+    /* ====== MAP ====== */
+    .map-key {
+        width: 56%;
+        height: 6%;
     }
 
     /* ====== ACCOUNT / STORE PAGE ====== */
@@ -243,10 +238,20 @@
         padding: 20px;
     }
 
+    /* ====== MAP ====== */
+    .map-key {
+        width: 100%;
+        
+    }
+    .map-key .key-list li p {
+        padding: 0 3px;
+        font-size: 13px;
+    }
+
     /*====== ACCOUNT / STORE PAGE ======*/
     /* Store Details Sidebar */
     .store-details {
-        max-width: 60%;
+        max-width: 56%;
     }
     .store-links li i {
         padding: 15px 0;
