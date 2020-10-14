@@ -52,41 +52,40 @@
 
     // Add Marker
     function addMarker(location, map, store) {
-        const red = new google.maps.MarkerImage(
-            'http://www.googlemapsmarkers.com/v1/A/FA2043/FA2043/A0A0A0/'
-        );
-        const yellow = new google.maps.MarkerImage(
-            'http://www.googlemapsmarkers.com/v1/A/FFF500/FFF500/A0A0A0/'
-        );
-        const green = new google.maps.MarkerImage(
-            'http://www.googlemapsmarkers.com/v1/A/009900/009900/A0A0A0/'
-        );
 
-        // Default icon = purple
-        let icon = new google.maps.MarkerImage(
-            'http://www.googlemapsmarkers.com/v1/A/AC01D5/AC01D5/A0A0A0/'
-        );
+        // Default color = purple
+        let color = '#ac01d5';
+
         if (store.details[0]) {
             const capacity = store.details[0].capacity;
 
-            // Green Marker = capacity < 50%
+            // Green = capacity < 50%
             if (capacity < 50) {
-                icon = green;
+                color = '#009900';
             }
-            // Yellow Marker = capacity between 50-80%
+            // Yellow = capacity between 50-80%
             else if (capacity < 80 && capacity > 50) {
-                icon = yellow;
+                color = '#fff500';
             }
-            // Red Marker (default) = if there is a wait or store is at > 80% capacity
+            // Red (default) = if there is a wait or store is at > 80% capacity
             else {
-                icon = red;
+                color = '#fa2043';
             }
         }
+        var customIcon = {
+            path: "M 0,0 c -1.25816,1.34277 -2.04623,3.29881 -2.01563,5.13867 0.0639,3.84476 1.79693,5.3002 4.56836,10.59179 0.99832,2.32851 2.04027,4.79237 3.03125,8.87305 0.13772,0.60193 0.27203,1.16104 0.33416,1.20948 0.0621,0.0485 0.19644,-0.51262 0.33416,-1.11455 0.99098,-4.08068 2.03293,-6.54258 3.03125,-8.87109 2.77143,-5.29159 4.50444,-6.74704 4.56836,-10.5918 0.0306,-1.83986 -0.75942,-3.79785 -2.01758,-5.14062 -1.43724,-1.53389 -3.60504,-2.66908 -5.91619,-2.71655 -2.31115,-0.0475 -4.4809,1.08773 -5.91814,2.62162 z",
+            anchor: new google.maps.Point(12, 17),
+            fillOpacity: 1,
+            fillColor: color,
+            strokeWeight: 1,
+            strokeColor: '#a0a0a0',
+            scale: 1,
+        };
 
         exports.marker = new google.maps.Marker({
             position: location,
             map: map,
-            icon: icon,
+            icon: customIcon,
         });
 
         makeInfoWindowEvent(
