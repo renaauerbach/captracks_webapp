@@ -249,6 +249,10 @@
     }
 
     /*====== ACCOUNT / STORE PAGE ======*/
+    #account-body {
+        padding-left: 20px;
+    }
+
     /* Store Details Sidebar */
     .store-details {
         max-width: 56%;

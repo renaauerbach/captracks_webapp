@@ -43,40 +43,44 @@
     // });
 
     /* ===== Map Key Panel ===== */
-    $('.btn-expand-collapse').click(function() {
-        $('.map-key').toggleClass('collapsed');
-        if ($('.map-key').hasClass('collapsed')) {
-            $(this)
-                .children(0)
-                .children()
-                .removeClass('fa-angle-up')
-                .addClass('fa-angle-down');
-        } else {
-            $(this)
-                .children(0)
-                .children()
-                .removeClass('fa-angle-down')
-                .addClass('fa-angle-up');
-        }
-    });
+    if ($('.map-key')) {
+        $('.btn-expand-collapse').click(function() {
+            $('.map-key').toggleClass('collapsed');
+            if ($('.map-key').hasClass('collapsed')) {
+                $(this)
+                    .children(0)
+                    .children()
+                    .removeClass('fa-angle-up')
+                    .addClass('fa-angle-down');
+            } else {
+                $(this)
+                    .children(0)
+                    .children()
+                    .removeClass('fa-angle-down')
+                    .addClass('fa-angle-up');
+            }
+        });
+    }
 
     /* ===== Store Details Sidepanel ===== */
-    $('.btn-expand-collapse').click(function() {
-        $('.store-details').toggleClass('collapsed');
-        if ($('.store-details').hasClass('collapsed')) {
-            $(this)
-                .children(0)
-                .children()
-                .removeClass('fa-angle-up')
-                .addClass('fa-angle-down');
-        } else {
-            $(this)
-                .children(0)
-                .children()
-                .removeClass('fa-angle-down')
-                .addClass('fa-angle-up');
-        }
-    });
+    if ($('.store-details')) {
+        $('.btn-expand-collapse').click(function() {
+            $('.store-details').toggleClass('collapsed');
+            if ($('.store-details').hasClass('collapsed')) {
+                $(this)
+                    .children(0)
+                    .children()
+                    .removeClass('fa-angle-up')
+                    .addClass('fa-angle-down');
+            } else {
+                $(this)
+                    .children(0)
+                    .children()
+                    .removeClass('fa-angle-down')
+                    .addClass('fa-angle-up');
+            }
+        });
+    }
 
     /* ===== Edit Store Details ===== */
     $('#edit').click(function() {

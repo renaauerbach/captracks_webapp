@@ -31,7 +31,7 @@ module.exports = function(app, express) {
             saveUninitialized: false,
             store: new MongoStore({
                 mongooseConnection: mongoose.connection,
-                touchAfter: 72 * 3600,  // 72 hour period
+                touchAfter: 72 * 3600, // 72 hour period
                 autoRemove: 'interval', // PROD: 'disabled'
             }),
         })

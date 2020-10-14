@@ -1,27 +1,4 @@
 // General text formatting (non-form related)
-const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-];
-const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-];
 const posts = document.querySelectorAll('.info-box');
 posts.forEach(created => {
     const date = created

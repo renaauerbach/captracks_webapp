@@ -2,7 +2,6 @@
 const async = require('async');
 const crypto = require('crypto');
 const express = require('express');
-const mongoose = require('mongoose');
 // ===== Router ===== //
 const router = express.Router();
 // ===== Models ===== //
