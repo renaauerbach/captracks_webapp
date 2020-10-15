@@ -120,7 +120,7 @@
             ? '<div class="tooltip-details">Current Capacity: <span class="data">' +
             info.details[0].capacity +
             '%</span></div>' +
-            '<div class="tooltip-details">Current Wait Time: <span class="data">' +
+            '<div class="tooltip-details">Current Entry Wait Time: <span class="data">' +
             info.details[0].waitTime +
             ' minutes</span></div>' +
             '</div>' +

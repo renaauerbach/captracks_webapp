@@ -47,6 +47,7 @@
         $('.btn-expand-collapse').click(function() {
             $('.map-key').toggleClass('collapsed');
             if ($('.map-key').hasClass('collapsed')) {
+                console.log($(this).children(0).children());
                 $(this)
                     .children(0)
                     .children()
