@@ -1,20 +1,3 @@
-// Format Floating Labels
-document.querySelectorAll('.form-control').forEach(input => {
-    input.addEventListener('blur', function() {
-        const parent = this.parentElement;
-        parent.classList.remove('focused');
-        if (this.value.length > 0) {
-            parent.classList.add('filled');
-        }
-    });
-
-    input.addEventListener('focus', function() {
-        const parent = this.parentElement;
-        parent.classList.remove('filled');
-        parent.classList.add('focused');
-    });
-});
-
 // Format Time
 function timeFormat(str) {
     if (!/:/.test(str)) {
@@ -87,9 +70,4 @@ if (phone) {
     phone.addEventListener('keyup', e => {
         phoneFormat(e);
     });
-}
-
-// Format Slider Value
-function updateSliderText(val) {
-    document.getElementById('sliderText').value = val;
 }

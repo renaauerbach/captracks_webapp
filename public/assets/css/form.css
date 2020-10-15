@@ -115,7 +115,10 @@ form.reset {
 
 /* Floating labels - Filled */
 .form .form-group .form-control.filled,
-.form .form-group.filled .control-label {
+.form .form-group.is-autofilled .form-control,
+.form .form-group.filled .control-label,
+.form .form-group.is-autofilled .control-label 
+ {
     border-color: #e708ae;
     opacity: 1;
     -webkit-transform: translate3d(0px, -10px, 0) scale(0.9);
@@ -125,9 +128,19 @@ form.reset {
     transform: translate3d(0px, -10px, 0) scale(0.9);
     line-height: 1px;
 }
-.form .form-group.filled .control-label {
+.form .form-group.filled .control-label,
+.form .form-group.is-autofilled .control-label {
     font-size: 16px;
     color: #e708ae;
+}
+/* Floating labels - Autofilled */
+@keyframes onAutoFillStart {  from {/**/}  to {/**/}}
+@keyframes onAutoFillCancel {  from {/**/}  to {/**/}}
+.form .form-group input:-webkit-autofill ~ .control-label{
+    animation-name: onAutoFillStart;
+}
+.form .form-group input:not(:-webkit-autofill) ~ .control-label {
+    animation-name: onAutoFillCancel;
 }
 
 /* Details */
