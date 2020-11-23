@@ -20,7 +20,21 @@
             <p class="cap-data">{{details.waitTime}} minutes</p>
         </div>
 
-        <!-- Row - Last Update -->
+       
+        {{#if user }}
+        {{#if qrcodeflag}}
+        <div class="row  d-flex justify-content-between align-items-center">
+            <p class="cap-title"> <a href="/account/downloadEntryQR/">Download Entry QR Code</a></p>
+            <p class="cap-data post-date"><span class="errorMsgStore">{{errorStore}}</span></p>
+        </div>
+         <div class="row  d-flex justify-content-between align-items-center">
+            <p class="cap-title"> <a href="/account/downloadExitQR/">Download Exit QR Code</a></p>
+            <p class="cap-data post-date"></p>
+        </div>
+        {{/if}}
+        {{/if}}
+
+         <!-- Row - Last Update -->
         <div class="row cap-date d-flex justify-content-between align-items-center">
             <p class="cap-title">Last Updated:</p>
             <p class="cap-data post-date">{{details.updated}}</p>
