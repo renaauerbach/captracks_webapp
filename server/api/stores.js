@@ -58,4 +58,24 @@ router.get('/store/:id', (req, res) => {
         });
 });
 
+// ==================== EXIT STORE PAGE (GET) ==================== //
+router.get('/store/:id/exit', (req, res) => {
+    // Get Store by ID
+    Store.findById(req.params.id)
+        .populate({ path: 'details', model: 'details' })
+        .populate({ path: 'forum', model: 'messages' })
+        .exec((err, store) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            res.render('exit', {
+                layout: 'layout',
+                title: 'Goodbye',
+                store: store,
+                details: store.details[0],
+                user: req.isAuthenticated(),
+            });
+        });
+});
+
 module.exports = router;
