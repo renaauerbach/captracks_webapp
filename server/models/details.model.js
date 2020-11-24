@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // DETAILS SCHEMA
-const detailsSchema = new mongoose.Schema({
+const detailsSchema = new Schema({
     id: { type: Schema.Types.ObjectId, require: true },
     partition: { type: String, required: true },
     maxCapacity: { type: Number, required: true },

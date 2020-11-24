@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // VENDOR SCHEMA
-const vendorSchema = new mongoose.Schema({
+const vendorSchema = new Schema({
 	id: { type: Schema.Types.ObjectId, require: true },
 	partition: { type: String, required: true },
 	firstName: { type: String, required: true },
