@@ -123,4 +123,14 @@ module.exports = function(app) {
             next();
         });
     });
+
+    // ==================== ERROR (GET) ==================== //
+    app.get('/error', (req, res) => {
+        res.render('error', {
+            layout: 'layout',
+            title: 'Error',
+            user: req.isAuthenticated(),
+        });
+    })
+
 };
