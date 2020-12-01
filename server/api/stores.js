@@ -58,6 +58,7 @@ router.get('/store/:id', (req, res) => {
         });
 });
 
+
 // ==================== EXIT STORE PAGE (GET) ==================== //
 router.get('/store/:id/exit', (req, res) => {
     // Get Store by ID
