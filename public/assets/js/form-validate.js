@@ -59,9 +59,14 @@ function validateForm() {
 		// Check for any empty inputs
 		for (let i = 0; i < inputs.length; i++) {
 			const curr = inputs[i];
-			if (curr.value === '' && curr.disabled === false) {
+			if (
+				curr.value === '' &&
+				curr.disabled === false &&
+				curr.id !== 'web'
+			) {
 				curr.classList.add('invalid');
-				err.innerHTML = 'Please fill in all text fields before continuing.';
+				err.innerHTML =
+					'Please fill in all text fields before continuing.';
 				return false;
 			}
 		}
@@ -99,7 +104,7 @@ function validateForm() {
 // Validate Password Reset
 const reset = document.getElementById('resetBtn');
 if (reset) {
-	reset.addEventListener('click', e => {
+	reset.addEventListener('click', (e) => {
 		e.preventDefault();
 		if (validateForm()) {
 			document.getElementsByTagName('form')[0].submit();
