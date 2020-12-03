@@ -25,7 +25,7 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "cd server && node -r dotenv/config app.js"
+        "start": "cd server && node app.js"
     },
     "repository": {
         "type": "git",
