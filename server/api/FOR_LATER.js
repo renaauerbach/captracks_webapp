@@ -11,7 +11,6 @@
 // };
 // sgMail.send(msg);
 
-
 // ===== VENDOR ===== //
 
 // ==================== VENDOR PROFILE (GET) ==================== //
@@ -27,7 +26,7 @@
 //     }
 //     // Not Authenticated --> back to Login
 //     else {
-//         return res.redirect('/login');
+//         return res.redirect('/auth/login');
 //     }
 // });
 
@@ -50,7 +49,7 @@
 //     }
 // Not Authenticated --> back to Login
 //     else {
-//         res.redirect('/login');
+//         res.redirect('/auth/login');
 //     }
 // });
 
@@ -66,5 +65,5 @@
 //         });
 //     }
 //     req.logout();
-//     res.redirect('/login');
+//     res.redirect('/auth/login');
 // });

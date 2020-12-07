@@ -5,7 +5,7 @@
             "subject": "Reset your CapTracks account password",
             "text": [
                 "\nYou are receiving this because you (or someone else) requested to reset the password for your CapTracks account. \nPlease use the following link (valid for the next 60 minutes) to complete the process: \n\nhttp://",
-                "/reset/",
+                "/auth/reset/",
                 "\n\nIf you did not make this request, please ignore this email, and your password will remain unchanged.\n"
             ]
         },
