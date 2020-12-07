@@ -168,7 +168,7 @@ module.exports = function (passport) {
 	});
 
 	// ==================== JOIN (GET) ==================== //
-	router.get('/auth/join', (req, res) => {
+	router.get('/join', (req, res) => {
 		// Get Stores in DB without Vendors
 		Store.find({ vendor: null }, (err, stores) => {
 			// Handle Error
