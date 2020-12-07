@@ -1,40 +1,40 @@
 <!--====== JOIN - VENDOR SIGNUP FORM ======-->
 <div class="signup">
 
-    <!-- Link - Login -->
-    <span class="details">Already have an account? <a href="/login">Log in</a>.</span>
+	<!-- Link - Login -->
+	<span class="details">Already have an account? <a href="/auth/login">Log in</a>.</span>
 
-    <!-- Input Row -->
-    <div class="form-inline">
-        <!-- Input - First Name -->
-        <div class="form-group col-lg-4 col-md-4 col-sm-6">
-            <label for="firstName" class="control-label">First name</label>
-            <input id="firstName" type="text" class="form-control" name="firstName" required>
-            <span class="help">Enter your first name.</span>
-        </div>
-        <!-- Input - Last Name -->
-        <div class="form-group col-lg-4 col-md-4 col-sm-6">
-            <label for="lastName" class="control-label">Last name</label>
-            <input id="lastName" type="text" class="form-control" name="lastName" required>
-            <span class="help">Enter your last name.</span>
-        </div>
-        <!-- Input - Phone -->
-        <div class="form-group col-lg-4 col-md-4 col-sm-12">
-            <label for="phone" class="control-label">Phone</label>
-            <input type="text" class="phone form-control" name="phone" minlength="14" maxlength="14" required>
-            <span class="help">We will never contact you without your permission.</span>
-        </div>
-    </div>
+	<!-- Input Row -->
+	<div class="form-inline">
+		<!-- Input - First Name -->
+		<div class="form-group col-lg-4 col-md-4 col-sm-6">
+			<label for="firstName" class="control-label">First name</label>
+			<input id="firstName" type="text" class="form-control" name="firstName" required>
+			<span class="help">Enter your first name.</span>
+		</div>
+		<!-- Input - Last Name -->
+		<div class="form-group col-lg-4 col-md-4 col-sm-6">
+			<label for="lastName" class="control-label">Last name</label>
+			<input id="lastName" type="text" class="form-control" name="lastName" required>
+			<span class="help">Enter your last name.</span>
+		</div>
+		<!-- Input - Phone -->
+		<div class="form-group col-lg-4 col-md-4 col-sm-12">
+			<label for="phone" class="control-label">Phone</label>
+			<input type="text" class="phone form-control" name="phone" minlength="14" maxlength="14" required>
+			<span class="help">We will never contact you without your permission.</span>
+		</div>
+	</div>
 
-    <!-- Input Row - Email -->
-    <div class="form-inline">
-        <div class="form-group col-12">
-            <label for="email" class="control-label">Email</label>
-            <input type="email" class="form-control" name="email" required>
-            <span class="help">We will never share your information with anyone.</span>
-        </div>
-    </div>
+	<!-- Input Row - Email -->
+	<div class="form-inline">
+		<div class="form-group col-12">
+			<label for="email" class="control-label">Email</label>
+			<input type="email" class="form-control" name="email" required>
+			<span class="help">We will never share your information with anyone.</span>
+		</div>
+	</div>
 
-    <!-- Password Inputs & Requirements -->
-    {{> input_password label1="Password" label2="Confirm Password"}}
+	<!-- Password Inputs & Requirements -->
+	{{> input_password label1="Password" label2="Confirm Password"}}
 </div>

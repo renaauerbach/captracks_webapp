@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 		});
 		// Save Message to DB
 		newMessage.save(
-			await function(err) {
+			await function (err) {
 				// Handle Error
 				if (err) {
 					req.flash('errorForum', process.env.FORUM_POST_ERROR);
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
 							forum: { $each: [newMessage._id], $position: 0 },
 						},
 					},
-					err => {
+					(err) => {
 						// Handle Error
 						if (err) {
 							req.flash(
@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
 	}
 	// Not Authenticated --> back to Login
 	else {
-		return res.redirect('/login');
+		return res.redirect('/auth/login');
 	}
 });
 
@@ -63,7 +63,7 @@ router.post('/delete/:id', (req, res) => {
 		Store.findOneAndUpdate(
 			{ vendor: req.user._id },
 			{ $pull: { forum: { _id: req.params.id } } },
-			err => {
+			(err) => {
 				// Handle Error
 				if (err) {
 					req.flash('error', process.env.FORUM_REMOVE_ERROR);
@@ -71,7 +71,7 @@ router.post('/delete/:id', (req, res) => {
 					return res.redirect('/account');
 				}
 				// Remove Message from DB
-				Message.findOneAndRemove({ _id: req.params.id }, err => {
+				Message.findOneAndRemove({ _id: req.params.id }, (err) => {
 					// Handle Error
 					if (err) {
 						req.flash('error', process.env.FORUM_REMOVE_ERROR);
@@ -84,7 +84,7 @@ router.post('/delete/:id', (req, res) => {
 	}
 	// Not Authenticated --> back to Login
 	else {
-		return res.redirect('/login');
+		return res.redirect('/auth/login');
 	}
 });
 

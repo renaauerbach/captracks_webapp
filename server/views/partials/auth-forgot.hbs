@@ -1,30 +1,30 @@
 <!--====== AUTHENTICATION - FORGOT FORM ======-->
 <form class="forgot form" method="POST">
 
-    <!-- Link - Login -->
-    <span class="details">Remember your password? <a href="/login">Log in</a></span>
+	<!-- Link - Login -->
+	<span class="details">Remember your password? <a href="/auth/login">Log in</a></span>
 
-    <!-- Input Row - Email -->
-    <div class="form-inline">
-        <div class="form-group">
-            <label for="email" class="control-label">Email</label>
-            <input id="forgotEmail" type="text" class="form-control" name="email" required>
-            <span class="help">Enter the email associated with your account.</span>
-        </div>
-    </div>
+	<!-- Input Row - Email -->
+	<div class="form-inline">
+		<div class="form-group">
+			<label for="email" class="control-label">Email</label>
+			<input id="forgotEmail" type="text" class="form-control" name="email" required>
+			<span class="help">Enter the email associated with your account.</span>
+		</div>
+	</div>
 
-    <!-- Flash & Error Messages -->
-    <span class="flashMsg">{{{message}}}</span>
-    <span class="errorMsg">{{{error}}}</span>
+	<!-- Flash & Error Messages -->
+	<span class="flashMsg">{{{message}}}</span>
+	<span class="errorMsg">{{{error}}}</span>
 
-    <!-- Button - Submit -->
-    <div class="submit-btn d-flex justify-content-center">
-        <input id="forgotBtn" class="main-btn" type="submit" value="Submit">
-    </div>
+	<!-- Button - Submit -->
+	<div class="submit-btn d-flex justify-content-center">
+		<input id="forgotBtn" class="main-btn" type="submit" value="Submit">
+	</div>
 </form>
 
 <!--=== Submitted Text Message ===-->
 <div class="submitted">
-    <p> If there is an account associated with the entered email, you will receive an email with a link to reset your account password.
-    </p>
+	<p> If there is an account associated with the entered email, you will receive an email with a link to reset your account password.
+	</p>
 </div>

@@ -27,7 +27,7 @@ module.exports = function (passport) {
 	// ==================== LOGIN (POST) ==================== //
 	router.post(
 		'/login',
-		passport.authenticate('login', { failureRedirect: '/login' }),
+		passport.authenticate('login', { failureRedirect: '/auth/login' }),
 		(req, res) => {
 			req.session.user = req.user;
 			return res.redirect('/account');
@@ -57,7 +57,7 @@ module.exports = function (passport) {
 					Vendor.findOne({ email: req.body.email }, (err, user) => {
 						if (!user || err) {
 							req.flash('error', process.env.WRONG_EMAIL);
-							return res.redirect('/forgot');
+							return res.redirect('/auth/forgot');
 						}
 
 						user.resetPasswordToken = token;
@@ -91,7 +91,7 @@ module.exports = function (passport) {
 				if (err) {
 					return next(err);
 				}
-				res.redirect('/forgot');
+				res.redirect('/auth/forgot');
 			}
 		);
 	});
@@ -106,7 +106,7 @@ module.exports = function (passport) {
 			(err, user) => {
 				if (!user || err) {
 					req.flash('error', process.env.RESET_INVALID);
-					return res.redirect('/forgot');
+					return res.redirect('/auth/forgot');
 				}
 				res.render('auth', {
 					user: req.user,
@@ -130,7 +130,7 @@ module.exports = function (passport) {
 						(err, user) => {
 							if (!user || err) {
 								req.flash('error', process.env.RESET_INVALID);
-								return res.redirect('/forgot');
+								return res.redirect('/auth/forgot');
 							}
 
 							user.password = createHash(req.body.password);
@@ -162,13 +162,13 @@ module.exports = function (passport) {
 				if (err) {
 					return next(err);
 				}
-				res.redirect('/login');
+				res.redirect('/auth/login');
 			}
 		);
 	});
 
 	// ==================== JOIN (GET) ==================== //
-	router.get('/join', (req, res) => {
+	router.get('/auth/join', (req, res) => {
 		// Get Stores in DB without Vendors
 		Store.find({ vendor: null }, (err, stores) => {
 			// Handle Error
@@ -197,7 +197,7 @@ module.exports = function (passport) {
 	// ==================== JOIN (POST) ==================== //
 	router.post(
 		'/join',
-		passport.authenticate('signup', { failureRedirect: '/join' }),
+		passport.authenticate('signup', { failureRedirect: '/auth/join' }),
 		(req, res, next) => {
 			async.waterfall(
 				[
@@ -225,7 +225,7 @@ module.exports = function (passport) {
 											'error',
 											process.env.STORE_REG_ERROR
 										);
-										return res.redirect('/join');
+										return res.redirect('/auth/join');
 									}
 								);
 							}
@@ -252,7 +252,9 @@ module.exports = function (passport) {
 													'error',
 													process.env.STORE_REG_ERROR
 												);
-												return res.redirect('/join');
+												return res.redirect(
+													'/auth/join'
+												);
 											}
 										);
 									}
@@ -314,7 +316,7 @@ module.exports = function (passport) {
 												'error',
 												process.env.STORE_REG_ERROR
 											);
-											return res.redirect('/join');
+											return res.redirect('/auth/join');
 										}
 									);
 								}
@@ -329,7 +331,7 @@ module.exports = function (passport) {
 												'error',
 												process.env.STORE_REG_EXISTS
 											);
-											return res.redirect('/join');
+											return res.redirect('/auth/join');
 										}
 									);
 								}
@@ -431,7 +433,7 @@ module.exports = function (passport) {
 				return res.redirect('/account');
 			}
 			req.logout();
-			res.redirect('/map');
+			res.redirect('/');
 		});
 	});
 
