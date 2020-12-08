@@ -155,7 +155,7 @@ router.get('/entryqr/:id', (req, res) => {
 //Scan EntryQR code function Ends here.
 
 //Scan ExitQR code function starts here.
-https: router.get('/exitqr/:id', (req, res) => {
+router.get('/exitqr/:id', (req, res) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, store) => {
