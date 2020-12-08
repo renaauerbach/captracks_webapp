@@ -1,0 +1,15 @@
+<!--====== STORE CONTENT - QR CODES ======-->
+<div class="qrcodes-box info-box">
+    <div class="qrcodes-content col">
+
+        <!-- Row - QR Code Links -->
+        {{#if user }}
+        {{#if qrcodeflag}}
+        <div class="row d-flex justify-content-start align-items-center">
+            <p class="qr-link"> <a href="/account/downloadEntryQR/">Download Entry QR Code</a></p>
+            <p class="qr-link"> <a href="/account/downloadExitQR/">Download Exit QR Code</a></p>
+        </div>
+        {{/if}}
+        {{/if}}
+    </div>
+</div>

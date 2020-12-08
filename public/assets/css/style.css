@@ -846,6 +846,15 @@ button.thin-btn:hover {
 	border-radius: 10px;
 }
 
+/* ==== QR CODES ==== */
+.qr-link {
+	margin-right: 20px;
+}
+
+.qr-link a {
+	color: #0000cd;
+}
+
 /* ==== CAPACITY ==== */
 /* Capacity Form */
 .capacity {
