@@ -289,7 +289,7 @@ module.exports = function (passport) {
 
 								for (let i = 0; i < days.length; i++) {
 									const curr = req.body[days[i]];
-									if (curr) {
+									if (curr || curr[0] == 'o n') {
 										hours.push({
 											day: days[i],
 											open: curr[0] + ' ' + curr[1],
