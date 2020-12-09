@@ -19,9 +19,9 @@ const isValidPassword = (vendor, password) => {
 //Entry QR code fuction starts
 const generateEntryQRCode = async (id) => {
 	try {
-		return await QRCode.toDataURL(process.env.ENTRY_QR_URL + id);
+		return await QRCode.toDataURL(process.env.ENTRY_QR_URL + '/' + id);
 	} catch (err) {
-		console.error('Error while generate Entry QR code : ', err);
+		console.error('Error while generate Entry QR code: ', err);
 	}
 };
 //Entry QR code fuction ends
@@ -29,9 +29,9 @@ const generateEntryQRCode = async (id) => {
 //Exit QR code fuction starts
 const generateExitQRCode = async (id) => {
 	try {
-		return await QRCode.toDataURL(process.env.EXIT_QR_URL + id);
+		return await QRCode.toDataURL(process.env.EXIT_QR_URL + '/' + id);
 	} catch (err) {
-		console.error('Error while generate Exit QR code : ', err);
+		console.error('Error while generate Exit QR code: ', err);
 	}
 };
 //Exit QR code fuction ends
@@ -121,6 +121,7 @@ function signup(passport) {
 								entryqrcode: '',
 								exitqrcode: '',
 							});
+
 							//Added For Generate the QR Code
 							let entrycode = generateEntryQRCode(
 								newVendor._id

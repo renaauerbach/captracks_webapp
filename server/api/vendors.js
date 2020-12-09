@@ -152,7 +152,6 @@ router.get('/entryqr/:id', (req, res) => {
 			}
 		});
 });
-
 //Scan EntryQR code function Ends here.
 
 //Scan ExitQR code function starts here.
@@ -198,45 +197,42 @@ router.get('/downloadEntryQR', (req, res) => {
 						console.log(err);
 						return res.status(400).send(err);
 					}
+					// Create new PDF for QR code
 					var doc = new jsPDF();
-
 					var logoPath = path.join(
 						__dirname,
-						'../../public/assets/img/logo1.png'
+						'../../public/assets/img/logo-pdf.png'
 					);
 					var bitmap = fs.readFileSync(logoPath);
 					var logoBase64 = new Buffer.from(bitmap).toString('base64');
 
-					doc.setFont(process.env.QR_DOC_FONT_FAMILY);
-					doc.setTextColor(0, 0, 102);
+					doc.setFont('Helvetica', 'bold');
+					doc.setTextColor(1, 1, 104);
+					// Logo image
 					doc.addImage(logoBase64, 'PNG', 65, 20, 75, 25);
-					doc.setFontSize(26);
-					var welcomeMsg1 =
-						process.env.QR_DOC_ENTRY_MESSAGE1 +
-						' ' +
-						store.name.toUpperCase() +
-						'!';
 
+					// First row text
+					doc.setFontSize(28);
+					var entryMsg1 = 'Welcome to ' + store.name + '!';
 					doc.text(
-						doc.splitTextToSize(welcomeMsg1, 180),
+						doc.splitTextToSize(entryMsg1, 180),
 						doc.internal.pageSize.getWidth() / 2,
-						60,
+						70,
 						{ align: 'center' }
 					);
+
+					// Second row text
 					doc.setFontSize(20);
-					var welcomeMsg2 =
-						process.env.QR_DOC_ENTRY_MESSAGE2 +
-						' ' +
-						store.name.toUpperCase() +
-						' ' +
-						process.env.QR_DOC_ENTRY_MESSAGE3 +
-						':';
+					doc.setFont('Helvetica', 'normal');
+					var entryMsg2 = 'PLEASE SCAN TO HELP US STAY SAFE:';
 					doc.text(
-						doc.splitTextToSize(welcomeMsg2, 180),
+						doc.splitTextToSize(entryMsg2, 180),
 						doc.internal.pageSize.getWidth() / 2,
-						80,
+						90,
 						{ align: 'center' }
 					);
+
+					// QR code
 					doc.addImage(
 						store.vendor.entryqrcode,
 						'PNG',
@@ -245,11 +241,12 @@ router.get('/downloadEntryQR', (req, res) => {
 						150,
 						150
 					);
-					doc.setFontSize(21);
+
+					doc.setFontSize(20);
 					doc.text(
-						process.env.QR_DOC_FOOTER_MESSAGE,
+						'Powered by CapTracks.com',
 						doc.internal.pageSize.getWidth() / 2,
-						doc.internal.pageSize.height - 25,
+						doc.internal.pageSize.height - 35,
 						{ align: 'center' }
 					);
 
@@ -292,7 +289,6 @@ router.get('/downloadEntryQR', (req, res) => {
 //Download pdf file for EntryQR code Ends here
 
 //Download pdf file for ExitQR code starts here
-
 router.get('/downloadExitQR', (req, res) => {
 	if (req.isAuthenticated()) {
 		Store.findOne({ vendor: req.user._id })
@@ -303,59 +299,57 @@ router.get('/downloadExitQR', (req, res) => {
 						return res.status(400).send(err);
 					}
 
+					// Create new PDF for QR code
 					var doc = new jsPDF();
-
 					var logoPath = path.join(
 						__dirname,
-						'../../public/assets/img/logo1.png'
+						'../../public/assets/img/logo-pdf.png'
 					);
 					var bitmap = fs.readFileSync(logoPath);
 					var logoBase64 = new Buffer.from(bitmap).toString('base64');
 
-					doc.setFont(process.env.QR_DOC_FONT_FAMILY);
-					doc.setTextColor(0, 0, 102);
+					doc.setFont('Helvetica', 'bold');
+					doc.setTextColor(1, 1, 104);
+					// Logo image
 					doc.addImage(logoBase64, 'PNG', 65, 20, 75, 25);
-					doc.setFontSize(24);
+
+					// First row text
+					doc.setFontSize(28);
+					var exitMsg1 = 'Thank you for visiting ' + store.name + '!';
 					doc.text(
-						process.env.QR_DOC_EXIT_MESSAGE1,
+						exitMsg1,
 						doc.internal.pageSize.getWidth() / 2,
-						60,
+						70,
 						{ align: 'center' }
 					);
 
-					var exitMsg =
-						process.env.QR_DOC_EXIT_MESSAGE2 +
-						' ' +
-						store.name.toUpperCase() +
-						'!';
+					// Second row text
+					doc.setFontSize(20);
+					doc.setFont('Helvetica', 'normal');
+					var exitMsg2 = 'PLEASE SCAN FOR YOUR EXIT TICKET:';
 					doc.text(
-						doc.splitTextToSize(exitMsg, 180),
+						doc.splitTextToSize(exitMsg2, 180),
 						doc.internal.pageSize.getWidth() / 2,
-						75,
+						90,
 						{ align: 'center' }
 					);
 					doc.addImage(
 						store.vendor.exitqrcode,
 						'PNG',
 						30,
-						90,
+						95,
 						150,
 						150
 					);
+
 					doc.setFontSize(20);
 					doc.text(
+						'Stay informed @ CapTracks.com',
 						doc.internal.pageSize.getWidth() / 2,
-						doc.internal.pageSize.height - 50,
-						process.env.QR_DOC_EXIT_MESSAGE3,
+						doc.internal.pageSize.height - 35,
 						{ align: 'center' }
 					);
-					doc.setFontSize(21);
-					doc.text(
-						doc.internal.pageSize.getWidth() / 2,
-						doc.internal.pageSize.height - 25,
-						process.env.QR_DOC_EXIT_MESSAGE4,
-						{ align: 'center' }
-					);
+
 					let saveStatus = doc
 						.save(
 							req.user._id + process.env.QR_DOC_EXIT_FILE_NAME,
