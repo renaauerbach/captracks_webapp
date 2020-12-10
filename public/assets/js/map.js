@@ -66,10 +66,10 @@
 				color = '#009900';
 			}
 			// Yellow = capacity between 50-80%
-			else if (capacity < 80 && capacity > 50) {
+			else if (capacity > 50 && capacity < 80) {
 				color = '#fff500';
 			}
-			// Red (default) = if there is a wait or store is at > 80% capacity
+			// Red (default) = if store is at > 80% capacity (or has a line)
 			else {
 				color = '#fa2043';
 			}
