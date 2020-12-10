@@ -491,6 +491,7 @@ button.thin-btn:hover {
 /*====== ALL PAGES/SECTIONS ======*/
 .intro,
 #legal,
+#exit,
 #error,
 #info,
 #store,
@@ -1044,6 +1045,21 @@ button.forum.thin-btn:hover {
 }
 .post-text {
 	font-size: 16px;
+}
+
+/* ====== EXIT ====== */
+#exit p.back,
+#exit p.back a,
+#exit p.exit-text a {
+	color: #0000cd;
+}
+
+#exit p {
+	text-align: center;
+}
+
+#exit p.back {
+	margin-top: 25px;
 }
 
 /* ====== FOOTER ====== */
