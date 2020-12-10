@@ -1,5 +1,7 @@
 // General text formatting (non-form related)
-const posts = document.querySelectorAll('.forum-box');
+
+// Timestamp format
+const posts = document.querySelectorAll('.info-box');
 posts.forEach((created) => {
 	var date = created
 		.getElementsByClassName('post-date')[0]
