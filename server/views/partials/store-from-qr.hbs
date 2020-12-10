@@ -1,0 +1,21 @@
+<!--====== STORE CONTENT SECTION (FORUM THEN CAP) ======-->
+<!-- Column - Capacity & Forum -->
+<div class="col-lg-10 col-md-11 col-sm-12 col-xs-12">
+
+    <!-- Forum -->
+    {{> store_title label="Forum"}}
+    {{#if store.forum}}
+    {{#each store.forum as |msg|}}
+    {{> forum_post msg=msg}}
+    {{/each}}
+    {{else}}
+    <p class="no-forum">No forum posts yet. Check back soon for an
+        update!</p>
+    {{/if}}
+
+    <!-- Capacity -->
+    {{> store_title label="Capacity"}}
+    {{> store_capacity details=details}}
+
+</div>
+<!-- Column End -->
