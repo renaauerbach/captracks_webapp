@@ -19,7 +19,7 @@ const isValidPassword = (vendor, password) => {
 //Entry QR code fuction starts
 const generateEntryQRCode = async (id) => {
 	try {
-		return await QRCode.toDataURL(process.env.ENTRY_QR_URL + '/' + id);
+		return await QRCode.toDataURL(process.env.ENTRY_QR_URL + id);
 	} catch (err) {
 		console.error('Error while generate Entry QR code: ', err);
 	}
@@ -29,7 +29,7 @@ const generateEntryQRCode = async (id) => {
 //Exit QR code fuction starts
 const generateExitQRCode = async (id) => {
 	try {
-		return await QRCode.toDataURL(process.env.EXIT_QR_URL + '/' + id);
+		return await QRCode.toDataURL(process.env.EXIT_QR_URL + id);
 	} catch (err) {
 		console.error('Error while generate Exit QR code: ', err);
 	}
