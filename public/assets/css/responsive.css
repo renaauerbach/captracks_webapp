@@ -1,280 +1,284 @@
 /*================ iPad Pros (and larger) ================*/
 @media (min-width: 992px) {
-    /*====== Nav ======*/
-    /* Show dropdown menu on hover */
-    .navigation .navbar .navbar-nav .dropdown:hover .dropdown-content{
-        display: block;
-    }
+	/*====== Nav ======*/
+	/* Show dropdown menu on hover */
+	.navigation .navbar .navbar-nav .dropdown:hover .dropdown-content {
+		display: block;
+	}
 }
 
 /*================ iPad (and smaller) ================*/
 @media (max-width: 991px) {
-    /*====== Nav ======*/
-    .navigation .navbar .navbar-collapse {
-        position: absolute;
-        top: 158%;
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        z-index: 99;
-    }
+	/*====== Nav ======*/
+	.navigation .navbar .navbar-collapse {
+		position: absolute;
+		top: 158%;
+		left: 0;
+		width: 100%;
+		background-color: #ffffff;
+		z-index: 99;
+	}
 
-    /* Make up for break between collapsed nav and bar */
-    .navigation.sticky .navbar .navbar-collapse {
-        top: 121%;
-    }
+	/* Make up for break between collapsed nav and bar */
+	.navigation.sticky .navbar .navbar-collapse {
+		top: 121%;
+	}
 
-    .navigation .navbar .navbar-collapse ul li {
-        padding: 3px 12px;
-    }
-    .navigation .navbar .navbar-nav .nav-item {
-        margin: 4px 0;
-    }
-    .navigation .navbar .navbar-nav .nav-item a::before,
-    .navigation .navbar .navbar-nav .nav-item button::before {
-        display: none;
-    }
+	.navigation .navbar .navbar-collapse ul li {
+		padding: 3px 12px;
+	}
+	.navigation .navbar .navbar-nav .nav-item {
+		margin: 4px 0;
+	}
+	.navigation .navbar .navbar-nav .nav-item a::before,
+	.navigation .navbar .navbar-nav .nav-item button::before {
+		display: none;
+	}
 
-    /* For collapsed nav */
-    .navigation .navbar .navbar-nav .nav-btn {
-        margin: 0;
-        background-color: #e708ae;
-    }
+	/* For collapsed nav */
+	.navigation .navbar .navbar-nav .nav-btn {
+		margin: 0;
+		background-color: #e708ae;
+	}
 
-    .navigation .navbar .navbar-nav .nav-btn button,
-    .navigation .navbar .navbar-nav .nav-btn a {
-        background-color: transparent;
-        border-radius: 0;
-        margin-top: 0;    
-        padding: 10px 0;
-    }
+	.navigation .navbar .navbar-nav .nav-btn button,
+	.navigation .navbar .navbar-nav .nav-btn a {
+		background-color: transparent;
+		border-radius: 0;
+		margin-top: 0;
+		padding: 10px 0;
+	}
 
-    /* Show the dropdown menu on click */
-    .navigation .navbar .navbar-nav .dropdown.show .dropdown-content {
-        display: block;
-        margin-left: 0;
-        position: relative;
-        border-radius: 0;
-    }
-    .navigation .navbar .navbar-nav .dropdown.benefits.show .dropdown-content {
-        border: 1.5px solid #bcbcbc;
-    }
-    .navigation .navbar .navbar-nav .dropdown.account.show .dropdown-content {
-        border: 1.5px solid #e708ae;
-    }
-    /* Remove curved dropdown hover */
-    .navigation .navbar .navbar-nav .dropdown .dropdown-content:nth-last-child(1) a:hover {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
+	/* Show the dropdown menu on click */
+	.navigation .navbar .navbar-nav .dropdown.show .dropdown-content {
+		display: block;
+		margin-left: 0;
+		position: relative;
+		border-radius: 0;
+	}
+	.navigation .navbar .navbar-nav .dropdown.benefits.show .dropdown-content {
+		border: 1.5px solid #bcbcbc;
+	}
+	.navigation .navbar .navbar-nav .dropdown.account.show .dropdown-content {
+		border: 1.5px solid #e708ae;
+	}
+	/* Remove curved dropdown hover */
+	.navigation
+		.navbar
+		.navbar-nav
+		.dropdown
+		.dropdown-content:nth-last-child(1)
+		a:hover {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 
-    /*====== Popup ======*/
-    /* .popup-container {
+	/*====== Popup ======*/
+	/* .popup-container {
         font-size: 15px;
         margin: 0 5%;
         width: 90%;
     } */
 
-    /*====== FOOTER ======*/
-    .footer-title {
-        font-size: 25px;
+	/*====== FOOTER ======*/
+	.footer-title {
+		font-size: 25px;
 		margin-bottom: 10px;
-    }
-    
-    .footer-widget .contact {
+	}
+
+	.footer-widget .contact {
 		margin-bottom: 20px;
-    }
-    
-    .footer-widget .icon span {
-        margin-left: -55px;
-    }
+	}
 
-    .footer-widget .icon span i {
-        font-size: 12px;
-        width: 26px;
-        height: 26px;
-    }
+	.footer-widget .icon span {
+		margin-left: -55px;
+	}
 
-    .footer-widget .icon span a,
-    .footer-widget .list li a {
-        font-size: 14px; 
-    }
+	.footer-widget .icon span i {
+		font-size: 12px;
+		width: 26px;
+		height: 26px;
+	}
+
+	.footer-widget .icon span a,
+	.footer-widget .list li a {
+		font-size: 14px;
+	}
 }
 
 /*================ iPad ================*/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    /*====== General ======*/ 
-    /* Titles */
-    .section-title .title {
-        font-size: 40px;
-        padding-bottom: 0;
-    }
-    
-    /*====== Header ======*/
-    .intro {
-        padding: 10%;
-        padding-top: 25%;
-    }
+	/*====== General ======*/
+	/* Titles */
+	.section-title .title {
+		font-size: 40px;
+		padding-bottom: 0;
+	}
 
-    .header-content {
-        height: 550px;
-    }
+	/*====== Header ======*/
+	.intro {
+		padding: 10%;
+		padding-top: 25%;
+	}
 
-    /*====== ALL PAGES/SECTIONS ======*/
-    .intro, 
-    #legal,
-    #info,
-    #store, 
-    #auth,
-    #account {
-        padding: 10%;
-        padding-top: 25%;
-    }
+	.header-content {
+		height: 550px;
+	}
 
-    #benefits,
-    #team,
-    #forum,
-    #account-body {
-        padding-top: 50px;
-        padding-bottom: 100px;
-    }
+	/*====== ALL PAGES/SECTIONS ======*/
+	.intro,
+	#legal,
+	#info,
+	#store,
+	#auth,
+	#account {
+		padding: 10%;
+		padding-top: 25%;
+	}
 
-    /* ====== MAP ====== */
-    .map-key {
-        width: 56%;
-        height: 6%;
-    }
+	#benefits,
+	#team,
+	#forum,
+	#account-body {
+		padding-top: 50px;
+		padding-bottom: 100px;
+	}
 
-    /* ====== ACCOUNT / STORE PAGE ====== */
-    /* Store Details Sidebar */
-    .store-details {
-        max-width: 50%;
-    }
+	/* ====== MAP ====== */
+	.map-key {
+		width: 56%;
+	}
+
+	/* ====== ACCOUNT / STORE PAGE ====== */
+	/* Store Details Sidebar */
+	.store-details {
+		max-width: 50%;
+	}
 }
 
 /*================ Phones ================*/
 @media (max-width: 767px) {
-    /*====== General ======*/
-    p, label {
-        font-size: 15px;
-    }
-    
-    /* Titles */
-    .section-title .title {
-        font-size: 36px;
-    }
-    .section-title.style-2 .title {
-        font-size: 25px;
-        margin: 0 8%;
-    }
+	/*====== General ======*/
+	p,
+	label {
+		font-size: 15px;
+	}
 
-    div#rounded-continer {
-        padding-left: 0;
-        padding-right: 0;
-    }
+	/* Titles */
+	.section-title .title {
+		font-size: 36px;
+	}
+	.section-title.style-2 .title {
+		font-size: 25px;
+		margin: 0 8%;
+	}
 
-    .sub-title {
-        font-size: 19px;
-    }
+	div#rounded-continer {
+		padding-left: 0;
+		padding-right: 0;
+	}
 
-    /* Buttons */
-    .main-btn {
-        font-size: 12px;
-        padding: 0 30px;
-    }
+	.sub-title {
+		font-size: 19px;
+	}
 
-    /*====== Nav ======*/
-    .navigation .navbar .navbar-brand .logo-full {
-        display: none;
-    }
-    .navigation .navbar .navbar-brand .logo-icon {
-        display: inline;
-        max-width: 40%;
-    }
+	/* Buttons */
+	.main-btn {
+		font-size: 12px;
+		padding: 0 30px;
+	}
 
-    /*====== Header ======*/
-    .intro {
-        padding: 10%;
-        padding-top: 40%;
-    }
+	/*====== Nav ======*/
+	.navigation .navbar .navbar-brand .logo-full {
+		display: none;
+	}
+	.navigation .navbar .navbar-brand .logo-icon {
+		display: inline;
+		max-width: 40%;
+	}
 
-    .header-content {
-        height: 550px;
-    }
+	/*====== Header ======*/
+	.intro {
+		padding: 10%;
+		padding-top: 40%;
+	}
 
-    .header-content-left .slogan {
-        font-size: 40px;
-    }
+	.header-content {
+		height: 550px;
+	}
 
-    .header-content-left .title {
-        font-size: 38px;
-    }
+	.header-content-left .slogan {
+		font-size: 40px;
+	}
 
-    /*====== Popup ======*/
-    .popup-container {
-        width: 100%;
-    }
+	.header-content-left .title {
+		font-size: 38px;
+	}
 
-    /*====== ALL PAGES/SECTIONS ======*/
-    .intro, 
-    #legal,
-    #info,
-    #store, 
-    #auth,
-    #account {
-        padding: 10%;
-        padding-top: 40%;
-    }
+	/*====== Popup ======*/
+	.popup-container {
+		width: 100%;
+	}
 
-    #benefits,
-    #team,
-    #forum,
-    #account-body {
-        padding-top: 45px;
-        padding-bottom: 80px;
-    }
+	/*====== ALL PAGES/SECTIONS ======*/
+	.intro,
+	#legal,
+	#info,
+	#store,
+	#auth,
+	#account {
+		padding: 10%;
+		padding-top: 40%;
+	}
 
-    .content {
-        padding: 20px;
-    }
+	#benefits,
+	#team,
+	#forum,
+	#account-body {
+		padding-top: 45px;
+		padding-bottom: 80px;
+	}
 
-    /* ====== MAP ====== */
-    .map-key {
-        width: 100%;
-        
-    }
-    .map-key .key-list li p {
-        padding: 0 3px;
-        font-size: 13px;
-    }
+	.content {
+		padding: 20px;
+	}
 
-    /*====== ACCOUNT / STORE PAGE ======*/
-    #account-body {
-        padding-left: 20px;
-    }
+	/* ====== MAP ====== */
+	.map-key {
+		width: 100%;
+	}
+	.map-key .key-list li p {
+		padding: 0 3px;
+		font-size: 13px;
+	}
 
-    /* Store Details Sidebar */
-    .store-details {
-        max-width: 56%;
-    }
-    .store-links li i {
-        padding: 15px 0;
-    }
+	/*====== ACCOUNT / STORE PAGE ======*/
+	#account-body {
+		padding-left: 20px;
+	}
 
-    /*====== FOOTER ======*/
-    #footer .links {
-        margin-bottom: 2%;
-    }
+	/* Store Details Sidebar */
+	.store-details {
+		max-width: 56%;
+	}
+	.store-links li i {
+		padding: 15px 0;
+	}
 
-    .footer-widget .icon span {
-        margin: 0 10px 15px 0;
-    }
+	/*====== FOOTER ======*/
+	#footer .links {
+		margin-bottom: 2%;
+	}
+
+	.footer-widget .icon span {
+		margin: 0 10px 15px 0;
+	}
 }
 
 @media (max-width: 600px) {
-    /*====== ACCOUNT / STORE PAGE ======*/
-    /* Store Details Sidebar */
-    .store-details {
-        max-width: 100%;
-    }
+	/*====== ACCOUNT / STORE PAGE ======*/
+	/* Store Details Sidebar */
+	.store-details {
+		max-width: 100%;
+	}
 }

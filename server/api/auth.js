@@ -289,7 +289,8 @@ module.exports = function (passport) {
 
 								for (let i = 0; i < days.length; i++) {
 									const curr = req.body[days[i]];
-									if (curr || curr[0] == 'o n') {
+									console.log(curr);
+									if (curr) {
 										hours.push({
 											day: days[i],
 											open: curr[0] + ' ' + curr[1],
@@ -355,7 +356,7 @@ module.exports = function (passport) {
 							});
 						}
 					},
-					function (store, done) {
+					function (store, done, err) {
 						// Email team members when a Vendor joins
 						const admins = [
 							'gabriel.low@captracks.com',
@@ -384,33 +385,33 @@ module.exports = function (passport) {
 								emails[3].text[6] +
 								req.body.max,
 						};
-						smtpTransport.sendMail(adminMailOptions, (err) => {
-							// Handle Error
-							if (err) {
-								return next(err);
-							}
-							next();
-						});
+						// smtpTransport.sendMail(adminMailOptions, (err) => {
+						// 	// Handle Error
+						// 	if (err) {
+						// 		return next(err);
+						// 	}
+						// 	next();
+						// });
 
-						// Confirmation email to Vendor
-						const mailOptions = {
-							to: req.body.email,
-							from: 'noreply@captracks.com',
-							subject: emails[3].subject,
-							text:
-								emails[3].text[0] +
-								'https://' +
-								req.headers.host +
-								'/account' +
-								emails[3].text[1],
-						};
-						smtpTransport.sendMail(mailOptions, (err) => {
-							// Handle Error
-							if (err) {
-								return next(err);
-							}
-							done(err);
-						});
+						// // Confirmation email to Vendor
+						// const mailOptions = {
+						// 	to: req.body.email,
+						// 	from: 'noreply@captracks.com',
+						// 	subject: emails[3].subject,
+						// 	text:
+						// 		emails[3].text[0] +
+						// 		'https://' +
+						// 		req.headers.host +
+						// 		'/account' +
+						// 		emails[3].text[1],
+						// };
+						// smtpTransport.sendMail(mailOptions, (err) => {
+						// 	// Handle Error
+						// 	if (err) {
+						// 		return next(err);
+						// 	}
+						done(err);
+						// });
 					},
 				],
 				function (err) {

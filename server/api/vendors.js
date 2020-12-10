@@ -122,7 +122,7 @@ router.post('/remove/:id/:link', (req, res) => {
 	}
 });
 
-//Scan EntryQR code function starts here.
+// ==================== SCAN ENTRY QR (GET) ==================== //
 router.get('/entryqr/:id', (req, res) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
@@ -154,7 +154,7 @@ router.get('/entryqr/:id', (req, res) => {
 });
 //Scan EntryQR code function Ends here.
 
-//Scan ExitQR code function starts here.
+// ==================== SCAN EXIT QR (GET) ==================== //
 router.get('/exitqr/:id', (req, res) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
@@ -186,6 +186,7 @@ router.get('/exitqr/:id', (req, res) => {
 });
 //Scan ExitQR code function Ends here.
 
+// ==================== DOWNLOAD ENTRY QR (GET) ==================== //
 //Download pdf file for EntryQR code starts here
 router.get('/downloadEntryQR', (req, res) => {
 	if (req.isAuthenticated()) {
@@ -206,10 +207,12 @@ router.get('/downloadEntryQR', (req, res) => {
 					var bitmap = fs.readFileSync(logoPath);
 					var logoBase64 = new Buffer.from(bitmap).toString('base64');
 
+					// General text style
 					doc.setFont('Helvetica', 'bold');
 					doc.setTextColor(1, 1, 104);
+
 					// Logo image
-					doc.addImage(logoBase64, 'PNG', 65, 20, 75, 25);
+					doc.addImage(logoBase64, 'PNG', 65, 20, 72, 20);
 
 					// First row text
 					doc.setFontSize(28);
@@ -218,7 +221,10 @@ router.get('/downloadEntryQR', (req, res) => {
 						doc.splitTextToSize(entryMsg1, 180),
 						doc.internal.pageSize.getWidth() / 2,
 						70,
-						{ align: 'center' }
+						{
+							maxWidth: 200,
+							align: 'center',
+						}
 					);
 
 					// Second row text
@@ -242,6 +248,7 @@ router.get('/downloadEntryQR', (req, res) => {
 						150
 					);
 
+					// Footer row text
 					doc.setFontSize(20);
 					doc.text(
 						'Powered by CapTracks.com',
@@ -288,6 +295,7 @@ router.get('/downloadEntryQR', (req, res) => {
 });
 //Download pdf file for EntryQR code Ends here
 
+// ==================== DOWNLOAD EXIT QR (GET) ==================== //
 //Download pdf file for ExitQR code starts here
 router.get('/downloadExitQR', (req, res) => {
 	if (req.isAuthenticated()) {
@@ -308,10 +316,12 @@ router.get('/downloadExitQR', (req, res) => {
 					var bitmap = fs.readFileSync(logoPath);
 					var logoBase64 = new Buffer.from(bitmap).toString('base64');
 
+					// General text style
 					doc.setFont('Helvetica', 'bold');
 					doc.setTextColor(1, 1, 104);
+
 					// Logo image
-					doc.addImage(logoBase64, 'PNG', 65, 20, 75, 25);
+					doc.addImage(logoBase64, 'PNG', 65, 20, 72, 20);
 
 					// First row text
 					doc.setFontSize(28);
@@ -320,7 +330,10 @@ router.get('/downloadExitQR', (req, res) => {
 						exitMsg1,
 						doc.internal.pageSize.getWidth() / 2,
 						70,
-						{ align: 'center' }
+						{
+							maxWidth: 200,
+							align: 'center',
+						}
 					);
 
 					// Second row text
@@ -333,6 +346,8 @@ router.get('/downloadExitQR', (req, res) => {
 						90,
 						{ align: 'center' }
 					);
+
+					// QR Code
 					doc.addImage(
 						store.vendor.exitqrcode,
 						'PNG',
@@ -342,6 +357,7 @@ router.get('/downloadExitQR', (req, res) => {
 						150
 					);
 
+					// Footer row text
 					doc.setFontSize(20);
 					doc.text(
 						'Stay informed @ CapTracks.com',

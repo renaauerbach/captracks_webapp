@@ -640,12 +640,14 @@ button.thin-btn:hover {
 }
 .map-key.collapsed {
 	height: 0px;
+	border: 2px solid #0000cd;
+	border-top: none;
 }
 
 .map-key .key-list {
-	list-style-type: none;
-	overflow: hidden;
-	margin-bottom: 0;
+	/* list-style-type: none; */
+	/* overflow: hidden; */
+	/* margin-bottom: 0; */
 }
 .map-key .key-list li {
 	float: left;
@@ -658,7 +660,7 @@ button.thin-btn:hover {
 	margin-bottom: 0;
 }
 
-.map-key .btn-expand-collapse {
+/* .map-key .btn-expand-collapse {
 	position: absolute;
 	display: inline;
 	font-size: 14px;
@@ -668,7 +670,7 @@ button.thin-btn:hover {
 	color: #ffffff;
 	background-color: #0000cd;
 	text-align: center;
-}
+} */
 .map-key .btn-expand-collapse:hover {
 	color: #ffffff;
 	text-decoration: none;
