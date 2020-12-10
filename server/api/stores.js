@@ -42,6 +42,8 @@ router.get('/', (req, res) => {
 
 // ==================== STORE PAGE (GET) ==================== //
 router.get('/store/:id', (req, res) => {
+	console.log('params', req.query);
+
 	// Get Store by ID
 	Store.findById(req.params.id)
 		.populate({ path: 'details', model: 'details' })
@@ -56,6 +58,7 @@ router.get('/store/:id', (req, res) => {
 				store: store,
 				details: store.details[0],
 				user: req.isAuthenticated(),
+				qr: req.query.qr ? true : false,
 			});
 		});
 });

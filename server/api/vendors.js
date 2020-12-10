@@ -147,7 +147,15 @@ router.get('/entryqr/:id', (req, res) => {
 							return res.status(400).send(err);
 						}
 					});
-					res.redirect('/store/' + store._id);
+					// Needed format for differing store layout in store.hbs
+					res.redirect(
+						url.format({
+							pathname: '/store/' + store._id,
+							query: {
+								qr: true,
+							},
+						})
+					);
 				}
 			}
 		});

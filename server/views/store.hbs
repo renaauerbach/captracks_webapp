@@ -13,7 +13,25 @@ text=(concat 'View recent updates directly from ' store.name)}}
 <span id="data" style="display: none">{{{ store }}}</span>
 
 <!-- Page Content -->
-{{> forum}}
+<section id="store-info">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Row Start -->
+        <div class="row justify-content-center">
+
+            <!-- Store Details -->
+            {{> store_details store=store}}
+
+            {{#if qr}}
+            {{> store_from_qr}}
+            {{else}}
+            {{> store_from_link}}
+            {{/if}}
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
+</section>
 <!--================ STORE PAGE END ================-->
 
 <!--===== Form Scripts =====-->
