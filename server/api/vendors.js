@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 	// Check Vendor Authentication
 	if (req.session.user !== undefined) {
 		// Get all store info and populate all fields
-		Store.findOne({ vendor: req.user._id })
+		Store.findOne({ vendor: req.session.user._id })
 			.populate({ path: 'details', model: 'details' })
 			.populate({ path: 'vendor', model: 'vendors' })
 			.populate({ path: 'forum', model: 'messages' })
