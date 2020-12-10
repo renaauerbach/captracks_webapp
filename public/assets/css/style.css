@@ -641,6 +641,7 @@ button.thin-btn:hover {
 .map-key.collapsed {
 	height: 0px;
 	border: 2px solid #0000cd;
+	border-top: none;
 }
 
 .map-key .key-list {
