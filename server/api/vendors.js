@@ -1,14 +1,15 @@
 // ===== Modules ===== //
 const express = require('express');
+const url = require('url');
+const path = require('path');
+const fs = require('fs');
+const { jsPDF } = require('jspdf'); //Added for generating PDF file for the QR code
 // ===== Router ===== //
 const router = express.Router();
 // ===== Models ===== //
 const Store = require('../models/store.model');
 const Details = require('../models/details.model');
 const Vendor = require('../models/vendor.model');
-const path = require('path');
-const { jsPDF } = require('jspdf'); //Added for generating PDF file for the QR code
-const fs = require('fs');
 
 // ==================== VENDOR ACCOUNT (GET) ==================== //
 router.get('/', (req, res) => {
@@ -148,6 +149,7 @@ router.get('/entryqr/:id', (req, res) => {
 						}
 					});
 					// Needed format for differing store layout in store.hbs
+
 					res.redirect(
 						url.format({
 							pathname: '/store/' + store._id,
