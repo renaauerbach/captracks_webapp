@@ -239,6 +239,10 @@
 		padding-bottom: 80px;
 	}
 
+	#store-info {
+		padding-left: 20px;
+	}
+
 	.content {
 		padding: 20px;
 	}
@@ -266,6 +270,10 @@
 	}
 
 	/*====== FOOTER ======*/
+	#footer {
+		padding: 15px;
+	}
+
 	#footer .links {
 		margin-bottom: 2%;
 	}
