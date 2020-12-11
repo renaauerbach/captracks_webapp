@@ -289,7 +289,6 @@ module.exports = function (passport) {
 
 								for (let i = 0; i < days.length; i++) {
 									const curr = req.body[days[i]];
-									console.log(curr);
 									if (curr) {
 										hours.push({
 											day: days[i],
@@ -312,7 +311,6 @@ module.exports = function (passport) {
 									Vendor.deleteOne(
 										{ _id: req.user._id },
 										(err) => {
-											console.log(err);
 											req.flash(
 												'error',
 												process.env.STORE_REG_ERROR
@@ -356,63 +354,63 @@ module.exports = function (passport) {
 							});
 						}
 					},
-					function (store, done, err) {
-						// Email team members when a Vendor joins
-						const admins = [
-							'gabriel.low@captracks.com',
-							'ben.shor@captracks.com',
-							'rena@captracks.com',
-						];
-						const adminMailOptions = {
-							from: 'rena@captracks.com',
-							to: admins,
-							subject: emails[2].subject,
-							text:
-								emails[3].text[0] +
-								req.body.firstName +
-								' ' +
-								req.body.lastName +
-								emails[3].text[1] +
-								store.name +
-								emails[3].text[2] +
-								store.address +
-								emails[3].text[3] +
-								req.body.survey1 +
-								emails[3].text[4] +
-								req.body.survey2 +
-								emails[3].text[5] +
-								req.body.reg +
-								emails[3].text[6] +
-								req.body.max,
-						};
-						// smtpTransport.sendMail(adminMailOptions, (err) => {
-						// 	// Handle Error
-						// 	if (err) {
-						// 		return next(err);
-						// 	}
-						// 	next();
-						// });
+					// function (store, done, err) {
+					// 	// Email team members when a Vendor joins
+					// 	const admins = [
+					// 		'gabriel.low@captracks.com',
+					// 		'ben.shor@captracks.com',
+					// 		'rena@captracks.com',
+					// 	];
+					// 	const adminMailOptions = {
+					// 		from: 'rena@captracks.com',
+					// 		to: admins,
+					// 		subject: emails[2].subject,
+					// 		text:
+					// 			emails[3].text[0] +
+					// 			req.body.firstName +
+					// 			' ' +
+					// 			req.body.lastName +
+					// 			emails[3].text[1] +
+					// 			store.name +
+					// 			emails[3].text[2] +
+					// 			store.address +
+					// 			emails[3].text[3] +
+					// 			req.body.survey1 +
+					// 			emails[3].text[4] +
+					// 			req.body.survey2 +
+					// 			emails[3].text[5] +
+					// 			req.body.reg +
+					// 			emails[3].text[6] +
+					// 			req.body.max,
+					// 	};
+					// 	// smtpTransport.sendMail(adminMailOptions, (err) => {
+					// 	// Handle Error
+					// 	if (err) {
+					// 		return next(err);
+					// 	}
+					// 	next();
+					// });
 
-						// // Confirmation email to Vendor
-						// const mailOptions = {
-						// 	to: req.body.email,
-						// 	from: 'noreply@captracks.com',
-						// 	subject: emails[3].subject,
-						// 	text:
-						// 		emails[3].text[0] +
-						// 		'https://' +
-						// 		req.headers.host +
-						// 		'/account' +
-						// 		emails[3].text[1],
-						// };
-						// smtpTransport.sendMail(mailOptions, (err) => {
-						// 	// Handle Error
-						// 	if (err) {
-						// 		return next(err);
-						// 	}
-						done(err);
-						// });
-					},
+					// // Confirmation email to Vendor
+					// const mailOptions = {
+					// 	to: req.body.email,
+					// 	from: 'noreply@captracks.com',
+					// 	subject: emails[3].subject,
+					// 	text:
+					// 		emails[3].text[0] +
+					// 		'https://' +
+					// 		req.headers.host +
+					// 		'/account' +
+					// 		emails[3].text[1],
+					// };
+					// smtpTransport.sendMail(mailOptions, (err) => {
+					// 	// Handle Error
+					// 	if (err) {
+					// 		return next(err);
+					// 	}
+					// 		done(err);
+					// 		// });
+					// 	},
 				],
 				function (err) {
 					// Handle Error
