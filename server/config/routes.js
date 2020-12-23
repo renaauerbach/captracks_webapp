@@ -14,10 +14,12 @@ global.emails = JSON.parse(
 )['emails'];
 // Nodemailer Transporter
 global.smtpTransport = nodemailer.createTransport({
-	service: 'SendGrid',
+	service: 'smtp.gmail.com',
+	port: 465,
+	secure: true,
 	auth: {
-		user: process.env.SENDGRID_USER,
-		pass: process.env.SENDGRID_PASS,
+		user: process.env.MAIL_USER,
+		pass: process.env.MAIL_PASS,
 	},
 });
 
