@@ -109,6 +109,13 @@
 
 	// Detail Content Formatter
 	function contentFormatter(info) {
+		// Green = capacity < 50%
+		// Yellow = capacity between 50-80%
+		// Red = capacity > 80% capacity
+		var val = parseInt(info.details[0].capacity);
+		let color =
+			val < 50 ? '#009900' : val > 50 && val < 80 ? '#fff500' : '#fa2043';
+
 		let contentString =
 			'<div id="tooltip">' +
 			'<div class="tooltip-title">' +
@@ -120,9 +127,13 @@
 			'</div>' +
 			'<br/>';
 		contentString += info.details[0]
-			? '<div class="tooltip-details">Current Capacity: <span class="data">' +
+			? '<div class="tooltip-details"><div class="cap-progress"><div class="cap-bar" style="background-color:' +
+			  color +
+			  '; width:' +
 			  info.details[0].capacity +
-			  '%</span></div>' +
+			  '%;">' +
+			  info.details[0].capacity +
+			  '%</div></div></div>' +
 			  '<div class="tooltip-details">Current Entry Wait Time: <span class="data">' +
 			  info.details[0].waitTime +
 			  ' minutes</span></div>' +

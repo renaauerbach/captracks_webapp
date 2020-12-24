@@ -119,33 +119,24 @@
 		$('.show').removeClass('show').addClass('hide-link');
 	});
 
-	/* ===== Capacity Progress Bar ===== */
+	/* ===== Capacity Progress Bar (Store Page) ===== */
 	if ($('.cap-progress')) {
 		var capacity = $('.cap-bar').text().split(' ')[0];
 
 		// Set width of progress bar as capacity
-		if (capacity == 0) {
-			$('.cap-bar').width('1%');
-		} else {
-			$('.cap-bar').width(capacity);
-		}
+		capacity == 0
+			? $('.cap-bar').width('1%')
+			: $('.cap-bar').width(capacity);
 
 		// Convert capacity to integer
 		var val = parseInt(capacity);
-		console.log(val);
-		// Set color based on capacity
-		// Green = capacity less than 50%
-		if (val < 50) {
-			$('.cap-bar').css('background-color', '#009900');
-		}
+
+		// Set color of progress bar
+		// Green = capacity < 50%
 		// Yellow = capacity between 50-80%
-		else if (val > 50 && val < 80) {
-			$('.cap-bar').css('background-color', '#fff500');
-			$('.cap-bar').css('color', '#555555');
-		}
-		// Red (default) = if store is at > 80% capacity (or has a line)
-		else {
-			$('.cap-bar').css('background-color', '#fa2043');
-		}
+		// Red = capacity > 80% capacity
+		let color =
+			val < 50 ? '#009900' : val > 50 && val < 80 ? '#fff500' : '#fa2043';
+		$('.cap-bar').css('background-color', color);
 	}
 })(jQuery);

@@ -996,20 +996,20 @@ input[type='range']:focus::-ms-fill-upper {
 }
 
 /* Progress Bar */
-.capacity-box .capacity-content .cap-progress {
+.cap-progress {
 	width: 100%;
 	background: #e7b6ee;
 	border-radius: 50px;
 }
-.capacity-box .capacity-content .cap-progress .cap-bar {
+.cap-progress .cap-bar {
 	width: 1%;
-	height: 20px;
+	height: 18px;
 	border-radius: 50px;
 	font-size: 12px;
 	text-align: right;
 	padding-right: 10px;
-	line-height: 20px; /* Centers text vertically */
-	color: white;
+	line-height: 18px; /* Centers text vertically */
+	color: #bbbbbb;
 }
 
 /* ==== FORUM POSTS ==== */

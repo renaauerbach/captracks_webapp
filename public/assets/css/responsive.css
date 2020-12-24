@@ -1,9 +1,13 @@
 /*================ iPad Pros (and larger) ================*/
-@media (min-width: 992px) {
+@media only screen and (min-width: 992px) and (max-width: 1090px) {
 	/*====== Nav ======*/
 	/* Show dropdown menu on hover */
 	.navigation .navbar .navbar-nav .dropdown:hover .dropdown-content {
 		display: block;
+	}
+	/* ====== MAP ====== */
+	.map-key {
+		width: 45%;
 	}
 }
 
@@ -146,7 +150,7 @@
 
 	/* ====== MAP ====== */
 	.map-key {
-		width: 56%;
+		width: 46%;
 	}
 
 	/* ====== ACCOUNT / STORE PAGE ====== */
