@@ -278,6 +278,7 @@ module.exports = function (passport) {
 								req.body.zip;
 							// Store Hours
 							const hours = [];
+							var twenty_four = false;
 							if (!req.body['24hours']) {
 								const days = [
 									'Sun',
@@ -302,7 +303,7 @@ module.exports = function (passport) {
 									}
 								}
 							} else {
-								hours.push('Open 24/7');
+								twenty_four = true;
 							}
 
 							// Check if Store already exists in DB with that address
@@ -343,6 +344,7 @@ module.exports = function (passport) {
 									details: [newDetails._id],
 									forum: [],
 									hours: hours,
+									twenty_four: twenty_four,
 									links: [],
 									name: req.body.name,
 									phone: req.body.storePhone,

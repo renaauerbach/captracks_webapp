@@ -42,6 +42,9 @@
 
                     <ul>
                         <p>Store Hours:</p>
+                        {{#if store.twenty_four}}
+                        <li>Open 24/7</li>
+                        {{else}}
                         {{#each store.hours as |day|}}
                         <li class="hours d-flex justify-content-between">
                             {{#if (or (eq day.open undefined) (eq day.open 'o n'))}}
@@ -52,6 +55,7 @@
                             {{/if}}
                         </li>
                         {{/each}}
+                        {{/if}}
                     </ul>
                 </li>
 
