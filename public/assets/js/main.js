@@ -1,5 +1,5 @@
 (function ($) {
-	'use strict';
+	('use strict');
 
 	/* ===== Mobile Navbar ===== */
 	$('.navbar-toggler').on('click', function () {
@@ -118,4 +118,25 @@
 		$('#add').show();
 		$('.show').removeClass('show').addClass('hide-link');
 	});
+
+	/* ===== Capacity Progress Bar (Store Page) ===== */
+	if ($('.cap-progress')) {
+		var capacity = $('.cap-bar').text().split(' ')[0];
+
+		// Set width of progress bar as capacity
+		capacity == 0
+			? $('.cap-bar').width('1%')
+			: $('.cap-bar').width(capacity);
+
+		// Convert capacity to integer
+		var val = parseInt(capacity);
+
+		// Set color of progress bar
+		// Green = capacity < 50%
+		// Yellow = capacity between 50-80%
+		// Red = capacity > 80% capacity
+		let color =
+			val < 50 ? '#009900' : val > 50 && val < 80 ? '#fff500' : '#fa2043';
+		$('.cap-bar').css('background-color', color);
+	}
 })(jQuery);

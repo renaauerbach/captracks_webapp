@@ -885,23 +885,6 @@ button.thin-btn:hover {
 	border: none;
 }
 
-/* Capacity Data */
-.capacity-box {
-	margin-bottom: 2rem;
-}
-
-.capacity-box .capacity-content p.cap-title,
-.capacity-box .capacity-content p.cap-data {
-	margin-bottom: 0;
-}
-
-.capacity-box .capacity-content .cap-date p {
-	color: #0000cd;
-	font-size: 13px;
-	margin-top: 10px;
-	text-transform: capitalize;
-}
-
 /* Slider Style */
 input[type='range'] {
 	height: 25px;
@@ -993,6 +976,40 @@ input[type='range']:focus::-ms-fill-upper {
 .no-line,
 .no-register {
 	display: none;
+}
+
+/* Capacity Data */
+.capacity-box {
+	margin-bottom: 2rem;
+}
+
+.capacity-box .capacity-content p.cap-title,
+.capacity-box .capacity-content p.cap-data {
+	margin-bottom: 0;
+}
+
+.capacity-box .capacity-content .cap-date p {
+	color: #0000cd;
+	font-size: 13px;
+	margin-top: 10px;
+	text-transform: capitalize;
+}
+
+/* Progress Bar */
+.cap-progress {
+	width: 100%;
+	background: #e7b6ee;
+	border-radius: 50px;
+}
+.cap-progress .cap-bar {
+	width: 1%;
+	height: 18px;
+	border-radius: 50px;
+	font-size: 12px;
+	text-align: right;
+	padding-right: 10px;
+	line-height: 18px; /* Centers text vertically */
+	color: #bbbbbb;
 }
 
 /* ==== FORUM POSTS ==== */
