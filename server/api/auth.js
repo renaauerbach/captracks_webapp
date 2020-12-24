@@ -117,6 +117,7 @@ module.exports = function (passport) {
 			}
 		);
 	});
+
 	// ==================== RESET (GET) ==================== //
 	router.post('/reset/:token', (req, res, next) => {
 		async.waterfall(
@@ -194,6 +195,7 @@ module.exports = function (passport) {
 			});
 		});
 	});
+
 	// ==================== JOIN (POST) ==================== //
 	router.post(
 		'/join',
@@ -277,6 +279,7 @@ module.exports = function (passport) {
 								req.body.zip;
 							// Store Hours
 							const hours = [];
+							var twenty_four = false;
 							if (!req.body['24hours']) {
 								const days = [
 									'Sun',
@@ -301,7 +304,7 @@ module.exports = function (passport) {
 									}
 								}
 							} else {
-								hours.push('Open 24/7');
+								twenty_four = true;
 							}
 
 							// Check if Store already exists in DB with that address
@@ -342,6 +345,7 @@ module.exports = function (passport) {
 									details: [newDetails._id],
 									forum: [],
 									hours: hours,
+									twenty_four: twenty_four,
 									links: [],
 									name: req.body.name,
 									phone: req.body.storePhone,
@@ -355,63 +359,63 @@ module.exports = function (passport) {
 							});
 						}
 					},
-					// function (store, done, err) {
-					// 	// Email team members when a Vendor joins
-					// 	const admins = [
-					// 		'gabriel.low@captracks.com',
-					// 		'ben.shor@captracks.com',
-					// 		'rena@captracks.com',
-					// 	];
-					// 	const adminMailOptions = {
-					// 		from: 'rena@captracks.com',
-					// 		to: admins,
-					// 		subject: emails[2].subject,
-					// 		text:
-					// 			emails[3].text[0] +
-					// 			req.body.firstName +
-					// 			' ' +
-					// 			req.body.lastName +
-					// 			emails[3].text[1] +
-					// 			store.name +
-					// 			emails[3].text[2] +
-					// 			store.address +
-					// 			emails[3].text[3] +
-					// 			req.body.survey1 +
-					// 			emails[3].text[4] +
-					// 			req.body.survey2 +
-					// 			emails[3].text[5] +
-					// 			req.body.reg +
-					// 			emails[3].text[6] +
-					// 			req.body.max,
-					// 	};
-					// 	// smtpTransport.sendMail(adminMailOptions, (err) => {
-					// 	// Handle Error
-					// 	if (err) {
-					// 		return next(err);
-					// 	}
-					// 	next();
-					// });
+					function (store, done, err) {
+						// Email team members when a Vendor joins
+						const admins = [
+							'gabriel.low@captracks.com',
+							'ben.shor@captracks.com',
+							'rena@captracks.com',
+						];
+						const adminMailOptions = {
+							from: 'join@captracks.com',
+							to: admins,
+							subject: emails[2].subject,
+							text:
+								emails[3].text[0] +
+								req.body.firstName +
+								' ' +
+								req.body.lastName +
+								emails[3].text[1] +
+								store.name +
+								emails[3].text[2] +
+								store.address +
+								emails[3].text[3] +
+								req.body.survey1 +
+								emails[3].text[4] +
+								req.body.survey2 +
+								emails[3].text[5] +
+								req.body.reg +
+								emails[3].text[6] +
+								req.body.max,
+						};
+						smtpTransport.sendMail(adminMailOptions, (err) => {
+							// Handle Error
+							if (err) {
+								return next(err);
+							}
+							next();
+						});
 
-					// // Confirmation email to Vendor
-					// const mailOptions = {
-					// 	to: req.body.email,
-					// 	from: 'noreply@captracks.com',
-					// 	subject: emails[3].subject,
-					// 	text:
-					// 		emails[3].text[0] +
-					// 		'https://' +
-					// 		req.headers.host +
-					// 		'/account' +
-					// 		emails[3].text[1],
-					// };
-					// smtpTransport.sendMail(mailOptions, (err) => {
-					// 	// Handle Error
-					// 	if (err) {
-					// 		return next(err);
-					// 	}
-					// 		done(err);
-					// 		// });
-					// 	},
+						// Confirmation email to Vendor
+						const mailOptions = {
+							to: req.body.email,
+							from: 'noreply@captracks.com',
+							subject: emails[3].subject,
+							text:
+								emails[3].text[0] +
+								'https://' +
+								req.headers.host +
+								'/account' +
+								emails[3].text[1],
+						};
+						smtpTransport.sendMail(mailOptions, (err) => {
+							// Handle Error
+							if (err) {
+								return next(err);
+							}
+							done(err);
+						});
+					},
 				],
 				function (err) {
 					// Handle Error

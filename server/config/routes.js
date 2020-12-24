@@ -14,10 +14,12 @@ global.emails = JSON.parse(
 )['emails'];
 // Nodemailer Transporter
 global.smtpTransport = nodemailer.createTransport({
-	service: 'SendGrid',
+	host: 'smtp.gmail.com',
+	port: 465,
+	secureConnection: false,
 	auth: {
-		user: process.env.SENDGRID_USER,
-		pass: process.env.SENDGRID_PASS,
+		user: process.env.MAIL_USER,
+		pass: process.env.MAIL_PASS,
 	},
 });
 
@@ -104,8 +106,7 @@ module.exports = function (app) {
 	// Confirmation email to Vendor
 	app.post('/contact', (req, res, next) => {
 		const mailOptions = {
-			// to: 'info@captracks.com',
-			to: 'rena@captracks.com',
+			to: 'support@captracks.com',
 			from: 'noreply@captracks.com',
 			subject: req.body.subject,
 			text:

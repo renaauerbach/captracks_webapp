@@ -17,6 +17,7 @@ const storeSchema = new Schema({
 			close: { type: String },
 		},
 	],
+	twenty_four: { type: Boolean, required: true },
 	forum: [{ type: Schema.Types.ObjectId, ref: 'Message' }],
 	vendor: { type: Schema.Types.ObjectId, ref: 'Vendor' },
 	details: [{ type: Schema.Types.ObjectId, ref: 'Details' }],

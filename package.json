@@ -18,6 +18,8 @@
         "express-session": "^1.17.1",
         "hbs": "^4.1.1",
         "jspdf": "^2.1.1",
+        "mongod": "^2.0.0",
+        "mongodb": "^3.6.3",
         "mongoose": "^5.10.4",
         "nodemailer": "^6.4.11",
         "passport": "^0.4.1",
@@ -34,11 +36,13 @@
         "url": "git+https://github.com/renaauerbach/captracks.git"
     },
     "keywords": [
+        "capacity",
+        "corona app",
         "covid-19",
-        "web app",
         "javascript",
+        "mongodb",
         "tracker",
-        "mongodb"
+        "web app"
     ],
     "author": "Rena Auerbach",
     "license": "ISC",
