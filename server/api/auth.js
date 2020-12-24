@@ -364,7 +364,7 @@ module.exports = function (passport) {
 							'rena@captracks.com',
 						];
 						const adminMailOptions = {
-							from: 'rena@captracks.com',
+							from: 'join@captracks.com',
 							to: admins,
 							subject: emails[2].subject,
 							text:

@@ -36,11 +36,13 @@
         "url": "git+https://github.com/renaauerbach/captracks.git"
     },
     "keywords": [
+        "capacity",
+        "corona app",
         "covid-19",
-        "web app",
         "javascript",
+        "mongodb",
         "tracker",
-        "mongodb"
+        "web app"
     ],
     "author": "Rena Auerbach",
     "license": "ISC",
