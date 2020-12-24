@@ -44,6 +44,12 @@
 		margin: 0;
 		background-color: #e708ae;
 	}
+	.navigation .navbar .navbar-nav .nav-btn:hover {
+		background-color: #0000cd;
+	}
+	.navigation .navbar .navbar-nav .nav-btn button:hover {
+		background-color: transparent;
+	}
 
 	.navigation .navbar .navbar-nav .nav-btn button,
 	.navigation .navbar .navbar-nav .nav-btn a {
