@@ -10,8 +10,9 @@
 
         <!-- Row - Current Capacity -->
         <div class="row d-flex justify-content-between align-items-center">
-            <p class="cap-title">Current Capacity:</p>
-            <p class="cap-data">{{details.capacity}}% full</p>
+            <div class="cap-progress">
+                <div class="cap-bar">{{details.capacity}}%</div>
+            </div>
         </div>
 
         <!-- Row - Current Wait Time -->

@@ -244,6 +244,7 @@ module.exports = function (passport) {
 									// Handle Error
 									if (err || !store) {
 										// Delete Vendor
+										// TODO: BROKEN
 										Vendor.deleteOne(
 											{ _id: req.user._id },
 											(err) => {
