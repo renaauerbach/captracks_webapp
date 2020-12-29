@@ -2,6 +2,8 @@
 const async = require('async');
 const crypto = require('crypto');
 const express = require('express');
+const sgMail = require('@sendgrid/mail');
+
 // ===== Router ===== //
 const router = express.Router();
 // ===== Models ===== //
@@ -12,7 +14,7 @@ const Vendor = require('../models/vendor.model');
 // ===== Helper Functions & Data ===== //
 const createHash = require('../passport/controller').createHash;
 const emails = global.emails;
-const smtpTransport = global.smtpTransport;
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = function (passport) {
 	// ==================== LOGIN (GET) ==================== //
@@ -69,18 +71,21 @@ module.exports = function (passport) {
 					});
 				},
 				function (token, user, done) {
-					const mailOptions = {
-						to: user.email,
-						from: 'noreply@captracks.com',
-						subject: emails[0].subject,
-						text:
-							emails[0].text[0] +
-							req.headers.host +
-							emails[0].text[1] +
-							token +
-							emails[0].text[2],
-					};
-					smtpTransport.sendMail(mailOptions, (err) => {
+					const text =
+						emails[0].text[0] +
+						req.headers.host +
+						emails[0].text[1] +
+						token +
+						emails[0].text[2];
+
+					const sender = sgMail.mailer(
+						'info@captracks.com',
+						user.email,
+						emails[0].subject,
+						text
+					);
+
+					sg.API(sender, (err) => {
 						req.flash('message', process.env.RESET_MESSAGE);
 						done(err, 'done');
 					});
@@ -145,16 +150,19 @@ module.exports = function (passport) {
 					);
 				},
 				function (user, done) {
-					const mailOptions = {
-						to: user.email,
-						from: 'noreply@captracks.com',
-						subject: emails[1].subject,
-						text:
-							emails[1].text[0] + user.email + emails[1].text[1],
-					};
-					smtpTransport.sendMail(mailOptions, (err) => {
+					const text =
+						emails[1].text[0] + user.email + emails[1].text[1];
+
+					const sender = sgMail.mailer(
+						'info@captracks.com',
+						user.email,
+						emails[1].subject,
+						text
+					);
+
+					sg.API(sender, (err) => {
 						req.flash('message', process.env.RESET_SUCCESS);
-						done(err);
+						done(err, 'done');
 					});
 				},
 			],
@@ -266,7 +274,6 @@ module.exports = function (passport) {
 						}
 						// Otherwise add Store to DB
 						else {
-							console.log('BODY', req.body);
 							// Store Address
 							const address =
 								req.body.street +
@@ -358,62 +365,76 @@ module.exports = function (passport) {
 							});
 						}
 					},
-					function (store, done, err) {
+					function (store, done) {
 						// Email team members when a Vendor joins
 						const admins = [
-							'gabriel.low@captracks.com',
-							'ben.shor@captracks.com',
+							'gabe@captracks.com',
+							'ben@captracks.com',
 							'rena@captracks.com',
 						];
-						const adminMailOptions = {
-							from: 'join@captracks.com',
+						var text =
+							emails[3].text[0] +
+							req.body.firstName +
+							' ' +
+							req.body.lastName +
+							emails[3].text[1] +
+							store.name +
+							emails[3].text[2] +
+							store.address +
+							emails[3].text[3] +
+							req.body.survey1 +
+							emails[3].text[4] +
+							req.body.survey2 +
+							emails[3].text[5] +
+							req.body.reg +
+							emails[3].text[6] +
+							req.body.max;
+
+						var msg = {
 							to: admins,
+							from: 'info@captracks.com',
 							subject: emails[2].subject,
-							text:
-								emails[3].text[0] +
-								req.body.firstName +
-								' ' +
-								req.body.lastName +
-								emails[3].text[1] +
-								store.name +
-								emails[3].text[2] +
-								store.address +
-								emails[3].text[3] +
-								req.body.survey1 +
-								emails[3].text[4] +
-								req.body.survey2 +
-								emails[3].text[5] +
-								req.body.reg +
-								emails[3].text[6] +
-								req.body.max,
+							text: text,
+							// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 						};
-						smtpTransport.sendMail(adminMailOptions, (err) => {
-							// Handle Error
-							if (err) {
+
+						sgMail
+							.send(msg)
+							.then(() => {
+								console.log('Email sent');
+								next();
+							})
+							.catch((err) => {
+								console.error(err);
 								return next(err);
-							}
-							next();
-						});
+							});
 
 						// Confirmation email to Vendor
-						const mailOptions = {
+						text =
+							emails[3].text[0] +
+							'https://' +
+							req.headers.host +
+							'/account' +
+							emails[3].text[1];
+
+						msg = {
 							to: req.body.email,
-							from: 'noreply@captracks.com',
+							from: 'info@captracks.com',
 							subject: emails[3].subject,
-							text:
-								emails[3].text[0] +
-								'https://' +
-								req.headers.host +
-								'/account' +
-								emails[3].text[1],
+							text: text,
+							// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 						};
-						smtpTransport.sendMail(mailOptions, (err) => {
-							// Handle Error
-							if (err) {
-								return next(err);
-							}
-							done(err);
-						});
+
+						sgMail
+							.send(msg)
+							.then(() => {
+								console.log('Email sent');
+								done();
+							})
+							.catch((err) => {
+								console.error(err);
+								done(err);
+							});
 					},
 				],
 				function (err) {

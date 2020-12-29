@@ -1,6 +1,6 @@
 // ===== Modules ===== //
 const fs = require('fs');
-const nodemailer = require('nodemailer');
+const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 const passport = require('passport');
 const path = require('path');
 
@@ -12,16 +12,6 @@ const parser = require('./parser.js');
 global.emails = JSON.parse(
 	fs.readFileSync(path.join(__dirname, '../content/emails.json'))
 )['emails'];
-// Nodemailer Transporter
-global.smtpTransport = nodemailer.createTransport({
-	host: 'smtp.gmail.com',
-	port: 465,
-	secureConnection: false,
-	auth: {
-		user: process.env.MAIL_USER,
-		pass: process.env.MAIL_PASS,
-	},
-});
 
 // ===== Routers ===== //
 const authRouter = require('../api/auth')(passport);
@@ -38,6 +28,7 @@ module.exports = function (app) {
 	app.use('/post', messageRouter);
 	app.use('/details', detailsRouter);
 
+	// SAKTHI: /ERROR GOES IN HERE?
 	app.use((req, res, next) => {
 		next();
 	});
@@ -105,24 +96,30 @@ module.exports = function (app) {
 	// ==================== FOOTER - CONTACT FORM (POST) ==================== //
 	// Confirmation email to Vendor
 	app.post('/contact', (req, res, next) => {
-		const mailOptions = {
-			to: 'support@captracks.com',
-			from: 'noreply@captracks.com',
-			subject: req.body.subject,
-			text:
-				req.body.name +
-				global.emails[4].text[0] +
-				req.body.message +
-				global.emails[4].text[1] +
-				req.body.email,
-		};
-		global.smtpTransport.sendMail(mailOptions, (err) => {
-			// Handle Error
-			if (err) {
-				return next(err);
-			}
-			next();
-		});
+		const text =
+			req.body.name +
+			global.emails[4].text[0] +
+			req.body.message +
+			global.emails[4].text[1] +
+			req.body.email;
+
+		const sender = sgMail.mailer(
+			'info@captracks.com',
+			'rena@captracks.com',
+			req.body.subject,
+			text
+		);
+
+		// sg.API(sender, (err, res) => {
+		// 	// Handle Error
+		// 	if (err) {
+		// 		return next(err);
+		// 	}
+		// 	console.log(res.statusCode);
+		// 	console.log(res.body);
+		// 	console.log(res.headers);
+		// 	next();
+		// });
 	});
 
 	// ==================== ERROR (GET) ==================== //
