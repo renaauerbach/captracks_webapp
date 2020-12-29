@@ -121,22 +121,31 @@
 
 	/* ===== Capacity Progress Bar (Store Page) ===== */
 	if ($('.cap-progress')) {
-		var capacity = $('.cap-bar').text().split(' ')[0];
+		// Max capacity
+		let max = parseInt($('.cap-max').text().split(' ')[0]);
+		// rawCap = exact number of people
+		var rawCap = parseInt($('.cap-bar').text().split(' ')[0]);
+		// calcCap = % based on max capacity
+		var calcCap = (rawCap / max) * 100;
 
 		// Set width of progress bar as capacity
-		capacity == 0
+		calcCap == 0
 			? $('.cap-bar').width('1%')
-			: $('.cap-bar').width(capacity);
-
-		// Convert capacity to integer
-		var val = parseInt(capacity);
+			: $('.cap-bar').width(calcCap + '%');
 
 		// Set color of progress bar
 		// Green = capacity < 50%
 		// Yellow = capacity between 50-80%
 		// Red = capacity > 80% capacity
 		let color =
-			val < 50 ? '#009900' : val > 50 && val < 80 ? '#fff500' : '#fa2043';
+			calcCap < 50
+				? '#009900'
+				: calcCap > 50 && calcCap < 80
+				? '#fff500'
+				: '#fa2043';
 		$('.cap-bar').css('background-color', color);
+
+		// Change .cap-bar text to display calcCap
+		$('.cap-bar').text(calcCap + '%');
 	}
 })(jQuery);
