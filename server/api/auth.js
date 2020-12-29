@@ -373,22 +373,23 @@ module.exports = function (passport) {
 							'ben@captracks.com',
 							'rena@captracks.com',
 						];
+
 						var text =
-							emails[3].text[0] +
+							emails[2].text[0] +
 							req.body.firstName +
 							' ' +
 							req.body.lastName +
-							emails[3].text[1] +
+							emails[2].text[1] +
 							store.name +
-							emails[3].text[2] +
+							emails[2].text[2] +
 							store.address +
-							emails[3].text[3] +
+							emails[2].text[3] +
 							req.body.survey1 +
-							emails[3].text[4] +
+							emails[2].text[4] +
 							req.body.survey2 +
-							emails[3].text[5] +
+							emails[2].text[5] +
 							req.body.reg +
-							emails[3].text[6] +
+							emails[2].text[6] +
 							req.body.max;
 
 						var msg = {
