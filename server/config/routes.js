@@ -103,23 +103,24 @@ module.exports = function (app) {
 			global.emails[4].text[1] +
 			req.body.email;
 
-		const sender = sgMail.mailer(
-			'info@captracks.com',
-			'rena@captracks.com',
-			req.body.subject,
-			text
-		);
+		msg = {
+			to: 'rena@captracks.com',
+			from: req.body.email,
+			subject: req.body.subject,
+			text: text,
+			// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+		};
 
-		// sg.API(sender, (err, res) => {
-		// 	// Handle Error
-		// 	if (err) {
-		// 		return next(err);
-		// 	}
-		// 	console.log(res.statusCode);
-		// 	console.log(res.body);
-		// 	console.log(res.headers);
-		// 	next();
-		// });
+		sgMail
+			.send(msg)
+			.then(() => {
+				console.log('Message sent');
+				next();
+			})
+			.catch((err) => {
+				console.error(err);
+				return next(err);
+			});
 	});
 
 	// ==================== ERROR (GET) ==================== //
