@@ -78,14 +78,14 @@ module.exports = function (passport) {
 						token +
 						emails[0].text[2];
 
-					const sender = sgMail.mailer(
-						'info@captracks.com',
-						user.email,
-						emails[0].subject,
-						text
-					);
+					const msg = {
+						to: user.email,
+						from: 'info@captracks.com',
+						subject: emails[0].subject,
+						text: text,
+					};
 
-					sg.API(sender, (err) => {
+					sgMail.send(msg, (err) => {
 						req.flash('message', process.env.RESET_MESSAGE);
 						done(err, 'done');
 					});
@@ -153,14 +153,14 @@ module.exports = function (passport) {
 					const text =
 						emails[1].text[0] + user.email + emails[1].text[1];
 
-					const sender = sgMail.mailer(
-						'info@captracks.com',
-						user.email,
-						emails[1].subject,
-						text
-					);
+					const msg = {
+						to: user.email,
+						from: 'info@captracks.com',
+						subject: emails[1].subject,
+						text: text,
+					};
 
-					sg.API(sender, (err) => {
+					sgMail.send(msg, (err) => {
 						req.flash('message', process.env.RESET_SUCCESS);
 						done(err, 'done');
 					});
