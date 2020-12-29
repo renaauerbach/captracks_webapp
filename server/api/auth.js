@@ -395,7 +395,6 @@ module.exports = function (passport) {
 							from: 'info@captracks.com',
 							subject: emails[2].subject,
 							text: text,
-							// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 						};
 
 						sgMail
@@ -425,16 +424,13 @@ module.exports = function (passport) {
 							// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 						};
 
-						sgMail
-							.send(msg)
-							.then(() => {
-								console.log('Email sent');
-								done();
-							})
-							.catch((err) => {
-								console.error(err);
-								done(err);
-							});
+						sgMail.send(msg, (err) => {
+							// Handle Error
+							if (err) {
+								return next(err);
+							}
+							done(err);
+						});
 					},
 				],
 				function (err) {
