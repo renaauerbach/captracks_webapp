@@ -126,7 +126,7 @@
 		// rawCap = exact number of people
 		var rawCap = parseInt($('.cap-bar').text().split(' ')[0]);
 		// calcCap = % based on max capacity
-		var calcCap = (rawCap / max) * 100;
+		var calcCap = Math.round(rawCap / max) * 100;
 
 		// Set width of progress bar as capacity
 		calcCap == 0

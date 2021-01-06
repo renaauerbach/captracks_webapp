@@ -14,6 +14,11 @@ const Vendor = require('../models/vendor.model');
 // ==================== VENDOR ACCOUNT (GET) ==================== //
 router.get('/', (req, res) => {
 	// Check Vendor Authentication
+	console.log('req', req.isAuthenticated());
+	console.log('req.session', req.session);
+	console.log('req.session.user', req.session.user);
+	console.log('req.user', req.user);
+
 	if (req.session.user !== undefined) {
 		// Get all store info and populate all fields
 		Store.findOne({ vendor: req.user._id })
@@ -21,8 +26,6 @@ router.get('/', (req, res) => {
 			.populate({ path: 'vendor', model: 'vendors' })
 			.populate({ path: 'forum', model: 'messages' })
 			.exec((err, store) => {
-				console.log('DETAILS: ', store.details);
-				console.log('DETAILS: ', store.details[0]);
 				if (err) {
 					return res.status(400).send(err);
 				}
