@@ -14,11 +14,6 @@ const Vendor = require('../models/vendor.model');
 // ==================== VENDOR ACCOUNT (GET) ==================== //
 router.get('/', (req, res) => {
 	// Check Vendor Authentication
-	console.log('req', req.isAuthenticated());
-	console.log('req.session', req.session);
-	console.log('req.session.user', req.session.user);
-	console.log('req.user', req.user);
-
 	if (req.session.user !== undefined) {
 		// Get all store info and populate all fields
 		Store.findOne({ vendor: req.user._id })
