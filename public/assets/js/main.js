@@ -126,12 +126,12 @@
 		// rawCap = exact number of people
 		var rawCap = parseInt($('.cap-bar').text().split(' ')[0]);
 		// calcCap = % based on max capacity
-		var calcCap = (rawCap / max) * 100;
+		var calcCap = Math.round((rawCap / max) * 100);
 
 		// Set width of progress bar as capacity
 		calcCap == 0
-			? $('.cap-bar').width('1%')
-			: $('.cap-bar').width(calcCap + '%');
+			? $('.cap-bar').css('width', '1%')
+			: $('.cap-bar').css('width', calcCap + '%');
 
 		// Set color of progress bar
 		// Green = capacity < 50%
