@@ -29,9 +29,15 @@ module.exports = function (app) {
 	app.use('/details', detailsRouter);
 
 	// SAKTHI: /ERROR GOES IN HERE?
-	app.use((req, res, next) => {
-		next();
-	});
+//	app.use((req, res, next) => {
+	//	next();
+//	});
+
+		// Added for the Error handling if any exception while calling api
+		app.use((err, req, res, next) => {
+			console.error('Error Status:'+err);
+				res.render('error');
+		   });
 
 	// ==================== WHY USE CAPTRACKS ==================== //
 	// Load Customer/Vendor benefits data
@@ -131,4 +137,10 @@ module.exports = function (app) {
 			user: req.isAuthenticated(),
 		});
 	});
+
+	// Added for the 404 page for invalid URL and Nodata from DB for certain cases
+	app.use(function(req, res, next) {
+		console.log("Tried access this invalid URL: "+req.path);
+		 res.render('404');
+	  });
 };

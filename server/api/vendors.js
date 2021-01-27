@@ -12,7 +12,7 @@ const Details = require('../models/details.model');
 const Vendor = require('../models/vendor.model');
 
 // ==================== VENDOR ACCOUNT (GET) ==================== //
-router.get('/', (req, res) => {
+router.get('/', (req, res,next) => {
 	// Check Vendor Authentication
 	if (req.session.user !== undefined) {
 		// Get all store info and populate all fields
@@ -23,8 +23,9 @@ router.get('/', (req, res) => {
 			.exec((err, store) => {
 				console.log('DETAILS: ', store.details);
 				console.log('DETAILS: ', store.details[0]);
-				if (err) {
-					return res.status(400).send(err);
+				if (err || store == null) {
+					//return res.status(400).send(err);
+					return next(err);
 				}
 
 				var flag = new Boolean(true);
@@ -126,12 +127,13 @@ router.post('/remove/:id/:link', (req, res) => {
 });
 
 // ==================== SCAN ENTRY QR (GET) ==================== //
-router.get('/entryqr/:id', (req, res) => {
+router.get('/entryqr/:id', (req, res,next) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, store) => {
 			if (err || !store) {
-				return res.status(400).send(err);
+				//return res.status(400).send(err);
+				return next(err);
 			} else {
 				let currentCapcity = store.details[0].capacity;
 				currentCapcity = currentCapcity + 1;
@@ -147,7 +149,8 @@ router.get('/entryqr/:id', (req, res) => {
 								'Save Error while invoking entryqr api - detail model :' +
 									err
 							);
-							return res.status(400).send(err);
+							//return res.status(400).send(err);
+							return next(err);
 						}
 					});
 					// Needed format for differing store layout in store.hbs
@@ -167,13 +170,14 @@ router.get('/entryqr/:id', (req, res) => {
 //Scan EntryQR code function Ends here.
 
 // ==================== SCAN EXIT QR (GET) ==================== //
-router.get('/exitqr/:id', (req, res) => {
+router.get('/exitqr/:id', (req, res,next) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, store) => {
 			if (err || !store) {
 				console.log(err);
-				return res.status(400).send(err);
+				//return res.status(400).send(err);
+				return next(err);
 			} else {
 				let currentCapcity = store.details[0].capacity;
 				if (currentCapcity > 0) {
@@ -187,7 +191,8 @@ router.get('/exitqr/:id', (req, res) => {
 								'Save Error while invoking exit detail model :' +
 									err
 							);
-							return res.status(400).send(err);
+							//return res.status(400).send(err);
+							return next(err);
 						}
 					});
 				}
@@ -200,7 +205,7 @@ router.get('/exitqr/:id', (req, res) => {
 
 // ==================== DOWNLOAD ENTRY QR (GET) ==================== //
 //Download pdf file for EntryQR code starts here
-router.get('/downloadEntryQR', (req, res) => {
+router.get('/downloadEntryQR', (req, res, next) => {
 	if (req.isAuthenticated()) {
 		Store.findOne({ vendor: req.user._id })
 			.populate({ path: 'vendor', model: 'vendors' })
@@ -208,7 +213,8 @@ router.get('/downloadEntryQR', (req, res) => {
 				{
 					if (err || !store) {
 						console.log(err);
-						return res.status(400).send(err);
+						//return res.status(400).send(err);
+						return next(err);
 					}
 					// Create new PDF for QR code
 					var doc = new jsPDF();
@@ -309,14 +315,15 @@ router.get('/downloadEntryQR', (req, res) => {
 
 // ==================== DOWNLOAD EXIT QR (GET) ==================== //
 //Download pdf file for ExitQR code starts here
-router.get('/downloadExitQR', (req, res) => {
+router.get('/downloadExitQR', (req, res,next) => {
 	if (req.isAuthenticated()) {
 		Store.findOne({ vendor: req.user._id })
 			.populate({ path: 'vendor', model: 'vendors' })
 			.exec((err, store) => {
 				{
 					if (err || !store) {
-						return res.status(400).send(err);
+						//return res.status(400).send(err);
+						return next(err);
 					}
 
 					// Create new PDF for QR code
@@ -415,5 +422,7 @@ router.get('/downloadExitQR', (req, res) => {
 			});
 	}
 });
+
+
 
 module.exports = router;
