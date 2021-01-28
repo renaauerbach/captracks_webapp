@@ -412,7 +412,7 @@ module.exports = function (passport) {
 								return next(err);
 							});
 
-							var vendorURL="https://"+req.header.host+"/account";
+							var vendorURL="https://"+req.headers.host+"/store/"+store._id;
 						// Confirmation email to Vendor
 						var confirmtext =
 							emails[3].text[0] +vendorURL+
