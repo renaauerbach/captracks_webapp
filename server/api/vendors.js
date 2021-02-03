@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
 			.populate({ path: 'vendor', model: 'vendors' })
 			.populate({ path: 'forum', model: 'messages' })
 			.exec((err, store) => {
+				console.log(req.isAuthenticated());
 				if (err) {
 					return res.status(400).send(err);
 				}

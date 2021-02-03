@@ -334,7 +334,6 @@ button.thin-btn:hover {
 	margin-top: -10px;
 	z-index: 8;
 }
-
 .navigation .navbar .navbar-nav .nav-btn button:hover,
 .navigation .navbar .navbar-nav .nav-btn a:hover {
 	background-color: #0000cd;
@@ -356,7 +355,6 @@ button.thin-btn:hover {
 	margin-top: -6px;
 	margin-left: 20px;
 }
-
 /* Links inside the dropdown */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a {
 	width: 100%;
@@ -367,12 +365,11 @@ button.thin-btn:hover {
 	text-decoration: none;
 	text-align: left;
 }
-
-/* Add a grey background color to dropdown links on hover */
+/* Add background color to benefits dropdown links on hover */
 .navigation .navbar .navbar-nav .dropdown.benefits .dropdown-content a:hover {
 	background-color: #dddddd;
 }
-/* Add a grey background color to dropdown links on hover */
+/* Add background color to account dropdown links on hover */
 .navigation .navbar .navbar-nav .dropdown.account .dropdown-content a:hover {
 	background-color: #ffaae9;
 }

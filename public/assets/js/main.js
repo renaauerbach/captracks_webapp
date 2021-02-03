@@ -28,6 +28,7 @@
 	/* ===== Dropdown Navbar ===== */
 	$('.dropbtn').on('click', function () {
 		const dropdown = $(this).parent().parent();
+		console.log(dropdown);
 		dropdown.toggleClass('show');
 	});
 
