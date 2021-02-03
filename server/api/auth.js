@@ -14,7 +14,6 @@ const Vendor = require('../models/vendor.model');
 // ===== Helper Functions & Data ===== //
 const createHash = require('../passport/controller').createHash;
 const { Console } = require('console');
-const e = require('express');
 const emails = global.emails;
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -369,11 +368,11 @@ module.exports = function (passport) {
 						}
 					},
 					function (store, done) {
-						// Email team members wEmail senthen a Vendor joins
+						// Email team members when a Vendor joins
 						const admins = [
 							'gabe@captracks.com',
 							'ben@captracks.com',
-							'rena@captracks.com'
+							'rena@captracks.com',
 						];
 
 						var text =
@@ -404,24 +403,34 @@ module.exports = function (passport) {
 						sgMail
 							.send(msg)
 							.then(() => {
-								console.log('Email sent to Captrack Admin Sucessfully');
+								console.log(
+									'Email sent to Captrack Admin Sucessfully'
+								);
 								//next();
 							})
 							.catch((err) => {
-								console.error("Error While sending mail to Captrack Admin People:"+err);
+								console.error(
+									'Error while sending email to Captrack Admin: ' +
+										err
+								);
 								return next(err);
 							});
 
-							var vendorURL="https://"+req.headers.host+"/store/"+store._id;
+						var vendorURL =
+							'https://' +
+							req.headers.host +
+							'/store/' +
+							store._id;
 						// Confirmation email to Vendor
 						var confirmtext =
-							emails[3].text[0] +vendorURL+
+							emails[3].text[0] +
+							vendorURL +
 							//'https://' +
 							//req.headers.host +
 							//'/account' +
 							emails[3].text[1];
 
-						console.log("Vendor URL:"+vendorURL);
+						console.log('Vendor URL:' + vendorURL);
 						confirmmsg = {
 							to: req.body.email,
 							from: 'info@captracks.com',
@@ -429,26 +438,28 @@ module.exports = function (passport) {
 							text: confirmtext,
 							// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 						};
-						
-						sgMail.send(confirmmsg, (err) => {
 
+						sgMail.send(confirmmsg, (err) => {
 							// Handle Error
 							if (err) {
-								console.log("Error while confirmation mail send to Vendor : "+err);
+								console.log(
+									'Error while sending confirmation email to Vendor: ' +
+										err
+								);
 								return next(err);
-							}
-							else{
-								console.log("Confirmation mail sent to Vendor Successfully..");
+							} else {
+								console.log(
+									'Confirmation email sent to Vendor successfully'
+								);
 								done(err);
 							}
-							
 						});
-					}
+					},
 				],
 				function (err) {
 					// Handle Error
 					if (err) {
-						console.log("Final error function: "+err);
+						console.log('Final error function: ' + err);
 						return next(err);
 					}
 					res.redirect('/account');
@@ -472,5 +483,3 @@ module.exports = function (passport) {
 
 	return router;
 };
-
-
