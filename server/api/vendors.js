@@ -21,8 +21,7 @@ router.get('/', (req, res,next) => {
 			.populate({ path: 'vendor', model: 'vendors' })
 			.populate({ path: 'forum', model: 'messages' })
 			.exec((err, store) => {
-				console.log('DETAILS: ', store.details);
-				console.log('DETAILS: ', store.details[0]);
+
 				if (err || store == null) {
 					//return res.status(400).send(err);
 					return next(err);

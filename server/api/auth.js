@@ -374,7 +374,6 @@ module.exports = function (passport) {
 							'ben@captracks.com',
 							'rena@captracks.com',
 						];
-
 						var text =
 							emails[2].text[0] +
 							req.body.firstName +
