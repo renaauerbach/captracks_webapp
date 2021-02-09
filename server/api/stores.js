@@ -29,7 +29,7 @@ router.get('/', (req, res,next) => {
 					hours: store.hours,
 				};
 			});
-
+			console.log(req.isAuthenticated());
 			res.render('map', {
 				layout: 'layout',
 				title: 'CapTracks',
@@ -43,7 +43,6 @@ router.get('/', (req, res,next) => {
 
 // ==================== STORE PAGE (GET) ==================== //
 router.get('/store/:id', (req, res,next) => {
-	console.log('params', req.query);
 
 	// Get Store by ID
 	Store.findById(req.params.id)
