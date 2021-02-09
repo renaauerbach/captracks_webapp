@@ -25,13 +25,6 @@
 		}
 	});
 
-	/* ===== Dropdown Navbar ===== */
-	$('.dropbtn').on('click', function () {
-		const dropdown = $(this).parent().parent();
-		console.log(dropdown);
-		dropdown.toggleClass('show');
-	});
-
 	// /* ===== Form Popup ===== */
 	// $('.form-toggler').on('click', function() {
 	//     $('.form-popup').toggleClass('open');
@@ -131,8 +124,8 @@
 
 		// Set width of progress bar as capacity
 		calcCap == 0
-			? $('.cap-bar').width('1%')
-			: $('.cap-bar').width(calcCap + '%');
+			? $('.cap-bar').css('width', '1%')
+			: $('.cap-bar').css('width', calcCap + '%');
 
 		// Set color of progress bar
 		// Green = capacity < 50%

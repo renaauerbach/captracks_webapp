@@ -340,6 +340,10 @@ button.thin-btn:hover {
 	text-decoration: none;
 }
 
+/* Dropdown on hover */
+.navigation .navbar .navbar-nav .dropdown:hover .dropdown-content {
+	display: block;
+}
 /* Dropdown content (hidden by default) */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content {
 	display: none;
