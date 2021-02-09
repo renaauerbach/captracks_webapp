@@ -341,6 +341,10 @@ button.thin-btn:hover {
 	text-decoration: none;
 }
 
+/* Dropdown on hover */
+.navigation .navbar .navbar-nav .dropdown:hover .dropdown-content {
+	display: block;
+}
 /* Dropdown content (hidden by default) */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content {
 	display: none;
@@ -356,7 +360,6 @@ button.thin-btn:hover {
 	margin-top: -6px;
 	margin-left: 20px;
 }
-
 /* Links inside the dropdown */
 .navigation .navbar .navbar-nav .dropdown .dropdown-content a {
 	width: 100%;
@@ -367,7 +370,6 @@ button.thin-btn:hover {
 	text-decoration: none;
 	text-align: left;
 }
-
 /* Add a grey background color to dropdown links on hover */
 .navigation .navbar .navbar-nav .dropdown.benefits .dropdown-content a:hover {
 	background-color: #dddddd;
