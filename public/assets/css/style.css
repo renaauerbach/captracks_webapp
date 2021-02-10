@@ -724,7 +724,6 @@ button.thin-btn:hover {
 	border-bottom-right-radius: 15px;
 	left: 0px;
 	position: fixed;
-	/* top: 51px; */
 	width: 100%;
 	max-width: 40%;
 	z-index: 1;
@@ -774,6 +773,7 @@ button.thin-btn:hover {
 }
 .store-links li {
 	line-height: 2em;
+	font-size: 16px;
 }
 .store-links li i {
 	color: #e708ae;
@@ -789,23 +789,19 @@ button.thin-btn:hover {
 }
 .store-links .hours span {
 	color: #555555;
+	margin-bottom: 0;
+	line-height: 20px;
 }
 .store-links li a {
 	display: inline;
 	color: #0000cd;
-	font-size: 16px;
 }
 .store-links li a:hover {
 	color: #e708ae;
 }
 
-.store-links li.hours span {
-	margin-bottom: 0;
-	font-size: 16px;
-	line-height: 20px;
-}
-
-/* Editing Store Info */
+/***** Editing Store Info *****/
+/* SAVE & EDIT button */
 .store-title #edit,
 .store-title #save {
 	color: #0000cd;
@@ -814,7 +810,7 @@ button.thin-btn:hover {
 	margin-top: 0;
 	text-transform: uppercase;
 }
-
+/* Buttons that are hidden by default */
 .store-title #save,
 .store-details .edit,
 .store-details #check,
@@ -838,11 +834,10 @@ button.thin-btn:hover {
 .store-details #remove {
 	font-size: 10px;
 }
-
+/* Editable inputs */
 .store-links .view,
 .store-links .show {
 	border-radius: 10px;
-	font-size: 17px;
 	width: 100%;
 	padding-left: 10px;
 }
@@ -855,7 +850,6 @@ button.thin-btn:hover {
 .qr-link {
 	margin-right: 20px;
 }
-
 .qr-link a {
 	color: #0000cd;
 }
