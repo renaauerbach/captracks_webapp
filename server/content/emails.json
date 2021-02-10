@@ -1,49 +1,49 @@
 {
-    "emails": [
-        {
-            "name": "forgot",
-            "subject": "Reset your CapTracks account password",
-            "text": [
-                "\nYou are receiving this because you (or someone else) requested to reset the password for your CapTracks account. \nPlease use the following link (valid for the next 60 minutes) to complete the process: \n\nhttp://",
-                "/auth/reset/",
-                "\n\nIf you did not make this request, please ignore this email, and your password will remain unchanged.\n"
-            ]
-        },
-        {
-            "name": "reset",
-            "subject": "Your password has been reset",
-            "text": [
-                "Hello! \n\nThis is a confirmation that the password for your CapTracks account ",
-                " has just been reset. \n\nIf you did not make this change, please contact support@captracks.com. \n\nThank you for using CapTracks!"
-            ]
-        },
-        {
-            "name": "join_admin",
-            "subject": "A new vendor joined CapTracks!",
-            "text": [
-                "We got a new vendor! \n\nVendor's Name: ",
-                "\nStore: ",
-                "\nAddress: ",
-                "\n\nSurvey 1 - Type of Business: ",
-                "\nSurvey 2 - Ad Services: ",
-                "\n\nNumber of Registers: ",
-                "\nMax Capacity: "
-            ]
-        },
-        {
-            "name": "join_customer",
-            "subject": "Welcome to CapTracks!",
-            "text": [
-                "Welcome to CapTracks! \n\nWe are so glad you joined the CapTracks ecosystem. \n\nIf you haven't had a chance already, take a look at your new store page: \n",
-                "\n\nYour page is where you'll be able to \n- Update your store's currecnt capacity \n- Post informatio to your forum \n- Add useful links for your customers (like a link to your store's weekly deals) \n- And update your store's information \n\nBe sure to bookmark your account page to access it easily. \n\nPlease note that CapTracks is still a work in progress. We hope you won't run into any issues with the site, but if you do, please help us out by emailing a screenshot of the error along with a few words describing the problem to support@captracks.com. \n\nIf you have any questions, comments, or concerns, please contact us at support@captracks.com. \n\nThank you for joining the CapTracks community! We look forward to working with you!\n\n- Team CapTracks"
-            ]
-        },
-        {
-            "name": "contact",
-            "text": [
-                " sent a message from CapTracks.com:\n\n",
-                "\n\nReply to: "
-            ]
-        }
-    ]
+	"emails": [
+		{
+			"name": "forgot",
+			"subject": "Reset your CapTracks account password",
+			"text": [
+				"\nYou are receiving this because you (or someone else) requested to reset the password for your CapTracks account. \nPlease use the following link (valid for the next 60 minutes) to complete the process: \n\nhttp://",
+				"/auth/reset/",
+				"\n\nIf you did not make this request, please ignore this email, and your password will remain unchanged.\n"
+			]
+		},
+		{
+			"name": "reset",
+			"subject": "Your password has been reset",
+			"text": [
+				"Hello! \n\nThis is a confirmation that the password for your CapTracks account ",
+				" has just been reset. \n\nIf you did not make this change, please contact support@captracks.com. \n\nThank you for using CapTracks!"
+			]
+		},
+		{
+			"name": "join_admin",
+			"subject": "A new vendor joined CapTracks!",
+			"text": [
+				"We got a new vendor! \n\nVendor's Name: ",
+				"\nStore: ",
+				"\nAddress: ",
+				"\n\nSurvey 1 - Type of Business: ",
+				"\nSurvey 2 - Ad Services: ",
+				"\n\nNumber of Registers: ",
+				"\nMax Capacity: "
+			]
+		},
+		{
+			"name": "join_customer",
+			"subject": "Welcome to CapTracks!",
+			"text": [
+				"Welcome to CapTracks! \n\nWe are so glad you joined the CapTracks ecosystem. \n\nIf you haven't had a chance already, take a look at your new store page: \n",
+				"\n\nYour page is where you'll be able to \n- Update your store's currecnt capacity \n- Post information to your forum \n- Add useful links for your customers (like a link to your store's weekly deals) \n- And update your store's information \n\nBe sure to bookmark your account page to access it easily. \n\nPlease note that CapTracks is still a work in progress. We hope you won't run into any issues with the site, but if you do, please help us out by emailing a screenshot of the error along with a few words describing the problem to support@captracks.com. \n\nIf you have any questions, comments, or concerns, please contact us at support@captracks.com. \n\nThank you for joining the CapTracks community! We look forward to working with you!\n\n- Team CapTracks"
+			]
+		},
+		{
+			"name": "contact",
+			"text": [
+				" sent a message from CapTracks.com:\n\n",
+				"\n\nReply to: "
+			]
+		}
+	]
 }
