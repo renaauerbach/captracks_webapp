@@ -25,12 +25,6 @@
 		}
 	});
 
-	/* ===== Dropdown Navbar ===== */
-	$('.dropbtn').on('click', function () {
-		const dropdown = $(this).parent().parent();
-		dropdown.toggleClass('show');
-	});
-
 	// /* ===== Form Popup ===== */
 	// $('.form-toggler').on('click', function() {
 	//     $('.form-popup').toggleClass('open');
@@ -121,31 +115,22 @@
 
 	/* ===== Capacity Progress Bar (Store Page) ===== */
 	if ($('.cap-progress')) {
-		// Max capacity
-		let max = parseInt($('.cap-max').text().split(' ')[0]);
-		// rawCap = exact number of people
-		var rawCap = parseInt($('.cap-bar').text().split(' ')[0]);
-		// calcCap = % based on max capacity
-		var calcCap = Math.round((rawCap / max) * 100);
-
+		// Current capacity - already calculated when POSTed to db (in details.js)
+		var cap = parseInt($('.cap-bar').text().split(' ')[0]);
 		// Set width of progress bar as capacity
-		calcCap == 0
+		cap == 0
 			? $('.cap-bar').css('width', '1%')
-			: $('.cap-bar').css('width', calcCap + '%');
+			: $('.cap-bar').css('width', cap + '%');
 
 		// Set color of progress bar
 		// Green = capacity < 50%
 		// Yellow = capacity between 50-80%
 		// Red = capacity > 80% capacity
 		let color =
-			calcCap < 50
-				? '#009900'
-				: calcCap > 50 && calcCap < 80
-				? '#fff500'
-				: '#fa2043';
+			cap < 50 ? '#009900' : cap > 50 && cap < 80 ? '#fff500' : '#fa2043';
 		$('.cap-bar').css('background-color', color);
 
-		// Change .cap-bar text to display calcCap
-		$('.cap-bar').text(calcCap + '%');
+		// Change .cap-bar text to display cap
+		$('.cap-bar').text(cap + '%');
 	}
 })(jQuery);

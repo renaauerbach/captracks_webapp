@@ -13,6 +13,7 @@ const Vendor = require('../models/vendor.model');
 
 // ===== Helper Functions & Data ===== //
 const createHash = require('../passport/controller').createHash;
+const { Console } = require('console');
 const emails = global.emails;
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -373,7 +374,6 @@ module.exports = function (passport) {
 							'ben@captracks.com',
 							'rena@captracks.com',
 						];
-
 						var text =
 							emails[2].text[0] +
 							req.body.firstName +
@@ -402,42 +402,63 @@ module.exports = function (passport) {
 						sgMail
 							.send(msg)
 							.then(() => {
-								console.log('Email sent');
-								next();
+								console.log(
+									'Email sent to Captrack Admin Sucessfully'
+								);
+								//next();
 							})
 							.catch((err) => {
-								console.error(err);
+								console.error(
+									'Error while sending email to Captrack Admin: ' +
+										err
+								);
 								return next(err);
 							});
 
-						// Confirmation email to Vendor
-						text =
-							emails[3].text[0] +
+						var vendorURL =
 							'https://' +
 							req.headers.host +
-							'/account' +
+							'/store/' +
+							store._id;
+						// Confirmation email to Vendor
+						var confirmtext =
+							emails[3].text[0] +
+							vendorURL +
+							//'https://' +
+							//req.headers.host +
+							//'/account' +
 							emails[3].text[1];
 
-						msg = {
+						console.log('Vendor URL:' + vendorURL);
+						confirmmsg = {
 							to: req.body.email,
 							from: 'info@captracks.com',
 							subject: emails[3].subject,
-							text: text,
+							text: confirmtext,
 							// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 						};
 
-						sgMail.send(msg, (err) => {
+						sgMail.send(confirmmsg, (err) => {
 							// Handle Error
 							if (err) {
+								console.log(
+									'Error while sending confirmation email to Vendor: ' +
+										err
+								);
 								return next(err);
+							} else {
+								console.log(
+									'Confirmation email sent to Vendor successfully'
+								);
+								done(err);
 							}
-							done(err);
 						});
 					},
 				],
 				function (err) {
 					// Handle Error
 					if (err) {
+						console.log('Final error function: ' + err);
 						return next(err);
 					}
 					res.redirect('/account');

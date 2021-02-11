@@ -6,13 +6,14 @@ const router = express.Router();
 const Store = require('../models/store.model');
 
 // ==================== MAP (GET) ==================== //
-router.get('/', (req, res) => {
+router.get('/', (req, res,next) => {
 	// Get all Stores
 	Store.find({})
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, stores) => {
 			if (err) {
-				return res.status(400).send(err);
+				//return res.status(400).send(err);
+				return next(err);
 			}
 			// Format Stores for Google
 			stores.map((store) => {
@@ -41,15 +42,18 @@ router.get('/', (req, res) => {
 });
 
 // ==================== STORE PAGE (GET) ==================== //
-router.get('/store/:id', (req, res) => {
+router.get('/store/:id', (req, res,next) => {
+
 	// Get Store by ID
 	Store.findById(req.params.id)
 		.populate({ path: 'details', model: 'details' })
 		.populate({ path: 'forum', model: 'messages' })
 		.exec((err, store) => {
-			if (err) {
-				return res.status(400).send(err);
+			if (err || store==null) {
+				 //res.status(400).send(error());;
+			return next(err);
 			}
+			else{
 			res.render('store', {
 				layout: 'layout',
 				title: store.name,
@@ -57,19 +61,22 @@ router.get('/store/:id', (req, res) => {
 				details: store.details[0],
 				user: req.isAuthenticated(),
 				qr: req.query.qr ? true : false,
-			});
+			
+			});}
 		});
+	
 });
 
 // ==================== EXIT STORE PAGE (GET) ==================== //
-router.get('/store/:id/exit', (req, res) => {
+router.get('/store/:id/exit', (req, res,next) => {
 	// Get Store by ID
 	Store.findById(req.params.id)
 		.populate({ path: 'details', model: 'details' })
 		.populate({ path: 'forum', model: 'messages' })
 		.exec((err, store) => {
-			if (err) {
-				return res.status(400).send(err);
+			if (err || store==null) {
+				//return res.status(400).send(err);
+				return next(err);
 			}
 			res.render('exit', {
 				layout: 'layout',
@@ -80,5 +87,7 @@ router.get('/store/:id/exit', (req, res) => {
 			});
 		});
 });
+
+
 
 module.exports = router;
