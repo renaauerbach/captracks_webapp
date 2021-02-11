@@ -9,10 +9,7 @@ const Store = require('../models/store.model');
 // ===== Helper Functions ===== //
 // Calculate capacity
 function calcCapacity(max, capacity) {
-	console.log('details from calcCapacity - max: ', max);
-	console.log('details from calcCapacity - capacity: ', capacity);
 	let cap = (capacity / max) * 100; // Divide current capacity by max capacity
-	console.log('details from calcCapacity - calculated: ', cap);
 	return Math.round(cap);
 }
 
