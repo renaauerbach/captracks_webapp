@@ -789,7 +789,7 @@ button.thin-btn:hover {
 }
 .store-links .hours span {
 	color: #555555;
-	margin-bottom: 0;
+	margin-bottom: 3px;
 	line-height: 20px;
 }
 .store-links li a {
@@ -834,16 +834,36 @@ button.thin-btn:hover {
 .store-details #remove {
 	font-size: 10px;
 }
-/* Editable inputs */
-.store-links .view,
-.store-links .show {
+/* Editable Inputs/Selects */
+.store-details input,
+.store-details select {
 	border-radius: 10px;
-	width: 100%;
 	padding-left: 10px;
 }
-.store-links .view:focus,
-.store-links .show:focus {
+.store-details input:focus,
+.store-details .time input:focus,
+.store-details select:focus,
+.store-details .time select:focus {
 	border-radius: 10px;
+}
+.store-details input.edit,
+.store-details select.edit {
+	width: 100%;
+	max-width: 80%;
+}
+.store-details .time input {
+	width: 20%;
+	max-width: 50%;
+}
+/* Meridian Select Inputs */
+.store-details select {
+	border: 1px solid #b116e0;
+	font-size: 14px;
+	padding: 0px;
+}
+.store-details .time select {
+	width: 16%;
+	max-width: 50%;
 }
 
 /* ==== QR CODES ==== */

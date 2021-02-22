@@ -12,7 +12,7 @@ const Details = require('../models/details.model');
 const Vendor = require('../models/vendor.model');
 
 // ==================== VENDOR ACCOUNT (GET) ==================== //
-router.get('/', (req, res,next) => {
+router.get('/', (req, res, next) => {
 	// Check Vendor Authentication
 	if (req.session.user !== undefined) {
 		// Get all store info and populate all fields
@@ -21,7 +21,6 @@ router.get('/', (req, res,next) => {
 			.populate({ path: 'vendor', model: 'vendors' })
 			.populate({ path: 'forum', model: 'messages' })
 			.exec((err, store) => {
-
 				if (err || store == null) {
 					//return res.status(400).send(err);
 					return next(err);
@@ -126,7 +125,7 @@ router.post('/remove/:id/:link', (req, res) => {
 });
 
 // ==================== SCAN ENTRY QR (GET) ==================== //
-router.get('/entryqr/:id', (req, res,next) => {
+router.get('/entryqr/:id', (req, res, next) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, store) => {
@@ -169,7 +168,7 @@ router.get('/entryqr/:id', (req, res,next) => {
 //Scan EntryQR code function Ends here.
 
 // ==================== SCAN EXIT QR (GET) ==================== //
-router.get('/exitqr/:id', (req, res,next) => {
+router.get('/exitqr/:id', (req, res, next) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, store) => {
@@ -314,7 +313,7 @@ router.get('/downloadEntryQR', (req, res, next) => {
 
 // ==================== DOWNLOAD EXIT QR (GET) ==================== //
 //Download pdf file for ExitQR code starts here
-router.get('/downloadExitQR', (req, res,next) => {
+router.get('/downloadExitQR', (req, res, next) => {
 	if (req.isAuthenticated()) {
 		Store.findOne({ vendor: req.user._id })
 			.populate({ path: 'vendor', model: 'vendors' })
@@ -421,7 +420,5 @@ router.get('/downloadExitQR', (req, res,next) => {
 			});
 	}
 });
-
-
 
 module.exports = router;

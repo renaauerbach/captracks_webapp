@@ -164,6 +164,9 @@
 	.store-details {
 		max-width: 50%;
 	}
+	.store-details .hours span.edit {
+		/* max-width: 90%; */
+	}
 }
 
 /*================ Phones ================*/
