@@ -1,5 +1,6 @@
 // ===== Modules ===== //
 const express = require('express');
+const tz = require('moment-timezone');
 // ===== Router ===== //
 const router = express.Router();
 // ===== Models ===== //
@@ -15,7 +16,7 @@ router.post('/', async (req, res) => {
 			partition: process.env.DB_PARTITION,
 			title: req.body.title,
 			text: req.body.text,
-			createdOn: new Date(),
+			createdOn: new Date().getTimezoneOffset(),
 		});
 		// Save Message to DB
 		newMessage.save(
