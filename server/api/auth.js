@@ -214,6 +214,11 @@ module.exports = function (passport) {
 				[
 					function (done) {
 						// New Details Object
+						const now = new Date();
+						console.log(
+							'AUTH - JOIN OFFSET:',
+							now.getTimezoneOffset()
+						);
 						const newDetails = new Details({
 							partition: process.env.DB_PARTITION,
 							maxCapacity: req.body.max,
@@ -221,7 +226,8 @@ module.exports = function (passport) {
 							waitTime: 0,
 							maxRegisters: req.body.reg,
 							registers: req.body.reg,
-							updated: new Date(),
+							updated: now,
+							offset: now.getTimezoneOffset(),
 						});
 						// Save Details to DB
 						newDetails.save((err) => {
@@ -429,7 +435,6 @@ module.exports = function (passport) {
 							//'/account' +
 							emails[3].text[1];
 
-						console.log('Vendor URL:' + vendorURL);
 						confirmmsg = {
 							to: req.body.email,
 							from: 'info@captracks.com',

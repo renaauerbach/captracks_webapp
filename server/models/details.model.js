@@ -1,6 +1,6 @@
 // ===== Modules ===== //
 const mongoose = require('mongoose');
-const tz = require('moment-timezone');
+const moment = require('moment-timezone');
 const Schema = mongoose.Schema;
 
 // DETAILS SCHEMA
@@ -12,7 +12,8 @@ const detailsSchema = new mongoose.Schema({
 	waitTime: { type: Number, required: true },
 	maxRegisters: { type: Number, required: true },
 	registers: { type: Number },
-	updated: { type: Date, default: Date.now, offset: now.getTimezoneOffset() },
+	updated: { type: Date, default: Date.now, required: true },
+	offset: { type: Number, required: true },
 });
 
 module.exports = mongoose.model('details', detailsSchema, 'details');

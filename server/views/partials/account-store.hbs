@@ -19,10 +19,10 @@
 
         <!-- Forum Form & Data -->
         {{> store_title label="Forum"}}
-        {{> form_forum}}
+        {{> form_forum tz=details.offset}}
         <hr>
         {{#each store.forum as |msg|}}
-        {{> forum_post account=true msg=msg}}
+            {{> forum_post account=true msg=msg}}
         {{/each}}
     </div>
     <!-- Column End -->
