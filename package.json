@@ -18,6 +18,7 @@
         "express-session": "^1.17.1",
         "hbs": "^4.1.1",
         "jspdf": "^2.1.1",
+        "moment-timezone": "^0.5.33",
         "mongod": "^2.0.0",
         "mongodb": "^3.6.3",
         "mongoose": "^5.10.4",
