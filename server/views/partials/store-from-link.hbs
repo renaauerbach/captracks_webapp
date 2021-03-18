@@ -10,7 +10,7 @@
     {{> store_title label="Forum"}}
     {{#if store.forum}}
         {{#each store.forum as |msg|}}
-            {{> forum_post msg=msg tz=details.offset}}
+            {{> forum_post msg=msg}}
         {{/each}}
     {{else}}
         <p class="no-forum">No forum posts yet. Check back soon for an
