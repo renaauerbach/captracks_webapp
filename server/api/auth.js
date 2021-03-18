@@ -275,7 +275,7 @@ module.exports = function (passport) {
 							const hours = [];
 							var twenty_four = false;
 							if (!req.body['24hours']) {
-								const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
+								const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
 								for (let i = 0; i < days.length; i++) {
 									const curr = req.body[days[i]];
