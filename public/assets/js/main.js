@@ -79,16 +79,16 @@
 	$('#edit').click(function () {
 		$(this).hide();
 		$('#save').show();
-		$('.edit').removeClass('edit').addClass('view');
-		$('.saved').removeClass('saved').addClass('edit');
+		$('.edit').show();
+		$('.saved').hide();
 	});
 
 	$('#save').click(function () {
 		$('.store-form').submit();
 		$(this).hide();
 		$('#edit').show();
-		$('.edit').removeClass('edit').addClass('saved');
-		$('.view').removeClass('view').addClass('edit');
+		$('.edit').hide();
+		$('.saved').show();
 	});
 
 	/* ===== Add Store Link ===== */

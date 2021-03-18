@@ -1,120 +1,132 @@
 <!--====== STORE CONTENT - STORE INFO ======-->
 <div class="store-details d-flex justify-content-around collapsed">
-
     <!-- Store Links -->
     <div class="store-links">
         <!-- Title -->
         {{> store_title label="Store Info"}}
         <ul>
             <!-- Form Start - Store Details -->
-            <form class='store form' action="/account/{{store._id}}" method="POST">
-
+            <form class="store form" action="/account/{{store._id}}" method="POST">
                 <!-- Store Address -->
                 <li class="d-flex justify-content-start align-items-center">
                     <i class="fas fa-map-marker-alt"></i>
                     <!-- Editable Input -->
-                    <input type="text" id="address" class="edit" name="address" value="{{store.address}}" required/>
+                    <input type="text" id="address" class="edit" name="address" value="{{store.address}}"
+                           required />
                     <!-- Text -->
                     <p class="saved">{{store.address}}</p>
                 </li>
-
                 <!-- Store Phone -->
                 <li class="d-flex justify-content-start align-items-center">
                     <i class="fas fa-phone"></i>
                     <!-- Editable Input -->
-                    <input type="text" id="phone" class="edit" name="phone" value="{{store.phone}}" required/>
+                    <input type="text" id="phone" class="edit" name="phone" value="{{store.phone}}"
+                           required />
                     <!-- Text Link -->
                     <a href="tel:{{store.phone}}" class="saved">{{store.phone}}</a>
                 </li>
-
                 <!-- Store Website -->
                 <li class="d-flex justify-content-start align-items-center">
                     <i class="fas fa-globe"></i>
                     <!-- Editable Input -->
-                    <input type="text" id="url" class="edit" name="url" value="{{store.url}}" required/>
-                    <!-- Text - Link -->
+                    <input type="text" id="url" class="edit" name="url" value="{{store.url}}" required />
+                    <!-- Text Link -->
                     <a href="{{store.url}}" class="saved">{{store.url}}</a>
                 </li>
-
                 <!-- Store Hours -->
                 <li class="d-flex justify-content-start align-items-baseline">
                     <i class="far fa-hourglass"></i>
-
                     <ul>
                         <p>Store Hours:</p>
                         {{#if store.twenty_four}}
-                        <li>Open 24/7</li>
+                            <li>Open 24/7</li>
                         {{else}}
-                        {{#each store.hours as |day|}}
-                        <li class="hours d-flex justify-content-between">
-                            {{#if (or (eq day.open undefined) (eq day.open 'o n'))}}
-                            <span class="day">{{day.day}}:</span> <span>Closed</span>
-                            {{else}}
-                            <span class="day">{{day.day}}:</span> <span>{{day.open}}
-                                - {{day.close}}</span>
-                            {{/if}}
-                        </li>
-                        {{/each}}
+                            {{#each store.hours as |day|}}
+                                <li class="hours d-flex justify-content-between">
+                                    <!-- Text - Day of Week -->
+                                    <span class="day">{{day.day}}:</span>
+                                    <span class="time d-flex justify-content-start">
+                                        {{#if (or (eq day.open undefined) (eq day.open 'o n'))}}
+                                            <!-- Editable Input -->
+                                            <input type="text" class="edit" name={{day.day}} minlength="4"
+                                                   maxlength="5" value="">
+                                            {{> input_meridiem name=day.day class="select edit"}}
+                                            <p class="edit">-</p>
+                                            <input type="text" class="edit" name={{day.day}} value=""
+                                                   minlength="4" maxlength="5">
+                                            {{> input_meridiem name=day.day class="select edit"}}
+                                            <!-- Text -->
+                                            <span class="saved">Closed</span>
+                                        {{else}}
+                                            <!-- Editable Input -->
+                                            <input type="text" class="edit" name={{day.day}}
+                                                   value={{day.open}} minlength="4" maxlength="5">
+                                            {{> input_meridiem name=day.day class="select edit"}}
+                                            <p class="edit">-</p>
+                                            <input type="text" class="edit" name={{day.day}}
+                                                   value={{day.close}} minlength="4" maxlength="5">
+                                            {{> input_meridiem name=day.day class="select edit"}}
+                                            <!-- Text -->
+                                            <span class="saved"> {{day.open}} - {{day.close}} </span>
+                                        {{/if}}
+                                    </span>
+                                </li>
+                            {{/each}}
                         {{/if}}
                     </ul>
                 </li>
-
-            </ul>
+        </ul>
         </form>
         <!-- Form End -->
-
         <!-- Store Links -->
         {{#if (eq (len store.links) 0)}}
         {{else}}
-        {{#each store.links as |link|}}
-        <!-- Form Start - Remove Link -->
-        <form class="delete-link" action="/account/remove/{{../store._id}}/{{link.url}}" method="POST">
-            <li class="d-flex justify-content-start align-items-center">
-                <i class="fas fa-link"></i>
-                <a href={{link.url}} alt={{link.url}} class="saved">{{link.title}}</a>
-                <a href="javascript:void(0);" id="remove-link">
-                    <i class="fas fa-minus-circle" id='remove'></i>
-                </a>
-            </li>
-        </form>
-        <!-- Form End -->
-        {{/each}}
+            {{#each store.links as |link|}}
+                <!-- Form Start - Remove Link -->
+                <form class="delete-link" action="/account/remove/{{../store._id}}/{{link.url}}"
+                      method="POST">
+                    <li class="d-flex justify-content-start align-items-center">
+                        <i class="fas fa-link"></i>
+                        <a href={{link.url}} alt={{link.url}} class="saved">{{link.title}}</a>
+                        <a href="javascript:void(0);" id="remove-link">
+                            <i class="fas fa-minus-circle" id='remove'></i>
+                        </a>
+                    </li>
+                </form>
+                <!-- Form End -->
+            {{/each}}
         {{/if}}
-
         {{#if (eq title 'My Account')}}
-        <!-- Form Start - Add Link -->
-        <form class="link" action="/account/{{store._id}}" method="POST">
-
-            <!-- Input Row - Link Title -->
-            <li class="d-flex justify-content-start align-items-center">
-                <input type="text" id="linkTitle" class="hide-link" name="linkTitle" placeholder="Link Title" required/>
-            </li>
-
-            <!-- Input Row -->
-            <li class="d-flex justify-content-start align-items-center">
-                <!-- Input - Link URL -->
-                <input type="text" id="linkUrl" class="hide-link" name="linkUrl" placeholder="URL" required/>
-                <!-- Button - Confirm -->
-                <i class="fas fa-check" id="check"></i>
-                <!-- Button - Cancel -->
-                <i class="fas fa-times" id="cancel"></i>
-            </li>
-
-            <!-- Button - Add Link -->
-            <li class="d-flex align-items-center">
-                <i class="fas fa-plus"></i>
-                <a href="javascript:void(0);" id="add">Add Link</a>
-            </li>
-        </form>
-        <!-- Form End -->
+            <!-- Form Start - Add Link -->
+            <form class="link" action="/account/{{store._id}}" method="POST">
+                <!-- Input Row - Link Title -->
+                <li class="d-flex justify-content-start align-items-center">
+                    <input type="text" id="linkTitle" class="hide-link" name="linkTitle"
+                           placeholder="Link Title" required />
+                </li>
+                <!-- Input Row -->
+                <li class="d-flex justify-content-start align-items-center">
+                    <!-- Input - Link URL -->
+                    <input type="text" id="linkUrl" class="hide-link" name="linkUrl" placeholder="URL"
+                           required />
+                    <!-- Button - Confirm -->
+                    <i class="fas fa-check" id="check"></i>
+                    <!-- Button - Cancel -->
+                    <i class="fas fa-times" id="cancel"></i>
+                </li>
+                <!-- Button - Add Link -->
+                <li class="d-flex align-items-center">
+                    <i class="fas fa-plus"></i>
+                    <a href="javascript:void(0);" id="add">Add Link</a>
+                </li>
+            </form>
+            <!-- Form End -->
         {{/if}}
-
     </div>
+    <!-- Expand Detail Button -->
     <a href="#" class="btn-expand-collapse">
         <p>
-            <i class="fas fa-angle-down"></i>
-            Store Details
-            <i class="fas fa-angle-down"></i>
+            <i class="fas fa-angle-down"></i> Store Details <i class="fas fa-angle-down"></i>
         </p>
     </a>
 </div>
