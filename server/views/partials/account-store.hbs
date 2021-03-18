@@ -13,13 +13,13 @@
 
         <!-- Capacity Form & Data -->
         {{> store_title label="Capacity"}}
-        {{> form_capacity details=details}}
+        {{> form_capacity details=details address=store.address}}
         <hr>
         {{> store_capacity details=details}}
 
         <!-- Forum Form & Data -->
         {{> store_title label="Forum"}}
-        {{> form_forum tz=details.offset}}
+        {{> form_forum address=store.address}}
         <hr>
         {{#each store.forum as |msg|}}
             {{> forum_post account=true msg=msg}}

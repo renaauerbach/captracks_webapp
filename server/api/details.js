@@ -25,6 +25,7 @@ function calcWait(max, body) {
 
 // ==================== UPDATE CAPACITY (POST) ==================== //
 router.post('/', async (req, res) => {
+	console.log('/details: ADDR: ', req.body.address);
 	// Check Vendor Authentication
 	if (req.isAuthenticated()) {
 		// New Details Object
@@ -36,7 +37,7 @@ router.post('/', async (req, res) => {
 			waitTime: calcWait(maxCap, req.body),
 			maxRegisters: req.body.maxReg,
 			registers: req.body.register === 'on' ? req.body.registers : 0,
-			updated: new Date(),
+			updated: new Date().toString(),
 		});
 
 		// Save Updates to DB

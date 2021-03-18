@@ -8,7 +8,7 @@ const messageSchema = new mongoose.Schema({
 	partition: { type: String, required: true },
 	title: { type: String, required: true },
 	text: { type: String, required: true },
-	createdOn: { type: Date, default: Date.now, required: true },
+	createdOn: { type: String, required: true },
 });
 
 module.exports = mongoose.model('messages', messageSchema, 'messages');

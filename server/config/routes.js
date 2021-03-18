@@ -9,9 +9,9 @@ const parser = require('./parser.js');
 
 // ===== Global Variables ===== //
 // Email Contents
-global.emails = JSON.parse(
-	fs.readFileSync(path.join(__dirname, '../content/emails.json'))
-)['emails'];
+global.emails = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/emails.json')))[
+	'emails'
+];
 
 // ===== Routers ===== //
 const authRouter = require('../api/auth')(passport);

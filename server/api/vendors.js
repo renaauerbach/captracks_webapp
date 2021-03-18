@@ -12,7 +12,7 @@ const Details = require('../models/details.model');
 const Vendor = require('../models/vendor.model');
 
 // ==================== VENDOR ACCOUNT (GET) ==================== //
-router.get('/', (req, res,next) => {
+router.get('/', (req, res, next) => {
 	// Check Vendor Authentication
 	if (req.session.user !== undefined) {
 		// Get all store info and populate all fields
@@ -21,7 +21,6 @@ router.get('/', (req, res,next) => {
 			.populate({ path: 'vendor', model: 'vendors' })
 			.populate({ path: 'forum', model: 'messages' })
 			.exec((err, store) => {
-
 				if (err || store == null) {
 					//return res.status(400).send(err);
 					return next(err);
@@ -126,7 +125,7 @@ router.post('/remove/:id/:link', (req, res) => {
 });
 
 // ==================== SCAN ENTRY QR (GET) ==================== //
-router.get('/entryqr/:id', (req, res,next) => {
+router.get('/entryqr/:id', (req, res, next) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, store) => {
@@ -145,8 +144,7 @@ router.get('/entryqr/:id', (req, res,next) => {
 						// Handle Error
 						if (err) {
 							console.log(
-								'Save Error while invoking entryqr api - detail model :' +
-									err
+								'Save Error while invoking entryqr api - detail model :' + err
 							);
 							//return res.status(400).send(err);
 							return next(err);
@@ -169,7 +167,7 @@ router.get('/entryqr/:id', (req, res,next) => {
 //Scan EntryQR code function Ends here.
 
 // ==================== SCAN EXIT QR (GET) ==================== //
-router.get('/exitqr/:id', (req, res,next) => {
+router.get('/exitqr/:id', (req, res, next) => {
 	Store.findOne({ vendor: req.params.id })
 		.populate({ path: 'details', model: 'details' })
 		.exec((err, store) => {
@@ -186,10 +184,7 @@ router.get('/exitqr/:id', (req, res,next) => {
 					newdetails.save((err) => {
 						// Handle Error
 						if (err) {
-							console.log(
-								'Save Error while invoking exit detail model :' +
-									err
-							);
+							console.log('Save Error while invoking exit detail model :' + err);
 							//return res.status(400).send(err);
 							return next(err);
 						}
@@ -217,10 +212,7 @@ router.get('/downloadEntryQR', (req, res, next) => {
 					}
 					// Create new PDF for QR code
 					var doc = new jsPDF();
-					var logoPath = path.join(
-						__dirname,
-						'../../public/assets/img/logo-pdf.png'
-					);
+					var logoPath = path.join(__dirname, '../../public/assets/img/logo-pdf.png');
 					var bitmap = fs.readFileSync(logoPath);
 					var logoBase64 = new Buffer.from(bitmap).toString('base64');
 
@@ -256,14 +248,7 @@ router.get('/downloadEntryQR', (req, res, next) => {
 					);
 
 					// QR code
-					doc.addImage(
-						store.vendor.entryqrcode,
-						'PNG',
-						30,
-						95,
-						150,
-						150
-					);
+					doc.addImage(store.vendor.entryqrcode, 'PNG', 30, 95, 150, 150);
 
 					// Footer row text
 					doc.setFontSize(20);
@@ -275,27 +260,21 @@ router.get('/downloadEntryQR', (req, res, next) => {
 					);
 
 					let saveStatus = doc
-						.save(
-							req.user._id + process.env.QR_DOC_ENTRY_FILE_NAME,
-							{
-								returnPromise: true,
-							}
-						)
+						.save(req.user._id + process.env.QR_DOC_ENTRY_FILE_NAME, {
+							returnPromise: true,
+						})
 						.then(function (obj) {
 							res.download(
 								path.join(
 									__dirname,
-									'../' +
-										req.user._id +
-										process.env.QR_DOC_ENTRY_FILE_NAME
+									'../' + req.user._id + process.env.QR_DOC_ENTRY_FILE_NAME
 								),
 								(err) => {
 									if (err) {
 										console.log(err);
 									} else {
 										let relPath =
-											req.user._id +
-											process.env.QR_DOC_ENTRY_FILE_NAME;
+											req.user._id + process.env.QR_DOC_ENTRY_FILE_NAME;
 										fs.unlink(relPath, (err) => {
 											if (err) {
 												console.error(err);
@@ -314,7 +293,7 @@ router.get('/downloadEntryQR', (req, res, next) => {
 
 // ==================== DOWNLOAD EXIT QR (GET) ==================== //
 //Download pdf file for ExitQR code starts here
-router.get('/downloadExitQR', (req, res,next) => {
+router.get('/downloadExitQR', (req, res, next) => {
 	if (req.isAuthenticated()) {
 		Store.findOne({ vendor: req.user._id })
 			.populate({ path: 'vendor', model: 'vendors' })
@@ -327,10 +306,7 @@ router.get('/downloadExitQR', (req, res,next) => {
 
 					// Create new PDF for QR code
 					var doc = new jsPDF();
-					var logoPath = path.join(
-						__dirname,
-						'../../public/assets/img/logo-pdf.png'
-					);
+					var logoPath = path.join(__dirname, '../../public/assets/img/logo-pdf.png');
 					var bitmap = fs.readFileSync(logoPath);
 					var logoBase64 = new Buffer.from(bitmap).toString('base64');
 
@@ -344,15 +320,10 @@ router.get('/downloadExitQR', (req, res,next) => {
 					// First row text
 					doc.setFontSize(28);
 					var exitMsg1 = 'Thank you for visiting ' + store.name + '!';
-					doc.text(
-						exitMsg1,
-						doc.internal.pageSize.getWidth() / 2,
-						70,
-						{
-							maxWidth: 200,
-							align: 'center',
-						}
-					);
+					doc.text(exitMsg1, doc.internal.pageSize.getWidth() / 2, 70, {
+						maxWidth: 200,
+						align: 'center',
+					});
 
 					// Second row text
 					doc.setFontSize(20);
@@ -366,14 +337,7 @@ router.get('/downloadExitQR', (req, res,next) => {
 					);
 
 					// QR Code
-					doc.addImage(
-						store.vendor.exitqrcode,
-						'PNG',
-						30,
-						95,
-						150,
-						150
-					);
+					doc.addImage(store.vendor.exitqrcode, 'PNG', 30, 95, 150, 150);
 
 					// Footer row text
 					doc.setFontSize(20);
@@ -385,19 +349,14 @@ router.get('/downloadExitQR', (req, res,next) => {
 					);
 
 					let saveStatus = doc
-						.save(
-							req.user._id + process.env.QR_DOC_EXIT_FILE_NAME,
-							{
-								returnPromise: true,
-							}
-						)
+						.save(req.user._id + process.env.QR_DOC_EXIT_FILE_NAME, {
+							returnPromise: true,
+						})
 						.then(function (obj) {
 							res.download(
 								path.join(
 									__dirname,
-									'../' +
-										req.user._id +
-										process.env.QR_DOC_EXIT_FILE_NAME
+									'../' + req.user._id + process.env.QR_DOC_EXIT_FILE_NAME
 								),
 								(err) => {
 									if (err) {
@@ -405,8 +364,7 @@ router.get('/downloadExitQR', (req, res,next) => {
 										console.log(err);
 									} else {
 										let relPath =
-											req.user._id +
-											process.env.QR_DOC_EXIT_FILE_NAME;
+											req.user._id + process.env.QR_DOC_EXIT_FILE_NAME;
 										fs.unlink(relPath, (err) => {
 											if (err) {
 												console.error(err);
@@ -421,7 +379,5 @@ router.get('/downloadExitQR', (req, res,next) => {
 			});
 	}
 });
-
-
 
 module.exports = router;
