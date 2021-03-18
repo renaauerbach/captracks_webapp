@@ -151,8 +151,7 @@ module.exports = function (passport) {
 					);
 				},
 				function (user, done) {
-					const text =
-						emails[1].text[0] + user.email + emails[1].text[1];
+					const text = emails[1].text[0] + user.email + emails[1].text[1];
 
 					const msg = {
 						to: user.email,
@@ -228,17 +227,11 @@ module.exports = function (passport) {
 							// Handle Error
 							if (err) {
 								// Delete Vendor
-								Vendor.deleteOne(
-									{ _id: req.user._id },
-									(err) => {
-										console.log(err);
-										req.flash(
-											'error',
-											process.env.STORE_REG_ERROR
-										);
-										return res.redirect('/auth/join');
-									}
-								);
+								Vendor.deleteOne({ _id: req.user._id }, (err) => {
+									console.log(err);
+									req.flash('error', process.env.STORE_REG_ERROR);
+									return res.redirect('/auth/join');
+								});
 							}
 						});
 
@@ -256,19 +249,11 @@ module.exports = function (passport) {
 									if (err || !store) {
 										// Delete Vendor
 										// TODO: BROKEN
-										Vendor.deleteOne(
-											{ _id: req.user._id },
-											(err) => {
-												console.log(err);
-												req.flash(
-													'error',
-													process.env.STORE_REG_ERROR
-												);
-												return res.redirect(
-													'/auth/join'
-												);
-											}
-										);
+										Vendor.deleteOne({ _id: req.user._id }, (err) => {
+											console.log(err);
+											req.flash('error', process.env.STORE_REG_ERROR);
+											return res.redirect('/auth/join');
+										});
 									}
 									done(err, store);
 								}
@@ -289,15 +274,7 @@ module.exports = function (passport) {
 							const hours = [];
 							var twenty_four = false;
 							if (!req.body['24hours']) {
-								const days = [
-									'Sun',
-									'Mon',
-									'Tues',
-									'Wed',
-									'Thur',
-									'Fri',
-									'Sat',
-								];
+								const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
 								for (let i = 0; i < days.length; i++) {
 									const curr = req.body[days[i]];
@@ -320,31 +297,19 @@ module.exports = function (passport) {
 								// Handle Error
 								if (err) {
 									// Delete Vendor
-									Vendor.deleteOne(
-										{ _id: req.user._id },
-										(err) => {
-											req.flash(
-												'error',
-												process.env.STORE_REG_ERROR
-											);
-											return res.redirect('/auth/join');
-										}
-									);
+									Vendor.deleteOne({ _id: req.user._id }, (err) => {
+										req.flash('error', process.env.STORE_REG_ERROR);
+										return res.redirect('/auth/join');
+									});
 								}
 								// Handle Store Exists
 								if (store) {
 									// Delete Vendor
-									Vendor.deleteOne(
-										{ _id: req.user._id },
-										(err) => {
-											console.log(err);
-											req.flash(
-												'error',
-												process.env.STORE_REG_EXISTS
-											);
-											return res.redirect('/auth/join');
-										}
-									);
+									Vendor.deleteOne({ _id: req.user._id }, (err) => {
+										console.log(err);
+										req.flash('error', process.env.STORE_REG_EXISTS);
+										return res.redirect('/auth/join');
+									});
 								}
 								// New Store Object
 								const newStore = new Store({
@@ -402,24 +367,17 @@ module.exports = function (passport) {
 						sgMail
 							.send(msg)
 							.then(() => {
-								console.log(
-									'Email sent to Captrack Admin Sucessfully'
-								);
+								console.log('Email sent to Captrack Admin Sucessfully');
 								//next();
 							})
 							.catch((err) => {
 								console.error(
-									'Error while sending email to Captrack Admin: ' +
-										err
+									'Error while sending email to Captrack Admin: ' + err
 								);
 								return next(err);
 							});
 
-						var vendorURL =
-							'https://' +
-							req.headers.host +
-							'/store/' +
-							store._id;
+						var vendorURL = 'https://' + req.headers.host + '/store/' + store._id;
 						// Confirmation email to Vendor
 						var confirmtext =
 							emails[3].text[0] +
@@ -442,14 +400,11 @@ module.exports = function (passport) {
 							// Handle Error
 							if (err) {
 								console.log(
-									'Error while sending confirmation email to Vendor: ' +
-										err
+									'Error while sending confirmation email to Vendor: ' + err
 								);
 								return next(err);
 							} else {
-								console.log(
-									'Confirmation email sent to Vendor successfully'
-								);
+								console.log('Confirmation email sent to Vendor successfully');
 								done(err);
 							}
 						});
