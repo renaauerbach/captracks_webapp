@@ -9,9 +9,12 @@ posts.forEach((created) => {
 
 	// Collect relevant date data
 	const fullDate = date.slice(0, 4).join(' ');
+	console.log('FORMAT.JS: ', fullDate);
 
 	// Get timezone
 	var tz = date.slice(6, 9);
+	console.log('FORMAT.JS - TZ: ', tz);
+
 	const timezone = '(' + tz[0][1] + tz[1][0] + tz[2][0] + ')';
 
 	// Collect relevant time data

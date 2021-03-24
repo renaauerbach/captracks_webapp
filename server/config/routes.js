@@ -9,9 +9,9 @@ const parser = require('./parser.js');
 
 // ===== Global Variables ===== //
 // Email Contents
-global.emails = JSON.parse(
-	fs.readFileSync(path.join(__dirname, '../content/emails.json'))
-)['emails'];
+global.emails = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/emails.json')))[
+	'emails'
+];
 
 // ===== Routers ===== //
 const authRouter = require('../api/auth')(passport);
@@ -28,15 +28,16 @@ module.exports = function (app) {
 	app.use('/post', messageRouter);
 	app.use('/details', detailsRouter);
 
-	// SAKTHI: /ERROR GOES IN HERE?
-	//	app.use((req, res, next) => {
-	//	next();
-	//	});
-
-	// Added for error handling if any exception while calling api
+	// Error Handling - any exception while calling API
 	app.use((err, req, res, next) => {
-		console.error('Error Status:' + err);
+		console.error('Error: ' + err);
 		res.render('error');
+	});
+
+	// 404 Errors - invalid URL or no data from DB for certain cases
+	app.use((req, res, next) => {
+		console.log('Tried accessing invalid URL: ' + req.path);
+		res.render('404');
 	});
 
 	// ==================== WHY USE CAPTRACKS ==================== //
@@ -127,20 +128,5 @@ module.exports = function (app) {
 				console.error(err);
 				return next(err);
 			});
-	});
-
-	// ==================== ERROR (GET) ==================== //
-	app.get('/error', (req, res) => {
-		res.render('error', {
-			layout: 'layout',
-			title: 'Error',
-			user: req.isAuthenticated(),
-		});
-	});
-
-	// Added for the 404 page for invalid URL and Nodata from DB for certain cases
-	app.use(function (req, res, next) {
-		console.log('Tried access this invalid URL: ' + req.path);
-		res.render('404');
 	});
 };

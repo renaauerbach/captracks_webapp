@@ -707,6 +707,11 @@ button.thin-btn:hover {
 	position: absolute;
 }
 
+.back.color,
+.back.color a {
+	color: #0000cd;
+}
+
 .back a {
 	text-decoration: none;
 	color: #ffffff;
@@ -714,7 +719,6 @@ button.thin-btn:hover {
 
 .back a:hover {
 	text-decoration: underline;
-	color: #ffffff;
 }
 
 /* Store Details Sidebar */
@@ -1153,4 +1157,10 @@ footer {
 
 .credit {
 	font-size: 10px;
+}
+
+/* ====== TERMS / PRIVACY ====== */
+.stand-alone-text {
+	text-align: center;
+	margin: 2em;
 }

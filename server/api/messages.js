@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 			partition: process.env.DB_PARTITION,
 			title: req.body.title,
 			text: req.body.text,
-			createdOn: new Date(),
+			createdOn: new Date().toString(),
 		});
 		// Save Message to DB
 		newMessage.save(
@@ -37,10 +37,7 @@ router.post('/', async (req, res) => {
 					(err) => {
 						// Handle Error
 						if (err) {
-							req.flash(
-								'errorForum',
-								process.env.FORUM_POST_ERROR
-							);
+							req.flash('errorForum', process.env.FORUM_POST_ERROR);
 							console.log('Error posting Message to forum:', err);
 						}
 						return res.redirect('/account');

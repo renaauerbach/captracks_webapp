@@ -6,7 +6,7 @@ const router = express.Router();
 const Store = require('../models/store.model');
 
 // ==================== MAP (GET) ==================== //
-router.get('/', (req, res,next) => {
+router.get('/', (req, res, next) => {
 	// Get all Stores
 	Store.find({})
 		.populate({ path: 'details', model: 'details' })
@@ -29,7 +29,7 @@ router.get('/', (req, res,next) => {
 					hours: store.hours,
 				};
 			});
-			console.log(req.isAuthenticated());
+			console.log('STORES.JS - AUTHENTICATED:', req.isAuthenticated());
 			res.render('map', {
 				layout: 'layout',
 				title: 'CapTracks',
@@ -42,39 +42,36 @@ router.get('/', (req, res,next) => {
 });
 
 // ==================== STORE PAGE (GET) ==================== //
-router.get('/store/:id', (req, res,next) => {
-
+router.get('/store/:id', (req, res, next) => {
 	// Get Store by ID
 	Store.findById(req.params.id)
 		.populate({ path: 'details', model: 'details' })
 		.populate({ path: 'forum', model: 'messages' })
 		.exec((err, store) => {
-			if (err || store==null) {
-				 //res.status(400).send(error());;
-			return next(err);
+			if (err || store == null) {
+				//res.status(400).send(error());;
+				return next(err);
+			} else {
+				res.render('store', {
+					layout: 'layout',
+					title: store.name,
+					store: store,
+					details: store.details[0],
+					user: req.isAuthenticated(),
+					qr: req.query.qr ? true : false,
+				});
 			}
-			else{
-			res.render('store', {
-				layout: 'layout',
-				title: store.name,
-				store: store,
-				details: store.details[0],
-				user: req.isAuthenticated(),
-				qr: req.query.qr ? true : false,
-			
-			});}
 		});
-	
 });
 
 // ==================== EXIT STORE PAGE (GET) ==================== //
-router.get('/store/:id/exit', (req, res,next) => {
+router.get('/store/:id/exit', (req, res, next) => {
 	// Get Store by ID
 	Store.findById(req.params.id)
 		.populate({ path: 'details', model: 'details' })
 		.populate({ path: 'forum', model: 'messages' })
 		.exec((err, store) => {
-			if (err || store==null) {
+			if (err || store == null) {
 				//return res.status(400).send(err);
 				return next(err);
 			}
@@ -87,7 +84,5 @@ router.get('/store/:id/exit', (req, res,next) => {
 			});
 		});
 });
-
-
 
 module.exports = router;
