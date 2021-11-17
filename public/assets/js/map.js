@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 (function (exports) {
 	'use strict';
 
@@ -19,10 +20,7 @@
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				exports.map.setCenter(
-					new google.maps.LatLng(
-						position.coords.latitude,
-						position.coords.longitude
-					)
+					new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 				);
 			});
 		}
@@ -74,9 +72,8 @@
 				color = '#fa2043';
 			}
 		}
-		var customIcon = {
-			path:
-				'M 0,0 c -1.25816,1.34277 -2.04623,3.29881 -2.01563,5.13867 0.0639,3.84476 1.79693,5.3002 4.56836,10.59179 0.99832,2.32851 2.04027,4.79237 3.03125,8.87305 0.13772,0.60193 0.27203,1.16104 0.33416,1.20948 0.0621,0.0485 0.19644,-0.51262 0.33416,-1.11455 0.99098,-4.08068 2.03293,-6.54258 3.03125,-8.87109 2.77143,-5.29159 4.50444,-6.74704 4.56836,-10.5918 0.0306,-1.83986 -0.75942,-3.79785 -2.01758,-5.14062 -1.43724,-1.53389 -3.60504,-2.66908 -5.91619,-2.71655 -2.31115,-0.0475 -4.4809,1.08773 -5.91814,2.62162 z',
+		const customIcon = {
+			path: 'M 0,0 c -1.25816,1.34277 -2.04623,3.29881 -2.01563,5.13867 0.0639,3.84476 1.79693,5.3002 4.56836,10.59179 0.99832,2.32851 2.04027,4.79237 3.03125,8.87305 0.13772,0.60193 0.27203,1.16104 0.33416,1.20948 0.0621,0.0485 0.19644,-0.51262 0.33416,-1.11455 0.99098,-4.08068 2.03293,-6.54258 3.03125,-8.87109 2.77143,-5.29159 4.50444,-6.74704 4.56836,-10.5918 0.0306,-1.83986 -0.75942,-3.79785 -2.01758,-5.14062 -1.43724,-1.53389 -3.60504,-2.66908 -5.91619,-2.71655 -2.31115,-0.0475 -4.4809,1.08773 -5.91814,2.62162 z',
 			anchor: new google.maps.Point(12, 17),
 			fillOpacity: 1,
 			fillColor: color,
@@ -91,12 +88,7 @@
 			icon: customIcon,
 		});
 
-		makeInfoWindowEvent(
-			map,
-			infoWindow,
-			contentFormatter(store),
-			exports.marker
-		);
+		makeInfoWindowEvent(map, infoWindow, contentFormatter(store), exports.marker);
 	}
 
 	// Maker Detail Tooltip
@@ -112,9 +104,13 @@
 		// Green = capacity < 50%
 		// Yellow = capacity between 50-80%
 		// Red = capacity > 80% capacity
-		var val = parseInt(info.details[0].capacity);
-		let color =
-			val < 50 ? '#009900' : val > 50 && val < 80 ? '#fff500' : '#fa2043';
+
+		// Default value to purple
+		let color = '#ac01d5';
+		if (info.details[0]) {
+			const val = parseInt(info.details[0].capacity);
+			color = val < 50 ? '#009900' : val > 50 && val < 80 ? '#fff500' : '#fa2043';
+		}
 
 		let contentString =
 			'<div id="tooltip">' +
