@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // ===== Modules ===== //
 const fs = require('fs');
 const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
@@ -34,11 +35,11 @@ module.exports = function (app) {
 		res.render('error');
 	});
 
-	// 404 Errors - invalid URL or no data from DB for certain cases
-	app.use((req, res, next) => {
-		console.log('Tried accessing invalid URL: ' + req.path);
-		res.render('404');
-	});
+	// // 404 Errors - invalid URL or no data from DB for certain cases
+	// app.use((req, res, next) => {
+	// 	console.log('Tried accessing invalid URL: ' + req.path);
+	// 	res.render('404');
+	// });
 
 	// ==================== WHY USE CAPTRACKS ==================== //
 	// Load Customer/Vendor benefits data
@@ -110,7 +111,7 @@ module.exports = function (app) {
 			global.emails[4].text[1] +
 			req.body.email;
 
-		msg = {
+		const msg = {
 			to: 'rena@captracks.com',
 			from: req.body.email,
 			subject: req.body.subject,
@@ -118,8 +119,7 @@ module.exports = function (app) {
 			// html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 		};
 
-		sgMail
-			.send(msg)
+		sg.send(msg)
 			.then(() => {
 				console.log('Message sent');
 				next();

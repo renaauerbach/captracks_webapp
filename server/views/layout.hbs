@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -22,7 +23,9 @@
         <link rel="stylesheet" href="/assets/css/responsive.css">
 
         <!--====== Bootstrap CSS ======-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
     </head>
 
     <body>
@@ -33,7 +36,7 @@
 
             <!-- Introduction (First Page Only) -->
             {{#if intro}}
-            {{> intro}}
+                {{> intro}}
             {{/if}}
         </header>
 
@@ -45,21 +48,26 @@
         <!--====== jQuery JS ======-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="/assets/js/modernizr-3.6.0.min.js"></script>
-        <script
-            src="https://code.jquery.com/jquery-1.12.4.min.js"
-            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <!--====== Bootstrap JS ======-->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+          crossorigin="anonymous"></script>
         <!--====== Main JS ======-->
         <script src="/assets/js/main.js"></script>
         <script src="/assets/js/form-post.js"></script>
 
         <!--====== Map Script ======-->
         {{#if displayMap}}
-        <script src="/assets/js/map.js"></script>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=&v=weekly" defer></script>
+            <script src="/assets/js/map.js"></script>
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+            {{!-- Google API attached to Regular email --}}
+            <script
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAko8lJfHW2TnHcJsvX0l4YrSHpdb0APhQ&callback=initMap&libraries=&v=weekly"
+              defer></script>
         {{/if}}
 
     </body>
+
 </html>

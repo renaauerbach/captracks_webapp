@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 // ===== Modules ===== //
 const express = require('express');
 // ===== Router ===== //
